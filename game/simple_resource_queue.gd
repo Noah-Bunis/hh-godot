@@ -59,6 +59,8 @@ func id_to_stage(id: int) -> Node:
 		stage_art = load("res://game/assets/backgroundStages/NewsRoom.tscn").instantiate()
 	elif (id == Global.STAGE_LIST.find("Streets!")):
 		stage_art = load("res://game/assets/backgroundStages/Streets.tscn").instantiate()
+	elif (id == Global.STAGE_LIST.find("Waffle House")):
+		stage_art = load("res://game/assets/backgroundStages/WaffleHouse.tscn").instantiate()
 	elif (id == Global.STAGE_LIST.find("None")):
 		stage_art = load("res://game/assets/backgroundStages/Empty.tscn").instantiate()
 	else:

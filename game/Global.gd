@@ -115,6 +115,7 @@ const STAGE_LIST = [
 	'Heart Of The Forest',
 	'News Room',
 	'Streets!',
+	'Waffle House',
 	'None',
 ]
 

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://31d4qj32qwmo"]
+
+[ext_resource type="Script" uid="uid://gt6l8h6v6871" path="res://game/backgrounds/AnimatedBackgroundParent.gd" id="1_suppk"]
+[ext_resource type="Texture2D" uid="uid://bvaa2or4mg6pq" path="res://game/assets/sprites/BGArt/WaffleHouse.jpg" id="2_k28fb"]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+script = ExtResource("1_suppk")
+
+[node name="Floor" type="ParallaxLayer" parent="."]
+
+[node name="Floor" type="Sprite2D" parent="Floor"]
+z_index = -100
+position = Vector2(0, -500)
+scale = Vector2(1.68, 1.68)
+texture = ExtResource("2_k28fb")

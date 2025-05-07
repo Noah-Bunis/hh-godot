@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bit22aqevfph5" path="res://game/assets/sprites/BGArt/RuinedHoloProOffice/parallax.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dsyacd7b24v7o" path="res://game/assets/sprites/BGArt/RuinedHoloProOffice/cityscape.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://dyw6wmfeduuaf" path="res://game/assets/sprites/BGArt/RuinedHoloProOffice/Sky.png" id="3"]
-[ext_resource type="Script" path="res://game/backgrounds/AnimatedBackgroundParent.gd" id="4"]
+[ext_resource type="Script" uid="uid://gt6l8h6v6871" path="res://game/backgrounds/AnimatedBackgroundParent.gd" id="4"]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 script = ExtResource("4")
