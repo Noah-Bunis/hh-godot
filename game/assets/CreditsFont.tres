@@ -1,7 +1,7 @@
 [gd_resource type="FontFile" load_steps=3 format=3 uid="uid://b5eaosacfvlr0"]
 
-[ext_resource type="FontFile" uid="uid://d1ej2qarjpare" path="res://game/assets/NotoSans-VariableFont_wdth,wght.ttf" id="1"]
-[ext_resource type="FontFile" uid="uid://jrbhk5lwa74s" path="res://game/assets/NotoSansJP-VariableFont_wght.ttf" id="2"]
+[ext_resource type="FontFile" uid="uid://0fvm2snf1kks" path="res://game/assets/NotoSans-VariableFont_wdth,wght.ttf" id="1"]
+[ext_resource type="FontFile" uid="uid://dkmrwn112estp" path="res://game/assets/NotoSansJP-VariableFont_wght.ttf" id="2"]
 
 [resource]
 fallbacks = Array[Font]([ExtResource("1"), ExtResource("2")])
@@ -10,3 +10,8 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
