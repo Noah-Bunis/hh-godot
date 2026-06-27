@@ -8,20 +8,20 @@ func _init():
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
-			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -10087936,
-			Enums.StKey.Hurt1ScaleX : 922078, Enums.StKey.Hurt1ScaleY : 1171143,
+			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -12471104,
+			Enums.StKey.Hurt1ScaleX : 922078, Enums.StKey.Hurt1ScaleY : 1336954,
 			},
 		1 : {
 			Enums.StKey.Summon : "rundust",
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
-			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -10087936,
-			Enums.StKey.Hurt1ScaleX : 922078, Enums.StKey.Hurt1ScaleY : 1171143,
+			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -12471104,
+			Enums.StKey.Hurt1ScaleX : 922078, Enums.StKey.Hurt1ScaleY : 1336954,
 		},
 	}
 	
 func enter(state: Dictionary) -> void:
 	super.enter(state)
-	state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*14, state[Enums.StKey.velocity_x])
+	state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*13, state[Enums.StKey.velocity_x])
 	state[Enums.StKey.accel_x] = 55536
 	state[Enums.StKey.leftfaceOK] = true
 	anim.play("Run")
@@ -33,11 +33,11 @@ func physics_tick(state: Dictionary) -> void:
 	elif (negative_penalty(state)):
 		state[Enums.StKey.sync_rate] -= SGFixed.mul(state[Enums.StKey.velocity_x], 1036)
 
-	if (state[Enums.StKey.frame] >= 10):
+	if (state[Enums.StKey.frame] >= 12):
 		SyncManager.play_sound("step", Global.StepSound, {"bus": "Sound"})
 		state[Enums.StKey.frame] = 1
-	if (state[Enums.StKey.velocity_x] > SGFixed.ONE*52):
-		state[Enums.StKey.velocity_x] = SGFixed.ONE*52
+	if (state[Enums.StKey.velocity_x] > SGFixed.ONE*49):
+		state[Enums.StKey.velocity_x] = SGFixed.ONE*49
 
 func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 	if (state[Enums.StKey.frame] == 0):
@@ -81,4 +81,3 @@ func has_property(state: Dictionary,property: int) -> bool:
 			return false
 		_:
 			return super.has_property(state,property)
-

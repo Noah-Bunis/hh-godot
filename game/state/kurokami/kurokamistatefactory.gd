@@ -10,7 +10,7 @@ func _init():
 		
 		"Stand": preload("res://game/state/kurokami/kurokamiStandState.gd"),
 		"Crouch": preload("res://game/state/kurokami/mainstates/kurokamiCrouchState.gd"),
-		"ForwardWalk": preload("res://game/state/kurokami/kurokamiRun.gd"),
+		"ForwardWalk": preload("res://game/state/kurokami/kurokamiforwardwalk.gd"),
 		"BackwardWalk": preload("res://game/state/kurokami/kurokamibackwalk.gd"),
 		"Run": preload("res://game/state/kurokami/kurokamiRun.gd"),
 		"Skid": preload("res://game/state/kurokami/kurokamiSkid.gd"),
@@ -28,9 +28,6 @@ func _init():
 		"Jump": preload("res://game/state/kurokami/kurokamiJump.gd"),
 		"ForwardJump": preload("res://game/state/kurokami/kurokamiForwardJump.gd"),
 		"BackwardJump": preload("res://game/state/kurokami/kurokamiBackJump.gd"),
-		"MidAirJump": preload("res://game/state/kurokami/kurokamiMidAirJump.gd"),
-		"ForwardMidAirJump": preload("res://game/state/kurokami/kurokamiMidAirForwardJump.gd"),
-		"BackwardMidAirJump": preload("res://game/state/kurokami/kurokamiMidAirBackJump.gd"),
 		"SuperJump": preload("res://game/state/kurokami/kurokamiSuperJump.gd"),
 		"ForwardSuperJump": preload("res://game/state/kurokami/kurokamiForwardSuperJump.gd"),
 		"BackwardSuperJump": preload("res://game/state/kurokami/kurokamiBackwardSuperJump.gd"),
@@ -53,14 +50,12 @@ func _init():
 		"Crouch2B": preload("res://game/state/kurokami/kurokami2BState.gd"),
 		"Crouch2C": preload("res://game/state/kurokami/kurokami2CState.gd"),
 		"StandcB": preload("res://game/state/kurokami/kurokami5BState.gd"),
-		"Stand6A": preload("res://game/state/kurokami/kurokami5AState.gd"),
 		"Stand6C": preload("res://game/state/kurokami/kurokami6CState.gd"),
 		"Crouch3C": preload("res://game/state/kurokami/kurokami3CState.gd"),
 		"Jump5A": preload("res://game/state/kurokami/kurokamiJAState.gd"),
 		"Jump5B": preload("res://game/state/kurokami/kurokamiJBState.gd"),
 		"Jump5C": preload("res://game/state/kurokami/kurokamiJCState.gd"),
 		"Jump2C": preload("res://game/state/kurokami/kurokamiJ2CState.gd"),
-		"Jump6C": preload("res://game/state/kurokami/kurokamiJ6CState.gd"),
 		
 		"GroundAssistCall2": preload("res://game/state/kurokami/kurokamiGroundAssistCall2.gd"),
 		"GroundAssistCallSuper": preload("res://game/state/kurokami/kurokamiGroundAssistCallSuper.gd"),
@@ -69,27 +64,7 @@ func _init():
 		"AirAssistCall2": preload("res://game/state/kurokami/kurokamiAirAssistCall2.gd"),
 		"AirAssistCallSuper": preload("res://game/state/kurokami/kurokamiAirAssistCallSuper.gd"),
 
-		"AirGrapple": preload("res://game/state/kurokami/kurokamiAirGrappleState.gd"),
-		"Grapple": preload("res://game/state/kurokami/kurokamiGrappleState.gd"),
-		"GrappleFollowup": preload("res://game/state/kurokami/kurokamiGrappleFollowupState.gd"),
-
-		"FlightEnter": preload("res://game/state/kurokami/kurokamiFlightEnterState.gd"),
-		"Flight": preload("res://game/state/kurokami/kurokamiFlightState.gd"),
-		"FlightExit": preload("res://game/state/kurokami/kurokamiFlightExitState.gd"),
-		"FlightNoFuel": preload("res://game/state/kurokami/kurokamiFlightNoFuelState.gd"),
-		"FlightForwardAirdash": preload("res://game/state/kurokami/kurokamiFlightForwardAirdash.gd"),
-		"FlightBackwardAirdash": preload("res://game/state/kurokami/kurokamiFlightBackwardAirdash.gd"),
-		"FlightUpwardAirdash": preload("res://game/state/kurokami/kurokamiFlightUpwardAirdash.gd"),
-		"FlightDownwardAirdash": preload("res://game/state/kurokami/kurokamiFlightDownwardAirdash.gd"),
-
-		"Flight5A": preload("res://game/state/kurokami/kurokamiFlightAState.gd"),
-		"Flight5B": preload("res://game/state/kurokami/kurokamiFlightBState.gd"),
-		"Flight5C": preload("res://game/state/kurokami/kurokamiFlightCState.gd"),
-
 		"RyukenShiki": preload("res://game/state/kurokami/kurokamiLightDPState.gd"),
-
-		"AirStomp": preload("res://game/state/kurokami/kurokamiAirStompState.gd"),
-		"DeusExMachina": preload("res://game/state/kurokami/kurokamiRTrusState.gd"),
 		
 		"LandingRecovery": preload("res://game/state/kurokami/kurokamiLandingRecovery.gd"),
 		
@@ -122,28 +97,16 @@ func common_idle_transitions(state: Dictionary, interpreter: InputInterpreter) -
 		return "CrouchParryWhiff"
 	elif (interpreter.is_holding_a_direction(Enums.Numpad.N5, state[Enums.StKey.leftface]) and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "StandParryWhiff"
-	elif (Global.level_2_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
-		return "DeusExMachina"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
 		return "RyukenShiki"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
 		return "RyukenShiki"
-	elif (interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
-			interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-		return "Grapple"
-	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
-			interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface]) or 
-			interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
-		return "FlightEnter"
 	elif (interpreter.is_stick_dashing(true, state[Enums.StKey.leftface]) and state[Enums.StKey.stateName] != "Run"):
 		return "Run"
 	elif (interpreter.is_button_dashing(true, state[Enums.StKey.leftface])):
 		return "Run"
 	elif (interpreter.is_dashing(false, state[Enums.StKey.leftface])):
 		return "BackDash"
-	elif (interpreter.is_holding_a_direction(Enums.Numpad.N6, state[Enums.StKey.leftface]) and 
-			interpreter.is_button_down(Enums.InputFlags.CDown)):
-		return "Stand6C"
 	elif (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) and 
 			interpreter.is_button_down(Enums.InputFlags.CDown)):
 		return "Crouch3C"
@@ -224,19 +187,10 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 				interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])) and 
 			interpreter.is_button_down(Enums.InputFlags.CDown)):
 		return "Jump2C"
-	elif (Global.level_2_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
-		return "AirStomp"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
 		return "RyukenShiki"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
 		return "RyukenShiki"
-	elif (interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
-			interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-		return "AirGrapple"
-	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
-			interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface]) or 
-			interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
-		return "FlightEnter"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(true, state[Enums.StKey.leftface])):
 		return "ForwardAirDash"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(false, state[Enums.StKey.leftface])):
@@ -248,20 +202,11 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 			return "AirAssistCallSuper"
 		else:
 			return "AirAssistCall"
-	elif (interpreter.is_holding_a_direction(Enums.Numpad.N6, state[Enums.StKey.leftface]) and 
-				interpreter.is_button_down(Enums.InputFlags.CDown)):
-			return "Jump6C"
 	elif (interpreter.is_button_down(Enums.InputFlags.CDown)):
 		return "Jump5C"
 	elif (interpreter.is_button_down(Enums.InputFlags.BDown)):
 		return "Jump5B"
 	elif (interpreter.is_button_down(Enums.InputFlags.ADown)):
 		return "Jump5A"
-	elif (state[Enums.StKey.doubleJump] > 0 and interpreter.is_tap_jumping() and interpreter.is_holding_a_direction(Enums.Numpad.N9, state[Enums.StKey.leftface])):
-		return "ForwardMidAirPreJump"
-	elif (state[Enums.StKey.doubleJump] > 0 and interpreter.is_tap_jumping() and interpreter.is_holding_a_direction(Enums.Numpad.N8, state[Enums.StKey.leftface])):
-		return "MidAirPreJump"
-	elif (state[Enums.StKey.doubleJump] > 0 and interpreter.is_tap_jumping() and interpreter.is_holding_a_direction(Enums.Numpad.N7, state[Enums.StKey.leftface])):
-		return "BackwardMidAirPreJump"
 	else:
 		return ""

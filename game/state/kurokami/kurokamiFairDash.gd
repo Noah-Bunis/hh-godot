@@ -69,4 +69,3 @@ func has_property(state: Dictionary,property: int) -> bool:
 			return false
 		_:
 			return super.has_property(state,property)
-

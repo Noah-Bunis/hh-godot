@@ -2,7 +2,7 @@ extends KurokamiAirIdleState
 
 class_name KurokamiSuperJumpState
 
-const JUMP_SPEED := SGFixed.ONE*-72
+const JUMP_SPEED := SGFixed.ONE*-62
 
 func _init():
 	anim_data = {
@@ -39,4 +39,3 @@ func has_property(state: Dictionary,property: int) -> bool:
 			return false
 		_:
 			return super.has_property(state,property)
-

@@ -24,4 +24,3 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.stop(true)
 	anim.play("LandingRecovery")
-
