@@ -39,8 +39,7 @@ func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 		state[Enums.StKey.frame] = 0
 
 func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
-	pass
-#	if (event_cause == Enums.Reaction.PointAttackHurt):
-#		change_state.call("Destroy")
-#	elif (event_cause == Enums.Reaction.PointBlockHurt):
-#		change_state.call("Travel")
+	if (event_cause == Enums.Reaction.PointAttackHurt):
+		change_state.call("Destroy")
+	elif (event_cause == Enums.Reaction.PointBlockHurt):
+		change_state.call("Destroy")

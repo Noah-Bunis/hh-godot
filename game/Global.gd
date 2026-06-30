@@ -1,6 +1,6 @@
 extends Node
 
-const BATTLE_ENGINE_VERSION = "HHv0.8.0007"
+const BATTLE_ENGINE_VERSION = "HHv0.8.0008"
 
 func get_battle_version() -> String:
 	if (len(Build.INTERNAL_BATTLE_ENGINE_KEY) < 50):
@@ -211,6 +211,8 @@ var TRAINING_HITBOX_ON = false
 var REPLAY_FILE_NAME: String = ""
 var IS_REPLAY: bool = false
 
+var ASSIST_COMBO_TRIAL: bool = false
+
 var ROLLBACK_LOGS_ENABLED: bool = false
 var DEBUG: bool = false
 
@@ -293,6 +295,7 @@ const SuperJumpDustVFX = preload("res://game/fighter/effects/SuperJumpDust.tscn"
 const FDBubbleVFX = preload("res://game/fighter/effects/FDBubble.tscn")
 const RedParryFlashVFX = preload("res://game/fighter/effects/RedParryFlash.tscn")
 const ParryWhiffVFX = preload("res://game/fighter/effects/ParryWhiffFlash.tscn")
+const IncreaseFlashVFX = preload("res://game/fighter/effects/IncreaseFlash.tscn")
 const TagVFX = preload("res://game/fighter/effects/AssistTag.tscn")
 const RCSound = preload("res://game/assets/sfx/RomanCancel.wav")
 const WhiffSound = preload("res://game/assets/sfx/Whiff.wav")

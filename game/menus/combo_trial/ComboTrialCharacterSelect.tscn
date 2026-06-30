@@ -56,27 +56,41 @@ script = ExtResource("1_7gm1j")
 
 [node name="PresentationLayer" parent="." instance=ExtResource("2_fsr0o")]
 
+[node name="P2Cursor" parent="PresentationLayer" index="10"]
+is_p1 = true
+gridX = 8
+start_col = 3
+
+[node name="P1Cursor" parent="PresentationLayer" index="11"]
+position = Vector2(960, 392)
+gridX = 8
+start_col = 3
+
 [node name="P1Portrait" parent="PresentationLayer" index="12"]
+z_index = 99
 material = SubResource("ShaderMaterial_b2baf")
 
 [node name="P2Portrait" parent="PresentationLayer" index="13"]
+z_index = 99
 material = SubResource("ShaderMaterial_jjwoc")
 
 [node name="A1Portrait" parent="PresentationLayer" index="14"]
+visible = false
 material = SubResource("ShaderMaterial_ertxd")
 
 [node name="A2Portrait" parent="PresentationLayer" index="15"]
+visible = false
 material = SubResource("ShaderMaterial_vubeb")
 
 [node name="AssistCharacterIcons" parent="." instance=ExtResource("5_dsoce")]
-visible = false
-z_index = 100
-position = Vector2(232, 306)
+z_index = 300
+position = Vector2(965, 303)
+scale = Vector2(-1, 1)
 
 [node name="AssistPointCharacterIconsNode" parent="." instance=ExtResource("6_2hk1s")]
-visible = false
 modulate = Color(0.7323408, 0.7655551, 1, 1)
-position = Vector2(1193, 144)
+position = Vector2(1188, 144)
+script = null
 
 [node name="WOOD" parent="AssistPointCharacterIconsNode" index="0"]
 visible = false

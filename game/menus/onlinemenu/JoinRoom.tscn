@@ -1,17 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4e5r5ri5mu4t"]
+[gd_scene load_steps=16 format=3 uid="uid://c4e5r5ri5mu4t"]
 
 [ext_resource type="Script" uid="uid://ydl22yb0cm65" path="res://game/menus/mainmenu/BackgroundFadeLoop.gd" id="2"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="2_dq2r3"]
 [ext_resource type="Script" uid="uid://cyya0oolm3yee" path="res://game/menus/mainmenu/LPSpin.gd" id="3"]
 [ext_resource type="Script" uid="uid://bromnkt5oankq" path="res://game/menus/onlinemenu/JoinRoom.gd" id="4"]
-[ext_resource type="Texture2D" uid="uid://b6ow73udpctn1" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://d3jnh37mq4dor" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://bvgnj3khkmjjr" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://cxjdgbte3ecjb" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b35en5rbily3g" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://c60y2t8lut7is" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="7"]
 [ext_resource type="Material" uid="uid://bofoucuf31088" path="res://game/assets/shaders/EarthBoundV1.tres" id="8"]
-[ext_resource type="Texture2D" uid="uid://kjlqkbldjwjy" path="res://game/assets/sprites/BGArt/Earthbound1.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://biq18vleavg8w" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
-[ext_resource type="Texture2D" uid="uid://dnrbymofxcin4" path="res://game/assets/sprites/UI/MainMenus/WIM.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://dddol2ny4s5fk" path="res://game/assets/sprites/BGArt/Earthbound1.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://doomqcq3aygwy" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://brippgfyq8q1g" path="res://game/assets/sprites/UI/MainMenus/WIM.png" id="14"]
 [ext_resource type="Material" uid="uid://cffvtcw31hg4s" path="res://game/assets/shaders/EarthBoundV2.tres" id="15"]
-[ext_resource type="Texture2D" uid="uid://0xw5lcnwgjfc" path="res://game/assets/sprites/BGArt/Earthbound2.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://bb04frwl1vxeg" path="res://game/assets/sprites/BGArt/Earthbound2.png" id="16"]
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Idle"
@@ -42,7 +43,7 @@ script = ExtResource("4")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MessageLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -495.0
@@ -53,11 +54,13 @@ scale = Vector2(2, 2)
 text = "Join Private Room"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = -1
 offset_left = 765.0
 offset_top = 307.0
 offset_right = 1129.0
 offset_bottom = 383.0
 scale = Vector2(2.62065, 3.92985)
+theme = ExtResource("2_dq2r3")
 columns = 2
 
 [node name="RoomIDLabel" type="Label" parent="CanvasLayer/GridContainer"]

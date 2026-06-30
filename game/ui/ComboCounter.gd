@@ -57,6 +57,9 @@ func show_counter():
 func change_color(color):
 	get_node("Counter").modulate = color
 
+func reset_to_game_start():
+	drop_combo()
+
 func display_text(number):
 	var digit_names = ["Digit1", "Digit2", "Digit3"]
 	for name in digit_names:

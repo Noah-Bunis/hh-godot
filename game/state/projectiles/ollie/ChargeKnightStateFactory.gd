@@ -8,6 +8,5 @@ func _init():
 		"Neutral": NeutralState,
 		"Active": preload("res://game/state/projectiles/ollie/Knightactiveprojectilestate.gd"),
 		"Travel": preload("res://game/state/projectiles/ollie/ChargeKnightTravelState.gd"),
-#		"Active": preload("res://game/state/projectiles/ollie/Knightactiveprojectilestate.gd"),
 		"Destroy": preload("res://game/state/projectiles/ollie/KnightdestroyState.gd"),
 	}

@@ -54,7 +54,7 @@ func _init():
 			Enums.StKey.counter_hitstun: 80,
 			Enums.StKey.attack_damage: 75,
 			Enums.StKey.hitstop: 13,
-			Enums.StKey.min_damage: 9,
+			Enums.StKey.min_damage: 20,
 			Enums.StKey.chip_damage: 6,
 			Enums.StKey.counter_launch_dir_x: SGFixed.ONE*3,
 			Enums.StKey.counter_launch_dir_y: SGFixed.ONE*75,

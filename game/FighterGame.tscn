@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bngmafg6y7eqk"]
+[gd_scene load_steps=64 format=3 uid="uid://bngmafg6y7eqk"]
 
 [ext_resource type="PackedScene" uid="uid://bee7pcc18xndp" path="res://game/ui/SyncRateMeter.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://btifqf7jlg8wh" path="res://game/StageCage.tscn" id="2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://qcfjxk2q4k1t" path="res://game/components/BattleCamera.gd" id="5"]
 [ext_resource type="PackedScene" path="res://game/fighter/InputInterpreter.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://5gsrso7qn0ff" path="res://game/ui/ComboCounter.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://c3m2mw500uppo" path="res://game/components/battle/RoundTracker.tscn" id="7_54rxn"]
 [ext_resource type="PackedScene" uid="uid://dlpdov1eot246" path="res://game/ui/RoundTimer.tscn" id="7_yl1ep"]
 [ext_resource type="PackedScene" path="res://game/ui/HPBar.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://game/ui/RoundCounter.tscn" id="9"]
@@ -335,6 +336,8 @@ z_index = -10
 position = Vector2(-2, -484)
 scale = Vector2(0.794853, 0.794853)
 
+[node name="RoundTracker" parent="Camera3D/BattleUI" instance=ExtResource("7_54rxn")]
+
 [node name="ClientComboCounter" parent="Camera3D/BattleUI" instance=ExtResource("7")]
 position = Vector2(553, -140)
 scale = Vector2(2, 2)
@@ -425,7 +428,6 @@ position = Vector2(-99, -433)
 is_p1 = true
 
 [node name="IntroShutters" type="Node2D" parent="Camera3D/BattleUI"]
-modulate = Color(1, 0.741176, 0.592157, 1)
 z_index = -100
 scale = Vector2(4, 4)
 script = ExtResource("70")
@@ -462,8 +464,9 @@ texture = ExtResource("35_yl1ep")
 script = ExtResource("31")
 wait_ticks = 60
 
-[node name="NowLoadingText" type="Node2D" parent="Camera3D/BattleUI"]
+[node name="NowLoadingText" type="Node2D" parent="Camera3D/BattleUI" node_paths=PackedStringArray("announcer_timer")]
 script = ExtResource("32")
+announcer_timer = NodePath("AnnouncerTimer")
 
 [node name="NetworkAnimationPlayer" type="AnimationPlayer" parent="Camera3D/BattleUI/NowLoadingText"]
 libraries = {
@@ -474,6 +477,10 @@ script = ExtResource("22")
 [node name="NetworkTimer" type="Node" parent="Camera3D/BattleUI/NowLoadingText"]
 script = ExtResource("31")
 wait_ticks = 191
+
+[node name="AnnouncerTimer" type="Node" parent="Camera3D/BattleUI/NowLoadingText"]
+script = ExtResource("31")
+wait_ticks = 135
 
 [node name="Fade" type="Node2D" parent="Camera3D/BattleUI/NowLoadingText"]
 visible = false
@@ -543,3 +550,4 @@ scale = Vector2(108.701, 673.875)
 [connection signal="timeout" from="Camera3D/BattleUI/WinScreenManager/NetworkTimer" to="Camera3D/BattleUI/WinScreenManager" method="_on_NetworkTimer_timeout"]
 [connection signal="timeout" from="Camera3D/BattleUI/DownText/NetworkTimer" to="Camera3D/BattleUI/DownText" method="_on_NetworkTimer_timeout"]
 [connection signal="timeout" from="Camera3D/BattleUI/NowLoadingText/NetworkTimer" to="Camera3D/BattleUI/NowLoadingText" method="_on_NetworkTimer_timeout"]
+[connection signal="timeout" from="Camera3D/BattleUI/NowLoadingText/AnnouncerTimer" to="Camera3D/BattleUI/NowLoadingText" method="_on_announcer_timer_timeout"]

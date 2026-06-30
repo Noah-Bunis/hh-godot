@@ -25,6 +25,7 @@ func enter(state: Dictionary) -> void:
 	state[Enums.StKey.drag_x] = Util.FRICTION
 	state[Enums.StKey.velocity_y] = -SGFixed.ONE*25
 	state[Enums.StKey.velocity_x] = 0
+	state[Enums.StKey.kara_OK] = false # No instant air kara
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)

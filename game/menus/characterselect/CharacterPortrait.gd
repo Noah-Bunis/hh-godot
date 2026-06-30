@@ -143,3 +143,77 @@ func change_portrait(enumChara: int, is_assist=false):
 	self.texture = load(portrait + ".png")
 	$Name.texture = load(portrait + "Name.png")
 	change_color_path(character_color_path+str(1)+".png")
+
+
+func change_portrait_all_character(enumChara: int, is_assist=false):
+	var portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SubaruPortrait"
+	var color = "res://game/assets/sprites/subaru/ColorPalettes/" 
+	match enumChara:
+		Enums.AllCharacters.AssistSubaru:
+			color = "res://game/assets/sprites/subaru/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SubaruPortrait"
+		Enums.AllCharacters.AssistMio:
+			color = "res://game/assets/sprites/mio/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/MioPortrait"
+		Enums.AllCharacters.AssistOga:
+			color = "res://game/assets/sprites/oga/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/OgaPortrait"
+		Enums.AllCharacters.AssistOllie:
+			color = "res://game/assets/sprites/ollie/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/OlliePortrait"
+		Enums.AllCharacters.AssistSuisei:
+			color = "res://game/assets/sprites/suisei/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SuiseiPortrait"
+		Enums.AllCharacters.AssistKanata:
+			color = "res://game/assets/sprites/kanata/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/KanataPortrait"
+		Enums.AllCharacters.AssistFlayon:
+			color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FubukiPortrait"
+		Enums.AllCharacters.Fubuki:
+			color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FubukiPortrait"
+		Enums.AllCharacters.Sora:
+			color = "res://game/assets/sprites/assists/sora/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SoraPortrait"
+		Enums.AllCharacters.OkaKoro:
+			color = "res://game/assets/sprites/assists/okakoro/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/OkakoroPortrait"
+		Enums.AllCharacters.Hakka:
+			color = "res://game/assets/sprites/assists/hakka/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/HakkaPortrait"
+		Enums.AllCharacters.Sana:
+			color = "res://game/assets/sprites/assists/sana/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SanaPortrait"
+		Enums.AllCharacters.Random:
+			color = "res://game/assets/sprites/subaru/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/RandomPortrait"
+		Enums.AllCharacters.Subaru:
+			color = "res://game/assets/sprites/subaru/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SubaruPortrait"
+		Enums.AllCharacters.Mio:
+			color = "res://game/assets/sprites/mio/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/MioPortrait"
+		Enums.AllCharacters.Oga:
+			color = "res://game/assets/sprites/oga/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/OgaPortrait"
+		Enums.AllCharacters.Ollie:
+			color = "res://game/assets/sprites/ollie/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/OlliePortrait"
+		Enums.AllCharacters.Suisei:
+			color = "res://game/assets/sprites/suisei/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SuiseiPortrait"
+		Enums.AllCharacters.Kanata:
+			color = "res://game/assets/sprites/kanata/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/KanataPortrait"
+		Enums.AllCharacters.Flayon:
+			color = "res://game/assets/sprites/subaru/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/RandomPortrait"
+		_:
+			color = "res://game/assets/sprites/subaru/ColorPalettes/"
+			portrait = "res://game/assets/sprites/subaru/SubaruPortrait"
+	
+	character_color_path = color
+	self.texture = load(portrait + ".png")
+	$Name.texture = load(portrait + "Name.png")
+	change_color_path(character_color_path+str(1)+".png")

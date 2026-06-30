@@ -92,9 +92,11 @@ func reset_to_game_start():
 	$Camera3D/BattleUI/ClientHPBar.reset_to_game_start()
 	$Camera3D/BattleUI/ServerHPBar.reset_to_game_start()
 	RoundTimer.reset_to_game_start()
-	$Camera3D/BattleUI/ServerRoundCounter.reset_to_game_start()
-	$Camera3D/BattleUI/ClientRoundCounter.reset_to_game_start()
+	$Camera3D/BattleUI/RoundTracker.reset_to_game_start()
 	$Camera3D.reset_to_game_start()
+
+	$Camera3D/BattleUI/ClientComboCounter.reset_to_game_start()
+	$Camera3D/BattleUI/ServerComboCounter.reset_to_game_start()
 	
 	ServerPlayer = Global.PLAYER_1_NODE_INSTANCE[0]
 	ServerPlayer.reset_to_game_start()
@@ -163,10 +165,8 @@ func reset_to_game_start():
 	ServerPlayer.hp_bar = $Camera3D/BattleUI/ServerHPBar
 	ClientPlayer.hp_bar = $Camera3D/BattleUI/ClientHPBar
 	
-	ServerPlayer.round_counter = $Camera3D/BattleUI/ServerRoundCounter
-	ServerPlayer.opponent_round_counter = $Camera3D/BattleUI/ClientRoundCounter
-	ClientPlayer.round_counter = $Camera3D/BattleUI/ClientRoundCounter
-	ClientPlayer.opponent_round_counter = $Camera3D/BattleUI/ServerRoundCounter
+	ServerPlayer.round_counter = $Camera3D/BattleUI/RoundTracker
+	ClientPlayer.round_counter = $Camera3D/BattleUI/RoundTracker
 	
 	ServerPlayer.update_opponent_anchor(ClientPlayer)
 	ClientPlayer.update_opponent_anchor(ServerPlayer)
@@ -235,7 +235,7 @@ func free_game():
 	if (AssistPlayer1 != null):
 		AssistPlayer1.queue_free()
 		AssistPlayer1 = null
-	if (Global.PLAYER_2_NODE[1] != null):
+	if (AssistPlayer2 != null):
 		AssistPlayer2.queue_free()
 		AssistPlayer2 = null
 	if (Hato1 != null):
@@ -359,16 +359,10 @@ func signal_connect():
 	RoundTimer.connect("round_timeout", Callable($Camera3D/BattleUI/ClientHPBar, "disable_hp"))
 	RoundTimer.connect("round_timeout", Callable(self, "timeOutFlash"))
 
-	$Camera3D/BattleUI/ServerRoundCounter.connect("win", Callable($Camera3D/BattleUI/WinScreenManager, "start_win_process"))
-	$Camera3D/BattleUI/ClientRoundCounter.connect("win", Callable($Camera3D/BattleUI/WinScreenManager, "start_win_process"))
-	$Camera3D/BattleUI/ServerRoundCounter.connect("win", Callable(MainMenuMusicControl, "fade_out_music"))
-	$Camera3D/BattleUI/ClientRoundCounter.connect("win", Callable(MainMenuMusicControl, "fade_out_music"))
-	$Camera3D/BattleUI/ServerRoundCounter.connect("win", Callable($Camera3D/BattleUI/DownText, "disable_on_win"))
-	$Camera3D/BattleUI/ClientRoundCounter.connect("win", Callable($Camera3D/BattleUI/DownText, "disable_on_win"))
-	$Camera3D/BattleUI/ServerRoundCounter.connect("win", Callable($Camera3D/BattleUI/ServerHPBar, "disable_hp"))
-	$Camera3D/BattleUI/ClientRoundCounter.connect("win", Callable($Camera3D/BattleUI/ServerHPBar, "disable_hp"))
-	$Camera3D/BattleUI/ServerRoundCounter.connect("win", Callable($Camera3D/BattleUI/ClientHPBar, "disable_hp"))
-	$Camera3D/BattleUI/ClientRoundCounter.connect("win", Callable($Camera3D/BattleUI/ClientHPBar, "disable_hp"))
+	$Camera3D/BattleUI/RoundTracker.connect("win", Callable($Camera3D/BattleUI/WinScreenManager, "start_win_process"))
+	$Camera3D/BattleUI/RoundTracker.connect("win", Callable(MainMenuMusicControl, "fade_out_music"))
+	$Camera3D/BattleUI/RoundTracker.connect("win", Callable($Camera3D/BattleUI/ServerHPBar, "disable_hp"))
+	$Camera3D/BattleUI/RoundTracker.connect("win", Callable($Camera3D/BattleUI/ClientHPBar, "disable_hp"))
 
 	$Camera3D/BattleUI/DownText.connect("end_down", Callable(self, "start_pre_round"))
 	$Camera3D/BattleUI/DownText.connect("end_down", Callable($Camera3D/BattleUI/ClientHPBar, "reset_hp"))
@@ -388,6 +382,7 @@ func signal_connect():
 	AssistPlayer2.connect("super_freeze", Callable(self, "super_flash"))
 	
 	ko_signal_connect()
+	connect_dependencies()
 
 func ko_signal_connect():
 	if (ko_enabled):
@@ -395,6 +390,14 @@ func ko_signal_connect():
 		$Camera3D/BattleUI/ClientHPBar.connect("ko", Callable(ClientPlayer, "ko"))
 		$Camera3D/BattleUI/ServerHPBar.connect("ko", Callable(self, "koStart"))
 		$Camera3D/BattleUI/ClientHPBar.connect("ko", Callable(self, "koStart"))
+
+func connect_dependencies() -> void:
+	$Camera3D/BattleUI/DownText.round_tracker = $Camera3D/BattleUI/RoundTracker
+	$Camera3D/BattleUI/NowLoadingText.round_tracker = $Camera3D/BattleUI/RoundTracker
+	$Camera3D/BattleUI/ServerRoundCounter.round_tracker = $Camera3D/BattleUI/RoundTracker
+	$Camera3D/BattleUI/ClientRoundCounter.round_tracker = $Camera3D/BattleUI/RoundTracker
+	$Camera3D/BattleUI/ServerRoundCounter.setup_signal()
+	$Camera3D/BattleUI/ClientRoundCounter.setup_signal()
 
 func freeze_game_sim() -> void:
 	frozen = true
@@ -446,16 +449,16 @@ func hp_freeze() -> void:
 func koFlash() -> void:
 	round_freeze()
 	if (ServerPlayer.hp_bar.currentHP <= 0 and ClientPlayer.hp_bar.currentHP <= 0):
-		if ($Camera3D/BattleUI/ServerRoundCounter.roundsWon < 1):
-			$Camera3D/BattleUI/ServerRoundCounter.register_ko()
-		if ($Camera3D/BattleUI/ClientRoundCounter.roundsWon < 1):
-			$Camera3D/BattleUI/ClientRoundCounter.register_ko()
+		if ($Camera3D/BattleUI/RoundTracker.read_rounds_won(true) < 1):
+			$Camera3D/BattleUI/RoundTracker.register_ko(true)
+		if ($Camera3D/BattleUI/RoundTracker.read_rounds_won(false) < 1):
+			$Camera3D/BattleUI/RoundTracker.register_ko(false)
 		$Camera3D/BattleUI/DownText.play_double_ko_text()
 	elif (ServerPlayer.hp_bar.currentHP <= 0):
-		$Camera3D/BattleUI/ClientRoundCounter.register_ko()
+		$Camera3D/BattleUI/RoundTracker.register_ko(false)
 		$Camera3D/BattleUI/DownText.play_down_text()
 	elif (ClientPlayer.hp_bar.currentHP <= 0):
-		$Camera3D/BattleUI/ServerRoundCounter.register_ko()
+		$Camera3D/BattleUI/RoundTracker.register_ko(true)
 		$Camera3D/BattleUI/DownText.play_down_text()
 	else:
 		print("no one ko'd???")
@@ -463,16 +466,16 @@ func koFlash() -> void:
 func timeOutFlash() -> void:
 	round_freeze()
 	if (ServerPlayer.hp_bar.currentHP > ClientPlayer.hp_bar.currentHP):
-		$Camera3D/BattleUI/ServerRoundCounter.register_ko()
+		$Camera3D/BattleUI/RoundTracker.register_ko(true)
 		$Camera3D/BattleUI/DownText.play_time_over_text()
 	elif (ServerPlayer.hp_bar.currentHP < ClientPlayer.hp_bar.currentHP):
-		$Camera3D/BattleUI/ClientRoundCounter.register_ko()
+		$Camera3D/BattleUI/RoundTracker.register_ko(false)
 		$Camera3D/BattleUI/DownText.play_time_over_text()
 	else:
-		if ($Camera3D/BattleUI/ServerRoundCounter.roundsWon < 1):
-			$Camera3D/BattleUI/ServerRoundCounter.register_ko()
-		if ($Camera3D/BattleUI/ClientRoundCounter.roundsWon < 1):
-			$Camera3D/BattleUI/ClientRoundCounter.register_ko()
+		if ($Camera3D/BattleUI/RoundTracker.read_rounds_won(true) < 1):
+			$Camera3D/BattleUI/RoundTracker.register_ko(true)
+		if ($Camera3D/BattleUI/RoundTracker.read_rounds_won(false) < 1):
+			$Camera3D/BattleUI/RoundTracker.register_ko(false)
 		$Camera3D/BattleUI/DownText.play_draw_text()
 
 func round_freeze() -> void:
@@ -647,9 +650,6 @@ func resolve_collision_interactions(fight_entities, allFirstFrameCollide):
 					hitNode.on_attack_hit(fight_entity.attackData[Enums.StKey.attack_type], hitData)
 					if (react_type == Enums.Reaction.ThrowHurt or react_type == Enums.Reaction.AirThrowHurt):
 						hurtNode.update_opponent_anchor(hitNode)
-
-		#if (allFirstFrameCollide.has(name) and not allFirstFrameCollide[name].is_empty()):
-			#print(name, str(allFirstFrameCollide[name]))
 	
 func left_face_calculation(pos1:int, pos2:int, left1:bool, left2:bool) -> bool:
 	var pivot1:int
@@ -674,7 +674,6 @@ func is_pushboxes_colliding():
 			ServerPlayer.fixed_position.y + height > ClientPlayer.fixed_position.y):
 		return true
 	return false
-#	return ServerPlayer.standing_on_player() or ClientPlayer.standing_on_player()
 
 func pushbox_collision():
 	# Pushbox on pushbox collision
@@ -832,7 +831,6 @@ func _network_process(input: Dictionary) -> void:
 			un_freeze_game_sim()
 		else:
 			pass # permafreeze
-#	BattleCamera.camera_sync_to_physics_engine()
 
 func point_left_face_calculation(is_server_player: bool) -> bool: 
 	# confusingly, true is Serverplayer.leftface = true

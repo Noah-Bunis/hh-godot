@@ -40,10 +40,10 @@ func _ready():
 		[Enums.AssistCharacters.Sana, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru]
 		]
 	
-	update_p1_portrait($P1Cursor.row, $P1Cursor.col)
-	update_p2_portrait($P2Cursor.row, $P2Cursor.col)
-	$CanvasLayer/WinCounterP1.update_win_count(true)
-	$CanvasLayer/WinCounterP2.update_win_count(false)
+	update_p1_portrait(P1Cursor.row, P1Cursor.col)
+	update_p2_portrait(P2Cursor.row, P2Cursor.col)
+	WinCounterP1.update_win_count(true)
+	WinCounterP2.update_win_count(false)
 
 	multiplayer.peer_connected.connect(_on_network_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_network_peer_disconnected)
@@ -62,29 +62,29 @@ func _ready():
 	OnlineMatch.connect("match_ready", Callable(self, "_on_OnlineMatch_match_ready"))
 	OnlineMatch.connect("match_not_ready", Callable(self, "_on_OnlineMatch_match_not_ready"))
 	
-	update_p1_portrait($P1Cursor.row, $P1Cursor.col)
-	update_p2_portrait($P2Cursor.row, $P2Cursor.col)
-	$CanvasLayer/WinCounterP1.update_win_count(true)
-	$CanvasLayer/WinCounterP2.update_win_count(false)
+	update_p1_portrait(P1Cursor.row, P1Cursor.col)
+	update_p2_portrait(P2Cursor.row, P2Cursor.col)
+	WinCounterP1.update_win_count(true)
+	WinCounterP2.update_win_count(false)
 	var peer = multiplayer.get_unique_id()
 	if (not SyncManager.spectating and not Global.was_spectating):
 		if peer == 1:
-			$P2Cursor.queue_free()
-			$P2Portrait.texture = null
+			P2Cursor.queue_free()
+			P2Portrait.texture = null
 		else:
-			$P1Cursor.queue_free()
-			$P1Portrait.texture = null
+			P1Cursor.queue_free()
+			P1Portrait.texture = null
 	else:
 		p1_ready = true
 		p2_ready = true
-		$P2Cursor.queue_free()
-		$P2Portrait.texture = null
-		$P1Cursor.queue_free()
-		$P1Portrait.texture = null
+		P2Cursor.queue_free()
+		P2Portrait.texture = null
+		P1Cursor.queue_free()
+		P1Portrait.texture = null
 	message_label.text = str(peer)
 	MainMenuMusicControl.reset_seek()
-	$P1Cursor.deselect_ok = false
-	$P2Cursor.deselect_ok = false
+	P1Cursor.deselect_ok = false
+	P2Cursor.deselect_ok = false
 	display_peer_ids()
 	set_player_names()
 	$TimeLimit.start(30)
@@ -138,6 +138,20 @@ func _on_OnlineMatch_match_ready(players: Dictionary) -> void:
 
 ### Remote Character Select
 
+func connect_ui_elements():
+	P2Cursor = $P2Cursor
+	P1Cursor = $P1Cursor
+	A1Portrait = $A1Portrait
+	A2Portrait = $A2Portrait
+	P1Portrait = $P1Portrait
+	P2Portrait = $P2Portrait
+	AkiMC = $AkiMC
+	P1SelectFlash = $P1SelectFlash
+	P2SelectFlash = $P2SelectFlash
+	KimiNoHiroin = $KimiNoHiroin
+	WinCounterP1 = $CanvasLayer/WinCounterP1
+	WinCounterP2 = $CanvasLayer/WinCounterP2
+
 @rpc("any_peer")
 func remote_peer_select(row:int, col:int, color_number:int):
 	var peer = multiplayer.get_remote_sender_id()
@@ -151,8 +165,8 @@ func remote_peer_select(row:int, col:int, color_number:int):
 			Global.load_queue.queue_resource(Global.PLAYER_1_NODE_PATH[2])
 		p1_color_number = color_number
 		update_p1_portrait(row, col)
-		$P1Portrait.change_color_number(p1_color_number)
-		$P1SelectFlash.player_call()
+		P1Portrait.change_color_number(p1_color_number)
+		P1SelectFlash.player_call()
 	else:
 		Global.PLAYER_2_NODE_PATH[0] = charaData[0]
 		Global.PLAYER_2_CHARACTER[0] = charaData[1]
@@ -161,8 +175,8 @@ func remote_peer_select(row:int, col:int, color_number:int):
 		if (Global.PLAYER_2_CHARACTER[0] == Enums.PointCharacters.Mio):
 			Global.load_queue.queue_resource(Global.PLAYER_2_NODE_PATH[2])
 		update_p2_portrait(row, col)
-		$P2Portrait.change_color_number(p2_color_number)
-		$P2SelectFlash.player_call()
+		P2Portrait.change_color_number(p2_color_number)
+		P2SelectFlash.player_call()
 
 @rpc("any_peer") 
 func remote_peer_assist_select(row:int, col:int, color_number:int):
@@ -175,8 +189,8 @@ func remote_peer_assist_select(row:int, col:int, color_number:int):
 		Global.load_queue.queue_resource(Global.PLAYER_1_NODE_PATH[1])
 		a1_color_number = color_number
 		update_a1_portrait(row, col)
-		$A1Portrait.change_color_number(a1_color_number)
-		$P1SelectFlash.player_call()
+		A1Portrait.change_color_number(a1_color_number)
+		P1SelectFlash.player_call()
 	else:
 		var charaData = resolve_assists(row, col, false)
 		Global.PLAYER_2_NODE_PATH[1] = charaData[0]
@@ -184,8 +198,8 @@ func remote_peer_assist_select(row:int, col:int, color_number:int):
 		Global.load_queue.queue_resource(Global.PLAYER_2_NODE_PATH[1])
 		a2_color_number = color_number
 		update_a2_portrait(row, col)
-		$A2Portrait.change_color_number(a2_color_number)
-		$P2SelectFlash.player_call()
+		A2Portrait.change_color_number(a2_color_number)
+		P2SelectFlash.player_call()
 
 func players_ready():
 	var peer = multiplayer.multiplayer_peer.get_unique_id()
@@ -196,12 +210,12 @@ func players_ready():
 
 func update_p1():
 	message_label.text = "p1 update"
-	p1_cursor_pos_row = $P1Cursor.row
-	p1_cursor_pos_col = $P1Cursor.col
-	p1_color_number = select_color($P1Cursor.input_prefix)
-	$P1Portrait.change_color_number(p1_color_number)
-	rpc("remote_peer_select", $P1Cursor.row, $P1Cursor.col, p1_color_number)
-	var charaData = resolve_characters($P1Cursor.row, $P1Cursor.col)
+	p1_cursor_pos_row = P1Cursor.row
+	p1_cursor_pos_col = P1Cursor.col
+	p1_color_number = select_color(P1Cursor.input_prefix)
+	P1Portrait.change_color_number(p1_color_number)
+	rpc("remote_peer_select", P1Cursor.row, P1Cursor.col, p1_color_number)
+	var charaData = resolve_characters(P1Cursor.row, P1Cursor.col)
 	Global.PLAYER_1_NODE_PATH[0] = charaData[0]
 	Global.PLAYER_1_CHARACTER[0] = charaData[1]
 	p1_assist_select = AssistSelect.instantiate()
@@ -212,8 +226,8 @@ func update_p1():
 	p1_assist_select.setup(true, true)
 	p1_assist_select.get_node("CharacterCursor").connect("change_character", Callable(self, "update_a1_portrait"))
 	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(self, "update_a1"))
-	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($P1SelectFlash, "player_call"))
-	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($AkiMC, "p1_call"))
+	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(P1SelectFlash, "player_call"))
+	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(AkiMC, "p1_call"))
 	update_a1_portrait(p1_assist_select.cursor_row(), p1_assist_select.cursor_col())
 	Global.load_queue.queue_resource(Global.PLAYER_1_NODE_PATH[0])
 	if (Global.PLAYER_1_CHARACTER[0] == Enums.PointCharacters.Mio):
@@ -221,12 +235,12 @@ func update_p1():
 
 func update_p2():
 	message_label.text = "p2 update"
-	p2_cursor_pos_row = $P2Cursor.row
-	p2_cursor_pos_col = $P2Cursor.col
-	p2_color_number = select_color($P2Cursor.input_prefix)
-	$P2Portrait.change_color_number(p2_color_number)
-	rpc("remote_peer_select", $P2Cursor.row, $P2Cursor.col, p2_color_number)
-	var charaData = resolve_characters($P2Cursor.row, $P2Cursor.col)
+	p2_cursor_pos_row = P2Cursor.row
+	p2_cursor_pos_col = P2Cursor.col
+	p2_color_number = select_color(P2Cursor.input_prefix)
+	P2Portrait.change_color_number(p2_color_number)
+	rpc("remote_peer_select", P2Cursor.row, P2Cursor.col, p2_color_number)
+	var charaData = resolve_characters(P2Cursor.row, P2Cursor.col)
 	Global.PLAYER_2_NODE_PATH[0] = charaData[0]
 	Global.PLAYER_2_CHARACTER[0] = charaData[1]
 	p2_assist_select = AssistSelect.instantiate()
@@ -237,8 +251,8 @@ func update_p2():
 	p2_assist_select.setup(false, true) # online is P1 only
 	p2_assist_select.get_node("CharacterCursor").connect("change_character", Callable(self, "update_a2_portrait"))
 	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(self, "update_a2"))
-	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($P2SelectFlash, "player_call"))
-	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($AkiMC, "p2_call"))
+	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(P2SelectFlash, "player_call"))
+	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(AkiMC, "p2_call"))
 	update_a2_portrait(p2_assist_select.cursor_row(), p2_assist_select.cursor_col())
 	Global.load_queue.queue_resource(Global.PLAYER_2_NODE_PATH[0])
 	if (Global.PLAYER_2_CHARACTER[0] == Enums.PointCharacters.Mio):
@@ -254,7 +268,7 @@ func update_p2():
 	p1_assist_pos_row = p1_assist_select.cursor_row()
 	p1_assist_pos_col = p1_assist_select.cursor_col()
 	a1_color_number = select_color(p1_assist_select.get_node("CharacterCursor").input_prefix)
-	$A1Portrait.change_color_number(p1_color_number)
+	A1Portrait.change_color_number(a1_color_number)
 	rpc("remote_peer_assist_select", p1_assist_select.cursor_row(), p1_assist_select.cursor_col(), a1_color_number)
 	p1_ready = true
 	rpc("ready_up_peer")
@@ -270,7 +284,7 @@ func update_a2():
 	p2_assist_pos_row = p2_assist_select.cursor_row()
 	p2_assist_pos_col = p2_assist_select.cursor_col()
 	a2_color_number = select_color(p2_assist_select.get_node("CharacterCursor").input_prefix)
-	$A2Portrait.change_color_number(p2_color_number)
+	A2Portrait.change_color_number(a2_color_number)
 	rpc("remote_peer_assist_select", p2_assist_select.cursor_row(), p2_assist_select.cursor_col(), a2_color_number)
 	p2_ready = true
 	rpc("ready_up_peer")
@@ -306,8 +320,8 @@ func music_load():
 func start_loading_process():
 	Global.SET_TOTAL = 0
 	Global.P1_SET_WIN_TOTAL = 0
-	$CanvasLayer/WinCounterP1.update_win_count(true)
-	$CanvasLayer/WinCounterP2.update_win_count(false)
+	WinCounterP1.update_win_count(true)
+	WinCounterP2.update_win_count(false)
 	resolve_colors()
 	resolve_assist_colors()
 	display_colors()
@@ -366,11 +380,6 @@ func is_all_load_ready() -> bool:
 func go_to_next_scene():
 	message_label.text = "going to match..."
 	print("go to next scene")
-	# testing laggy load times
-#		if (multiplayer.is_network_server()):
-#			yield(get_tree().create_timer(10), "timeout")
-#		else:
-#			yield(get_tree().create_timer(6), "timeout")
 	get_tree().change_scene_to_file("res://game/DemoMain.tscn")
 
 func physics_tick():

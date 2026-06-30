@@ -43,10 +43,18 @@ func _ready() -> void:
 
 func load_combo(index: int) -> void:
 	var trials_size = 0
+	var combo_database = ComboDatabase.COMBOS
+	var character_index = Global.PLAYER_2_CHARACTER[0]
 	if Global.TRAINING_P1:
-		trials_size = ComboDatabase.COMBOS[Global.PLAYER_1_CHARACTER[0]].size()
-	else:
-		trials_size = ComboDatabase.COMBOS[Global.PLAYER_2_CHARACTER[0]].size()
+		character_index = Global.PLAYER_1_CHARACTER[0]
+	if Global.ASSIST_COMBO_TRIAL:
+		combo_database = ComboDatabase.ASSIST_COMBOS
+		character_index = Global.PLAYER_2_CHARACTER[1]
+		if Global.TRAINING_P1:
+			character_index = Global.PLAYER_1_CHARACTER[1]
+	
+	
+	trials_size = combo_database[character_index].size()
 
 	if (index < 0):
 		index = trials_size - 1
@@ -54,16 +62,10 @@ func load_combo(index: int) -> void:
 		index = 0
 
 	current_combo_index = index
-	if Global.TRAINING_P1:
-		if index == trials_size:
-			print("All combo trials complete!")
-			return
-		combo_trial = ComboDatabase.COMBOS[Global.PLAYER_1_CHARACTER[0]][index].duplicate()
-	else:
-		if index == trials_size:
-			print("All combo trials complete!")
-			return
-		combo_trial = ComboDatabase.COMBOS[Global.PLAYER_2_CHARACTER[0]][index].duplicate()
+	if index == trials_size:
+		print("All combo trials complete!")
+		return
+	combo_trial = combo_database[character_index][index].duplicate()
 
 	current_combo_position = 0
 	current_step_progress = 0

@@ -1,53 +1,49 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dird4f0w057ux"]
 
-[ext_resource path="res://game/menus/training/CommandList.gd" type="Script" id=1]
-[ext_resource path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/KanataButton.png" type="Texture2D" id=2]
-[ext_resource path="res://game/assets/sprites/ollie/NanayaDrill/Timeline 1_0005.png" type="Texture2D" id=3]
+[ext_resource type="Script" uid="uid://dql0a3dp6vtfq" path="res://game/menus/training/CommandList.gd" id="1"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="1_7ye67"]
+[ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="2_5w5sc"]
+[ext_resource type="Texture2D" uid="uid://cokqxq333srbd" path="res://game/assets/sprites/UI/Arrow.png" id="4_7ye67"]
 
 [node name="CommandList" type="Container"]
+anchors_preset = -1
 offset_right = 47.0
 offset_bottom = 20.0
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2( 242.637, 174.414 )
-scale = Vector2( 5.10869, 2.41933 )
-texture = ExtResource( 2 )
+position = Vector2(447, 429)
+scale = Vector2(2.6382382, 2.016317)
+texture = ExtResource("2_5w5sc")
 
-[node name="Sprite2" type="Sprite2D" parent="Sprite2D"]
-position = Vector2( 52.7266, 7.2688 )
-scale = Vector2( 0.00905112, 0.0404558 )
-texture = ExtResource( 3 )
+[node name="Sprite4" type="Sprite2D" parent="."]
+position = Vector2(-5.000001, 194)
+scale = Vector2(-0.7482326, 0.7482326)
+texture = ExtResource("4_7ye67")
 
-[node name="Sprite4" type="Sprite2D" parent="Sprite2D"]
-position = Vector2( -46.9082, 7.2688 )
-scale = Vector2( -0.009, 0.04 )
-texture = ExtResource( 3 )
+[node name="Sprite2" type="Sprite2D" parent="."]
+position = Vector2(576.99994, 194)
+scale = Vector2(0.7482326, 0.7482326)
+texture = ExtResource("4_7ye67")
 
 [node name="CloseButton" type="Button" parent="."]
-offset_right = 500.0
-offset_bottom = 20.0
+layout_mode = 2
+theme = ExtResource("1_7ye67")
 text = "Close"
 
 [node name="Moves" type="GridContainer" parent="."]
-offset_top = 24.0
-offset_right = 500.0
-offset_bottom = 324.0
-custom_minimum_size = Vector2( 500, 300 )
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
 columns = 4
 
 [node name="P2Moves" type="GridContainer" parent="."]
-offset_top = 24.0
-offset_right = 500.0
-offset_bottom = 324.0
-custom_minimum_size = Vector2( 500, 300 )
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
 columns = 4
 
 [node name="UniversalMechanics" type="GridContainer" parent="."]
-offset_top = 328.0
-offset_right = 500.0
-offset_bottom = 628.0
-custom_minimum_size = Vector2( 500, 300 )
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 2
 columns = 4
 
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

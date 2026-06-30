@@ -52,17 +52,14 @@ func _init():
 # Writing _delta instead of delta here prevents the unused variable warning.
 func enter(state: Dictionary) -> void:
 	super.enter(state)
-	state[Enums.StKey.velocity_x] = 0
 	state[Enums.StKey.velocity_y] = 0
 	state[Enums.StKey.accel_y] = 0
-	state[Enums.StKey.drag_x] = Util.SLIPPERY_FRICTION
+	state[Enums.StKey.drag_x] = Util.ICE_FRICTION
 	anim.play("Grapple")
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
-	if (state[Enums.StKey.frame] == 3):
-		state[Enums.StKey.velocity_x] = -SGFixed.ONE*20
-	elif (state[Enums.StKey.frame] == 20):
+	if (state[Enums.StKey.frame] == 20):
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*40, state[Enums.StKey.velocity_x])
 		state[Enums.StKey.velocity_y] = -SGFixed.ONE*35
 		state[Enums.StKey.drag_x] = 0

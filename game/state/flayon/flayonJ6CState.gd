@@ -29,7 +29,7 @@ func _init():
 			Enums.StKey.hitstun : 23,
 			Enums.StKey.attack_damage: 40,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher,
-			Enums.StKey.launch_dir_x : -SGFixed.ONE*25,
+			Enums.StKey.launch_dir_x : -SGFixed.ONE*22,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*55,
 			Enums.StKey.hitstop: 10,
 			Enums.StKey.min_damage:8,
@@ -37,7 +37,7 @@ func _init():
 			Enums.StKey.guard: Enums.GuardType.Mid,
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.counter_hitstun: 20,
-			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*25,
+			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*22,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*55,
 			},
 		15 : { 
@@ -57,11 +57,11 @@ func enter(state: Dictionary) -> void:
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 2):
-		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*30, state[Enums.StKey.velocity_x])
+		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*32, state[Enums.StKey.velocity_x])
 		state[Enums.StKey.accel_y] = 0
 		state[Enums.StKey.velocity_y] = -SGFixed.ONE*2
 		SyncManager.play_sound("FlayonVoice", voice, {"bus": "Voice"})
-	elif (state[Enums.StKey.frame] == 10):
+	elif (state[Enums.StKey.frame] == 16):
 		state[Enums.StKey.velocity_x] = SGFixed.mul(state[Enums.StKey.velocity_x], 30000)
 		state[Enums.StKey.accel_y] = Util.GRAVITY
 		state[Enums.StKey.velocity_y] = -SGFixed.ONE*20

@@ -22,7 +22,7 @@ func enter(state: Dictionary) -> void:
 	anim.play("FlightUpwardAirdash")
 	state[Enums.StKey.drag_x] = 0
 	state[Enums.StKey.accel_y] = 0
-	state[Enums.StKey.super_meter] -= SGFixed.ONE*500
+	state[Enums.StKey.super_meter] -= SGFixed.ONE*700
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)

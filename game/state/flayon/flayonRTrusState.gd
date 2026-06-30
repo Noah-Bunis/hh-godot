@@ -28,15 +28,12 @@ func _init():
 		},
 		11 : {
 			Enums.StKey.counterOK : true,
+			Enums.StKey.burst_OK: false,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.hit_box_colliding_frame : 3,
 			Enums.StKey.Hit1PosX : 8629186, Enums.StKey.Hit1PosY : -15760254,
 			Enums.StKey.Hit1ScaleX : 1526496, Enums.StKey.Hit1ScaleY : 1350290,
-			Enums.StKey.Hurt1Disable : false, Enums.StKey.Hurt2Disable : false, Enums.StKey.Hurt3Disable : true,
-			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -10087936,
-			Enums.StKey.Hurt1ScaleX : 603537, Enums.StKey.Hurt1ScaleY : 1071143,
-			Enums.StKey.Hurt2PosX : 6546270, Enums.StKey.Hurt2PosY : -20362431,
-			Enums.StKey.Hurt2ScaleX : 645783, Enums.StKey.Hurt2ScaleY : 665625,
+			Enums.StKey.Hurt1Disable : true, Enums.StKey.Hurt2Disable : true, Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.attack_type : Enums.AttackType.WallBouncer,
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*75,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*80,
@@ -76,6 +73,18 @@ func physics_tick(state: Dictionary) -> void:
 		SyncManager.play_sound("FlayonVoice", VoiceSound, {"bus": "Voice"})
 		SyncManager.play_sound("FlayonVoiceReverb", VoiceSound, {"bus": "ReverbVoice"})
 
+
+func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
+	if (state[Enums.StKey.hitStopFrame] >= 0):
+		if (boost_OK(state, interpreter)):
+			state[Enums.StKey.cancelState] = "BoostCancel"
+		elif (assist_ok(state, interpreter) and state[Enums.StKey.cancelState] != "BoostCancel"):
+			if (level_1_OK(state) and super_assist_meter_ok(state)  and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.DDown, state[Enums.StKey.leftface])):
+				state[Enums.StKey.cancelState] = "GroundAssistCallSuper"
+	else:
+		if (boost_OK(state, interpreter)):
+			change_state.call("BoostCancel")
+
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
 
@@ -84,3 +93,6 @@ func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
+
+func combo_pushback(comboTime: int) -> int:
+	return 0

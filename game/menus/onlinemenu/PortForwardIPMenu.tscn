@@ -1,21 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://6ik2musijihg"]
+[gd_scene load_steps=21 format=3 uid="uid://6ik2musijihg"]
 
-[ext_resource type="FontFile" uid="uid://d28sv0htum78d" path="res://game/assets/monogram_extended.ttf" id="1"]
-[ext_resource type="Script" path="res://game/menus/mainmenu/BackgroundFadeLoop.gd" id="2"]
-[ext_resource type="Script" path="res://game/menus/mainmenu/LPSpin.gd" id="3"]
-[ext_resource type="Script" path="res://game/menus/onlinemenu/PortForwardIPMenu.gd" id="4"]
-[ext_resource type="Texture2D" uid="uid://b6ow73udpctn1" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://d3jnh37mq4dor" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://bvgnj3khkmjjr" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="7"]
-[ext_resource type="Material" path="res://game/assets/shaders/EarthBoundV1.tres" id="8"]
-[ext_resource type="Texture2D" uid="uid://byxe3cmt8n8r3" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/Brewski mini.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://kjlqkbldjwjy" path="res://game/assets/sprites/BGArt/Earthbound1.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://ds2u53rfp3f5i" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/RosetaiButton.png" id="11"]
-[ext_resource type="Texture2D" uid="uid://biq18vleavg8w" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
-[ext_resource type="Texture2D" uid="uid://bggo4s5qjupx4" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/RosenmaidenButton.png" id="13"]
-[ext_resource type="Texture2D" uid="uid://dnrbymofxcin4" path="res://game/assets/sprites/UI/MainMenus/WIM.png" id="14"]
-[ext_resource type="Material" path="res://game/assets/shaders/EarthBoundV2.tres" id="15"]
-[ext_resource type="Texture2D" uid="uid://0xw5lcnwgjfc" path="res://game/assets/sprites/BGArt/Earthbound2.png" id="16"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="1"]
+[ext_resource type="Script" uid="uid://ydl22yb0cm65" path="res://game/menus/mainmenu/BackgroundFadeLoop.gd" id="2"]
+[ext_resource type="Script" uid="uid://cyya0oolm3yee" path="res://game/menus/mainmenu/LPSpin.gd" id="3"]
+[ext_resource type="Script" uid="uid://muji5ncm7wpo" path="res://game/menus/onlinemenu/PortForwardIPMenu.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://cxjdgbte3ecjb" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b35en5rbily3g" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="6"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="6_ts1nf"]
+[ext_resource type="Texture2D" uid="uid://c60y2t8lut7is" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="7"]
+[ext_resource type="Material" uid="uid://bofoucuf31088" path="res://game/assets/shaders/EarthBoundV1.tres" id="8"]
+[ext_resource type="Texture2D" uid="uid://cscqgktkgfbbn" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/Brewski mini.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://dddol2ny4s5fk" path="res://game/assets/sprites/BGArt/Earthbound1.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bjm8b14quyhkl" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/RosetaiButton.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://doomqcq3aygwy" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://bef4piyy3ufhe" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/RosenmaidenButton.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://brippgfyq8q1g" path="res://game/assets/sprites/UI/MainMenus/WIM.png" id="14"]
+[ext_resource type="Material" uid="uid://cffvtcw31hg4s" path="res://game/assets/shaders/EarthBoundV2.tres" id="15"]
+[ext_resource type="Texture2D" uid="uid://bb04frwl1vxeg" path="res://game/assets/sprites/BGArt/Earthbound2.png" id="16"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("1")])
@@ -46,7 +47,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_udbuj"]
 _data = {
-"Idle": SubResource("2")
+&"Idle": SubResource("2")
 }
 
 [node name="OnlineMenu" type="Node2D"]
@@ -55,7 +56,7 @@ script = ExtResource("4")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MessageLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -489.0
@@ -68,6 +69,7 @@ text = "Direct IP connection (Needs port forwarding)"
 
 [node name="OnlineButtons" type="VBoxContainer" parent="CanvasLayer"]
 visible = false
+anchors_preset = -1
 offset_left = 148.0
 offset_top = 86.0
 offset_right = 328.0
@@ -86,11 +88,13 @@ layout_mode = 2
 texture_normal = ExtResource("11")
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = -1
 offset_left = 765.0
 offset_top = 307.0
 offset_right = 1129.0
 offset_bottom = 383.0
 scale = Vector2(2.62065, 3.92985)
+theme = ExtResource("6_ts1nf")
 columns = 2
 
 [node name="HostLabel" type="Label" parent="CanvasLayer/GridContainer"]
@@ -167,7 +171,7 @@ texture = ExtResource("6")
 reset_on_save = false
 root_node = NodePath("../Background")
 libraries = {
-"": SubResource("AnimationLibrary_udbuj")
+&"": SubResource("AnimationLibrary_udbuj")
 }
 
 [connection signal="pressed" from="CanvasLayer/GridContainer/ServerButton" to="." method="_on_ServerButton_pressed"]

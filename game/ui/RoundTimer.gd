@@ -1,6 +1,6 @@
 extends ComboCounter
 
-const TOTAL_TIME:int = 6000 # 6000
+const TOTAL_TIME:int = Util.TOTAL_ROUND_TIME
 const VISUAL_TOTAL_TIME:int = 100
 
 var currentTime:int

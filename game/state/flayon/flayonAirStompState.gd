@@ -3,7 +3,7 @@ extends FlayonAirAttackState
 class_name FlayonAirStompState
 
 func _init():
-	endFrame = 25
+	endFrame = 60
 	
 	anim_data = {
 		0 : {
@@ -14,6 +14,7 @@ func _init():
 			},
 		2: {
 			Enums.StKey.counterOK : true,
+			Enums.StKey.burst_OK: false,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hit1PosX : 829186, Enums.StKey.Hit1PosY : -15760254,
 			Enums.StKey.Hit1ScaleX : 1526496, Enums.StKey.Hit1ScaleY : 1026496,
@@ -26,7 +27,7 @@ func _init():
 			Enums.StKey.hit_box_colliding_frame : 254,
 			Enums.StKey.attack_damage: 65,
 			Enums.StKey.min_damage: 1,
-			Enums.StKey.guard: Enums.GuardType.High,
+			Enums.StKey.guard: Enums.GuardType.Mid,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher,
 			Enums.StKey.hitstun: Util.DEFAULT_HITSTUN + 4,
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*5,
@@ -50,6 +51,7 @@ func _init():
 		},
 		4: {
 			Enums.StKey.counterOK : true,
+			Enums.StKey.burst_OK: false,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hit1PosX : 829186, Enums.StKey.Hit1PosY : -15760254,
 			Enums.StKey.Hit1ScaleX : 1526496, Enums.StKey.Hit1ScaleY : 1026496,
@@ -73,6 +75,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*75,
 			},
 		7: {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true, Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.Hurt1PosX : -262144, Enums.StKey.Hurt1PosY : -13471104,
@@ -91,7 +94,7 @@ func enter(state: Dictionary) -> void:
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 5):
-		state[Enums.StKey.velocity_y] =	-SGFixed.ONE*35
+		state[Enums.StKey.velocity_y] =	-SGFixed.ONE*40
 		state[Enums.StKey.accel_y] = Util.GRAVITY
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):

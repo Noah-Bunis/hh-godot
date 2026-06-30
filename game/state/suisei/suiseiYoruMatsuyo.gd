@@ -65,6 +65,7 @@ func enter(state: Dictionary) -> void:
 	anim.play("Tatsu")
 	state[Enums.StKey.velocity_y] = 0
 	state[Enums.StKey.super_meter] += SGFixed.ONE*200
+	state[Enums.StKey.kara_OK] = false # No instant air kara
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)

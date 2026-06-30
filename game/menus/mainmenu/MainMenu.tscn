@@ -1,14 +1,16 @@
-[gd_scene load_steps=34 format=3 uid="uid://dwajufq80dc4w"]
+[gd_scene load_steps=36 format=3 uid="uid://dwajufq80dc4w"]
 
 [ext_resource type="Script" uid="uid://by6hd156nj55l" path="res://game/menus/mainmenu/MainMenu.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="2"]
 [ext_resource type="Texture2D" uid="uid://qn5j62sxeijo" path="res://game/assets/sprites/UI/MainMenus/MainScreen.png" id="3"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="3_hxaok"]
 [ext_resource type="Texture2D" uid="uid://de1uim16viyi4" path="res://game/assets/sprites/UI/MainMenus/Buttons/ONLINE/Timeline 1_0001.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://comfacrindw3" path="res://game/assets/sprites/UI/MainMenus/Buttons/DISCORD/Timeline 1_0001.png" id="4_xbiuh"]
 [ext_resource type="Texture2D" uid="uid://d7sjwacxj1v5" path="res://game/assets/sprites/UI/MainMenus/Buttons/VERSUS/Timeline 1_0001.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://d2h1mk6od7hmp" path="res://game/assets/sprites/UI/MainMenus/Buttons/DISCORD/Timeline 1_0000.png" id="5_kh4bg"]
 [ext_resource type="Texture2D" uid="uid://dyahl7dvcv4lt" path="res://game/assets/sprites/UI/MainMenus/Buttons/ONLINE/Timeline 1_0000.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://ceytlec472l3" path="res://game/assets/sprites/UI/MainMenus/Buttons/OPTIONS/Timeline 1_0001.png" id="7"]
+[ext_resource type="FontFile" uid="uid://b5eaosacfvlr0" path="res://game/assets/CreditsFont.tres" id="7_ax5fe"]
 [ext_resource type="Texture2D" uid="uid://b35en5rbily3g" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://b18q761010tfw" path="res://game/assets/sprites/UI/MainMenus/HoloheavenLP.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://c60y2t8lut7is" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="10"]
@@ -206,8 +208,8 @@ offset_right = 348.0
 offset_bottom = 38.0
 grow_horizontal = 2
 scale = Vector2(3.71277, 3.76316)
+theme = ExtResource("3_hxaok")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("1")
 text = "Your Name:"
 
 [node name="DiscordLabel" type="Label" parent="CanvasLayer"]
@@ -250,7 +252,8 @@ grow_horizontal = 2
 scale = Vector2(1.60862, 2.88665)
 focus_neighbor_left = NodePath("../MainMenuButtons/Offline")
 focus_neighbor_bottom = NodePath("../MainMenuButtons/Offline")
-theme_override_fonts/font = SubResource("1")
+theme = ExtResource("3_hxaok")
+theme_override_fonts/font = ExtResource("7_ax5fe")
 theme_override_font_sizes/font_size = 24
 placeholder_text = "Your Name"
 max_length = 30

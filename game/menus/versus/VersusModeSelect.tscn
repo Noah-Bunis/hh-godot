@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://b5uumeqo1cl7"]
+[gd_scene load_steps=15 format=3 uid="uid://b5uumeqo1cl7"]
 
 [ext_resource type="Script" uid="uid://c12dke4n0rufk" path="res://game/menus/versus/VersusModeSelect.gd" id="1"]
 [ext_resource type="Script" uid="uid://cyya0oolm3yee" path="res://game/menus/mainmenu/LPSpin.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://d3jnh37mq4dor" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://bvgnj3khkmjjr" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://bgak6vly3j6hu" path="res://game/assets/sprites/UI/MainMenus/OfflineVersusScreen.png" id="5_a81u2"]
-[ext_resource type="FontFile" uid="uid://d28sv0htum78d" path="res://game/assets/monogram_extended.ttf" id="6"]
-[ext_resource type="Texture2D" uid="uid://b6ow73udpctn1" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="7"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="3_8rg3v"]
+[ext_resource type="Texture2D" uid="uid://b35en5rbily3g" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://c60y2t8lut7is" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b45xc6fw0jlib" path="res://game/assets/sprites/UI/MainMenus/OfflineVersusScreen.png" id="5_a81u2"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="6"]
+[ext_resource type="Texture2D" uid="uid://cxjdgbte3ecjb" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="7"]
 [ext_resource type="Material" uid="uid://cffvtcw31hg4s" path="res://game/assets/shaders/EarthBoundV2.tres" id="10"]
-[ext_resource type="Texture2D" uid="uid://dnrbymofxcin4" path="res://game/assets/sprites/UI/MainMenus/WIM.png" id="11"]
-[ext_resource type="Texture2D" uid="uid://0xw5lcnwgjfc" path="res://game/assets/sprites/BGArt/Earthbound2.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://brippgfyq8q1g" path="res://game/assets/sprites/UI/MainMenus/WIM.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bb04frwl1vxeg" path="res://game/assets/sprites/BGArt/Earthbound2.png" id="13"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("6")])
@@ -67,6 +68,7 @@ offset_top = 190.0
 offset_right = 651.0
 offset_bottom = 266.0
 scale = Vector2(3.97283, 5.72218)
+theme = ExtResource("3_8rg3v")
 columns = 2
 
 [node name="PVP" type="Button" parent="CanvasLayer/GridContainer"]

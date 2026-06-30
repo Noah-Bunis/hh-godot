@@ -32,6 +32,7 @@ func _init():
 	
 func enter(state: Dictionary) -> void:
 	super.enter(state)
+	state[Enums.StKey.kara_OK] = false # No instant air kara
 	anim.play("MioCards")
 
 func physics_tick(state: Dictionary) -> void:

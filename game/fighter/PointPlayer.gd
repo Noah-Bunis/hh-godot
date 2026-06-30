@@ -14,7 +14,6 @@ var hp_bar: Node2D
 # TODO: round counters are just for angel install comeback check, don't write to them
 # there's probably some observer design pattern we should use
 var round_counter: Node2D
-var opponent_round_counter: Node2D
 
 func _init():
 	super._init()
@@ -218,6 +217,8 @@ func summonHelper(entity: String) -> void:
 			summonVFX("SuperJumpDustVFX", Global.SuperJumpDustVFX)
 		elif (entity == "FDBubble"):
 			summonVFX("FDBubbleVFX", Global.FDBubbleVFX)
+		elif (entity == "IncreaseFlash"):
+			summonVFX("IncreaseFlashVFX", Global.IncreaseFlashVFX)
 		elif (entity == "ParryWhiff"):
 			summonVFX("ParryWhiff", Global.ParryWhiffVFX)
 		elif (entity == "RedParryFlash"):

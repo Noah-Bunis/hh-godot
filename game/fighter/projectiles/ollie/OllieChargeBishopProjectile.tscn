@@ -4,13 +4,13 @@
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="2"]
 [ext_resource type="Script" uid="uid://cvhvl56hrvye2" path="res://game/fighter/projectiles/ollie/OllieChargeChessProjectilePlayer.gd" id="2_yxd1i"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="3"]
-[ext_resource type="Texture2D" uid="uid://cgbpnugtnpiik" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0004.png" id="3_k04o0"]
-[ext_resource type="Texture2D" uid="uid://c3x14vkbcj7xn" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0003.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://3xapyy8llhy4" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0004.png" id="3_k04o0"]
+[ext_resource type="Texture2D" uid="uid://bemu3ipjumy8k" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0003.png" id="4"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="20"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="21"]
-[ext_resource type="Texture2D" uid="uid://bhg2jx47mwqoj" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0002.png" id="25"]
-[ext_resource type="Texture2D" uid="uid://jij7n07lu1ef" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0000.png" id="26"]
-[ext_resource type="Texture2D" uid="uid://xqw7sv6k2pmv" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0001.png" id="27"]
+[ext_resource type="Texture2D" uid="uid://ucwk04v6n6e6" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0002.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://d0o8gwoghr1w0" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0000.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://dxqcr5hlhfgvp" path="res://game/assets/sprites/ollie/Bishop/Timeline 1_0001.png" id="27"]
 
 [sub_resource type="SGRectangleShape2D" id="1"]
 extents_x = 4063232
@@ -19,7 +19,6 @@ extents_y = 8847360
 [sub_resource type="Animation" id="2"]
 resource_name = "Active"
 length = 0.033335064
-loop_mode = 2
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -84,7 +83,7 @@ script = ExtResource("2_yxd1i")
 material = ExtResource("3")
 position = Vector2(1, -179)
 scale = Vector2(1.428, 1.428)
-texture = ExtResource("3_k04o0")
+texture = ExtResource("26")
 
 [node name="Pushbox" type="SGCollisionShape2D" parent="."]
 shape = SubResource("1")

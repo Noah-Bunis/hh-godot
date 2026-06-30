@@ -20,9 +20,9 @@ texture = ExtResource("1_7crh2")
 
 [node name="TextureRect5" type="TextureRect" parent="."]
 anchors_preset = -1
-offset_left = 372.0
+offset_left = 361.0
 offset_top = -167.0
-offset_right = 515.0
+offset_right = 504.0
 offset_bottom = 5.0
 pivot_offset = Vector2(130, 140)
 texture = ExtResource("2_m1rdv")
@@ -38,9 +38,9 @@ texture = ExtResource("1_7crh2")
 
 [node name="TextureRect6" type="TextureRect" parent="."]
 anchors_preset = -1
-offset_left = 374.0
+offset_left = 363.0
 offset_top = 15.0
-offset_right = 517.0
+offset_right = 506.0
 offset_bottom = 187.0
 pivot_offset = Vector2(130, 140)
 texture = ExtResource("3_ycclh")
@@ -66,9 +66,9 @@ texture = ExtResource("4_byjnm")
 
 [node name="TextureRect7" type="TextureRect" parent="."]
 anchors_preset = -1
-offset_left = 375.0
+offset_left = 364.0
 offset_top = 198.0
-offset_right = 518.0
+offset_right = 507.0
 offset_bottom = 370.0
 pivot_offset = Vector2(130, 140)
 texture = ExtResource("5_8n4qa")
