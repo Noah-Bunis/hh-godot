@@ -124,13 +124,13 @@
 [ext_resource type="Texture2D" uid="uid://dl4ye8jeg0wft" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0002.png" id="115_mggq2"]
 [ext_resource type="Texture2D" uid="uid://cy7ssncjr61nb" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0003.png" id="116_qrtf5"]
 [ext_resource type="Texture2D" uid="uid://wjv131hsu4ug" path="res://game/assets/sprites/flayon/StandParry/Timeline 1_0000.png" id="117_tyb2q"]
-[ext_resource type="Texture2D" uid="uid://dmu3yjcno7iii" path="res://game/assets/sprites/flayon/PizzaCutter/Timeline 1_0001.png" id="119_q1i54"]
-[ext_resource type="Texture2D" uid="uid://cbqrxy7l8ypao" path="res://game/assets/sprites/flayon/PizzaCutter/Timeline 1_0002.png" id="120_ta78x"]
 [ext_resource type="Texture2D" uid="uid://cdgls86c4f2sh" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0000.png" id="121_l754w"]
 [ext_resource type="Texture2D" uid="uid://c64nek4bdutw3" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0001.png" id="122_uhaxj"]
 [ext_resource type="Texture2D" uid="uid://p1yotyx3jhpj" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0002.png" id="123_poon3"]
 [ext_resource type="Texture2D" uid="uid://867qmhjcwhva" path="res://game/assets/sprites/flayon/jC/Timeline 1_0000.png" id="124_boc6f"]
+[ext_resource type="Texture2D" uid="uid://c45cb36w7658k" path="res://game/assets/sprites/kurokami/j2C/Timeline 1_0000.png" id="125_dc1am"]
 [ext_resource type="Texture2D" uid="uid://c06dyy5ue2vji" path="res://game/assets/sprites/flayon/jC/Timeline 1_0001.png" id="125_moikh"]
+[ext_resource type="Texture2D" uid="uid://drf77g2a1eki7" path="res://game/assets/sprites/kurokami/j2C/Timeline 1_0001.png" id="126_dd2cc"]
 [ext_resource type="Texture2D" uid="uid://ctqinrx8p8ewl" path="res://game/assets/sprites/flayon/jC/Timeline 1_0002.png" id="126_x1xq0"]
 [ext_resource type="Texture2D" uid="uid://dnpojpcgc4ljj" path="res://game/assets/sprites/flayon/jC/Timeline 1_0003.png" id="127_1t73e"]
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="128_ctypp"]
@@ -1614,7 +1614,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("64_k5e8y")]
+"values": [ExtResource("64_8siup")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1626,7 +1626,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(-100, 160)]
+"values": [Vector2(-80, 125)]
 }
 
 [sub_resource type="Animation" id="10"]
@@ -1949,7 +1949,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="25"]
 resource_name = "j2C"
-length = 0.25
+length = 0.23333545
 loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
@@ -1959,10 +1959,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.18333334, 0.23333333, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("124_boc6f"), ExtResource("119_q1i54"), ExtResource("120_ta78x"), ExtResource("127_1t73e")]
+"values": [ExtResource("125_dc1am"), ExtResource("126_dd2cc")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1974,7 +1974,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(-30, 20)]
+"values": [Vector2(-80, 95)]
 }
 
 [sub_resource type="Animation" id="72"]

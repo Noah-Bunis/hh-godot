@@ -1,9 +1,9 @@
 [gd_resource type="Theme" load_steps=9 format=3 uid="uid://of3afybns5hm"]
 
 [ext_resource type="FontFile" uid="uid://ubo1dqjqq8fk" path="res://game/assets/HandwritingJoe.otf" id="1_0w15m"]
-[ext_resource type="Texture2D" uid="uid://c5gtwe85w5ynb" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0002.png" id="2_co60m"]
-[ext_resource type="Texture2D" uid="uid://lg623tut8ime" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0001.png" id="3_arosq"]
-[ext_resource type="Texture2D" uid="uid://2csdjdj1yr8r" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0000.png" id="4_co60m"]
+[ext_resource type="Texture2D" uid="uid://c1k5snuxrirvn" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0002.png" id="2_co60m"]
+[ext_resource type="Texture2D" uid="uid://dxsvsww1xjbsv" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0001.png" id="3_arosq"]
+[ext_resource type="Texture2D" uid="uid://be2g6mvvohuai" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0000.png" id="4_co60m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_433jq"]
 texture = ExtResource("2_co60m")
