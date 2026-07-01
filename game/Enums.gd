@@ -13,7 +13,7 @@ enum StKey {
 	leftfaceOK,
 	frame, # 11
 	last_anim_frame,
-	hitStopFrame,
+	hitStopFrame, # 13
 	hit_box_colliding_frame,  # 14
 	cancelState,
 	hitstun,

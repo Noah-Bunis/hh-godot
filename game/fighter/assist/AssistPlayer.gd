@@ -209,8 +209,6 @@ func anim_updates() -> void:
 		
 		if(anim_frame.get(Enums.StKey.WarpOffScreen, false)):
 			warp_off_screen()
-		if (not anim_frame.is_empty()):
-			summonHelper(anim_frame.get(Enums.StKey.Summon, ""))
 	attackData[Enums.StKey.attack_type] = anim_frame.get(Enums.StKey.attack_type, Enums.AttackType.Strike)
 	attackData[Enums.StKey.attack_damage] = anim_frame.get(Enums.StKey.attack_damage, 50)
 	attackData[Enums.StKey.guard] = anim_frame.get(Enums.StKey.guard, Enums.GuardType.Mid)
@@ -239,18 +237,26 @@ func summonVFX(VFXname: String, VFX) -> void:
 		leftface = currentState[Enums.StKey.leftface],
 	})
 
-func summonHelper(entity: String) -> void:
-	if (entity == "superFlash"):
-		emit_signal("super_freeze", get_global_fixed_position().x, get_global_fixed_position().y, currentState[Enums.StKey.leftface])
-		SyncManager.play_sound("superflash", Global.SuperFlashSound, {"bus": "Sound"})
-	elif (entity == "meterDump"):
-		emit_signal("battery_player", -Util.LEVEL_ONE_SUPER, 0, 0)
-	elif (entity == "knockdowndust"):
-		summonVFX("KnockdownVFX", Global.KnockdownDustVFX)
-	elif (entity == "WallBounceDust"):
-		summonVFX("WallBounceDustVFX", Global.WallBounceDustVFX)
-	elif (entity == "burst"):
-		summonVFX("BurstVFX", Global.BurstVFX)
+func delay_summon():
+	var anim_frame : Dictionary = fighterState.state.anim_data.get(currentState[Enums.StKey.frame], {})
+	if (currentState[Enums.StKey.last_anim_frame] == currentState[Enums.StKey.frame]):
+		summonHelper(anim_frame.get(Enums.StKey.Summon, ""), currentState[Enums.StKey.hitstun] <= 0)
+
+func summonHelper(entity: String, uninterrupted:bool=true) -> void:
+	if (not entity.is_empty()):
+		if (uninterrupted):
+			if (entity == "superFlash"):
+				emit_signal("super_freeze", get_global_fixed_position().x, get_global_fixed_position().y, currentState[Enums.StKey.leftface])
+				SyncManager.play_sound("superflash", Global.SuperFlashSound, {"bus": "Sound"})
+			elif (entity == "meterDump"):
+				emit_signal("battery_player", -Util.LEVEL_ONE_SUPER, 0, 0)
+		if (entity == "knockdowndust"):
+			summonVFX("KnockdownVFX", Global.KnockdownDustVFX)
+		elif (entity == "WallBounceDust"):
+			summonVFX("WallBounceDustVFX", Global.WallBounceDustVFX)
+		elif (entity == "burst"):
+			summonVFX("BurstVFX", Global.BurstVFX)
+		
 
 func tag_in(x : int, y : int, left_face : bool, grounded : bool, tag_attack: int) -> void:
 	if (has_property(Enums.StateProperty.DormantAssist) and tag_attack != 12): # normal burst doesn't initiate summon

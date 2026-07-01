@@ -37,6 +37,7 @@ func _init():
 func enter(state: Dictionary) -> void:
 	super.enter(state)
 	state[Enums.StKey.drag_x] = 85536
+	state[Enums.StKey.hitstun] = 0
 	state[Enums.StKey.hitStopFrame] = 0
 	anim.play("GroundAssist")
 

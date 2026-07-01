@@ -80,7 +80,7 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 20):
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*11, state[Enums.StKey.velocity_x])
-		state[Enums.StKey.velocity_y] = -SGFixed.ONE*25
+		# state[Enums.StKey.velocity_y] = -SGFixed.ONE*25
 		state[Enums.StKey.drag_x] = 0
 	elif (state[Enums.StKey.frame] == 55):
 		state[Enums.StKey.accel_y] = Util.GRAVITY
@@ -91,7 +91,8 @@ func combo_pushback(comboTime: int) -> int:
 
 func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
 	if (event_cause == Enums.Reaction.GroundLand):
-		if (state[Enums.StKey.frame] > 21 and state[Enums.StKey.hitStopFrame] <= 0):
-			change_state.call("ASuicoLandAttackRecovery")
+		pass
+		# if (state[Enums.StKey.frame] > 87 and state[Enums.StKey.hitStopFrame] <= 0):
+		# 	change_state.call("ASuicoLandAttackRecovery")
 	else:
 		super.reaction(state, interpreter, event_cause)

@@ -14,9 +14,9 @@ const ChargeKnight = preload("res://game/fighter/projectiles/ollie/OllieChargeKn
 const Queen = preload("res://game/fighter/projectiles/ollie/OllieQueenProjectile.tscn")
 const ProtonCannon = preload("res://game/fighter/projectiles/ollie/OllieProtonCannonProjectile.tscn")
 
-func summonHelper(entity: String) -> void:
-	super.summonHelper(entity)
-	if (not entity.is_empty()):
+func summonHelper(entity: String, uninterrupted:bool=true) -> void:
+	super.summonHelper(entity, uninterrupted)
+	if (not entity.is_empty() and uninterrupted):
 		var leftface_mult = 1
 		if (currentState[Enums.StKey.leftface]):
 			leftface_mult = -1

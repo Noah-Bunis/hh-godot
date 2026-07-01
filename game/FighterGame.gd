@@ -806,6 +806,11 @@ func _network_process(input: Dictionary) -> void:
 				ServerPlayer.currentState[Enums.StKey.super_meter] = ServerPlayer.old_super_meter
 			if (ClientPlayer.currentState[Enums.StKey.super_meter] > ClientPlayer.old_super_meter):
 				ClientPlayer.currentState[Enums.StKey.super_meter] = ClientPlayer.old_super_meter
+		
+		ServerPlayer.delay_summon()
+		ClientPlayer.delay_summon()
+		AssistPlayer1.delay_summon()
+		AssistPlayer2.delay_summon()
 
 		# Pushbox collision updates
 		pushbox_collision()

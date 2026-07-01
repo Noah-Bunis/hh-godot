@@ -28,7 +28,7 @@ func _init():
 		7 : { 
 			Enums.StKey.Summon : "move_pilot",
 			Enums.StKey.Hit1Disable : true,
-			Enums.StKey.Hurt1Disable : false, Enums.StKey.Hurt2Disable : true,
+			Enums.StKey.Hurt1Disable : true, Enums.StKey.Hurt2Disable : true,
 			},
 	}
 
@@ -55,9 +55,7 @@ func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 			interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) or
 			interpreter.is_holding_a_direction(Enums.Numpad.N9, state[Enums.StKey.leftface])):
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*27, state[Enums.StKey.velocity_x])
-	#else:
-		#state[Enums.StKey.velocity_x] = 0
-	
+
 	if (interpreter.is_holding_a_direction(Enums.Numpad.N2, state[Enums.StKey.leftface]) or
 			interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or
 			interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])):

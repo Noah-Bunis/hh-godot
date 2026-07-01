@@ -14,13 +14,16 @@ func _ready():
 	load_startup_config()
 	$CanvasLayer/Options/FullScreenButton.grab_focus()
 	$CanvasLayer/Options/VsyncEmpty.text = bool_to_on_off_string(DisplayServer.window_get_vsync_mode() != DisplayServer.VSYNC_DISABLED)
-	$CanvasLayer/Options/MainVolumeMeter.value = Main_volume + $CanvasLayer/Options/MainVolumeMeter.max_value
-	$CanvasLayer/Options/MusicVolumeMeter.value = BGM_volume + $CanvasLayer/Options/MusicVolumeMeter.max_value
-	$CanvasLayer/Options/SoundVolumeMeter.value = Sound_volume + $CanvasLayer/Options/SoundVolumeMeter.max_value
-	$CanvasLayer/Options/VoiceVolumeMeter.value = Voice_volume + $CanvasLayer/Options/VoiceVolumeMeter.max_value
+	$CanvasLayer/Options/MainVolumeMeter.value = db_conversion(Main_volume, $CanvasLayer/Options/MainVolumeMeter.max_value)
+	$CanvasLayer/Options/MusicVolumeMeter.value = db_conversion(BGM_volume, $CanvasLayer/Options/MusicVolumeMeter.max_value)
+	$CanvasLayer/Options/SoundVolumeMeter.value = db_conversion(Sound_volume, $CanvasLayer/Options/SoundVolumeMeter.max_value)
+	$CanvasLayer/Options/VoiceVolumeMeter.value = db_conversion(Voice_volume, $CanvasLayer/Options/VoiceVolumeMeter.max_value)
 	$CanvasLayer/Options/VersionLabelReadout.text = Global.BATTLE_ENGINE_VERSION
 	update_debug_rollback_log()
 	replay_text_update()
+
+func db_conversion(internal_volume, meter_max):
+	return (internal_volume * 2) + meter_max
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -99,8 +102,8 @@ func _on_VoiceVolumeMeter_value_changed(value):
 	Voice_volume = volume_meter_change("ReverbVoice", $CanvasLayer/Options/VoiceVolumeMeter, -5)
 
 func volume_meter_change(bus, meter, modify=0):
-	var volume = meter.value - meter.max_value
-	if volume <= -meter.min_value + 0.1:
+	var volume = (meter.value - meter.max_value) / 2
+	if meter.value <= meter.min_value + 0.1:
 		volume = -100
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(bus), volume + modify)
 	return volume
