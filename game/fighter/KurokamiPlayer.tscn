@@ -1,4 +1,4 @@
-[gd_scene load_steps=206 format=3 uid="uid://c1rd33xsv2ply"]
+[gd_scene load_steps=208 format=3 uid="uid://c1rd33xsv2ply"]
 
 [ext_resource type="Script" uid="uid://dgsx3duqjaeo5" path="res://game/fighter/PointPlayer.gd" id="1_cnkmf"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="2_ahu1b"]
@@ -15,10 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://d4ehpmjfb0e11" path="res://game/assets/sprites/flayon/2C/Timeline 1_0000.png" id="13_0d52k"]
 [ext_resource type="Texture2D" uid="uid://blcd5rdmd1kek" path="res://game/assets/sprites/flayon/2C/Timeline 1_0001.png" id="14_qplap"]
 [ext_resource type="Texture2D" uid="uid://xgutjwit1vn7" path="res://game/assets/sprites/flayon/2C/Timeline 1_0002.png" id="15_pvkee"]
-[ext_resource type="Texture2D" uid="uid://camq2286btx3" path="res://game/assets/sprites/flayon/3C/Timeline 1_0000.png" id="16_xlt7h"]
-[ext_resource type="Texture2D" uid="uid://o65u887n2jbd" path="res://game/assets/sprites/flayon/3C/Timeline 1_0001.png" id="17_8qfo6"]
-[ext_resource type="Texture2D" uid="uid://dbx7dussunhp1" path="res://game/assets/sprites/flayon/3C/Timeline 1_0002.png" id="18_7qefs"]
-[ext_resource type="Texture2D" uid="uid://dr8uq87d5m36e" path="res://game/assets/sprites/flayon/3C/Timeline 1_0003.png" id="19_iiywk"]
+[ext_resource type="Texture2D" uid="uid://dyl176l5cvg3j" path="res://game/assets/sprites/kurokami/3C/Timeline 1_0000.png" id="16_i5r0k"]
+[ext_resource type="Texture2D" uid="uid://d184qts61vfi2" path="res://game/assets/sprites/kurokami/3C/Timeline 1_0001.png" id="17_8siup"]
+[ext_resource type="Texture2D" uid="uid://bu6pnuvf06akc" path="res://game/assets/sprites/kurokami/3C/Timeline 1_0002.png" id="18_q6mlb"]
+[ext_resource type="Texture2D" uid="uid://1gu3oic3qra5" path="res://game/assets/sprites/kurokami/3C/Timeline 1_0003.png" id="19_pprro"]
 [ext_resource type="Texture2D" uid="uid://bs6fs30k54imm" path="res://game/assets/sprites/flayon/5A/Timeline 1_0000.png" id="20_ffcfl"]
 [ext_resource type="Texture2D" uid="uid://bwwf8r4mw6ktt" path="res://game/assets/sprites/flayon/5A/Timeline 1_0001.png" id="21_hjlae"]
 [ext_resource type="Texture2D" uid="uid://bli5o4bnfesq" path="res://game/assets/sprites/flayon/5A/Timeline 1_0002.png" id="22_k6tb7"]
@@ -114,16 +114,18 @@
 [ext_resource type="Texture2D" uid="uid://pwvi88re7n1d" path="res://game/assets/sprites/flayon/RTrus/Timeline 1_0005.png" id="107_qs5yl"]
 [ext_resource type="Texture2D" uid="uid://dhmdjwf6w1od4" path="res://game/assets/sprites/flayon/RTrus/Timeline 1_0006.png" id="108_fculv"]
 [ext_resource type="Texture2D" uid="uid://bts157o12xsca" path="res://game/assets/sprites/kurokami/Jump/Timeline 1_0001.png" id="108_i5r0k"]
-[ext_resource type="Texture2D" uid="uid://cu1uywrvoisnm" path="res://game/assets/sprites/flayon/Run/Timeline 1_0000.png" id="109_5ko35"]
 [ext_resource type="Texture2D" uid="uid://6almwtsew665" path="res://game/assets/sprites/kurokami/Jump/Timeline 1_0002.png" id="109_8siup"]
-[ext_resource type="Texture2D" uid="uid://bcy504o68ht0q" path="res://game/assets/sprites/flayon/Run/Timeline 1_0001.png" id="110_c5tqt"]
-[ext_resource type="Texture2D" uid="uid://b7jwg6t0yf7q4" path="res://game/assets/sprites/flayon/Run/Timeline 1_0002.png" id="111_ccihm"]
 [ext_resource type="Texture2D" uid="uid://dkkuafn44majj" path="res://game/assets/sprites/flayon/StandBlock/Timeline 1_0000.png" id="112_ep7c7"]
 [ext_resource type="Texture2D" uid="uid://pqrvt03q8i3k" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0000.png" id="113_t03jw"]
 [ext_resource type="Texture2D" uid="uid://c4pv85jxndjuh" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0001.png" id="114_bvsmd"]
 [ext_resource type="Texture2D" uid="uid://dl4ye8jeg0wft" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0002.png" id="115_mggq2"]
+[ext_resource type="Texture2D" uid="uid://co3bffmg8tugy" path="res://game/assets/sprites/kurokami/Run/Timeline 1_0000.png" id="116_i5r0k"]
 [ext_resource type="Texture2D" uid="uid://cy7ssncjr61nb" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0003.png" id="116_qrtf5"]
+[ext_resource type="Texture2D" uid="uid://cscd8kf3og2gs" path="res://game/assets/sprites/kurokami/Run/Timeline 1_0001.png" id="117_8siup"]
 [ext_resource type="Texture2D" uid="uid://wjv131hsu4ug" path="res://game/assets/sprites/flayon/StandParry/Timeline 1_0000.png" id="117_tyb2q"]
+[ext_resource type="Texture2D" uid="uid://c0hwwrct21h3l" path="res://game/assets/sprites/kurokami/Run/Timeline 1_0002.png" id="118_q6mlb"]
+[ext_resource type="Texture2D" uid="uid://bjlwkgsk8sjy7" path="res://game/assets/sprites/kurokami/Run/Timeline 1_0003.png" id="119_pprro"]
+[ext_resource type="Texture2D" uid="uid://cwklrmh7ul1bw" path="res://game/assets/sprites/kurokami/Run/Timeline 1_0004.png" id="120_0d52k"]
 [ext_resource type="Texture2D" uid="uid://cdgls86c4f2sh" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0000.png" id="121_l754w"]
 [ext_resource type="Texture2D" uid="uid://c64nek4bdutw3" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0001.png" id="122_uhaxj"]
 [ext_resource type="Texture2D" uid="uid://p1yotyx3jhpj" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0002.png" id="123_poon3"]
@@ -239,10 +241,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.18333334, 0.26666635),
+"times": PackedFloat32Array(0, 0.13333334, 0.21666667, 0.26666668),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("16_xlt7h"), ExtResource("17_8qfo6"), ExtResource("18_7qefs"), ExtResource("19_iiywk")]
+"values": [ExtResource("16_i5r0k"), ExtResource("17_8siup"), ExtResource("18_q6mlb"), ExtResource("19_pprro")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -254,7 +256,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(-60, 120)]
+"values": [Vector2(-60, 40)]
 }
 
 [sub_resource type="Animation" id="2"]
@@ -1726,10 +1728,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 0.13333334),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("109_5ko35"), ExtResource("110_c5tqt"), ExtResource("111_ccihm")]
+"values": [ExtResource("116_i5r0k"), ExtResource("117_8siup"), ExtResource("118_q6mlb"), ExtResource("119_pprro"), ExtResource("120_0d52k")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1741,7 +1743,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(-50, 140)]
+"values": [Vector2(-50, 100)]
 }
 
 [sub_resource type="Animation" id="22"]
@@ -2195,20 +2197,20 @@ script = ExtResource("128_ctypp")
 auto_reset = false
 
 [node name="Hitbox1" parent="." instance=ExtResource("129_pxbka")]
-fixed_position_x = 8629186
-fixed_position_y = -17760254
-fixed_scale_x = 526496
-fixed_scale_y = 1150290
-position = Vector2(131.67093, -270.99997)
-scale = Vector2(8.033691, 17.552032)
+fixed_position_x = 2767169
+fixed_position_y = -33619964
+fixed_scale_x = 519159
+fixed_scale_y = -339693
+position = Vector2(42.223648, -512.99994)
+scale = Vector2(7.9217377, -5.183304)
 
 [node name="Hitbox2" parent="." instance=ExtResource("129_pxbka")]
-fixed_position_x = 40435712
-fixed_position_y = -19136510
-fixed_scale_x = 1520696
-fixed_scale_y = 910074
-position = Vector2(617, -292)
-scale = Vector2(23.204, 13.8866)
+fixed_position_x = 12010048
+fixed_position_y = -17920636
+fixed_scale_x = 504071
+fixed_scale_y = 1863129
+position = Vector2(183.25879, -273.4472)
+scale = Vector2(7.691513, 28.429092)
 
 [node name="Hurtbox1" parent="." instance=ExtResource("130_i8k0d")]
 fixed_position_y = -10087936

@@ -60,7 +60,7 @@ func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 		state[Enums.StKey.velocity_y] = 0
 	elif (state[Enums.StKey.frame] >= Util.AIR_DASH_CANCEL_FRAME):
 		if (common_jump_transitions_default(state, interpreter)):
-			state[Enums.StKey.velocity_y] = -SGFixed.ONE*8
+			state[Enums.StKey.velocity_y] = -SGFixed.ONE*6
 			state[Enums.StKey.velocity_x] = SGFixed.mul(state[Enums.StKey.velocity_x], SGFixed.HALF)
 
 func has_property(state: Dictionary,property: int) -> bool:
