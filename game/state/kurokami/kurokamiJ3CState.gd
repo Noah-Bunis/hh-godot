@@ -1,8 +1,8 @@
 extends KurokamiAirAttackState
 
-class_name Kurokamij2CState
+class_name Kurokamij3CState
 
-var voice = preload("res://game/assets/voice/fubuki/fbk_HORA.wav")
+var voice = preload("res://game/assets/voice/fubuki/fbk_kurokami baka nanoka.wav")
 
 func _init():
 	endFrame = 40
@@ -33,27 +33,18 @@ func _init():
 			Enums.StKey.counter_hit: Enums.AttackType.GroundBouncer,
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*7,
 			Enums.StKey.counter_launch_dir_y: SGFixed.ONE*42,
-			Enums.StKey.hitstun: 22,
+			Enums.StKey.hitstun: Util.DEFAULT_LIGHT_HITSTUN,
 			Enums.StKey.counter_hitstun: 46,
 			}
 	}
 
 func enter(state: Dictionary) -> void:
 	super.enter(state)
-	anim.play("j2C")
+	anim.play("j3C")
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 1):
 		SyncManager.play_sound("kurokamiVoice", voice, {"bus": "Voice"})
-		state[Enums.StKey.velocity_y] = SGFixed.ONE * 20
-		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE * 1, state[Enums.StKey.velocity_x])
-		
-func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
-	if (event_cause == Enums.Reaction.GroundLand):
-		if (state[Enums.StKey.hitStopFrame] <= 0 and state[Enums.StKey.frame] >= 3):
-			state[Enums.StKey.doubleJump] = 1
-			state[Enums.StKey.airDash] = 1
-			change_state.call("LandingRecovery")
-	else:
-		super.reaction(state, interpreter, event_cause)
+		state[Enums.StKey.velocity_y] = SGFixed.ONE * 18
+		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE * 30, state[Enums.StKey.velocity_x])

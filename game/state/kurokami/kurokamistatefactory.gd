@@ -55,7 +55,7 @@ func _init():
 		"Jump5A": preload("res://game/state/kurokami/kurokamiJAState.gd"),
 		"Jump5B": preload("res://game/state/kurokami/kurokamiJBState.gd"),
 		"Jump5C": preload("res://game/state/kurokami/kurokamiJCState.gd"),
-		"Jump2C": preload("res://game/state/kurokami/kurokamiJ2CState.gd"),
+		"Jump3C": preload("res://game/state/kurokami/kurokamiJ3CState.gd"),
 		
 		"GroundAssistCall2": preload("res://game/state/kurokami/kurokamiGroundAssistCall2.gd"),
 		"GroundAssistCallSuper": preload("res://game/state/kurokami/kurokamiGroundAssistCallSuper.gd"),
@@ -182,11 +182,9 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 			interpreter.is_holding_a_direction(Enums.Numpad.N8, state[Enums.StKey.leftface])) 
 			and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "AirParryWhiff"
-	elif ((interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or
-				interpreter.is_holding_a_direction(Enums.Numpad.N2, state[Enums.StKey.leftface]) or
-				interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])) and 
-			interpreter.is_button_down(Enums.InputFlags.CDown)):
-		return "Jump2C"
+	elif (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) and 
+			interpreter.is_button_down(Enums.InputFlags.CDown) and state["_pos_y"] <= Util.MIN_IAD_HEIGHT):
+		return "Jump3C"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
 		return "RyukenShiki"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):

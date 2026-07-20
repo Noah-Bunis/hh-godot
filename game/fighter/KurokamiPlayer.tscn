@@ -19,9 +19,9 @@
 [ext_resource type="Texture2D" uid="uid://d184qts61vfi2" path="res://game/assets/sprites/kurokami/3C/Timeline 1_0001.png" id="17_8siup"]
 [ext_resource type="Texture2D" uid="uid://bu6pnuvf06akc" path="res://game/assets/sprites/kurokami/3C/Timeline 1_0002.png" id="18_q6mlb"]
 [ext_resource type="Texture2D" uid="uid://1gu3oic3qra5" path="res://game/assets/sprites/kurokami/3C/Timeline 1_0003.png" id="19_pprro"]
-[ext_resource type="Texture2D" uid="uid://bs6fs30k54imm" path="res://game/assets/sprites/flayon/5A/Timeline 1_0000.png" id="20_ffcfl"]
-[ext_resource type="Texture2D" uid="uid://bwwf8r4mw6ktt" path="res://game/assets/sprites/flayon/5A/Timeline 1_0001.png" id="21_hjlae"]
-[ext_resource type="Texture2D" uid="uid://bli5o4bnfesq" path="res://game/assets/sprites/flayon/5A/Timeline 1_0002.png" id="22_k6tb7"]
+[ext_resource type="Texture2D" uid="uid://ceng4rbpiitki" path="res://game/assets/sprites/kurokami/5A/Timeline 1_0000.png" id="20_dc1am"]
+[ext_resource type="Texture2D" uid="uid://dw2l1laqeplci" path="res://game/assets/sprites/kurokami/5A/Timeline 1_0001.png" id="21_i5r0k"]
+[ext_resource type="Texture2D" uid="uid://hgm4kqtabu6w" path="res://game/assets/sprites/kurokami/5A/Timeline 1_0002.png" id="22_8siup"]
 [ext_resource type="Texture2D" uid="uid://d17yf261r8sbd" path="res://game/assets/sprites/flayon/5B/Timeline 1_0000.png" id="23_won46"]
 [ext_resource type="Texture2D" uid="uid://c51bcdhlhafvy" path="res://game/assets/sprites/flayon/5B/Timeline 1_0001.png" id="24_5y1o2"]
 [ext_resource type="Texture2D" uid="uid://cd7grd0bb3cv5" path="res://game/assets/sprites/flayon/5B/Timeline 1_0002.png" id="25_63sct"]
@@ -130,9 +130,9 @@
 [ext_resource type="Texture2D" uid="uid://c64nek4bdutw3" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0001.png" id="122_uhaxj"]
 [ext_resource type="Texture2D" uid="uid://p1yotyx3jhpj" path="res://game/assets/sprites/flayon/SwordDash/Timeline 1_0002.png" id="123_poon3"]
 [ext_resource type="Texture2D" uid="uid://867qmhjcwhva" path="res://game/assets/sprites/flayon/jC/Timeline 1_0000.png" id="124_boc6f"]
-[ext_resource type="Texture2D" uid="uid://c45cb36w7658k" path="res://game/assets/sprites/kurokami/j2C/Timeline 1_0000.png" id="125_dc1am"]
+[ext_resource type="Texture2D" uid="uid://c45cb36w7658k" path="res://game/assets/sprites/kurokami/j3C/Timeline 1_0000.png" id="125_dc1am"]
 [ext_resource type="Texture2D" uid="uid://c06dyy5ue2vji" path="res://game/assets/sprites/flayon/jC/Timeline 1_0001.png" id="125_moikh"]
-[ext_resource type="Texture2D" uid="uid://drf77g2a1eki7" path="res://game/assets/sprites/kurokami/j2C/Timeline 1_0001.png" id="126_dd2cc"]
+[ext_resource type="Texture2D" uid="uid://drf77g2a1eki7" path="res://game/assets/sprites/kurokami/j3C/Timeline 1_0001.png" id="126_dd2cc"]
 [ext_resource type="Texture2D" uid="uid://ctqinrx8p8ewl" path="res://game/assets/sprites/flayon/jC/Timeline 1_0002.png" id="126_x1xq0"]
 [ext_resource type="Texture2D" uid="uid://dnpojpcgc4ljj" path="res://game/assets/sprites/flayon/jC/Timeline 1_0003.png" id="127_1t73e"]
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="128_ctypp"]
@@ -270,10 +270,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"times": PackedFloat32Array(0, 0.1, 0.15),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("20_ffcfl"), ExtResource("21_hjlae"), ExtResource("22_k6tb7")]
+"values": [ExtResource("20_dc1am"), ExtResource("21_i5r0k"), ExtResource("22_8siup")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -285,7 +285,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(-45, 110)]
+"values": [Vector2(-45, 45)]
 }
 
 [sub_resource type="Animation" id="40"]
@@ -1949,36 +1949,6 @@ tracks/1/keys = {
 "values": [Vector2(-50, 150), Vector2(-50, 100), Vector2(-50, 150)]
 }
 
-[sub_resource type="Animation" id="25"]
-resource_name = "j2C"
-length = 0.23333545
-loop_mode = 1
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("125_dc1am"), ExtResource("126_dd2cc")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1000000),
-"update": 0,
-"values": [Vector2(-80, 95)]
-}
-
 [sub_resource type="Animation" id="72"]
 resource_name = "j6C"
 length = 0.283334
@@ -2095,6 +2065,36 @@ tracks/1/keys = {
 "values": [Vector2(0, 100)]
 }
 
+[sub_resource type="Animation" id="25"]
+resource_name = "j2C"
+length = 0.23333545
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("125_dc1am"), ExtResource("126_dd2cc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1000000),
+"update": 0,
+"values": [Vector2(-80, 95)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wc0pe"]
 _data = {
 &"2A": SubResource("44"),
@@ -2159,7 +2159,7 @@ _data = {
 &"StandParryCatch": SubResource("69"),
 &"ThrowHurt": SubResource("8"),
 &"Wakeup": SubResource("28"),
-&"j2C": SubResource("25"),
+&"j3C": SubResource("25"),
 &"j6C": SubResource("72"),
 &"jA": SubResource("26"),
 &"jB": SubResource("12"),
@@ -2197,40 +2197,41 @@ script = ExtResource("128_ctypp")
 auto_reset = false
 
 [node name="Hitbox1" parent="." instance=ExtResource("129_pxbka")]
-fixed_position_x = 2767169
+fixed_position_x = 6767169
 fixed_position_y = -33619964
-fixed_scale_x = 519159
+fixed_scale_x = 1019159
 fixed_scale_y = -339693
-position = Vector2(42.223648, -512.99994)
-scale = Vector2(7.9217377, -5.183304)
+position = Vector2(103.258804, -512.99994)
+scale = Vector2(15.551132, -5.183304)
 
 [node name="Hitbox2" parent="." instance=ExtResource("129_pxbka")]
-fixed_position_x = 12010048
-fixed_position_y = -17920636
-fixed_scale_x = 504071
+fixed_position_x = 11010048
+fixed_position_y = -18920636
+fixed_scale_x = 904071
 fixed_scale_y = 1863129
-position = Vector2(183.25879, -273.4472)
-scale = Vector2(7.691513, 28.429092)
+position = Vector2(168, -288.706)
+scale = Vector2(13.795029, 28.429092)
 
 [node name="Hurtbox1" parent="." instance=ExtResource("130_i8k0d")]
-fixed_position_y = -10087936
-fixed_scale_x = 803537
-fixed_scale_y = 1071143
-position = Vector2(0, -153.92969)
-scale = Vector2(12.261002, 16.344345)
+fixed_position_x = -327680
+fixed_position_y = -27787266
+fixed_scale_x = 334968
+fixed_scale_y = 357786
+position = Vector2(-5, -424.00003)
+scale = Vector2(5.111206, 5.459381)
 
 [node name="Hurtbox2" parent="." instance=ExtResource("130_i8k0d")]
-fixed_position_x = 6546270
-fixed_position_y = -20362431
-fixed_scale_x = 645783
-fixed_scale_y = 665625
-position = Vector2(99.88815, -310.70605)
-scale = Vector2(9.853867, 10.156631)
+fixed_position_x = -979648
+fixed_position_y = -11908288
+fixed_scale_x = 646568
+fixed_scale_y = -1254072
+position = Vector2(-14.948242, -181.70605)
+scale = Vector2(9.865845, -19.13562)
 
 [node name="Hurtbox3" parent="." instance=ExtResource("130_i8k0d")]
-fixed_position_x = 12420000
-fixed_position_y = -7187392
-fixed_scale_x = 978601
-fixed_scale_y = 696011
-position = Vector2(189.51416, -109.6709)
-scale = Vector2(14.932266, 10.620285)
+fixed_position_x = 8767169
+fixed_position_y = -12000000
+fixed_scale_x = 400000
+fixed_scale_y = -1245535
+position = Vector2(133.77638, -183.10547)
+scale = Vector2(6.1035156, -19.005356)
