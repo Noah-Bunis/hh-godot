@@ -56,6 +56,9 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("jA")
 
+func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
+	pass
+	
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
 		if ((interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or

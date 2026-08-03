@@ -63,6 +63,9 @@ func physics_tick(state: Dictionary) -> void:
 	if (state[Enums.StKey.frame] == 10):
 		SyncManager.play_sound("kurokamiVoice", voice, {"bus": "Voice"})
 
+func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
+	pass
+	
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
 		if ((interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or

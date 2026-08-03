@@ -55,6 +55,8 @@ func _init():
 		"Jump5A": preload("res://game/state/kurokami/kurokamiJAState.gd"),
 		"Jump5B": preload("res://game/state/kurokami/kurokamiJBState.gd"),
 		"Jump5C": preload("res://game/state/kurokami/kurokamiJCState.gd"),
+		"Jump3A": preload("res://game/state/kurokami/kurokamiJ3AState.gd"),
+		"Jump3B": preload("res://game/state/kurokami/kurokamiJ3BState.gd"),
 		"Jump3C": preload("res://game/state/kurokami/kurokamiJ3CState.gd"),
 		
 		"GroundAssistCall2": preload("res://game/state/kurokami/kurokamiGroundAssistCall2.gd"),
@@ -182,9 +184,6 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 			interpreter.is_holding_a_direction(Enums.Numpad.N8, state[Enums.StKey.leftface])) 
 			and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "AirParryWhiff"
-	elif (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) and 
-			interpreter.is_button_down(Enums.InputFlags.CDown) and state["_pos_y"] <= Util.MIN_IAD_HEIGHT):
-		return "Jump3C"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
 		return "RyukenShiki"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
@@ -201,10 +200,19 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 		else:
 			return "AirAssistCall"
 	elif (interpreter.is_button_down(Enums.InputFlags.CDown)):
-		return "Jump5C"
+		if (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) and state["_pos_y"] <= Util.MIN_IAD_HEIGHT):
+			return "Jump3C"
+		else:
+			return "Jump5C"
 	elif (interpreter.is_button_down(Enums.InputFlags.BDown)):
-		return "Jump5B"
+		if (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) and state["_pos_y"] <= Util.MIN_IAD_HEIGHT):
+			return "Jump3B"
+		else:
+			return "Jump5B"
 	elif (interpreter.is_button_down(Enums.InputFlags.ADown)):
-		return "Jump5A"
+		if (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) and state["_pos_y"] <= Util.MIN_IAD_HEIGHT):
+			return "Jump3A"
+		else:
+			return "Jump5A"
 	else:
 		return ""
