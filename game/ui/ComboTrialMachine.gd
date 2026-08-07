@@ -26,6 +26,7 @@ var processed_combo: Array = []
 var current_combo_position: int = 0
 var current_step_progress: int = 0
 var showing_complete_message: bool = false
+var is_paused: bool = false
 
 var success_bg_color: String = "#0aaa80"
 var pending_bg_color: String = "#eedd22"
@@ -217,8 +218,13 @@ func _is_dummy_step(step: String) -> bool:
 	return step.begins_with("DUMMY:")
 
 
+func set_paused(paused: bool) -> void:
+	is_paused = paused
+	if not is_paused:
+		refresh_combo_ui()
+
 func attack_hurt(hitbox_name: String) -> void:
-	if showing_complete_message:
+	if is_paused or showing_complete_message:
 		return
 
 	print(hitbox_name)
@@ -257,6 +263,8 @@ func attack_hurt(hitbox_name: String) -> void:
 
 
 func drop_combo() -> void:
+	if is_paused:
+		return
 	if current_combo_position > 0 or current_step_progress > 0:
 
 		current_combo_position = 0

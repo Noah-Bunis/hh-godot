@@ -5,6 +5,7 @@ signal exit()
 signal reset()
 signal savestate()
 signal loadstate()
+signal play_demo()
 
 var menu_close_delay: int
 var most_recent_focus:Control
@@ -121,6 +122,9 @@ func _on_SaveStateButton_pressed():
 
 func _on_LoadStateButton_pressed():
 	emit_signal("loadstate")
+
+func _on_PlayDemoButton_pressed():
+	emit_signal("play_demo")
 
 func _on_CloseButton_pressed():
 	set_close_delay()

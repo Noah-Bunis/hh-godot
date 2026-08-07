@@ -194,6 +194,23 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
 
+[node name="PlayDemoLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Play Demo"
+
+[node name="PlayDemoButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "Play Demo"
+
+[node name="PlayDemoEmpty" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
 [node name="LoadStateLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -585,6 +602,7 @@ z_index = -1
 position = Vector2(302, 424)
 
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/SaveStateButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_SaveStateButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/PlayDemoButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_PlayDemoButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/LoadStateButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_LoadStateButton_pressed"]
 [connection signal="button_down" from="CanvasLayer/TrainingOptionsMenu/PrevButton" to="." method="_on_prev_trial_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/TrainingOptionsMenu/NextButton" to="." method="_on_next_trial_button_button_down"]

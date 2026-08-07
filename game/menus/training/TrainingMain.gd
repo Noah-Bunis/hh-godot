@@ -15,6 +15,7 @@ var player_input: InputInterpreter
 var record_left_face_ref: bool
 
 var recording_machine
+var replay_restore_player_input: InputInterpreter
 
 var _input_frames_received: Dictionary = {}
 
@@ -50,6 +51,7 @@ func _ready() -> void:
 	$CanvasLayer/TrainingOptionsMenu.connect("reset", Callable(self, "reset"))
 	$CanvasLayer/TrainingOptionsMenu.connect("loadstate", Callable(self, "loadstate_menu"))
 	$CanvasLayer/TrainingOptionsMenu.connect("savestate", Callable(self, "execute_savestate"))
+	$CanvasLayer/TrainingOptionsMenu.connect("play_demo", Callable(self, "play_demo"))
 	$CanvasLayer/TrainingOptionsMenu.command_list = $CanvasLayer/CommandList
 	$CanvasLayer/TrainingOptionsMenu.command_list.connect("close_menu", Callable($CanvasLayer/TrainingOptionsMenu, "command_list_closed"))
 	dummy_input.connect("strike_hurt", Callable(self, "load_reaction_state"))
@@ -72,11 +74,22 @@ func _physics_process(delta):
 		elif (is_replaying):
 			if (recording_machine.has_input()):
 				var input:int = recording_machine.read_input()
-				dummy_input.replay_input = input
+				if (self is ComboTrialMain):
+					var replay_target: InputInterpreter = fighter_game.get_node("ServerInputInterpreter")
+					replay_target.replay_input = input
+					replay_target.is_replaying = true
+				else:
+					dummy_input.replay_input = input
+					dummy_input.is_replaying = true
 				$CanvasLayer/MessageLabel.text = recording_machine.string_replaying_frame()
 			else:
-				dummy_input.is_replaying = false
-				dummy_input.replay_input = 0
+				if (self is ComboTrialMain):
+					var replay_target: InputInterpreter = fighter_game.get_node("ServerInputInterpreter")
+					replay_target.is_replaying = false
+					replay_target.replay_input = 0
+				else:
+					dummy_input.is_replaying = false
+					dummy_input.replay_input = 0
 				stop_replay()
 		update_reaction_save_state()
 		
@@ -378,6 +391,20 @@ func start_pre_record():
 	recording_machine.switch_section(0)
 	is_replaying = false
 
+func prepare_for_demo_playback() -> void:
+	pass
+
+func play_demo():
+	if recording_machine.load_recording_from_file("user://training_recording.dat"):
+		recording_machine.switch_section(recording_machine.section)
+		recording_machine.index = 0
+		if (self is ComboTrialMain):
+			prepare_for_demo_playback()
+		$CanvasLayer/MessageLabel.text = "Playing demo"
+		start_replay()
+	else:
+		$CanvasLayer/MessageLabel.text = "No recording found"
+
 func start_record():
 	recording_state = RecordingStates.Recording
 	$CanvasLayer/MessageLabel.text = recording_machine.string_recording_frame()
@@ -401,18 +428,36 @@ func stop_record():
 func start_replay():
 	recording_state = RecordingStates.Replaying
 	$CanvasLayer/MessageLabel.text = "Replaying"
+	if (self is ComboTrialMain):
+		replay_restore_player_input = player_input
+		player_input = fighter_game.get_node("ServerInputInterpreter")
+		player_input.prep_for_replay()
+		$CanvasLayer/ComboTrialListener.set_paused(true)
+	else:
+		replay_restore_player_input = null
+		dummy_input.prep_for_replay()
 	return_control_to_player()
+	if (self is ComboTrialMain):
+		player_input = fighter_game.get_node("ServerInputInterpreter")
 	is_replaying = true
-	dummy_input.prep_for_replay()
 
 func stop_replay():
 	recording_state = RecordingStates.Idle
 	$CanvasLayer/MessageLabel.text = ""
+	if (self is ComboTrialMain):
+		var replay_target: InputInterpreter = fighter_game.get_node("ServerInputInterpreter")
+		replay_target.is_replaying = false
+		replay_target.replay_input = 0
+		$CanvasLayer/ComboTrialListener.set_paused(false)
+	else:
+		dummy_input.is_replaying = false
+		dummy_input.replay_input = 0
 	return_control_to_player()
+	if (self is ComboTrialMain and replay_restore_player_input != null):
+		player_input = replay_restore_player_input
 	recording_machine.cancel_replay()
 	is_replaying = false
-	dummy_input.is_replaying = false
-	dummy_input.replay_input = 0
+	replay_restore_player_input = null
 
 func _input(event):
 	pass
@@ -429,4 +474,10 @@ func input_helper(event):
 			recording_fsm_record_input()
 	elif (Global.TRAINING_P1 and Input.is_action_just_pressed("player1_replay")) or (not Global.TRAINING_P1 and Input.is_action_just_pressed("player2_replay")):
 		if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):
-			recording_fsm_replay_input()
+			if (self is ComboTrialMain):
+				if (recording_state == RecordingStates.Replaying):
+					stop_replay()
+				else:
+					play_demo()
+			else:
+				recording_fsm_replay_input()

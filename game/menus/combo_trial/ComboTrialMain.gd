@@ -14,6 +14,9 @@ func _ready() -> void:
 	self.connect("prev_trial", Callable($CanvasLayer/ComboTrialListener, "prev_trial"))
 	self.connect("next_trial", Callable($CanvasLayer/ComboTrialListener, "next_trial"))
 
+func prepare_for_demo_playback() -> void:
+	reset()
+
 func exit():
 	get_tree().change_scene_to_file("res://game/menus/combo_trial/ComboTrialCharacterSelect.tscn")
 	sync_clear()

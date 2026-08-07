@@ -16,8 +16,6 @@ var counter_hit = 0
 
 var guard_type = 0
 
-var is_replaying: bool = false
-var replay_input: int = 0
 var replay_initial_leftface: bool = false # which way was i facing when the recording started?
 var game_left_face: bool = false # i could be turned around, so input 6 to block
 var bit_input: int = 0
