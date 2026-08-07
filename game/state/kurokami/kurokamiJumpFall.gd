@@ -38,3 +38,4 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.sync_rate] += SGFixed.mul(speed, 536)
 	elif (negative_penalty(state)):
 		state[Enums.StKey.sync_rate] -= SGFixed.mul(speed, 1536)
+
