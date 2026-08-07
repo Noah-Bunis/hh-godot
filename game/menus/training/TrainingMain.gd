@@ -467,7 +467,8 @@ func start_replay():
 		replay_restore_player_input = player_input
 		player_input = fighter_game.get_node("ServerInputInterpreter")
 		player_input.prep_for_replay()
-		$CanvasLayer/ComboTrialListener.set_paused(true)
+		$CanvasLayer/ComboTrialListener.set_auto_advance_on_complete(false)
+		$CanvasLayer/ComboTrialListener.set_hold_completion_for_demo(true)
 	else:
 		replay_restore_player_input = null
 		dummy_input.prep_for_replay()
@@ -483,7 +484,7 @@ func stop_replay():
 		var replay_target: InputInterpreter = fighter_game.get_node("ServerInputInterpreter")
 		replay_target.is_replaying = false
 		replay_target.replay_input = 0
-		$CanvasLayer/ComboTrialListener.set_paused(false)
+		$CanvasLayer/ComboTrialListener.set_auto_advance_on_complete(true)
 	else:
 		dummy_input.is_replaying = false
 		dummy_input.replay_input = 0

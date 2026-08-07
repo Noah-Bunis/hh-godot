@@ -27,6 +27,8 @@ var current_combo_position: int = 0
 var current_step_progress: int = 0
 var showing_complete_message: bool = false
 var is_paused: bool = false
+var auto_advance_on_complete: bool = true
+var hold_completion_for_demo: bool = false
 
 var success_bg_color: String = "#0aaa80"
 var pending_bg_color: String = "#eedd22"
@@ -111,7 +113,8 @@ func _skip_dummy_steps() -> void:
 
 
 func refresh_combo_ui() -> void:
-	if showing_complete_message:
+	var is_completion_state := current_combo_position >= processed_combo.size()
+	if showing_complete_message and not is_completion_state:
 		return
 
 	_process_combo()
@@ -223,6 +226,12 @@ func set_paused(paused: bool) -> void:
 	if not is_paused:
 		refresh_combo_ui()
 
+func set_auto_advance_on_complete(enabled: bool) -> void:
+	auto_advance_on_complete = enabled
+
+func set_hold_completion_for_demo(hold: bool) -> void:
+	hold_completion_for_demo = hold
+
 func attack_hurt(hitbox_name: String) -> void:
 	if is_paused or showing_complete_message:
 		return
@@ -245,8 +254,10 @@ func attack_hurt(hitbox_name: String) -> void:
 
 				if current_combo_position >= processed_combo.size():
 					showing_complete_message = true
+					refresh_combo_ui()
 
-					combo_list_label.text = "[color=green] [b] COMPLETE! [/b] [/color]"
+					if auto_advance_on_complete:
+						combo_list_label.text = combo_list_label.text + "\n [font_size=48] [rainbow] [wave] [b] [center]SUCCESS!"
 
 					await get_tree().create_timer(1.5).timeout
 
@@ -255,8 +266,13 @@ func attack_hurt(hitbox_name: String) -> void:
 					current_combo_position = 0
 					current_step_progress = 0
 
-					load_combo(current_combo_index + 1)
+					var should_auto_advance := auto_advance_on_complete and not hold_completion_for_demo
+					if should_auto_advance:
+						load_combo(current_combo_index + 1)
+					else:
+						load_combo(current_combo_index)
 
+					hold_completion_for_demo = false
 					return
 
 	refresh_combo_ui()
