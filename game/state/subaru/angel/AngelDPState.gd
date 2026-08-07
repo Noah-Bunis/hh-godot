@@ -72,7 +72,7 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE * 23, state[Enums.StKey.velocity_x])
 		state[Enums.StKey.drag_x] = 65536
 	elif (state[Enums.StKey.frame] == 4):
-		SyncManager.play_sound("AngelDP", voice, {"bus": "Voice"})
+		SyncManager.play_sound("SubaruVoice", voice, {"bus": "Voice"})
 
 func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
 	if (event_cause == Enums.Reaction.GroundLand):

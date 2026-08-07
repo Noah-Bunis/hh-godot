@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4efp1crprskp"]
+[gd_scene load_steps=10 format=3 uid="uid://c4efp1crprskp"]
 
 [ext_resource type="Script" uid="uid://ces24rdne18ma" path="res://game/screens/netplay/online_modes_screen.gd" id="1_kxdns"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="2_5ikgm"]
 [ext_resource type="Texture2D" uid="uid://brippgfyq8q1g" path="res://game/assets/sprites/UI/MainMenus/WIM.png" id="2_mrkjf"]
 [ext_resource type="Script" uid="uid://cyya0oolm3yee" path="res://game/menus/mainmenu/LPSpin.gd" id="3_5ikgm"]
 [ext_resource type="Texture2D" uid="uid://b35en5rbily3g" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="4_u3leh"]
@@ -67,6 +68,7 @@ offset_top = 204.0
 offset_right = 1122.0
 offset_bottom = 350.0
 scale = Vector2(2.5301, 2.93276)
+theme = ExtResource("2_5ikgm")
 
 [node name="HostLabel" type="Label" parent="GridContainer"]
 layout_mode = 2

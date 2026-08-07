@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://p50nsj8hxh5e"]
 
 [ext_resource type="Script" uid="uid://b0cdk5smm6rgu" path="res://game/menus/mainmenu/Title.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://b7kcdcuqo7r5j" path="res://game/assets/monogram_extended.ttf" id="2"]
-[ext_resource type="Texture2D" uid="uid://bxvm2bl37so31" path="res://game/assets/sprites/UI/MainMenus/Buttons/UNDER CONSTRUCTION/Timeline 1_0001.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://dsrvx2msjo87" path="res://game/assets/sprites/UI/MainMenus/HOLOHEAVEN.png" id="5"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="2"]
+[ext_resource type="Texture2D" uid="uid://b37qabrol6287" path="res://game/assets/sprites/UI/MainMenus/Buttons/UNDER CONSTRUCTION/Timeline 1_0001.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dls6321oqqqwg" path="res://game/assets/sprites/UI/MainMenus/HOLOHEAVEN.png" id="5"]
 
 [sub_resource type="FontFile" id="3"]
 fallbacks = Array[Font]([ExtResource("2")])

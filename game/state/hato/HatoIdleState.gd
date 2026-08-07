@@ -59,11 +59,11 @@ func common_idle_transitions(state: Dictionary, interpreter: InputInterpreter) -
 	if (pilot_level_2_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.CUp, state[Enums.StKey.leftface])):
 		change_state.call("HatoCards")
 	elif (interpreter.is_button_down(Enums.InputFlags.CUp)):
-		change_state.call("Stand5C")
+		change_state.call("Hato5C")
 	elif (interpreter.is_button_down(Enums.InputFlags.BUp)):
-		change_state.call("Stand5B")
+		change_state.call("Hato5B")
 	elif (interpreter.is_button_down(Enums.InputFlags.AUp)):
-		change_state.call("Stand5A")
+		change_state.call("Hato5A")
 	elif (interpreter.is_holding_a_direction(Enums.Numpad.N6, state[Enums.StKey.leftface]) or
 			interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface]) or
 			interpreter.is_holding_a_direction(Enums.Numpad.N9, state[Enums.StKey.leftface])):

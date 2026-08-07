@@ -77,7 +77,7 @@ func _load_state(state: Dictionary) -> void:
 	currentState[Enums.StKey.frame] = state.get(Enums.StKey.frame, 0)
 	currentState[Enums.StKey.last_anim_frame] = state.get(Enums.StKey.last_anim_frame, 0)
 	currentState[Enums.StKey.hitStopFrame] = state.get(Enums.StKey.hitStopFrame, -1)
-	currentState[Enums.StKey.hit_cooldown] = state.get(Enums.StKey.hit_cooldown, {})
+	currentState[Enums.StKey.hit_cooldown] = state.get(Enums.StKey.hit_cooldown, {}).duplicate()
 	currentState[Enums.StKey.hit_box_colliding_frame] = state.get(Enums.StKey.hit_box_colliding_frame, -1)
 	fighterState.update_rollback_state(currentState)
 	fighterState.rollback_state_transition(currentState.get(Enums.StKey.stateName, "Neutral"))
@@ -100,9 +100,6 @@ func tick() -> void:
 	movement_physics_tick()
 	anim_updates() # super flash needs to happen last
 
-
-# TODO: the rare giga slowdown was assist / puppet tick related. maybe here?
-# It seems to be a universal sync_to_physics_engine slowdown
 func movement_physics_tick() -> void:
 	var x_dir = 1
 	if (currentState[Enums.StKey.leftface]):
@@ -139,7 +136,6 @@ func getFirstFrameCollide() -> Dictionary:
 func tick_box_collisions() -> void:
 	for hitbox_name in ["Hitbox1"]:
 		get_node(hitbox_name).process_collisions()
-		#get_node(hitbox_name).update()
 
 func normal_strike_hit(_attack_type: int, opponent_hit_data: Dictionary) -> void:
 	if (opponent_hit_data["hitType"] == Enums.HitType.PushBlock):
@@ -260,6 +256,7 @@ func has_property(property: int) -> bool:
 #####################
 
 func _network_spawn(data: Dictionary) -> void:
+	reset_state()
 	visible = true
 	var spawn_position : SGFixedVector2 = SGFixedVector2.new()
 	spawn_position.x = data['position_x']
@@ -353,7 +350,6 @@ func anim_updates() -> void:
 		Hurtbox1.fixed_scale.x = anim_frame.get(Enums.StKey.Hurt1ScaleX, Hurtbox1.fixed_scale.x)
 		Hurtbox1.fixed_scale.y = anim_frame.get(Enums.StKey.Hurt1ScaleY, Hurtbox1.fixed_scale.y)
 		if (anim_frame.get(Enums.StKey.Destroy, false)):
-#			queue_free() # TODO: is this rollback safe? we'll need to respawn and despawn repeatedly
 			SyncManager.despawn(self)
 	
 	attackData[Enums.StKey.attack_type] = anim_frame.get(Enums.StKey.attack_type, Enums.AttackType.Strike)

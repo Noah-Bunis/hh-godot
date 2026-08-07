@@ -64,11 +64,10 @@ func _init():
 		"AirAssistCall2": preload("res://game/state/suisei/suiseiAirAssistCall2.gd"),
 		"AirAssistCallSuper": preload("res://game/state/suisei/suiseiAirAssistCallSuper.gd"),
 
-		"Stinger": preload("res://game/state/suisei/suiseiYoruMatsuyo.gd"),
+		"YoruMatsuyo": preload("res://game/state/suisei/suiseiYoruMatsuyo.gd"),
 		"GatoKick": preload("res://game/state/suisei/suiseiGatoKickState.gd"),
 		"GatoDive": preload("res://game/state/suisei/suiseiGatoDiveState.gd"),
 		"Pendulum": preload("res://game/state/suisei/suiseiPendulumState.gd"),
-		"AirStinger": preload("res://game/state/suisei/suiseiYoruMatsuyo.gd"),
 		"LightYoruMatsuyo": preload("res://game/state/suisei/suiseiLightYoruMatsuyo.gd"),
 		"CaramelThrust": preload("res://game/state/suisei/suiseiCaramelThrust.gd"),
 		"AirCaramelThrust": preload("res://game/state/suisei/suiseiAirCaramelThrust.gd"),
@@ -303,7 +302,7 @@ func common_idle_transitions(state: Dictionary, interpreter: InputInterpreter) -
 	elif (interpreter.is_holding_a_direction(Enums.Numpad.N5, state[Enums.StKey.leftface]) and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "StandParryWhiff"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-		return "Stinger"
+		return "YoruMatsuyo"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
 		return "LightYoruMatsuyo"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
@@ -390,7 +389,7 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 			and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "AirParryWhiff"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-		return "AirStinger"
+		return "YoruMatsuyo"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
 		return "LightYoruMatsuyo"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):

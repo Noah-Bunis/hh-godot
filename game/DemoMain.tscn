@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b66p3r0mf1itt" path="res://game/DemoMain.gd" id="1_m35yc"]
 [ext_resource type="PackedScene" path="res://game/ui/FPSCounter.tscn" id="2"]
-[ext_resource type="FontFile" uid="uid://b7kcdcuqo7r5j" path="res://game/assets/monogram_extended.ttf" id="3"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="3"]
 [ext_resource type="PackedScene" uid="uid://c5xgqi0ik2bpc" path="res://game/ui/MatchWinCounter.tscn" id="4"]
 
 [sub_resource type="FontFile" id="1"]
@@ -55,7 +55,9 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
 theme_override_font_sizes/font_size = 40
+text = "<null>"
 horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="PingLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1

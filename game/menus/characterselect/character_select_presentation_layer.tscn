@@ -1,0 +1,337 @@
+[gd_scene load_steps=62 format=3 uid="uid://cvwapffbx4nk5"]
+
+[ext_resource type="Texture2D" uid="uid://bn0mw6dkrnc7k" path="res://game/assets/sprites/UI/CharacterSelect/CardboardFloor.png" id="1_41gkd"]
+[ext_resource type="PackedScene" path="res://game/menus/characterselect/Rosetai.tscn" id="2_ada1j"]
+[ext_resource type="Script" uid="uid://dm4wmxa8r0rr0" path="res://game/menus/characterselect/KimiNoHiroin.gd" id="3_nci42"]
+[ext_resource type="PackedScene" path="res://game/menus/characterselect/KNHLetter.tscn" id="4_u46sl"]
+[ext_resource type="Texture2D" uid="uid://boo4lotxg4glw" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/Ki.png" id="5_uuttx"]
+[ext_resource type="Texture2D" uid="uid://5btvlaye3ah" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/Mi.png" id="6_26ey7"]
+[ext_resource type="Texture2D" uid="uid://ch1dcbgvkklvu" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/No.png" id="7_k30kf"]
+[ext_resource type="Texture2D" uid="uid://chchgeaa87m3k" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/Hi.png" id="8_e0fpu"]
+[ext_resource type="Texture2D" uid="uid://c1www2i0touqu" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/Ro.png" id="9_ruq7g"]
+[ext_resource type="Texture2D" uid="uid://dmuc283hc3gip" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/EEE.png" id="10_b7uek"]
+[ext_resource type="Texture2D" uid="uid://doudq40pf5d5d" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/NN.png" id="11_auvph"]
+[ext_resource type="Texture2D" uid="uid://duaebsen2kdr6" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/Wa.png" id="12_1vr52"]
+[ext_resource type="Texture2D" uid="uid://ce3dtgdeidc1o" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/DaRe.png" id="13_vmv56"]
+[ext_resource type="Texture2D" uid="uid://tl8gly7tkcuw" path="res://game/assets/sprites/UI/CharacterSelect/KimiNoHiroin/QuestionMark.png" id="14_a38uf"]
+[ext_resource type="Texture2D" uid="uid://e3tvapeete0o" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/ButtonSelect.png" id="15_yuhlv"]
+[ext_resource type="Texture2D" uid="uid://dtj12jswyj53h" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Color.png" id="16_abjww"]
+[ext_resource type="PackedScene" uid="uid://delgirqnq1vas" path="res://game/menus/characterselect/character_icons_node.tscn" id="17_48fpo"]
+[ext_resource type="Script" uid="uid://cv1fa8k03ytiy" path="res://game/menus/characterselect/CurtainFlash.gd" id="18_hnvor"]
+[ext_resource type="Texture2D" uid="uid://k4ajd75bsu2x" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0004.png" id="19_cbdnk"]
+[ext_resource type="Texture2D" uid="uid://cv3twnm5lmray" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0005.png" id="20_41lqv"]
+[ext_resource type="Texture2D" uid="uid://cp2kr1kjwbj6c" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0006.png" id="21_cshc3"]
+[ext_resource type="Texture2D" uid="uid://2jb8e2vyns85" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0007.png" id="22_c0n7f"]
+[ext_resource type="Texture2D" uid="uid://bxhhjys4n0gf3" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0000.png" id="23_qy5gw"]
+[ext_resource type="Texture2D" uid="uid://c0gubrpt8xqi1" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0001.png" id="24_18gw8"]
+[ext_resource type="Texture2D" uid="uid://b6s1a677fb8id" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0002.png" id="25_y6qrp"]
+[ext_resource type="Texture2D" uid="uid://bcrsadsprrugj" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0003.png" id="26_ay2dx"]
+[ext_resource type="Texture2D" uid="uid://e5c2nvj62apo" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0010.png" id="27_rf1h6"]
+[ext_resource type="Texture2D" uid="uid://d00pcskguvb1i" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0009.png" id="28_im0o7"]
+[ext_resource type="Texture2D" uid="uid://h6u0qd4dqo71" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0008.png" id="29_uni6a"]
+[ext_resource type="Texture2D" uid="uid://cbm255iyh5tnt" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0011.png" id="30_a5s3r"]
+[ext_resource type="Texture2D" uid="uid://c53k72yo5bsmh" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0012.png" id="31_krwiq"]
+[ext_resource type="Texture2D" uid="uid://b715h47wxsrrm" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0013.png" id="32_ytn8k"]
+[ext_resource type="Texture2D" uid="uid://dmx1ekkr2m0w5" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0014.png" id="33_d8uwe"]
+[ext_resource type="Texture2D" uid="uid://c778cl23lbwfm" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0015.png" id="34_3w6iu"]
+[ext_resource type="Texture2D" uid="uid://ipwlyyisioil" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0016.png" id="35_1gt41"]
+[ext_resource type="Texture2D" uid="uid://3e1tmqjsfvs2" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0017.png" id="36_qtcdk"]
+[ext_resource type="Texture2D" uid="uid://dnit3cqkffnpx" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0019.png" id="37_1gxmm"]
+[ext_resource type="Texture2D" uid="uid://bjjgn5582vl1h" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0020.png" id="38_0wlvf"]
+[ext_resource type="Texture2D" uid="uid://dq2hcctrip7sv" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0021.png" id="39_fbfc6"]
+[ext_resource type="Texture2D" uid="uid://dx1ci1x688111" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0022.png" id="40_kwkje"]
+[ext_resource type="Texture2D" uid="uid://b5bph53cdrmc1" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0023.png" id="41_t5mtg"]
+[ext_resource type="Texture2D" uid="uid://cgjpbrb6bs7y1" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0024.png" id="42_iugej"]
+[ext_resource type="Texture2D" uid="uid://diy0tpf4in8th" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0025.png" id="43_0sfhb"]
+[ext_resource type="Texture2D" uid="uid://d4mgd7o7oipr5" path="res://game/assets/sprites/UI/CharacterSelect/CurtainFlash/Timeline 1_0026.png" id="44_u5duc"]
+[ext_resource type="PackedScene" path="res://game/menus/characterselect/AkiMC.tscn" id="45_obule"]
+[ext_resource type="PackedScene" uid="uid://dqvlvwhflgwtg" path="res://game/menus/characterselect/PlayerSelectFlash.tscn" id="46_2o7g6"]
+[ext_resource type="Script" uid="uid://ds4bds8ylrmqi" path="res://game/menus/characterselect/PlayerSelectFlash.gd" id="47_n1646"]
+[ext_resource type="Script" uid="uid://bl4bfy15l04hj" path="res://game/menus/characterselect/Curtains.gd" id="48_fmydb"]
+[ext_resource type="Texture2D" uid="uid://cjttin0uldb7o" path="res://game/assets/sprites/UI/CharacterSelect/Curtains/HideCurtain.png" id="49_xtjk1"]
+[ext_resource type="PackedScene" uid="uid://y8pd0pebt7ce" path="res://game/menus/characterselect/CharacterCursor.tscn" id="50_mqt4k"]
+[ext_resource type="PackedScene" uid="uid://b1vhgvt0bb4vq" path="res://game/menus/characterselect/CharacterPortrait.tscn" id="51_s4e2l"]
+[ext_resource type="Shader" uid="uid://dinoskkj75qym" path="res://game/assets/shaders/ColorSwapAntiAlias.gdshader" id="52_ooij2"]
+[ext_resource type="Texture2D" uid="uid://7j6rx4336gr2" path="res://game/assets/sprites/assists/hakka/ColorPalettes/2.png" id="53_gbm6h"]
+[ext_resource type="Texture2D" uid="uid://bddwhxuy57wqh" path="res://game/assets/sprites/UI/CharacterSelect/Curtains/LowCurtain.png" id="54_awgsj"]
+[ext_resource type="Texture2D" uid="uid://cu4pova1qcr3v" path="res://game/assets/sprites/UI/CharacterSelect/Curtains/HighCurtain.png" id="55_b28sg"]
+
+[sub_resource type="Animation" id="8"]
+resource_name = "Intro"
+length = 5.0
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.23333, 1.3, 1.33333, 1.4, 1.43333, 1.61667, 1.68333, 1.71667, 1.78333, 1.81667, 2.25, 2.31667, 2.35, 2.41667, 2.45, 2.63333, 2.7, 2.73333, 2.8, 2.83333, 3.01667, 3.05, 3.08333, 3.11667, 3.15, 3.2, 3.25, 3.3, 3.38333, 3.46667, 3.53333, 3.61667, 3.68333, 3.75, 3.81667, 3.88333, 3.95, 4.01667, 4.08333, 4.15, 4.21667, 4.28333, 4.35, 4.41667, 4.48333, 4.55, 4.61667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("19_cbdnk"), ExtResource("20_41lqv"), ExtResource("21_cshc3"), ExtResource("22_c0n7f"), null, ExtResource("23_qy5gw"), ExtResource("24_18gw8"), ExtResource("25_y6qrp"), ExtResource("26_ay2dx"), null, ExtResource("23_qy5gw"), ExtResource("24_18gw8"), ExtResource("25_y6qrp"), ExtResource("26_ay2dx"), null, ExtResource("19_cbdnk"), ExtResource("20_41lqv"), ExtResource("21_cshc3"), ExtResource("22_c0n7f"), null, ExtResource("27_rf1h6"), ExtResource("28_im0o7"), ExtResource("29_uni6a"), ExtResource("27_rf1h6"), ExtResource("30_a5s3r"), ExtResource("31_krwiq"), ExtResource("32_ytn8k"), ExtResource("33_d8uwe"), ExtResource("34_3w6iu"), ExtResource("34_3w6iu"), ExtResource("35_1gt41"), ExtResource("36_qtcdk"), ExtResource("37_1gxmm"), ExtResource("38_0wlvf"), ExtResource("39_fbfc6"), ExtResource("40_kwkje"), ExtResource("41_t5mtg"), ExtResource("42_iugej"), ExtResource("43_0sfhb"), ExtResource("44_u5duc"), ExtResource("41_t5mtg"), ExtResource("44_u5duc"), null, ExtResource("44_u5duc"), null, ExtResource("44_u5duc"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oga32"]
+_data = {
+&"Intro": SubResource("8")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2baf"]
+resource_local_to_scene = true
+shader = ExtResource("52_ooij2")
+shader_parameter/palette = ExtResource("53_gbm6h")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjwoc"]
+resource_local_to_scene = true
+shader = ExtResource("52_ooij2")
+shader_parameter/palette = ExtResource("53_gbm6h")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ertxd"]
+resource_local_to_scene = true
+shader = ExtResource("52_ooij2")
+shader_parameter/palette = ExtResource("53_gbm6h")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vubeb"]
+resource_local_to_scene = true
+shader = ExtResource("52_ooij2")
+shader_parameter/palette = ExtResource("53_gbm6h")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[node name="PresentationLayer" type="Node2D"]
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+z_index = -1000
+position = Vector2(960, 540)
+texture = ExtResource("1_41gkd")
+
+[node name="RosetaiFlock" type="Node2D" parent="."]
+z_index = -999
+position = Vector2(-1892, 381)
+
+[node name="Rosetai" parent="RosetaiFlock" instance=ExtResource("2_ada1j")]
+
+[node name="Rosetai2" parent="RosetaiFlock" instance=ExtResource("2_ada1j")]
+position = Vector2(-13, -11)
+delay = 20
+
+[node name="Rosetai3" parent="RosetaiFlock" instance=ExtResource("2_ada1j")]
+position = Vector2(4, 21)
+delay = 40
+
+[node name="Rosetai4" parent="RosetaiFlock" instance=ExtResource("2_ada1j")]
+position = Vector2(9, -19)
+delay = 60
+
+[node name="Rosetai5" parent="RosetaiFlock" instance=ExtResource("2_ada1j")]
+position = Vector2(-21, 21)
+delay = 80
+
+[node name="KimiNoHiroin" type="Node2D" parent="."]
+z_index = 120
+position = Vector2(529, 89)
+script = ExtResource("3_nci42")
+
+[node name="Ki" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+z_index = 1
+position = Vector2(-49, 0)
+image = ExtResource("5_uuttx")
+
+[node name="Mi" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+position = Vector2(52, 0)
+image = ExtResource("6_26ey7")
+ticks = 13
+
+[node name="No" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+z_index = -1
+position = Vector2(140, 0)
+image = ExtResource("7_k30kf")
+ticks = 20
+
+[node name="Hi" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+z_index = 1
+position = Vector2(236, 0)
+image = ExtResource("8_e0fpu")
+ticks = 40
+
+[node name="Ro" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+position = Vector2(324, 0)
+image = ExtResource("9_ruq7g")
+ticks = 60
+
+[node name="EE" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+z_index = 1
+position = Vector2(394, 0)
+image = ExtResource("10_b7uek")
+ticks = 80
+
+[node name="NN" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+z_index = -1
+position = Vector2(453, 0)
+image = ExtResource("11_auvph")
+ticks = 100
+
+[node name="Wa" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+position = Vector2(567, 0)
+image = ExtResource("12_1vr52")
+ticks = 120
+
+[node name="DaRe" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+z_index = 1
+position = Vector2(742, 0)
+image = ExtResource("13_vmv56")
+ticks = 140
+
+[node name="?" parent="KimiNoHiroin" instance=ExtResource("4_u46sl")]
+position = Vector2(897, 0)
+image = ExtResource("14_a38uf")
+ticks = 150
+
+[node name="MenuTutorials" type="Node2D" parent="."]
+z_index = 1016
+position = Vector2(960, 540)
+
+[node name="ButtonSet" type="Sprite2D" parent="MenuTutorials"]
+z_index = -1000
+position = Vector2(-252, 506)
+texture = ExtResource("15_yuhlv")
+
+[node name="ColorSet" type="Sprite2D" parent="MenuTutorials"]
+z_index = -1000
+position = Vector2(322, 509)
+texture = ExtResource("16_abjww")
+
+[node name="CharacterIconsNode" parent="." instance=ExtResource("17_48fpo")]
+position = Vector2(750, 144)
+
+[node name="CurtainFlash" type="Node2D" parent="."]
+z_index = 4096
+position = Vector2(960, 540)
+script = ExtResource("18_hnvor")
+
+[node name="Sprite2D" type="Sprite2D" parent="CurtainFlash"]
+scale = Vector2(2, 2)
+texture = ExtResource("19_cbdnk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CurtainFlash"]
+libraries = {
+&"": SubResource("AnimationLibrary_oga32")
+}
+
+[node name="AkiMC" parent="." instance=ExtResource("45_obule")]
+position = Vector2(0, -24)
+
+[node name="P1SelectFlash" parent="." instance=ExtResource("46_2o7g6")]
+position = Vector2(428, 446)
+script = ExtResource("47_n1646")
+
+[node name="P2SelectFlash" parent="." instance=ExtResource("46_2o7g6")]
+position = Vector2(1492, 446)
+rotation = 3.1415927
+scale = Vector2(2, -2)
+script = ExtResource("47_n1646")
+
+[node name="Curtains" type="Node2D" parent="."]
+z_index = 13
+script = ExtResource("48_fmydb")
+ticks = 190
+
+[node name="Left" type="Sprite2D" parent="Curtains"]
+position = Vector2(1540, 540)
+texture = ExtResource("49_xtjk1")
+offset = Vector2(40, 0)
+
+[node name="Right" type="Sprite2D" parent="Curtains"]
+position = Vector2(347, 540)
+scale = Vector2(-1, 1)
+texture = ExtResource("49_xtjk1")
+offset = Vector2(40, 0)
+
+[node name="P2Cursor" parent="." instance=ExtResource("50_mqt4k")]
+position = Vector2(966, 392)
+input_prefix = "player2_"
+gridY = 4
+gridX = 3
+start_col = 1
+start_row = 1
+
+[node name="P1Cursor" parent="." instance=ExtResource("50_mqt4k")]
+position = Vector2(962, 392)
+is_p1 = true
+gridY = 4
+gridX = 3
+start_col = 1
+start_row = 1
+
+[node name="P1Portrait" parent="." instance=ExtResource("51_s4e2l")]
+z_index = 103
+material = SubResource("ShaderMaterial_b2baf")
+position = Vector2(396, 591)
+xOffset = 396
+speed = 5
+
+[node name="P2Portrait" parent="." instance=ExtResource("51_s4e2l")]
+z_index = 103
+material = SubResource("ShaderMaterial_jjwoc")
+position = Vector2(1535, 598)
+xOffset = 1535
+speed = -5
+
+[node name="A1Portrait" parent="." instance=ExtResource("51_s4e2l")]
+z_index = 104
+material = SubResource("ShaderMaterial_ertxd")
+position = Vector2(212, 400)
+scale = Vector2(0.8, 0.8)
+xOffset = 212
+speed = 5
+
+[node name="A2Portrait" parent="." instance=ExtResource("51_s4e2l")]
+z_index = 104
+material = SubResource("ShaderMaterial_vubeb")
+position = Vector2(1764, 400)
+scale = Vector2(0.8, 0.8)
+xOffset = 1764
+speed = -5
+
+[node name="SideCurtainLeft" type="Sprite2D" parent="."]
+z_index = -90
+position = Vector2(2000, 511)
+texture = ExtResource("54_awgsj")
+
+[node name="SideCurtainRight" type="Sprite2D" parent="."]
+z_index = -90
+position = Vector2(-80, 511)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+texture = ExtResource("54_awgsj")
+
+[node name="HighCurtain" type="Sprite2D" parent="."]
+z_index = -90
+position = Vector2(960, 92)
+texture = ExtResource("55_b28sg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

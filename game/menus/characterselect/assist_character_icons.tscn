@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://h0bhajfnumoy"]
+
+[ext_resource type="Texture2D" uid="uid://cbntdah3dhu8y" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/FubukiButton.png" id="1_7crh2"]
+[ext_resource type="Texture2D" uid="uid://d31blxoy07t7h" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/HakkaButton.png" id="2_m1rdv"]
+[ext_resource type="Texture2D" uid="uid://bqb2l165fecyi" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OkaKoroButton.png" id="3_ycclh"]
+[ext_resource type="Texture2D" uid="uid://vuvyurs2s2yb" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SoraButton.png" id="4_byjnm"]
+[ext_resource type="Texture2D" uid="uid://ebgaafuav8sb" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SanaButton.png" id="5_8n4qa"]
+
+[node name="AssistCharacterIcons" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchors_preset = -1
+offset_left = 220.0
+offset_top = -167.0
+offset_right = 363.0
+offset_bottom = 5.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("1_7crh2")
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+anchors_preset = -1
+offset_left = 361.0
+offset_top = -167.0
+offset_right = 504.0
+offset_bottom = 5.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("2_m1rdv")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchors_preset = -1
+offset_left = 220.0
+offset_top = 15.0
+offset_right = 363.0
+offset_bottom = 187.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("1_7crh2")
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+anchors_preset = -1
+offset_left = 363.0
+offset_top = 15.0
+offset_right = 506.0
+offset_bottom = 187.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("3_ycclh")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+anchors_preset = -1
+offset_left = 220.0
+offset_top = 198.0
+offset_right = 363.0
+offset_bottom = 370.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("4_byjnm")
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+visible = false
+anchors_preset = -1
+offset_left = 220.0
+offset_top = 381.0
+offset_right = 363.0
+offset_bottom = 553.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("4_byjnm")
+
+[node name="TextureRect7" type="TextureRect" parent="."]
+anchors_preset = -1
+offset_left = 364.0
+offset_top = 198.0
+offset_right = 507.0
+offset_bottom = 370.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("5_8n4qa")
+
+[node name="TextureRect8" type="TextureRect" parent="."]
+visible = false
+anchors_preset = -1
+offset_left = 375.0
+offset_top = 381.0
+offset_right = 518.0
+offset_bottom = 553.0
+pivot_offset = Vector2(130, 140)
+texture = ExtResource("5_8n4qa")

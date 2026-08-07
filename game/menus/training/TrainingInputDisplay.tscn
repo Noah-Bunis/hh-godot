@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://cnx2a5iq536el"]
 
 [ext_resource type="Script" uid="uid://chp7uop4uldqp" path="res://game/menus/training/TrainingInputDisplay.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://dwkta6ujmgrnx" path="res://game/assets/sprites/UI/RoundCounterEmpty.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://dbmmei8pvpyb" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0011.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://cmjwlmom7l7fo" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0009.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://d2urcc4opxajg" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0005.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://dyf8cgpp5w0k4" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0007.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://tsnl7jo4jsaq" path="res://game/assets/sprites/UI/RoundCounterEmpty.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://7rdfcm0talgm" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0011.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://iyruyejy2r8w" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0009.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://it1cvoayhos5" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0005.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://u8l25a0vnasi" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0007.png" id="6"]
 
 [node name="TrainingInputDisplay" type="Node2D"]
 z_index = 1000

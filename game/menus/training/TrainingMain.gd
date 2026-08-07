@@ -29,7 +29,7 @@ func _init() -> void:
 	game_mode_root = "/root/TrainingMain/FighterGame"
 	fighter_game.ko_enabled = false
 	Global.HITBOX_DISPLAY = true
-	Global.TRAINING_HITBOX_ON = true
+	Global.TRAINING_HITBOX_ON = false
 	savestate = {}
 	state_history = []
 	fillWith(state_history, {}, 3+SyncManager.input_delay)
@@ -54,8 +54,8 @@ func _ready() -> void:
 	$CanvasLayer/TrainingOptionsMenu.command_list.connect("close_menu", Callable($CanvasLayer/TrainingOptionsMenu, "command_list_closed"))
 	dummy_input.connect("strike_hurt", Callable(self, "load_reaction_state"))
 	var dummy_player = fighter_game.ClientPlayer if Global.TRAINING_P1 else fighter_game.ServerPlayer
-	dummy_player.connect("attack_hurt", Callable($CanvasLayer/ComboTrialListener, "attack_hurt"))
-	dummy_player.connect("combo_exit", Callable($CanvasLayer/ComboTrialListener, "drop_combo"))
+	#dummy_player.connect("attack_hurt", Callable($CanvasLayer/ComboTrialListener, "attack_hurt"))
+	#dummy_player.connect("combo_exit", Callable($CanvasLayer/ComboTrialListener, "drop_combo"))
 
 func _physics_process(delta):
 	if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):

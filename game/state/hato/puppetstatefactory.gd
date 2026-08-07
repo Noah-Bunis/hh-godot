@@ -7,7 +7,7 @@ func _init():
 	
 	var new_states : Dictionary = {
 		"Dormant" : preload("res://game/state/hato/HatoDormantState.gd"),
-		Enums.StKey.Summon : DormantState, #TODO: is this OK?
+		Enums.StKey.Summon : DormantState,
 		
 		"HurtStand": HatoHurtState,
 		
@@ -15,9 +15,9 @@ func _init():
 		"ForwardWalk": HatoForwardWalkState,
 		"BackwardWalk": HatoBackwardWalkState,
 		
-		"Stand5A": HatoStand5AState,
-		"Stand5B": HatoStand5BState,
-		"Stand5C": HatoStand5CState,
+		"Hato5A": HatoStand5AState,
+		"Hato5B": HatoStand5BState,
+		"Hato5C": HatoStand5CState,
 		
 		"HatoCards": HatoCardsState,
 		

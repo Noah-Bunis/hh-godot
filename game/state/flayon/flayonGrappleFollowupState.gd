@@ -19,12 +19,13 @@ func _init():
 			Enums.StKey.hit_box_colliding_frame : 254,
 			Enums.StKey.Hit1PosX : 8629186, Enums.StKey.Hit1PosY : -17760254,
 			Enums.StKey.Hit1ScaleX : 526496, Enums.StKey.Hit1ScaleY : 1150290,
+			Enums.StKey.burst_OK: false,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher,
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*5,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*70,
 			Enums.StKey.chip_damage: 5,
 			Enums.StKey.min_damage:2,
-			Enums.StKey.attack_damage: 55,
+			Enums.StKey.attack_damage: 40,
 			Enums.StKey.hitstun: 80,
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.counter_hitstun: 60,
@@ -72,7 +73,18 @@ func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 				state[Enums.StKey.cancelState] = "AirAssistCall"
 
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
-	pass
+	if (state[Enums.StKey.hitStopFrame] >= 0):
+		if (level_2_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirStomp"
+		elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "RyukenShiki"
+		elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "RyukenShiki"
+		elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
+				interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface]) or 
+				interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirFlightEnter"
+
 
 func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
 	if (state[Enums.StKey.frame] < 18 and event_cause == Enums.Reaction.GroundLand):

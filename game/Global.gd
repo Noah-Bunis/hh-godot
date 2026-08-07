@@ -1,6 +1,6 @@
 extends Node
 
-const BATTLE_ENGINE_VERSION = "HHv0.8.0007"
+const BATTLE_ENGINE_VERSION = "HHv0.8.0012"
 
 func get_battle_version() -> String:
 	if (len(Build.INTERNAL_BATTLE_ENGINE_KEY) < 50):
@@ -98,8 +98,6 @@ func load_new_color(is_p1, is_assist):
 			color_slot = PLAYER_2_COLOR[0]
 			instance = PLAYER_2_COLOR_INSTANCE[0]
 			
-	#if (instance != null and is_instance_valid(instance)):
-		#instance.queue_free() # Refcounted auto garbage collects
 	instance = load(color_slot)
 	
 	if (is_p1):
@@ -145,6 +143,7 @@ const BGM_LIST = [
 	'Yume Hanabi',
 	'Homenobi',
 	'Palette',
+	'Beginning',
 	'Heroine Audition',
 	'WIM',
 	'This MU is (2-8) At Best',
@@ -168,6 +167,7 @@ const BGM_UID_LIST = [
 	'uid://dbiyw2ycctnsw', #'Yume Hanabi',
 	'uid://baxokql4qdh6x', #'Homenobi',
 	'uid://cco7o17v7g0oh', #'Palette',
+	'uid://bdadh04yuigie', #'Beginning',
 	'uid://bta8h85cknuxa', #'Heroine Audition',
 	'uid://dpprd47eukupb', #'WIM',
 	'uid://63an0yld6m2s', #'This MU is (2-8) At Best',
@@ -210,6 +210,8 @@ var HITBOX_DISPLAY: bool = false
 var TRAINING_HITBOX_ON = false
 var REPLAY_FILE_NAME: String = ""
 var IS_REPLAY: bool = false
+
+var ASSIST_COMBO_TRIAL: bool = false
 
 var ROLLBACK_LOGS_ENABLED: bool = false
 var DEBUG: bool = false
@@ -293,6 +295,7 @@ const SuperJumpDustVFX = preload("res://game/fighter/effects/SuperJumpDust.tscn"
 const FDBubbleVFX = preload("res://game/fighter/effects/FDBubble.tscn")
 const RedParryFlashVFX = preload("res://game/fighter/effects/RedParryFlash.tscn")
 const ParryWhiffVFX = preload("res://game/fighter/effects/ParryWhiffFlash.tscn")
+const IncreaseFlashVFX = preload("res://game/fighter/effects/IncreaseFlash.tscn")
 const TagVFX = preload("res://game/fighter/effects/AssistTag.tscn")
 const RCSound = preload("res://game/assets/sfx/RomanCancel.wav")
 const WhiffSound = preload("res://game/assets/sfx/Whiff.wav")

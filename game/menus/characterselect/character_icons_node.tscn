@@ -1,21 +1,22 @@
 [gd_scene load_steps=10 format=3 uid="uid://delgirqnq1vas"]
 
 [ext_resource type="Script" uid="uid://irk3qummfdvc" path="res://game/menus/characterselect/CharacterIconsNode.gd" id="1_5l5au"]
-[ext_resource type="Texture2D" uid="uid://csm7c5dbea7x2" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="2_g6j5k"]
-[ext_resource type="Texture2D" uid="uid://djoyr0hnf5eju" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OllieButton.png" id="3_o3dsl"]
-[ext_resource type="Texture2D" uid="uid://dppcf4hqlvayd" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SuiseiButton.png" id="4_xyxf4"]
-[ext_resource type="Texture2D" uid="uid://lj1dcdy08xyo" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/KanataButton.png" id="5_36d71"]
-[ext_resource type="Texture2D" uid="uid://bcxls26tiktea" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/MioButton.png" id="6_amqb8"]
-[ext_resource type="Texture2D" uid="uid://d302mjwqy8r6g" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SubaruButton.png" id="7_bx3fi"]
-[ext_resource type="Texture2D" uid="uid://dtxwiyc72wl6n" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OgaButton.png" id="8_0juh2"]
-[ext_resource type="Texture2D" uid="uid://dtj3xj7tdcm7" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/UnknownButton.png" id="9_qrcdu"]
+[ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="2_g6j5k"]
+[ext_resource type="Texture2D" uid="uid://bmcje8fnrjlvm" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OllieButton.png" id="3_o3dsl"]
+[ext_resource type="Texture2D" uid="uid://7drog0j7qk35" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SuiseiButton.png" id="4_xyxf4"]
+[ext_resource type="Texture2D" uid="uid://dcxjlbbqbp5v3" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/KanataButton.png" id="5_36d71"]
+[ext_resource type="Texture2D" uid="uid://cx5rvud32dkss" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/MioButton.png" id="6_amqb8"]
+[ext_resource type="Texture2D" uid="uid://wjn7vjouxyfg" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SubaruButton.png" id="7_bx3fi"]
+[ext_resource type="Texture2D" uid="uid://dcarq7pxg1ypk" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OgaButton.png" id="8_0juh2"]
+[ext_resource type="Texture2D" uid="uid://msynft5xabux" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/UnknownButton.png" id="9_qrcdu"]
 
 [node name="CharacterIconsNode" type="Node2D"]
 z_index = 100
 script = ExtResource("1_5l5au")
 
 [node name="WOOD" type="Sprite2D" parent="."]
-position = Vector2(216, 357)
+position = Vector2(220, 267.00003)
+scale = Vector2(1.0059077, 0.7606589)
 texture = ExtResource("2_g6j5k")
 
 [node name="1" type="TextureRect" parent="."]

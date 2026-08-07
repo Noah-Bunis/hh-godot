@@ -74,6 +74,7 @@ func _init():
 		"GrappleFollowup": FlayonGrappleFollowupState,
 
 		"FlightEnter": FlayonFlightEnterState,
+		"AirFlightEnter": FlayonAirFlightEnterState,
 		"Flight": FlayonFlightState,
 		"FlightExit": FlayonFlightExitState,
 		"FlightNoFuel": FlayonFlightNoFuelState,
@@ -85,6 +86,14 @@ func _init():
 		"Flight5A": FlayonFlightAState,
 		"Flight5B": FlayonFlightBState,
 		"Flight5C": FlayonFlightCState,
+		"Flight2C": FlayonFlight2CState,
+		"Flight2CEarly": FlayonFlight2CEarlyState,
+		"Flight2CIncrease": FlayonFlight2CIncreaseState,
+		"Flight5BEarly": FlayonFlightBEarlyState,
+		"Flight5CEarly": FlayonFlightCEarlyState,
+		"Flight5BIncrease": FlayonFlightBIncreaseState,
+		"Flight5CIncrease": FlayonFlightCIncreaseState,
+		"Flight8C": FlayonFlight8CState,
 
 		"RyukenShiki": preload("res://game/state/flayon/flayonLightDPState.gd"),
 
@@ -236,7 +245,7 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
 			interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface]) or 
 			interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
-		return "FlightEnter"
+		return "AirFlightEnter"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(true, state[Enums.StKey.leftface])):
 		return "ForwardAirDash"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(false, state[Enums.StKey.leftface])):

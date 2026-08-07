@@ -98,8 +98,7 @@ func _init():
 		"HurtAir": OgaHurtAirState,
 		"HurtStand": OgaHurtGroundState,
 		"HurtCrouch": OgaHurtCrouchState,
-#		"HurtThrow": ThrowHurtState,
-#		"HurtAirThrow": AirThrowHurtState,
+		
 		"StandBlock": OgaStandBlockState,
 		"CrouchBlock": OgaCrouchBlockState,
 		"AirBlock": OgaAirBlockState,

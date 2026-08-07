@@ -1,33 +1,37 @@
-[gd_scene load_steps=32 format=3 uid="uid://dwajufq80dc4w"]
+[gd_scene load_steps=36 format=3 uid="uid://dwajufq80dc4w"]
 
 [ext_resource type="Script" uid="uid://by6hd156nj55l" path="res://game/menus/mainmenu/MainMenu.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://d28sv0htum78d" path="res://game/assets/monogram_extended.ttf" id="2"]
-[ext_resource type="Texture2D" uid="uid://by45ex2wcjuue" path="res://game/assets/sprites/UI/MainMenus/MainScreen.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://b1ea6fsk5opag" path="res://game/assets/sprites/UI/MainMenus/Buttons/ONLINE/Timeline 1_0001.png" id="4"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="2"]
+[ext_resource type="Texture2D" uid="uid://qn5j62sxeijo" path="res://game/assets/sprites/UI/MainMenus/MainScreen.png" id="3"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="3_hxaok"]
+[ext_resource type="Texture2D" uid="uid://de1uim16viyi4" path="res://game/assets/sprites/UI/MainMenus/Buttons/ONLINE/Timeline 1_0001.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://comfacrindw3" path="res://game/assets/sprites/UI/MainMenus/Buttons/DISCORD/Timeline 1_0001.png" id="4_xbiuh"]
-[ext_resource type="Texture2D" uid="uid://c4mhu80u1vk3h" path="res://game/assets/sprites/UI/MainMenus/Buttons/VERSUS/Timeline 1_0001.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://d7sjwacxj1v5" path="res://game/assets/sprites/UI/MainMenus/Buttons/VERSUS/Timeline 1_0001.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://d2h1mk6od7hmp" path="res://game/assets/sprites/UI/MainMenus/Buttons/DISCORD/Timeline 1_0000.png" id="5_kh4bg"]
-[ext_resource type="Texture2D" uid="uid://djwfju56r655s" path="res://game/assets/sprites/UI/MainMenus/Buttons/ONLINE/Timeline 1_0000.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://c00be1qdhieom" path="res://game/assets/sprites/UI/MainMenus/Buttons/OPTIONS/Timeline 1_0001.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://d3jnh37mq4dor" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://0s6t47kre3f" path="res://game/assets/sprites/UI/MainMenus/HoloheavenLP.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://bvgnj3khkmjjr" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://b6ow73udpctn1" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://dyahl7dvcv4lt" path="res://game/assets/sprites/UI/MainMenus/Buttons/ONLINE/Timeline 1_0000.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://ceytlec472l3" path="res://game/assets/sprites/UI/MainMenus/Buttons/OPTIONS/Timeline 1_0001.png" id="7"]
+[ext_resource type="FontFile" uid="uid://b5eaosacfvlr0" path="res://game/assets/CreditsFont.tres" id="7_ax5fe"]
+[ext_resource type="Texture2D" uid="uid://b35en5rbily3g" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://b18q761010tfw" path="res://game/assets/sprites/UI/MainMenus/HoloheavenLP.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://c60y2t8lut7is" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://cxjdgbte3ecjb" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0001.png" id="11"]
 [ext_resource type="Script" uid="uid://cyya0oolm3yee" path="res://game/menus/mainmenu/LPSpin.gd" id="12"]
+[ext_resource type="Texture2D" uid="uid://bhv3iq6atws4r" path="res://game/assets/sprites/UI/MainMenus/Buttons/TRIALS/Timeline 1_0000.png" id="12_vmtg1"]
 [ext_resource type="Material" uid="uid://bofoucuf31088" path="res://game/assets/shaders/EarthBoundV1.tres" id="13"]
+[ext_resource type="Texture2D" uid="uid://f3orxnc01ooi" path="res://game/assets/sprites/UI/MainMenus/Buttons/TRIALS/Timeline 1_0001.png" id="13_yp457"]
 [ext_resource type="Script" uid="uid://ydl22yb0cm65" path="res://game/menus/mainmenu/BackgroundFadeLoop.gd" id="14"]
-[ext_resource type="Texture2D" uid="uid://bl277ou75530p" path="res://game/assets/sprites/UI/MainMenus/Buttons/OPTIONS/Timeline 1_0000.png" id="15"]
-[ext_resource type="Texture2D" uid="uid://bnviqkvkoko11" path="res://game/assets/sprites/UI/MainMenus/Buttons/CREDITS/Timeline 1_0000.png" id="16"]
-[ext_resource type="Texture2D" uid="uid://ci4mdgte7e83k" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/OKAttack.png" id="17"]
-[ext_resource type="Texture2D" uid="uid://bshufts6ujwci" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Cancel.png" id="18"]
-[ext_resource type="Texture2D" uid="uid://duiblsujvcrhu" path="res://game/assets/sprites/UI/MainMenus/Buttons/TRAINING/Timeline 1_0000.png" id="19"]
-[ext_resource type="Texture2D" uid="uid://cst1wdkvslwnx" path="res://game/assets/sprites/UI/MainMenus/Buttons/TRAINING/Timeline 1_0001.png" id="20"]
-[ext_resource type="Texture2D" uid="uid://cg8rwavcpreg2" path="res://game/assets/sprites/UI/MainMenus/Buttons/VERSUS/Timeline 1_0000.png" id="21"]
-[ext_resource type="Texture2D" uid="uid://dnaa1wacudocd" path="res://game/assets/sprites/UI/MainMenus/Buttons/CREDITS/Timeline 1_0001.png" id="22"]
-[ext_resource type="Texture2D" uid="uid://ncy4wx6qbedf" path="res://game/assets/sprites/UI/MainMenus/Buttons/UNDER CONSTRUCTION/Timeline 1_0000.png" id="23"]
-[ext_resource type="Texture2D" uid="uid://sa1wkovcx60f" path="res://game/assets/sprites/UI/MainMenus/Buttons/REPLAYS/Timeline 1_0001.png" id="24"]
-[ext_resource type="Texture2D" uid="uid://dx01t2m8jpx7m" path="res://game/assets/sprites/UI/MainMenus/Buttons/REPLAYS/Timeline 1_0000.png" id="25"]
-[ext_resource type="Texture2D" uid="uid://ctmk4l2sfl2qs" path="res://game/assets/sprites/assists/okakoro/PowerBounceHit/Timeline 1_0002.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://bvw3is3w8u38q" path="res://game/assets/sprites/UI/MainMenus/Buttons/OPTIONS/Timeline 1_0000.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://wh5q5y6rg666" path="res://game/assets/sprites/UI/MainMenus/Buttons/CREDITS/Timeline 1_0000.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://bgp4xe8ks0d5h" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/OKAttack.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://gky7pq7auebq" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Cancel.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://cqhi5mye8ohjg" path="res://game/assets/sprites/UI/MainMenus/Buttons/TRAINING/Timeline 1_0000.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://7yt71kyflem6" path="res://game/assets/sprites/UI/MainMenus/Buttons/TRAINING/Timeline 1_0001.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://bambojfyk6iaj" path="res://game/assets/sprites/UI/MainMenus/Buttons/VERSUS/Timeline 1_0000.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://dws5e16y2me2y" path="res://game/assets/sprites/UI/MainMenus/Buttons/CREDITS/Timeline 1_0001.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://i0cn7pna5d5v" path="res://game/assets/sprites/UI/MainMenus/Buttons/UNDER CONSTRUCTION/Timeline 1_0000.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://1s43aow0w01p" path="res://game/assets/sprites/UI/MainMenus/Buttons/REPLAYS/Timeline 1_0001.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://3wixddhn3ldf" path="res://game/assets/sprites/UI/MainMenus/Buttons/REPLAYS/Timeline 1_0000.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://dhgojc5ed7lh7" path="res://game/assets/sprites/assists/okakoro/PowerBounceHit/Timeline 1_0002.png" id="26"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("2")])
@@ -204,8 +208,8 @@ offset_right = 348.0
 offset_bottom = 38.0
 grow_horizontal = 2
 scale = Vector2(3.71277, 3.76316)
+theme = ExtResource("3_hxaok")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("1")
 text = "Your Name:"
 
 [node name="DiscordLabel" type="Label" parent="CanvasLayer"]
@@ -248,7 +252,8 @@ grow_horizontal = 2
 scale = Vector2(1.60862, 2.88665)
 focus_neighbor_left = NodePath("../MainMenuButtons/Offline")
 focus_neighbor_bottom = NodePath("../MainMenuButtons/Offline")
-theme_override_fonts/font = SubResource("1")
+theme = ExtResource("3_hxaok")
+theme_override_fonts/font = ExtResource("7_ax5fe")
 theme_override_font_sizes/font_size = 24
 placeholder_text = "Your Name"
 max_length = 30
@@ -281,6 +286,13 @@ texture_focused = ExtResource("20")
 layout_mode = 2
 texture_normal = ExtResource("6")
 texture_focused = ExtResource("4")
+
+[node name="Trials" type="TextureButton" parent="CanvasLayer/MainMenuButtons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Online")
+focus_neighbor_bottom = NodePath("../Replay")
+texture_normal = ExtResource("12_vmtg1")
+texture_focused = ExtResource("13_yp457")
 
 [node name="Replay" type="TextureButton" parent="CanvasLayer/MainMenuButtons"]
 layout_mode = 2
@@ -332,17 +344,18 @@ position = Vector2(258, 911)
 texture = ExtResource("8")
 
 [node name="A OK" type="Sprite2D" parent="."]
-position = Vector2(682, 573)
+position = Vector2(682, 647)
 texture = ExtResource("17")
 
 [node name="Cancel" type="Sprite2D" parent="."]
-position = Vector2(734, 613)
+position = Vector2(734, 687)
 texture = ExtResource("18")
 
 [connection signal="button_down" from="CanvasLayer/DiscordButton" to="." method="_on_discord_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Offline" to="." method="_on_Offline_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Training" to="." method="_on_Training_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Online" to="." method="_on_Online_button_down"]
+[connection signal="button_down" from="CanvasLayer/MainMenuButtons/Trials" to="." method="_on_Trials_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Replay" to="." method="_on_Replay_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Options" to="." method="_on_Options_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Credits" to="." method="_on_Credits_button_down"]

@@ -4,14 +4,12 @@ signal end_down ()
 
 const DOWNSound = preload("res://game/assets/sfx/DOWN.wav")
 
-var isEndOfMatch = false
+var round_tracker: RoundTracker
 
 func _ready():
 	reset()
 
 func reset():
-	isEndOfMatch = false
-	#$Sprite2D.visible = false
 	$NetworkAnimationPlayer.play("EMPTY")
 
 func play_down_text():
@@ -40,11 +38,7 @@ func play_draw_text():
 	SyncManager.play_sound("parry", Global.ParrySound, {"bus": "Sound"})
 
 func _on_NetworkTimer_timeout():
-	if (not isEndOfMatch):
+	if (not round_tracker.is_game_over()):
 		$NetworkAnimationPlayer.play("EMPTY")
 		$NetworkTimer.stop()
 		emit_signal("end_down")
-
-func disable_on_win() -> void:
-	isEndOfMatch = true
-	$NetworkTimer.stop()

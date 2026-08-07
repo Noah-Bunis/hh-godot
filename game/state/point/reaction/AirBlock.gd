@@ -38,6 +38,7 @@ func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int
 		change_state.call("AirBlock")
 	elif (state[Enums.StKey.hitStopFrame] <= 0):
 		if (event_cause == Enums.Reaction.GroundLand):
+			state[Enums.StKey.hitstun] = 0
 			state[Enums.StKey.doubleJump] = 1
 			state[Enums.StKey.airDash] = 1
 			state[Enums.StKey.leftfaceOK] = true

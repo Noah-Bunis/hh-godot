@@ -21,6 +21,7 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("AirParryCatch")
 	state[Enums.StKey.hitStopFrame] = 0
+	state[Enums.StKey.hitstun] = 0
 	state[Enums.StKey.drag_x] = Util.FD_FRICTION
 	state[Enums.StKey.doubleJump] = 1
 	state[Enums.StKey.airDash] = 1

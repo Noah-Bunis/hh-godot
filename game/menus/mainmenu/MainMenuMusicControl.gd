@@ -203,7 +203,7 @@ func character_id_to_bgm_id() -> int:
 				out_id = Global.BGM_LIST.find("Saikyo Tensai")
 		Enums.PointCharacters.Oga:
 			if (assist_id == Enums.AssistCharacters.Oga):
-				out_id = Global.BGM_LIST.find("Just Follow Stars") # TODO: Beginning
+				out_id = Global.BGM_LIST.find("Beginning")
 			if (assist_id == Enums.AssistCharacters.Fubuki):
 				out_id = Global.BGM_LIST.find("WIM")
 			elif (assist_id == Enums.AssistCharacters.Hakka):

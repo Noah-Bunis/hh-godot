@@ -38,7 +38,3 @@ func physics_tick(state: Dictionary) -> void:
 	elif (state[Enums.StKey.frame] > 3):
 		state[Enums.StKey.velocity_x] -= SGFixed.ONE*4
 		state[Enums.StKey.velocity_y] -= SGFixed.ONE*4
-
-func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
-	if (event_cause == Enums.Reaction.PointAttackHurt):
-		change_state.call("Destroy")

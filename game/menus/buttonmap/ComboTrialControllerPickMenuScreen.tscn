@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://ber5xy5vlrpj3"]
+
+[ext_resource type="Texture2D" uid="uid://cwmygg7ym3m2l" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/ControllerPick.png" id="1"]
+[ext_resource type="Script" uid="uid://dk1givgulrw26" path="res://game/menus/buttonmap/ComboTrialControllerPickMenuScreen.gd" id="1_pjtc8"]
+[ext_resource type="Texture2D" uid="uid://dxrvkffshjj2u" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/OK.png" id="3"]
+[ext_resource type="Material" uid="uid://cffvtcw31hg4s" path="res://game/assets/shaders/EarthBoundV2.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://cd1rjvylpr054" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/OKController.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cn8lnxibcnyyv" path="res://game/assets/sprites/UI/CharacterSelect/Cursors/BigP1/Timeline 1_0000.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dwck8tt07iqoq" path="res://game/assets/sprites/UI/CharacterSelect/Cursors/BigP2/Timeline 1_0000.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://d6yvh3hsyvo1" path="res://game/assets/sprites/UI/MainMenus/TrainingScreen.png" id="8"]
+
+[node name="ComboTrialControllerPickScreen" type="Node2D"]
+script = ExtResource("1_pjtc8")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.2)
+material = ExtResource("4")
+position = Vector2(960, 540)
+texture = ExtResource("8")
+
+[node name="Background2" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.513726)
+position = Vector2(960, 540)
+texture = ExtResource("5")
+
+[node name="ChooseSide" type="Sprite2D" parent="."]
+position = Vector2(763.157, 40)
+scale = Vector2(1.767, 1.767)
+texture = ExtResource("1")
+
+[node name="A OK" type="Sprite2D" parent="."]
+position = Vector2(1185.16, 40)
+scale = Vector2(1.37597, 1.37597)
+texture = ExtResource("3")
+
+[node name="P1Side" type="Sprite2D" parent="."]
+position = Vector2(301, 522)
+scale = Vector2(3.993, 4.774)
+texture = ExtResource("6")
+
+[node name="P2Side" type="Sprite2D" parent="."]
+position = Vector2(1595, 517)
+scale = Vector2(3.993, 4.774)
+texture = ExtResource("7")

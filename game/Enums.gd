@@ -13,7 +13,7 @@ enum StKey {
 	leftfaceOK,
 	frame, # 11
 	last_anim_frame,
-	hitStopFrame,
+	hitStopFrame, # 13
 	hit_box_colliding_frame,  # 14
 	cancelState,
 	hitstun,
@@ -87,6 +87,29 @@ enum StKey {
 	WarpOffScreen,
 	hit_cooldown, # 85
 	hit_box_colliding_frame_attack_data,
+}
+
+enum AllCharacters {
+	Subaru,
+	Mio,
+	Oga,
+	Ollie,
+	Suisei,
+	Kanata,
+	Flayon,
+	Fubuki,
+	Sora,
+	Sana,
+	OkaKoro,
+	Hakka,
+	AssistSubaru,
+	AssistMio,
+	AssistOga,
+	AssistOllie,
+	AssistSuisei,
+	AssistKanata,
+	AssistFlayon,
+	Random,
 }
 
 enum PointCharacters {
@@ -512,7 +535,7 @@ const FlayonMoveList: = [
 	["Command Normals"],
 	["No reverse chains on command normals", "", "", ""],
 	["3C", "", "", "Universal launcher, Jump cancel OK"],
-	["6C", "", "", "only cancels into 3C"],
+	["6C", "", "", ""],
 	["j2C", "Pizza Cutter", "", "Multi hit crossup"],
 	["j6C", "", "", ""],
 	["Specials"],
@@ -522,6 +545,7 @@ const FlayonMoveList: = [
 	["214X (Air OK)", "Flight", "", "Spend super meter to fly"],
 	["Airdash cancel", "", "", "Cancel Flight normals into 4 way airdash"],
 	["Reverse Chains", "", "", "Flight Normals are reverse chain OK"],
+	["Increase Moves", "", "", "Some Flight Normals can be held to enhance them"],
 	["Flight > 214X", "Flight Exit", "", ""],
 	["Supers"],
 	["j236C (Air Only)", "", "Level 2", "Hits before superflash"],

@@ -34,7 +34,7 @@ const credits = {
 		"asokii",
 		"DirgeUndying",
 		"Phen",
-		"HoldBuckToBark",
+		"HoldBackToBark",
 		"HakethKOTB",
 		"AriaofScarlet",
 		"LIKiMiNAJ",
@@ -77,6 +77,7 @@ const credits = {
 		"Pleiades - Shunsuke Takizawa, Oozora Subaru",
 		"Summer High Heels - Shuhei Tsubota, Oozora Subaru",
 		"Violet, Meconopsis, Astrogirl - seibin, M2U, Ujico*/Snail's House, Ninomae Inanis",
+		"Beginning - Harada Atsushi, Kageyama Shien",
 		"Ghost - Atsuhito Sato, Hoshimachi Suisei",
 		],
 	"Special Thanks": [

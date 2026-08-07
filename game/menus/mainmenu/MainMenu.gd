@@ -40,6 +40,10 @@ func _on_Replay_button_down():
 	try_write_new_config_file()
 	get_tree().change_scene_to_file("res://game/menus/buttonmap/ReplayControllerPickMenuScreen.tscn")
 
+func _on_Trials_button_down():
+	try_write_new_config_file()
+	get_tree().change_scene_to_file("res://game/menus/buttonmap/ComboTrialControllerPickMenuScreen.tscn")
+
 func _on_Credits_button_down():
 	try_write_new_config_file()
 	get_tree().change_scene_to_file("res://game/menus/optionsmenu/Credits.tscn")

@@ -13,8 +13,8 @@ func tick() -> void:
 			pilot.currentState[Enums.StKey.assist_meter] <= 0):
 		fighterState.reaction(Enums.Reaction.ForceTagOut, input_interpreter)
 
-func summonHelper(entity: String) -> void:
+func summonHelper(entity: String, uninterrupted:bool=true) -> void:
 	if (entity == "refund"):
 		emit_signal("battery_player", 0, SGFixed.ONE*20, SGFixed.ONE*4200)
 	else:
-		super.summonHelper(entity)
+		super.summonHelper(entity, uninterrupted)

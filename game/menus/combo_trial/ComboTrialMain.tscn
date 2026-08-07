@@ -1,0 +1,602 @@
+[gd_scene load_steps=17 format=3 uid="uid://crkvty0v7xv45"]
+
+[ext_resource type="Script" uid="uid://bpwlotk1q2het" path="res://game/menus/combo_trial/ComboTrialMain.gd" id="1_xuqk6"]
+[ext_resource type="PackedScene" path="res://game/ui/FPSCounter.tscn" id="2"]
+[ext_resource type="Script" uid="uid://bpq5gaa5mv3gf" path="res://game/menus/training/LoadedStateLabel.gd" id="2_34aeq"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="3"]
+[ext_resource type="PackedScene" uid="uid://c5xgqi0ik2bpc" path="res://game/ui/MatchWinCounter.tscn" id="4"]
+[ext_resource type="Script" uid="uid://c2ba4562pur36" path="res://game/menus/training/TrainingOptionsMenu.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="6"]
+[ext_resource type="Script" uid="uid://bqourwt6u6d5m" path="res://game/menus/training/FastSlider.gd" id="7"]
+[ext_resource type="Script" uid="uid://cljcn86ml7wo6" path="res://game/menus/training/MeterNumber.gd" id="8"]
+[ext_resource type="Script" uid="uid://c6wx1x7lf5yw1" path="res://game/ui/DamageCounter.gd" id="9"]
+[ext_resource type="Texture2D" uid="uid://vuvyurs2s2yb" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SoraButton.png" id="10"]
+[ext_resource type="PackedScene" path="res://game/menus/training/CommandList.tscn" id="11"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="11_s221j"]
+[ext_resource type="PackedScene" uid="uid://cnx2a5iq536el" path="res://game/menus/training/TrainingInputDisplay.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://bk1lasncttige" path="res://game/components/combo_trial/combo_trial_listener.tscn" id="15_xuqk6"]
+
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("3")])
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[node name="TrainingMain" type="Node2D"]
+script = ExtResource("1_xuqk6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MessageLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -502.0
+offset_top = 283.0
+offset_right = -31.0
+offset_bottom = 413.0
+grow_horizontal = 2
+scale = Vector2(2.31141, 2.08452)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "WOW"
+
+[node name="LoadedStateLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -507.0
+offset_top = 213.0
+offset_right = -36.0
+offset_bottom = 343.0
+grow_horizontal = 2
+scale = Vector2(2.31141, 2.08452)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Loaded State"
+script = ExtResource("2_34aeq")
+
+[node name="SyncLostLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -271.0
+offset_top = 22.0
+offset_right = -169.0
+offset_bottom = 35.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Regaining sync..."
+
+[node name="PingLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -271.0
+offset_top = 22.0
+offset_right = -169.0
+offset_bottom = 35.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Regaining sync..."
+
+[node name="RollbackFrameLabel" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -271.0
+offset_top = 22.0
+offset_right = -169.0
+offset_bottom = 35.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Regaining sync..."
+
+[node name="WinCounterP1" parent="CanvasLayer" instance=ExtResource("4")]
+visible = false
+anchors_preset = -1
+offset_left = -475.0
+offset_right = -4.0
+
+[node name="WinCounterP2" parent="CanvasLayer" instance=ExtResource("4")]
+visible = false
+anchors_preset = -1
+offset_left = 1.0
+offset_right = 472.0
+
+[node name="FPSCounter" parent="CanvasLayer" instance=ExtResource("2")]
+anchors_preset = -1
+offset_left = 937.0
+offset_top = 2.0
+offset_right = 977.0
+offset_bottom = 16.0
+
+[node name="DamageCounter" type="Node2D" parent="CanvasLayer"]
+position = Vector2(784, 137)
+script = ExtResource("9")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/DamageCounter"]
+modulate = Color(0.160784, 0.0745098, 0.0745098, 0.415686)
+position = Vector2(256, 26)
+scale = Vector2(4.24481, 0.38454)
+texture = ExtResource("10")
+
+[node name="AttackDamage" parent="CanvasLayer/DamageCounter" instance=ExtResource("2")]
+anchors_preset = -1
+offset_left = 14.0
+offset_top = 8.00001
+offset_right = 118.0
+offset_bottom = 22.0
+text = "Attack  Damage:"
+script = null
+
+[node name="ComboDamage" parent="CanvasLayer/DamageCounter" instance=ExtResource("2")]
+anchors_preset = -1
+offset_left = 12.9999
+offset_top = 31.0
+offset_right = 52.9999
+offset_bottom = 45.0
+text = "Combo Damage: "
+script = null
+
+[node name="TrainingInputDisplay" parent="CanvasLayer" instance=ExtResource("12")]
+
+[node name="InputLog" parent="CanvasLayer/TrainingInputDisplay/CanvasLayer" index="0"]
+offset_left = 1606.0
+offset_right = 1756.0
+
+[node name="TrainingOptionsMenu" type="GridContainer" parent="CanvasLayer"]
+visible = false
+modulate = Color(1, 1, 1, 0.964706)
+anchors_preset = -1
+offset_left = 122.0
+offset_top = 53.0
+offset_right = 622.0
+offset_bottom = 509.0
+scale = Vector2(2.8483367, 1.8152132)
+theme = ExtResource("11_s221j")
+columns = 3
+script = ExtResource("5")
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer/TrainingOptionsMenu"]
+modulate = Color(0.172549, 0.121569, 0.121569, 0.411765)
+position = Vector2(172.305, 200.957)
+scale = Vector2(-2.583444, 2.5909083)
+texture = ExtResource("6")
+
+[node name="SaveStateLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Save State"
+
+[node name="SaveStateButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
+text = "Save"
+
+[node name="SaveStateEmpty" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="LoadStateLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Load From State"
+
+[node name="LoadStateButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "(Back button also works)"
+
+[node name="LoadStateEmpty" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="PrevLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="PrevButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "Prev Trial"
+
+[node name="PrevEmpty" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="NextLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="NextButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "Next Trial"
+
+[node name="NextEmpty" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="StanceLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Stance"
+
+[node name="StanceOptions" type="OptionButton" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+toggle_mode = false
+action_mode = 1
+
+[node name="StanceBlockNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="CounterHitLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "CounterHit"
+
+[node name="CounterHitOptions" type="OptionButton" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+toggle_mode = false
+action_mode = 1
+
+[node name="CounterHitNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="BlockLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Block Settings"
+
+[node name="BlockOptions" type="OptionButton" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+toggle_mode = false
+action_mode = 1
+
+[node name="BlockNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="BlockSwitchLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Block Switching"
+
+[node name="BlockSwitchOptions" type="OptionButton" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+toggle_mode = false
+action_mode = 1
+
+[node name="BlockSwitchNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="BlockTypeLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Block Type"
+
+[node name="BlockTypeOptions" type="OptionButton" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+toggle_mode = false
+action_mode = 1
+
+[node name="BlockTypeNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="RecoveryLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Air Recovery"
+
+[node name="RecoveryOptions" type="OptionButton" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+toggle_mode = false
+action_mode = 1
+
+[node name="RecoveryNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="SuperMeterLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Super Meter"
+
+[node name="SuperMeter" type="HSlider" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+max_value = 500.0
+step = 5.0
+value = 500.0
+tick_count = 6
+ticks_on_borders = true
+script = ExtResource("7")
+
+[node name="SuperMeterNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "500"
+script = ExtResource("8")
+
+[node name="AssistMeterLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Assist Meter"
+
+[node name="AssistMeter" type="HSlider" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+max_value = 400.0
+step = 4.0
+value = 400.0
+tick_count = 5
+ticks_on_borders = true
+script = ExtResource("7")
+
+[node name="AssistMeterNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "400"
+script = ExtResource("8")
+
+[node name="SyncRateLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Sync Rate"
+
+[node name="SyncRate" type="HSlider" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+value = 10.0
+tick_count = 11
+ticks_on_borders = true
+script = ExtResource("7")
+
+[node name="SyncRateNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "100"
+script = ExtResource("8")
+
+[node name="AssistBuildLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Assist Meter Build"
+
+[node name="AssistBuildButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+text = "OFF"
+
+[node name="AssistBuildNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="MeterResetLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Meter Refill"
+
+[node name="MeterResetButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+text = "ON"
+
+[node name="MeterResetNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="CommandListLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="CommandListButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "Command List"
+
+[node name="CommandListNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="HideHitboxesLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="HideHitboxesButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "Toggle Hitboxes"
+
+[node name="HideHitboxesNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="ResetLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="ResetButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "Reset Positions"
+
+[node name="ResetNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="CloseLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Close Menu"
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "Close"
+
+[node name="CloseNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="ExitLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "Quit Training"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../SaveStateButton")
+text = "Quit"
+
+[node name="ExitNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
+[node name="CommandList" parent="CanvasLayer" instance=ExtResource("11")]
+visible = false
+anchors_preset = -1
+offset_left = 62.0
+offset_top = 19.0
+offset_right = 109.0
+offset_bottom = 43.0
+scale = Vector2(2.87118, 3.02479)
+
+[node name="ComboTrialListener" parent="CanvasLayer" instance=ExtResource("15_xuqk6")]
+z_index = -1
+position = Vector2(302, 424)
+
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/SaveStateButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_SaveStateButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/LoadStateButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_LoadStateButton_pressed"]
+[connection signal="button_down" from="CanvasLayer/TrainingOptionsMenu/PrevButton" to="." method="_on_prev_trial_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/TrainingOptionsMenu/NextButton" to="." method="_on_next_trial_button_button_down"]
+[connection signal="value_changed" from="CanvasLayer/TrainingOptionsMenu/SuperMeter" to="CanvasLayer/TrainingOptionsMenu/SuperMeterNumber" method="_on_SuperMeter_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/TrainingOptionsMenu/AssistMeter" to="CanvasLayer/TrainingOptionsMenu/AssistMeterNumber" method="_on_AssistMeter_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/TrainingOptionsMenu/SyncRate" to="CanvasLayer/TrainingOptionsMenu/SyncRateNumber" method="_on_SyncRate_value_changed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/AssistBuildButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_AssistBuildButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/MeterResetButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_MeterResetButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/CommandListButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_CommandListButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/HideHitboxesButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_hide_hitboxes_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/ResetButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_ResetButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/CloseButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/ExitButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_ExitButton_pressed"]
+
+[editable path="CanvasLayer/TrainingInputDisplay"]

@@ -14,7 +14,6 @@ var hp_bar: Node2D
 # TODO: round counters are just for angel install comeback check, don't write to them
 # there's probably some observer design pattern we should use
 var round_counter: Node2D
-var opponent_round_counter: Node2D
 
 func _init():
 	super._init()
@@ -54,7 +53,6 @@ func update_opponent_anchor(opponent: BasePlayer) -> void:
 	var path : String = opponent.get_path()
 	currentState[Enums.StKey.capture_anchor] = path
 
-
 func anim_updates() -> void:
 	super.anim_updates()
 	var anim_frame : Dictionary = fighterState.state.anim_data.get(currentState[Enums.StKey.frame], {})
@@ -63,8 +61,6 @@ func anim_updates() -> void:
 		anim_frame = fighterState.state.anim_data.get(currentState[Enums.StKey.last_anim_frame], {})
 	else:
 		currentState[Enums.StKey.last_anim_frame] = currentState[Enums.StKey.frame]
-	if (currentState[Enums.StKey.last_anim_frame] == currentState[Enums.StKey.frame]):
-		summonHelper(anim_frame.get(Enums.StKey.Summon, ""))
 
 func tick() -> void:
 	super.tick()
@@ -99,132 +95,139 @@ func summonVFX(VFXname: String, VFX, use_color_palette:bool = false) -> void:
 			leftface = currentState[Enums.StKey.leftface],
 		})
 
-func summonHelper(entity: String) -> void:
+func summonHelper(entity: String, uninterrupted:bool=true) -> void:
 	if (not entity.is_empty()):
 		var leftface_mult = 1
 		if (currentState[Enums.StKey.leftface]):
 			leftface_mult = -1
-		
-		if (entity == "assist"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				true,
-				5)
-		elif (entity == "assist2"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				true,
-				2)
-		elif (entity == "assistSuper"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				true,
-				0)
-		elif (entity == "airassist"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				false,
-				5)
-		elif (entity == "airassist2"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				false,
-				2)
-		elif (entity == "airassistSuper"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				false,
-				0)
-		elif (entity == "assistGuardCancel"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				true,
-				10)
-		elif (entity == "airassistGuardCancel"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				false,
-				10)
-		elif (entity == "assistWeakGuardCancel"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				true,
-				11)
-		elif (entity == "airassistWeakGuardCancel"):
-			emit_signal("summon", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface],
-				false,
-				11)
-		elif (entity == "hatoSummon"):
-			emit_signal("summonPuppet", 
-				fixed_position.x, 
-				fixed_position.y, 
-				currentState[Enums.StKey.leftface])
-		elif (entity == "hatoUnsummon"):
-			emit_signal("unsummonPuppet")
-		elif (entity == "burst"):
-			summonVFX("BurstVFX", Global.BurstVFX)
-			if (Util.assist_burst_exhausted(currentState)):
+		if (uninterrupted):
+			if (entity == "assist"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					true,
+					5)
+			elif (entity == "assist2"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					true,
+					2)
+			elif (entity == "assistSuper"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					true,
+					0)
+			elif (entity == "airassist"):
 				emit_signal("summon", 
 					fixed_position.x, 
 					fixed_position.y, 
 					currentState[Enums.StKey.leftface],
 					false,
-					13)
-			else:
+					5)
+			elif (entity == "airassist2"):
 				emit_signal("summon", 
 					fixed_position.x, 
 					fixed_position.y, 
 					currentState[Enums.StKey.leftface],
 					false,
-					12)
-		elif (entity == "RCVFX"):
-			summonVFX("RCVFX", Global.RCVFX)
-		elif (entity == "fairdash"):
-			summonVFX("AirdashVFX", Global.AirdashVFX)
-		elif (entity == "bairdash"):
-			summonVFX("AirdashVFX", Global.AirdashVFX)
-		elif (entity == "rundust"):
-			summonVFX("RunDustVFX", Global.RunDustVFX)
-		elif (entity == "backdashdust"):
-			summonVFX("BackDashDustVFX", Global.BackDashDustVFX)
-		elif (entity == "jumpdust"):
-			summonVFX("JumpDustVFX", Global.JumpDustVFX)
-		elif (entity == "knockdowndust"):
+					2)
+			elif (entity == "airassistSuper"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					false,
+					0)
+			elif (entity == "assistGuardCancel"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					true,
+					10)
+			elif (entity == "airassistGuardCancel"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					false,
+					10)
+			elif (entity == "assistWeakGuardCancel"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					true,
+					11)
+			elif (entity == "airassistWeakGuardCancel"):
+				emit_signal("summon", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface],
+					false,
+					11)
+			elif (entity == "hatoSummon"):
+				emit_signal("summonPuppet", 
+					fixed_position.x, 
+					fixed_position.y, 
+					currentState[Enums.StKey.leftface])
+			elif (entity == "hatoUnsummon"):
+				emit_signal("unsummonPuppet")
+			elif (entity == "RCVFX"):
+				summonVFX("RCVFX", Global.RCVFX)
+			elif (entity == "fairdash"):
+				summonVFX("AirdashVFX", Global.AirdashVFX)
+			elif (entity == "bairdash"):
+				summonVFX("AirdashVFX", Global.AirdashVFX)
+			elif (entity == "rundust"):
+				summonVFX("RunDustVFX", Global.RunDustVFX)
+			elif (entity == "backdashdust"):
+				summonVFX("BackDashDustVFX", Global.BackDashDustVFX)
+			elif (entity == "jumpdust"):
+				summonVFX("JumpDustVFX", Global.JumpDustVFX)
+			elif (entity == "superjumpdust"):
+				summonVFX("SuperJumpDustVFX", Global.SuperJumpDustVFX)
+			elif (entity == "IncreaseFlash"):
+				summonVFX("IncreaseFlashVFX", Global.IncreaseFlashVFX)
+			elif (entity == "superFlash"):
+				emit_signal("super_freeze", get_global_fixed_position().x, get_global_fixed_position().y, currentState[Enums.StKey.leftface])
+				SyncManager.play_sound("superflash", Global.SuperFlashSound, {"bus": "Sound"})
+		if (entity == "knockdowndust"):
 			summonVFX("KnockdownVFX", Global.KnockdownDustVFX)
 		elif (entity == "WallBounceDust"):
 			summonVFX("WallBounceDustVFX", Global.WallBounceDustVFX)
-		elif (entity == "superjumpdust"):
-			summonVFX("SuperJumpDustVFX", Global.SuperJumpDustVFX)
-		elif (entity == "FDBubble"):
-			summonVFX("FDBubbleVFX", Global.FDBubbleVFX)
+		elif (entity == "burst"):
+				summonVFX("BurstVFX", Global.BurstVFX)
+				if (Util.assist_burst_exhausted(currentState)):
+					emit_signal("summon", 
+						fixed_position.x, 
+						fixed_position.y, 
+						currentState[Enums.StKey.leftface],
+						false,
+						13)
+				else:
+					emit_signal("summon", 
+						fixed_position.x, 
+						fixed_position.y, 
+						currentState[Enums.StKey.leftface],
+						false,
+						12)
 		elif (entity == "ParryWhiff"):
 			summonVFX("ParryWhiff", Global.ParryWhiffVFX)
 		elif (entity == "RedParryFlash"):
 			summonVFX("RedParryFlash", Global.RedParryFlashVFX)
-		elif (entity == "superFlash"):
-			emit_signal("super_freeze", get_global_fixed_position().x, get_global_fixed_position().y, currentState[Enums.StKey.leftface])
-			SyncManager.play_sound("superflash", Global.SuperFlashSound, {"bus": "Sound"})
+		elif (entity == "FDBubble"):
+			summonVFX("FDBubbleVFX", Global.FDBubbleVFX)
+
+func delay_summon():
+	var anim_frame : Dictionary = fighterState.state.anim_data.get(currentState[Enums.StKey.frame], {})
+	if (currentState[Enums.StKey.last_anim_frame] == currentState[Enums.StKey.frame]):
+		summonHelper(anim_frame.get(Enums.StKey.Summon, ""), currentState[Enums.StKey.hitstun] <= 0)
 
 func assist_hurt(scaled:int, hitCount:int, invalid: bool, block: bool, guard: bool) -> void:
 	if (currentState[Enums.StKey.assist_meter] <= Util.ASSIST_STOCK):

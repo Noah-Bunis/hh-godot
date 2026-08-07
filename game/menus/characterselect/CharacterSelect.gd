@@ -9,6 +9,19 @@ var rng : RandomNumberGenerator
 var next_scene_packed
 var prev_scene_packed
 
+var P1Cursor
+var P2Cursor
+var A1Portrait
+var A2Portrait
+var P1Portrait
+var P2Portrait
+var AkiMC
+var P1SelectFlash
+var P2SelectFlash
+var KimiNoHiroin
+var WinCounterP1
+var WinCounterP2
+
 var character = [
 	[Enums.PointCharacters.Ollie, Enums.PointCharacters.Suisei, Enums.PointCharacters.Kanata],
 	[Enums.PointCharacters.Mio, Enums.PointCharacters.Subaru, Enums.PointCharacters.Oga],
@@ -51,26 +64,42 @@ var a2_color_number: int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	connect_ui_elements()
+
 	Global.load_queue.start()
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
-	$P1Cursor.connect("change_character", Callable(self, "update_p1_portrait"))
-	$P2Cursor.connect("change_character", Callable(self, "update_p2_portrait"))
-	$P1Cursor.connect("select_chara", Callable(self, "update_p1"))
-	$P2Cursor.connect("select_chara", Callable(self, "update_p2"))
-	$P1Cursor.connect("select_chara", Callable($AkiMC, "p1_call"))
-	$P2Cursor.connect("select_chara", Callable($AkiMC, "p2_call"))
-	$P1Cursor.connect("select_chara", Callable($P1SelectFlash, "player_call"))
-	$P2Cursor.connect("select_chara", Callable($P2SelectFlash, "player_call"))
-	$KimiNoHiroin.connect("start_intro_sequence", Callable(MainMenuMusicControl, "play_character_select_music"))
-	update_p1_portrait($P1Cursor.row, $P1Cursor.col)
-	update_p2_portrait($P2Cursor.row, $P2Cursor.col)
+	P1Cursor.connect("change_character", Callable(self, "update_p1_portrait"))
+	P2Cursor.connect("change_character", Callable(self, "update_p2_portrait"))
+	P1Cursor.connect("select_chara", Callable(self, "update_p1"))
+	P2Cursor.connect("select_chara", Callable(self, "update_p2"))
+	P1Cursor.connect("select_chara", Callable(AkiMC, "p1_call"))
+	P2Cursor.connect("select_chara", Callable(AkiMC, "p2_call"))
+	P1Cursor.connect("select_chara", Callable(P1SelectFlash, "player_call"))
+	P2Cursor.connect("select_chara", Callable(P2SelectFlash, "player_call"))
+	KimiNoHiroin.connect("start_intro_sequence", Callable(MainMenuMusicControl, "play_character_select_music"))
+	update_p1_portrait(P1Cursor.row, P1Cursor.col)
+	update_p2_portrait(P2Cursor.row, P2Cursor.col)
 	if (self.has_node("CanvasLayer/WinCounterP1")):
-		$CanvasLayer/WinCounterP1.update_win_count(true)
-		$CanvasLayer/WinCounterP2.update_win_count(false)
-	p1_active_cursor = $P1Cursor
-	p2_active_cursor = $P2Cursor
+		WinCounterP1.update_win_count(true)
+		WinCounterP2.update_win_count(false)
+	p1_active_cursor = P1Cursor
+	p2_active_cursor = P2Cursor
 	MainMenuMusicControl.reset_seek()
+
+func connect_ui_elements():
+	P2Cursor = $P2Cursor
+	P1Cursor = $P1Cursor
+	A1Portrait = $A1Portrait
+	A2Portrait = $A2Portrait
+	P1Portrait = $P1Portrait
+	P2Portrait = $P2Portrait
+	AkiMC = $AkiMC
+	P1SelectFlash = $P1SelectFlash
+	P2SelectFlash = $P2SelectFlash
+	KimiNoHiroin = $KimiNoHiroin
+	WinCounterP1 = $CanvasLayer/WinCounterP1
+	WinCounterP2 = $CanvasLayer/WinCounterP2
 
 func try_react_to_new_controller(event):
 	if (event is InputEventJoypadMotion or event is InputEventJoypadButton):
@@ -78,37 +107,37 @@ func try_react_to_new_controller(event):
 			Util.try_replace_controller(event.device)
 
 func update_p1_portrait(row:int,col:int):
-	$P1Portrait.change_portrait_anim()
+	P1Portrait.change_portrait_anim()
 	resolve_portrait(row, col, true)
 
 func update_p2_portrait(row:int,col:int):
-	$P2Portrait.change_portrait_anim()
+	P2Portrait.change_portrait_anim()
 	resolve_portrait(row, col, false)
 
 func update_a1_portrait(row:int,col:int):
-	$A1Portrait.change_portrait_anim()
+	A1Portrait.change_portrait_anim()
 	resolve_assist_portrait(row, col, true)
 
 func update_a2_portrait(row:int,col:int):
-	$A2Portrait.change_portrait_anim()
+	A2Portrait.change_portrait_anim()
 	resolve_assist_portrait(row, col, false)
 
 func update_p1():
 	p1_assist_select = AssistSelect.instantiate() 
 	add_child(p1_assist_select)
-	p1_color_number = select_color($P1Cursor.input_prefix)
+	p1_color_number = select_color(P1Cursor.input_prefix)
 	p1_active_cursor = p1_assist_select
 	p1_assist_select.position.x = 966
 	p1_assist_select.position.y = 300
 	p1_assist_select.setup(true, true)
 	p1_assist_select.get_node("CharacterCursor").connect("change_character", Callable(self, "update_a1_portrait"))
 	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(self, "update_a1"))
-	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($P1SelectFlash, "player_call"))
-	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($AkiMC, "p1_call"))
+	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(P1SelectFlash, "player_call"))
+	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(AkiMC, "p1_call"))
 	update_a1_portrait(p1_assist_select.cursor_row(), p1_assist_select.cursor_col())
-	var charaData = resolve_characters($P1Cursor.row, $P1Cursor.col)
+	var charaData = resolve_characters(P1Cursor.row, P1Cursor.col)
 	
-	$P1Portrait.change_color_number(p1_color_number)
+	P1Portrait.change_color_number(p1_color_number)
 	unload_character(charaData[0],true,false)
 	Global.PLAYER_1_NODE_PATH[0] = charaData[0]
 	Global.PLAYER_1_CHARACTER[0] = charaData[1]
@@ -118,21 +147,21 @@ func update_p1():
 	
 func update_p2():
 #	Global.PLAYER_2_COLOR[0] = "res://game/assets/sprites/subaru/ColorPalettes/2.png"
-#	$P2Portrait.material.set_shader_param("palette", load(Global.PLAYER_2_COLOR[0]))
+#	P2Portrait.material.set_shader_param("palette", load(Global.PLAYER_2_COLOR[0]))
 	p2_assist_select = AssistSelect.instantiate() 
 	add_child(p2_assist_select)
-	p2_color_number = select_color($P2Cursor.input_prefix)
+	p2_color_number = select_color(P2Cursor.input_prefix)
 	p2_active_cursor = p2_assist_select
 	p2_assist_select.position.x = 966
 	p2_assist_select.position.y = 300
 	p2_assist_select.setup(false, false)
 	p2_assist_select.get_node("CharacterCursor").connect("change_character", Callable(self, "update_a2_portrait"))
 	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(self, "update_a2"))
-	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($P2SelectFlash, "player_call"))
-	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable($AkiMC, "p2_call"))
+	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(P2SelectFlash, "player_call"))
+	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(AkiMC, "p2_call"))
 	update_a2_portrait(p2_assist_select.cursor_row(), p2_assist_select.cursor_col())
-	var charaData = resolve_characters($P2Cursor.row, $P2Cursor.col)
-	$P2Portrait.change_color_number(p2_color_number)
+	var charaData = resolve_characters(P2Cursor.row, P2Cursor.col)
+	P2Portrait.change_color_number(p2_color_number)
 	unload_character(charaData[0],false,false)
 	Global.PLAYER_2_NODE_PATH[0] = charaData[0]
 	Global.PLAYER_2_CHARACTER[0] = charaData[1]
@@ -145,7 +174,7 @@ func update_a1():
 	var charaData = resolve_assists(p1_assist_select.cursor_row(), p1_assist_select.cursor_col(), true)
 	unload_character(charaData[0], true,true)
 	a1_color_number = select_color(p1_assist_select.get_node("CharacterCursor").input_prefix)
-	$A1Portrait.change_color_number(a1_color_number)
+	A1Portrait.change_color_number(a1_color_number)
 	p1_active_cursor = null
 	Global.PLAYER_1_NODE_PATH[1] = charaData[0]
 	Global.PLAYER_1_CHARACTER[1] = charaData[1]
@@ -157,7 +186,7 @@ func update_a2():
 	var charaData = resolve_assists(p2_assist_select.cursor_row(), p2_assist_select.cursor_col(), false)
 	unload_character(charaData[0],false,true)
 	a2_color_number = select_color(p2_assist_select.get_node("CharacterCursor").input_prefix)
-	$A2Portrait.change_color_number(a2_color_number)
+	A2Portrait.change_color_number(a2_color_number)
 	p2_active_cursor = null
 	Global.PLAYER_2_NODE_PATH[1] = charaData[0]
 	Global.PLAYER_2_CHARACTER[1] = charaData[1]
@@ -192,7 +221,7 @@ func _physics_process(_delta):
 
 func physics_tick():
 	if (p1_button_map == null and Input.is_action_just_pressed("player1_cancel")):
-		if (not $P1Cursor.selected):
+		if (not P1Cursor.selected):
 			go_to_prev_scene()
 		else:
 			if (p1_assist_select != null and p1_assist_select.is_selected()):
@@ -202,12 +231,12 @@ func physics_tick():
 			else:
 				p1_assist_select.queue_free()
 				remove_child(p1_assist_select)
-				$A1Portrait.clear_portrait()
+				A1Portrait.clear_portrait()
 				p1_assist_select = null
-				p1_active_cursor = $P1Cursor
-				$P1Cursor.deselect()
+				p1_active_cursor = P1Cursor
+				P1Cursor.deselect()
 	if (p2_button_map == null and Input.is_action_just_pressed("player2_cancel")):
-		if (not $P2Cursor.selected):
+		if (not P2Cursor.selected):
 			go_to_prev_scene()
 		else:
 			if (p2_assist_select != null and p2_assist_select.is_selected()):
@@ -217,10 +246,10 @@ func physics_tick():
 			else:
 				p2_assist_select.queue_free()
 				remove_child(p2_assist_select)
-				$A2Portrait.clear_portrait()
+				A2Portrait.clear_portrait()
 				p2_assist_select = null
-				p2_active_cursor = $P2Cursor
-				$P2Cursor.deselect()
+				p2_active_cursor = P2Cursor
+				P2Cursor.deselect()
 
 func resolve_characters(row: int, col: int):
 	var enumChara: int = character[row][col]
@@ -386,9 +415,9 @@ func resolve_portrait(row:int, col:int, is_p1:bool):
 	var enumChara: int = character[row][col]
 	var portrait: String = ""
 	if (is_p1):
-		$P1Portrait.change_portrait(enumChara)
+		P1Portrait.change_portrait(enumChara)
 	else:
-		$P2Portrait.change_portrait(enumChara)
+		P2Portrait.change_portrait(enumChara)
 
 func resolve_assist_portrait(row:int, col:int, is_p1:bool):
 	var enumChara: int = assist2[row][col]
@@ -397,9 +426,9 @@ func resolve_assist_portrait(row:int, col:int, is_p1:bool):
 	var color: String = ""
 	var portrait: String = ""
 	if (is_p1):
-		$A1Portrait.change_portrait(enumChara, true)
+		A1Portrait.change_portrait(enumChara, true)
 	else:
-		$A2Portrait.change_portrait(enumChara, true)
+		A2Portrait.change_portrait(enumChara, true)
 
 func button_set_complete(is_p1:bool):
 	if (is_p1):

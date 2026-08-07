@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://b010dt6v25trf" path="res://addons/godot-rollback-netcode/NetworkTimer.gd" id="2"]
 [ext_resource type="Script" uid="uid://ccj4aoqw0jypu" path="res://game/fighter/projectiles/ollie/OllieProtonCannonPlayer.gd" id="2_opkev"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://bi16f64ax5htl" path="res://game/assets/sprites/ollie/ProtonLazer/Timeline 1_0000.png" id="3_opkev"]
+[ext_resource type="Texture2D" uid="uid://byw8nm80q1stm" path="res://game/assets/sprites/ollie/ProtonLazer/Timeline 1_0000.png" id="3_opkev"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="4"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="5"]
-[ext_resource type="Texture2D" uid="uid://bubw6a3uuur65" path="res://game/assets/sprites/ollie/ProtonLazer/Timeline 1_0002.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://dg4ufo7p31nk0" path="res://game/assets/sprites/ollie/ProtonLazer/Timeline 1_0001.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://cpwcb0gq764jq" path="res://game/assets/sprites/ollie/ProtonLazer/Timeline 1_0002.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://b8sbh241uiwp4" path="res://game/assets/sprites/ollie/ProtonLazer/Timeline 1_0001.png" id="12"]
 
 [sub_resource type="SGRectangleShape2D" id="1"]
 extents_x = 4063232

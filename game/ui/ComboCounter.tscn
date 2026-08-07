@@ -2,18 +2,35 @@
 
 [ext_resource type="Script" uid="uid://0rc6xhuk6el3" path="res://game/ui/ComboCounter.gd" id="1"]
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://cob4qjlv0uhpb" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0004.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://bcrich145mfm" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0000.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://ceh4xuroewj1y" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0001.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://bk0gb2g7ol4aa" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0003.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://jstopqw15kja" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0002.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://tq7jpwpmpnav" path="res://game/assets/sprites/Empty_0000.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://bj5tsnrtee8bo" path="res://game/assets/sprites/UI/Meters/Combo/Timeline 1_0010.png" id="9_7wqtw"]
-[ext_resource type="Texture2D" uid="uid://bp4j4hy8p3y40" path="res://game/assets/sprites/UI/Meters/Combo/Timeline 1_0009.png" id="9_lpo3l"]
+[ext_resource type="Texture2D" uid="uid://bn8dlub82a1s" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0004.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bjpp0bo2s75kx" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0000.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ux56urk43wv0" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0001.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://b7np2ecd2js7v" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0003.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://ckuvmvkvepjtx" path="res://game/assets/sprites/VFX/InvalidComboFlash/Timeline 1_0002.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://c3h40i4mamblw" path="res://game/assets/sprites/Empty_0000.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://d35h5a0hlmwq6" path="res://game/assets/sprites/UI/Meters/Combo/Timeline 1_0010.png" id="9_7wqtw"]
+[ext_resource type="Texture2D" uid="uid://cimo0d6rnqwkl" path="res://game/assets/sprites/UI/Meters/Combo/Timeline 1_0009.png" id="9_lpo3l"]
 
-[sub_resource type="Animation" id="2"]
-resource_name = "Resting"
-length = 0.0333334
+[sub_resource type="Animation" id="1"]
+resource_name = "CountHit"
+length = 0.08333516
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Counter:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0166667, 0.05),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 0.8), Vector2(0.88, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gnvgj"]
+resource_name = "Invalid"
+length = 0.33333564
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -22,10 +39,10 @@ tracks/0/path = NodePath("X:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.133333, 0.2, 0.266667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("8")]
+"values": [ExtResource("4"), ExtResource("5"), ExtResource("7"), ExtResource("6"), ExtResource("3"), ExtResource("8")]
 }
 
 [sub_resource type="Animation" id="Animation_3dghh"]
@@ -55,25 +72,9 @@ tracks/1/keys = {
 "values": [ExtResource("8")]
 }
 
-[sub_resource type="Animation" id="1"]
-resource_name = "CountHit"
-length = 0.366667
-step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Counter:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0166667, 0.05),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 0.8), Vector2(0.88, 1.2), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_gnvgj"]
-resource_name = "Invalid"
+[sub_resource type="Animation" id="2"]
+resource_name = "Resting"
+length = 0.0333334
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -82,10 +83,10 @@ tracks/0/path = NodePath("X:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.133333, 0.2, 0.266667, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4"), ExtResource("5"), ExtResource("7"), ExtResource("6"), ExtResource("3"), ExtResource("8")]
+"values": [ExtResource("8")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n4sq1"]
@@ -98,6 +99,7 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_7wqtw"]
 resource_name = "CountHit"
+length = 0.11666856
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false

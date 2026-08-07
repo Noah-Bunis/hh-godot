@@ -3,18 +3,13 @@ extends AssistAirGuardCancelAttackState
 class_name SanaAssistAirGuardCancelAttackState
 
 func _init():
-	endFrame = 22
+	endFrame = 10
 	
 	anim_data = {
 		0 : {
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : true, Enums.StKey.Hurt2Disable : true,
-			},
-		10 : {
-			Enums.StKey.Hit1Disable : true,
-			Enums.StKey.Hit2Disable : true,
-			Enums.StKey.Hurt1Disable : false, Enums.StKey.Hurt2Disable : true,
 			},
 	}
 

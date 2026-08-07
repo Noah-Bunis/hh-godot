@@ -3,7 +3,7 @@ extends FlayonFlightBaseState
 class_name FlayonFlightForwardAirdashState
 
 func _init():
-	endFrame = 12
+	endFrame = 16
 	
 	anim_data = {
 		0 : {
@@ -29,7 +29,7 @@ func physics_tick(state: Dictionary) -> void:
 	state[Enums.StKey.super_meter] -= Util.FLIGHT_METER_DRAIN
 	if (state[Enums.StKey.frame] == 1):
 		state[Enums.StKey.velocity_y] = 0
-		state[Enums.StKey.velocity_x] = SGFixed.ONE*32
+		state[Enums.StKey.velocity_x] = SGFixed.ONE*40
 	elif (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.hitStopFrame] = 0
 		SyncManager.play_sound("airdash", Global.AirdashSound, {"bus": "Sound"})

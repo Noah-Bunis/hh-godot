@@ -10,6 +10,3 @@ func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int
 		change_state.call("Destroy")
 	elif (event_cause == Enums.Reaction.PointBlockHurt):
 		change_state.call("Destroy")
-	else:
-		super.reaction(state, interpreter, event_cause)
-	

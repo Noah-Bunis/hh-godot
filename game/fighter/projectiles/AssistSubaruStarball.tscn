@@ -1,22 +1,23 @@
-[gd_scene load_steps=26 format=3 uid="uid://dlslnn2dd886a"]
+[gd_scene load_steps=27 format=3 uid="uid://dlslnn2dd886a"]
 
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="1_saqvy"]
 [ext_resource type="Script" uid="uid://b7fhdj087awib" path="res://game/fighter/projectiles/SubaruStarBallProjectilePlayer.gd" id="2_1icdc"]
-[ext_resource type="Texture2D" uid="uid://cum5sq4kfqjkq" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0004.png" id="3_k3n5m"]
-[ext_resource type="Texture2D" uid="uid://bndjufohjelm4" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0000.png" id="4_pufqo"]
-[ext_resource type="Texture2D" uid="uid://dp77h0xq2abio" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0001.png" id="5_dbj55"]
-[ext_resource type="Texture2D" uid="uid://oytar8fdp22b" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0002.png" id="6_ibhhy"]
-[ext_resource type="Texture2D" uid="uid://crovt4brt3sjd" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0003.png" id="7_uhx73"]
-[ext_resource type="Texture2D" uid="uid://be56h67pr7nsp" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0005.png" id="8_8qldh"]
-[ext_resource type="Texture2D" uid="uid://dsxnlgf5s6528" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0006.png" id="9_toxda"]
-[ext_resource type="Texture2D" uid="uid://dx24bf7lq5pqf" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0007.png" id="10_i0ve0"]
-[ext_resource type="Texture2D" uid="uid://b5s8fnmoy3xo1" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0008.png" id="11_bggoj"]
-[ext_resource type="Texture2D" uid="uid://dqsjauvsg8hj1" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0009.png" id="12_l7ipu"]
-[ext_resource type="Texture2D" uid="uid://usbb47owea0w" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0010.png" id="13_vx61e"]
-[ext_resource type="Texture2D" uid="uid://b3bgowmlq4xjb" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0011.png" id="14_y1box"]
-[ext_resource type="Texture2D" uid="uid://dirmyxdf3crui" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0012.png" id="15_7fego"]
-[ext_resource type="Texture2D" uid="uid://kfmph2dmyw6n" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0013.png" id="16_0ogyx"]
-[ext_resource type="Texture2D" uid="uid://b2fgwbvw3jq5m" path="res://game/assets/sprites/VFX/Airdash/Timeline 1_0000.png" id="17_m5gkr"]
+[ext_resource type="Texture2D" uid="uid://ctjmk70bayi5o" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0004.png" id="3_k3n5m"]
+[ext_resource type="Texture2D" uid="uid://41ncsbbw7htf" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0000.png" id="4_pufqo"]
+[ext_resource type="Texture2D" uid="uid://chtjtg26ywble" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0001.png" id="5_dbj55"]
+[ext_resource type="Texture2D" uid="uid://cifuuc45u85iu" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0002.png" id="6_ibhhy"]
+[ext_resource type="Texture2D" uid="uid://dp5tgtq1ahdur" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0003.png" id="7_uhx73"]
+[ext_resource type="Texture2D" uid="uid://bibukc4eo0mrv" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0005.png" id="8_8qldh"]
+[ext_resource type="Texture2D" uid="uid://dy5bj7f5ynifq" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0006.png" id="9_toxda"]
+[ext_resource type="Texture2D" uid="uid://dwke08l2fvh42" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0007.png" id="10_i0ve0"]
+[ext_resource type="Texture2D" uid="uid://b1o400e8thxwq" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0008.png" id="11_bggoj"]
+[ext_resource type="Texture2D" uid="uid://bn0eqecjn08dy" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0009.png" id="12_l7ipu"]
+[ext_resource type="Texture2D" uid="uid://ddj023t7b5tva" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0010.png" id="13_vx61e"]
+[ext_resource type="Texture2D" uid="uid://yl72iktf0ugs" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0011.png" id="14_y1box"]
+[ext_resource type="Texture2D" uid="uid://do514cwmukr0j" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0012.png" id="15_7fego"]
+[ext_resource type="Texture2D" uid="uid://bcocl6w1ju6tf" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0013.png" id="16_0ogyx"]
+[ext_resource type="Texture2D" uid="uid://dq4i2i3hlfowx" path="res://game/assets/sprites/VFX/Airdash/Timeline 1_0000.png" id="17_m5gkr"]
+[ext_resource type="Texture2D" uid="uid://c3h40i4mamblw" path="res://game/assets/sprites/Empty_0000.png" id="18_1icdc"]
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="18_intu1"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="19_0v7ar"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="20_dtl6t"]
@@ -58,7 +59,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("17_m5gkr")]
+"values": [ExtResource("18_1icdc")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_u42dm"]
@@ -75,7 +76,7 @@ script = ExtResource("2_1icdc")
 material = ExtResource("1_saqvy")
 position = Vector2(80, -49)
 scale = Vector2(1.8395245, 1.8395245)
-texture = ExtResource("4_pufqo")
+texture = ExtResource("17_m5gkr")
 
 [node name="Pushbox" type="SGCollisionShape2D" parent="."]
 shape = SubResource("1")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://3vfd2rw72r42"]
+[gd_scene load_steps=16 format=3 uid="uid://3vfd2rw72r42"]
 
 [ext_resource type="Script" uid="uid://ydl22yb0cm65" path="res://game/menus/mainmenu/BackgroundFadeLoop.gd" id="1"]
 [ext_resource type="Script" uid="uid://cyya0oolm3yee" path="res://game/menus/mainmenu/LPSpin.gd" id="2"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="2_neuap"]
 [ext_resource type="Script" uid="uid://dxrxikk02w2n7" path="res://game/menus/onlinemenu/OnlineModes.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://b35en5rbily3g" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0000.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://c60y2t8lut7is" path="res://game/assets/sprites/UI/MainMenus/AruDJ/Timeline 1_0002.png" id="5"]
@@ -70,6 +71,7 @@ offset_top = 204.0
 offset_right = 1122.0
 offset_bottom = 350.0
 scale = Vector2(2.5301, 2.93276)
+theme = ExtResource("2_neuap")
 
 [node name="HostLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2

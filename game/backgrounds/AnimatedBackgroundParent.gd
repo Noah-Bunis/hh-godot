@@ -5,12 +5,15 @@ var nodes:Array
 
 func _ready():
 	for name in animatedBackgroundNames:
-		nodes.append(get_node(name))
+		# nodes.append(get_node(name))
+		get_node(name).play("Normal")
 
 func freeze():
-	for node in nodes:
-		node.get_node("AnimationPlayer").playback_speed = 0
+	pass
+	#for node in nodes:
+		#node.get_node("AnimationPlayer").playback_speed = 0
 
 func unfreeze():
-	for node in nodes:
-		node.get_node("AnimationPlayer").playback_speed = 1
+	pass
+	#for node in nodes:
+		#node.get_node("AnimationPlayer").playback_speed = 1

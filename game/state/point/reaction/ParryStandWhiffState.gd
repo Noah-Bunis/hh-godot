@@ -25,6 +25,7 @@ func _init():
 # Writing _delta instead of delta here prevents the unused variable warning.
 func enter(state: Dictionary) -> void:
 	super.enter(state)
+	state[Enums.StKey.hitstun] = 0
 	anim.play("StandParry")
 
 # Writing _delta instead of delta here prevents the unused variable warning.

@@ -2,8 +2,11 @@ extends FlayonAirAttackState
 
 class_name FlayonFlightNoFuelState
 
+var knockdownsound = preload("res://game/assets/sfx/HitLvl1.wav")
+var voice = preload("res://game/assets/voice/flayon/mxf_Augh.wav")
+
 func _init():
-	endFrame = 20
+	endFrame = 40
 	
 	anim_data = {
 		0 : {
@@ -18,10 +21,19 @@ func _init():
 
 func enter(state: Dictionary) -> void:
 	super.enter(state)
-	anim.play("JumpFall")
+	anim.play("FlightNoFuel")
 	state[Enums.StKey.drag_x] = Util.FRICTION
-	state[Enums.StKey.velocity_y] = -SGFixed.ONE*20
+	state[Enums.StKey.velocity_y] = -SGFixed.ONE*25
 	state[Enums.StKey.velocity_x] = 0
+	state[Enums.StKey.kara_OK] = false # No instant air kara
+
+func physics_tick(state: Dictionary) -> void:
+	super.physics_tick(state)
+	if (state[Enums.StKey.frame] == 2 || state[Enums.StKey.frame] == 8 || state[Enums.StKey.frame] == 12):
+		SyncManager.play_sound("knockdown", knockdownsound, {"bus": "Sound"})
+	elif (state[Enums.StKey.frame] == 20):
+		SyncManager.play_sound("FlayonVoice", voice, {"bus": "Voice"})
+
 
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass

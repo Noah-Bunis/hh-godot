@@ -38,6 +38,7 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	state[Enums.StKey.accel_y] = 0
 	state[Enums.StKey.velocity_y] = 0
+	state[Enums.StKey.hitstun] = 0
 	state[Enums.StKey.drag_x] = 85536
 	state[Enums.StKey.hitStopFrame] = 0
 	anim.play("AirAssist")

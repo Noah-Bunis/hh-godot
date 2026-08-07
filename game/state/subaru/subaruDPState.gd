@@ -62,6 +62,7 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	state[Enums.StKey.super_meter] += SGFixed.ONE*200
 	state[Enums.StKey.velocity_y] = 0
+	state[Enums.StKey.kara_OK] = false # No instant air kara
 	anim.play("DP")
 
 func physics_tick(state: Dictionary) -> void:

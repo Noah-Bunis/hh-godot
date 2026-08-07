@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://c3j5kabhudlvl"]
+
+[ext_resource type="Script" uid="uid://bctt8a7boky8m" path="res://game/menus/stagemusicselect/ComboTrialStageMusicSelect.gd" id="1_l4ss6"]
+[ext_resource type="Texture2D" uid="uid://cn8lnxibcnyyv" path="res://game/assets/sprites/UI/CharacterSelect/Cursors/BigP1/Timeline 1_0000.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dwck8tt07iqoq" path="res://game/assets/sprites/UI/CharacterSelect/Cursors/BigP2/Timeline 1_0000.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bgp4xe8ks0d5h" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/OKAttack.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cwmygg7ym3m2l" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/ControllerPick.png" id="6"]
+[ext_resource type="Material" uid="uid://cffvtcw31hg4s" path="res://game/assets/shaders/EarthBoundV2.tres" id="7"]
+[ext_resource type="Texture2D" uid="uid://d6yvh3hsyvo1" path="res://game/assets/sprites/UI/MainMenus/TrainingScreen.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://b6grw6t0eoo8e" path="res://game/assets/sprites/UI/IntroShutters.png" id="9"]
+
+[node name="ComboTrialStageMusicSelect" type="Node2D"]
+script = ExtResource("1_l4ss6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="StageLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -535.0
+offset_top = 479.0
+offset_right = -64.0
+offset_bottom = 609.0
+grow_horizontal = 2
+scale = Vector2(2.53437, 2.89349)
+text = "STAGE: "
+
+[node name="BGMLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 46.0
+offset_right = -69.0
+offset_bottom = 176.0
+grow_horizontal = 2
+scale = Vector2(2.61624, 3.11828)
+text = "BGM: "
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.2)
+material = ExtResource("7")
+position = Vector2(960, 540)
+texture = ExtResource("8")
+
+[node name="Background2" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.513726)
+position = Vector2(960, 540)
+texture = ExtResource("9")
+
+[node name="ChooseSide" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(937, 1035)
+scale = Vector2(1.767, 1.767)
+texture = ExtResource("6")
+
+[node name="A OK" type="Sprite2D" parent="."]
+position = Vector2(1365, 1035)
+scale = Vector2(1.37597, 1.37597)
+texture = ExtResource("5")
+
+[node name="P1Side" type="Sprite2D" parent="."]
+position = Vector2(359, 124)
+texture = ExtResource("3")
+
+[node name="P2Side" type="Sprite2D" parent="."]
+position = Vector2(1438, 124)
+texture = ExtResource("4")

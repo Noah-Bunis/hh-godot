@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://bqourwt6u6d5m" path="res://game/menus/training/FastSlider.gd" id="2"]
 [ext_resource type="Script" uid="uid://7pwdp6l0cxh8" path="res://game/menus/onlinemenu/PrivateRoom.gd" id="3"]
-[ext_resource type="FontFile" uid="uid://d28sv0htum78d" path="res://game/assets/monogram_extended.ttf" id="6"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="3_xqwvp"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="6"]
 [ext_resource type="Material" uid="uid://bofoucuf31088" path="res://game/assets/shaders/EarthBoundV1.tres" id="8"]
-[ext_resource type="Texture2D" uid="uid://biq18vleavg8w" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://doomqcq3aygwy" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("6")])
@@ -25,22 +26,13 @@ cache/0/30/0/underline_position = 0.0
 cache/0/30/0/underline_thickness = 0.0
 cache/0/30/0/scale = 1.0
 
-[sub_resource type="FontFile" id="3"]
-fallbacks = Array[Font]([ExtResource("6")])
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
 [node name="PrivateRoom" type="Node2D"]
 script = ExtResource("3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MessageLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -940.0
@@ -52,7 +44,7 @@ theme_override_font_sizes/font_size = 20
 
 [node name="DebugLabel" type="Label" parent="CanvasLayer"]
 visible = false
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -928.0
@@ -65,7 +57,7 @@ theme_override_font_sizes/font_size = 20
 text = "(Nothing)"
 
 [node name="SpectatorLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -946.0
@@ -79,7 +71,7 @@ text = "(Nothing)"
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 visible = false
 modulate = Color(1, 0.117647, 0.117647, 1)
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -439.0
@@ -93,7 +85,7 @@ theme_override_font_sizes/font_size = 30
 text = "(Nothing)"
 
 [node name="NameLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -932.0
@@ -105,7 +97,7 @@ theme_override_font_sizes/font_size = 20
 text = "(Nothing)"
 
 [node name="SessionIDLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -932.0
@@ -117,7 +109,7 @@ scale = Vector2(1.24678, 1.18851)
 theme_override_font_sizes/font_size = 20
 
 [node name="BattleVersionLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 203.0
@@ -129,7 +121,7 @@ theme_override_font_sizes/font_size = 20
 text = "Battle Version: "
 
 [node name="RoomIDLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 167.0
@@ -142,6 +134,7 @@ theme_override_font_sizes/font_size = 16
 text = "RoomID: "
 
 [node name="RoomIDField" type="LineEdit" parent="CanvasLayer"]
+anchors_preset = -1
 offset_left = 1224.0
 offset_top = 20.0
 offset_right = 1588.0
@@ -155,11 +148,13 @@ editable = false
 secret = true
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = -1
 offset_left = 282.0
 offset_top = 74.0
 offset_right = 982.0
 offset_bottom = 474.0
 scale = Vector2(2, 2)
+theme = ExtResource("3_xqwvp")
 columns = 3
 
 [node name="CopyRoomID" type="Button" parent="CanvasLayer/GridContainer"]
@@ -178,9 +173,6 @@ text = "Hide/UnHide RoomId"
 
 [node name="InputDelayLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("3")
 text = "Input Delay: 2"
 
 [node name="Empty4" type="Label" parent="CanvasLayer/GridContainer"]
@@ -202,6 +194,7 @@ script = ExtResource("2")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(800, 400)
+anchors_preset = -1
 offset_left = 265.0
 offset_top = 230.0
 offset_right = 265.0

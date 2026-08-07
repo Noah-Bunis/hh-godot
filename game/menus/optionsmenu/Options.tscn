@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch13gsq5uhakb"]
+[gd_scene load_steps=9 format=3 uid="uid://ch13gsq5uhakb"]
 
 [ext_resource type="Script" uid="uid://egfe8jder5nv" path="res://game/menus/optionsmenu/Options.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://d28sv0htum78d" path="res://game/assets/monogram_extended.ttf" id="2"]
-[ext_resource type="Texture2D" uid="uid://by45ex2wcjuue" path="res://game/assets/sprites/UI/MainMenus/MainScreen.png" id="3"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="2"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="2_xm26x"]
+[ext_resource type="Texture2D" uid="uid://qn5j62sxeijo" path="res://game/assets/sprites/UI/MainMenus/MainScreen.png" id="3"]
 [ext_resource type="Material" uid="uid://cffvtcw31hg4s" path="res://game/assets/shaders/EarthBoundV2.tres" id="4"]
 [ext_resource type="Script" uid="uid://cljcn86ml7wo6" path="res://game/menus/training/MeterNumber.gd" id="6"]
 [ext_resource type="Script" uid="uid://bqourwt6u6d5m" path="res://game/menus/training/FastSlider.gd" id="7"]
@@ -28,6 +29,7 @@ offset_top = 90.0
 offset_right = 727.0
 offset_bottom = 428.0
 scale = Vector2(2.74607, 2.44857)
+theme = ExtResource("2_xm26x")
 columns = 3
 
 [node name="VersionLabel" type="Label" parent="CanvasLayer/Options"]
@@ -99,7 +101,6 @@ horizontal_alignment = 2
 
 [node name="MainVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
 layout_mode = 2
-min_value = 50.0
 value = 90.0
 tick_count = 6
 ticks_on_borders = true
@@ -123,7 +124,6 @@ horizontal_alignment = 2
 
 [node name="MusicVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
 layout_mode = 2
-min_value = 50.0
 value = 90.0
 tick_count = 6
 ticks_on_borders = true
@@ -147,7 +147,6 @@ horizontal_alignment = 2
 
 [node name="SoundVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
 layout_mode = 2
-min_value = 50.0
 value = 90.0
 tick_count = 6
 ticks_on_borders = true
@@ -171,7 +170,6 @@ horizontal_alignment = 2
 
 [node name="VoiceVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
 layout_mode = 2
-min_value = 50.0
 value = 90.0
 tick_count = 6
 ticks_on_borders = true
@@ -223,30 +221,13 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
 text = "WOW"
 
-[node name="ResetLabel" type="Label" parent="CanvasLayer/Options"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("1")
-text = "Reset to default"
-horizontal_alignment = 2
-
-[node name="ResetButton" type="Button" parent="CanvasLayer/Options"]
-layout_mode = 2
-text = "Reset"
-
-[node name="ResetEmpty" type="Label" parent="CanvasLayer/Options"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("1")
-
 [node name="GetLogDirLabel" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Get Logs DirAccess Path"
+text = "Get Logs Path"
+horizontal_alignment = 2
 
 [node name="GetLogDirButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
@@ -273,6 +254,24 @@ text = "Clear Controls"
 
 [node name="ClearControlsEmpty" type="Label" parent="CanvasLayer/Options"]
 custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("1")
+
+[node name="ResetLabel" type="Label" parent="CanvasLayer/Options"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("1")
+text = "Reset to default"
+horizontal_alignment = 2
+
+[node name="ResetButton" type="Button" parent="CanvasLayer/Options"]
+layout_mode = 2
+text = "Reset"
+
+[node name="ResetEmpty" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -320,7 +319,7 @@ texture = ExtResource("3")
 [connection signal="value_changed" from="CanvasLayer/Options/VoiceVolumeMeter" to="CanvasLayer/Options/VoiceVolumeNumber" method="_on_SuperMeter_value_changed"]
 [connection signal="pressed" from="CanvasLayer/Options/ReplayLogsButton" to="." method="_on_ReplayLogsButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/DebugRollbackLogsButton" to="." method="_on_DebugRollbackLogsButton_pressed"]
-[connection signal="pressed" from="CanvasLayer/Options/ResetButton" to="." method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/GetLogDirButton" to="." method="_on_GetLogsDirButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/ClearControlsButton" to="." method="_on_ClearControlsButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/ResetButton" to="." method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/GoBackButton" to="." method="_on_GoBackButton_pressed"]

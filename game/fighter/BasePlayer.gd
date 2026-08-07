@@ -178,7 +178,7 @@ func _load_state(state: Dictionary) -> void:
 	currentState[Enums.StKey.super_meter] = state.get(Enums.StKey.super_meter, 0)
 	currentState[Enums.StKey.opponent_pos_x] = state.get(Enums.StKey.opponent_pos_x, 0)
 	currentState[Enums.StKey.distance_to_opponent] = state.get(Enums.StKey.distance_to_opponent, 0)
-	currentState[Enums.StKey.hit_cooldown] = state.get(Enums.StKey.hit_cooldown, {})
+	currentState[Enums.StKey.hit_cooldown] = state.get(Enums.StKey.hit_cooldown, {}).duplicate()
 	fighterState.update_rollback_state(currentState) # TODO: probably don't need this anymore
 	fighterState.rollback_state_transition(currentState.get(Enums.StKey.stateName, "Neutral"))
 	sync_to_physics_engine()

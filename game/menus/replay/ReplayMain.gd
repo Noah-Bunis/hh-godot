@@ -32,6 +32,7 @@ func _init() -> void:
 	replay_logging_enabled = false
 	game_mode_root = "/root/ReplayMain/FighterGame"
 	Global.HITBOX_DISPLAY = true
+	Global.TRAINING_HITBOX_ON = false
 	is_waiting = true
 	setup_complete = false
 
@@ -181,10 +182,9 @@ func start_replay_sync():
 	SyncManager.input_delay = 2
 	SyncManager.start()
 	if (fighter_game.get_node("Camera3D/BattleUI/WinScreenManager") != null):
-		if (fighter_game.get_node("Camera3D/BattleUI/ServerRoundCounter") != null):
-			fighter_game.get_node("Camera3D/BattleUI/ServerRoundCounter").disconnect("win", Callable(fighter_game.get_node("Camera3D/BattleUI/WinScreenManager"), "start_win_process"))
-		if (fighter_game.get_node("Camera3D/BattleUI/ClientRoundCounter") != null):
-			fighter_game.get_node("Camera3D/BattleUI/ClientRoundCounter").disconnect("win", Callable(fighter_game.get_node("Camera3D/BattleUI/WinScreenManager"), "start_win_process"))
+		if (fighter_game.get_node("Camera3D/BattleUI/RoundTracker") != null):
+			fighter_game.get_node("Camera3D/BattleUI/RoundTracker").disconnect("win", Callable(fighter_game.get_node("Camera3D/BattleUI/WinScreenManager"), "start_win_process"))
+		
 
 func get_next_rewind_tick(tick):
 	var last_state_tick: int = int(tick / state_tick_gap)

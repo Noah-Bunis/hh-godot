@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://dj5lb2al0fkku"]
+
+[ext_resource type="Script" uid="uid://c25mvpv8bv0vr" path="res://game/menus/combo_trial/ComboTrialCharacterSelect.gd" id="1_7gm1j"]
+[ext_resource type="PackedScene" uid="uid://cvwapffbx4nk5" path="res://game/menus/characterselect/character_select_presentation_layer.tscn" id="2_fsr0o"]
+[ext_resource type="PackedScene" uid="uid://h0bhajfnumoy" path="res://game/menus/characterselect/assist_character_icons.tscn" id="5_dsoce"]
+[ext_resource type="PackedScene" uid="uid://delgirqnq1vas" path="res://game/menus/characterselect/character_icons_node.tscn" id="6_2hk1s"]
+[ext_resource type="Shader" uid="uid://dinoskkj75qym" path="res://game/assets/shaders/ColorSwapAntiAlias.gdshader" id="53_0bet7"]
+[ext_resource type="Texture2D" uid="uid://7j6rx4336gr2" path="res://game/assets/sprites/assists/hakka/ColorPalettes/2.png" id="54_pky06"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2baf"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjwoc"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ertxd"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vubeb"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[node name="ComboTrialCharacterSelectMenu" type="Node2D"]
+script = ExtResource("1_7gm1j")
+
+[node name="PresentationLayer" parent="." instance=ExtResource("2_fsr0o")]
+
+[node name="P2Cursor" parent="PresentationLayer" index="10"]
+is_p1 = true
+gridX = 8
+start_col = 3
+
+[node name="P1Cursor" parent="PresentationLayer" index="11"]
+position = Vector2(960, 392)
+gridX = 8
+start_col = 3
+
+[node name="P1Portrait" parent="PresentationLayer" index="12"]
+z_index = 99
+material = SubResource("ShaderMaterial_b2baf")
+
+[node name="P2Portrait" parent="PresentationLayer" index="13"]
+z_index = 99
+material = SubResource("ShaderMaterial_jjwoc")
+
+[node name="A1Portrait" parent="PresentationLayer" index="14"]
+visible = false
+material = SubResource("ShaderMaterial_ertxd")
+
+[node name="A2Portrait" parent="PresentationLayer" index="15"]
+visible = false
+material = SubResource("ShaderMaterial_vubeb")
+
+[node name="AssistCharacterIcons" parent="." instance=ExtResource("5_dsoce")]
+z_index = 300
+position = Vector2(965, 303)
+scale = Vector2(-1, 1)
+
+[node name="AssistPointCharacterIconsNode" parent="." instance=ExtResource("6_2hk1s")]
+modulate = Color(0.7323408, 0.7655551, 1, 1)
+position = Vector2(1188, 144)
+script = null
+
+[node name="WOOD" parent="AssistPointCharacterIconsNode" index="0"]
+visible = false
+
+[node name="8" parent="AssistPointCharacterIconsNode" index="8"]
+visible = false
+
+[editable path="PresentationLayer"]
+[editable path="PresentationLayer/CharacterIconsNode"]
+[editable path="AssistPointCharacterIconsNode"]

@@ -10,9 +10,9 @@ const SubaruBatterSetBall = preload("res://game/fighter/projectiles/SubaruBatter
 func tick() -> void:
 	super.tick()
 
-func summonHelper(entity: String) -> void:
-	super.summonHelper(entity)
-	if (not entity.is_empty()):
+func summonHelper(entity: String, uninterrupted:bool=true) -> void:
+	super.summonHelper(entity, uninterrupted)
+	if (not entity.is_empty() and uninterrupted):
 		var leftface_mult = 1
 		if (currentState[Enums.StKey.leftface]):
 			leftface_mult = -1
@@ -21,9 +21,8 @@ func summonHelper(entity: String) -> void:
 			MainMenuMusicControl.stop_music()
 		elif (entity == "angelInstallMusic"):
 			var is_comeback = false
-			if (is_instance_valid(round_counter) and round_counter != null and 
-					is_instance_valid(opponent_round_counter) and opponent_round_counter != null):
-				if (round_counter.read_rounds_won() < opponent_round_counter.read_rounds_won()):
+			if (is_instance_valid(round_counter) and round_counter != null):
+				if (round_counter.read_rounds_won(not self.team) < round_counter.read_rounds_won(self.team)):
 					is_comeback = true
 			MainMenuMusicControl.play_angel_install_music(is_comeback)
 			start_glowing()

@@ -90,8 +90,8 @@ func physics_tick(state: Dictionary) -> void:
 		SyncManager.play_sound("SuicopathVoice", CallSound, {"bus": "Voice"})
 		SyncManager.play_sound("SuicopathVoiceReverb", CallSound, {"bus": "ReverbVoice"})
 	elif (state[Enums.StKey.frame] == 14):
-		SyncManager.play_sound("SuicopathFX", Knockdownsound, {"bus": "Voice"})
-		SyncManager.play_sound("SuicopathFXReverb", Knockdownsound, {"bus": "ReverbVoice"})
+		SyncManager.play_sound("knockdown", Knockdownsound, {"bus": "Voice"})
+		SyncManager.play_sound("knockdownReverb", Knockdownsound, {"bus": "ReverbVoice"})
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

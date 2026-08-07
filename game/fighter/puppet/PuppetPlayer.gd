@@ -79,13 +79,14 @@ func summonVFX(VFXname: String, VFX) -> void:
 		leftface = currentState[Enums.StKey.leftface],
 	})
 
-func summonHelper(entity: String) -> void:
-	if (not entity.is_empty()):
-		if (entity == "superFlash"):
-			emit_signal("super_freeze", get_global_fixed_position().x, get_global_fixed_position().y, currentState[Enums.StKey.leftface])
-			SyncManager.play_sound("superflash", Global.SuperFlashSound, {"bus": "Sound"})
-		elif (entity == "meterDump"):
-			emit_signal("battery_player", -Util.LEVEL_ONE_SUPER, 0, 0)
+func summonHelper(entity: String, uninterrupted:bool=true) -> void:
+	if (not entity.is_empty() and uninterrupted):
+		if (not entity.is_empty()):
+			if (entity == "superFlash"):
+				emit_signal("super_freeze", get_global_fixed_position().x, get_global_fixed_position().y, currentState[Enums.StKey.leftface])
+				SyncManager.play_sound("superflash", Global.SuperFlashSound, {"bus": "Sound"})
+			elif (entity == "meterDump"):
+				emit_signal("battery_player", -Util.LEVEL_ONE_SUPER, 0, 0)
 
 func summon(x : int, y : int, left_face : bool) -> void:
 #	currentState[Enums.StKey.leftface] = left_face

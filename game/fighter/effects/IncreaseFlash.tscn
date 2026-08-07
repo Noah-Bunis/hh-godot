@@ -1,0 +1,56 @@
+[gd_scene load_steps=13 format=3 uid="uid://sy5q5fr71twp"]
+
+[ext_resource type="Script" uid="uid://bhp1nkcfug72s" path="res://game/fighter/effects/VFX.gd" id="1_7bwm1"]
+[ext_resource type="Texture2D" uid="uid://c1dns0ec574xl" path="res://game/assets/sprites/VFX/ParryWhiff/Timeline 1_0000.png" id="2_1uttt"]
+[ext_resource type="Texture2D" uid="uid://b47b0cxc6gebl" path="res://game/assets/sprites/VFX/ParryWhiff/Timeline 1_0001.png" id="3_1eo2w"]
+[ext_resource type="Texture2D" uid="uid://xa8u76sdcmua" path="res://game/assets/sprites/VFX/ParryWhiff/Timeline 1_0002.png" id="4_qq7e6"]
+[ext_resource type="Texture2D" uid="uid://b7u1tcmnew365" path="res://game/assets/sprites/VFX/ParryWhiff/Timeline 1_0003.png" id="5_fwglm"]
+[ext_resource type="Texture2D" uid="uid://diwa4vxlxak8i" path="res://game/assets/sprites/VFX/ParryWhiff/Timeline 1_0004.png" id="6_2sak1"]
+[ext_resource type="Texture2D" uid="uid://5q7teg0w5pcc" path="res://game/assets/sprites/VFX/ParryWhiff/Timeline 1_0005.png" id="7_jaea2"]
+[ext_resource type="Texture2D" uid="uid://dcyr1aljnr6kk" path="res://game/assets/sprites/VFX/ParryWhiff/Timeline 1_0006.png" id="8_bmfkr"]
+[ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="9_oce5v"]
+[ext_resource type="Script" uid="uid://b010dt6v25trf" path="res://addons/godot-rollback-netcode/NetworkTimer.gd" id="10_0dbll"]
+
+[sub_resource type="Animation" id="1"]
+resource_name = "Hit"
+length = 0.350001
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.034, 0.068, 0.1, 0.133333, 0.166667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_1uttt"), ExtResource("3_1eo2w"), ExtResource("4_qq7e6"), ExtResource("5_fwglm"), ExtResource("6_2sak1"), ExtResource("7_jaea2"), ExtResource("8_bmfkr")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hmgo0"]
+_data = {
+&"Hit": SubResource("1")
+}
+
+[node name="IncreaseFlash" type="Node2D"]
+z_index = 15
+script = ExtResource("1_7bwm1")
+
+[node name="NetworkAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hmgo0")
+}
+script = ExtResource("9_oce5v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.661776, 3.570912, 5.1329317, 1)
+position = Vector2(0, -353)
+scale = Vector2(3, 3)
+texture = ExtResource("8_bmfkr")
+
+[node name="NetworkTimer" type="Node" parent="."]
+script = ExtResource("10_0dbll")
+wait_ticks = 14
+
+[connection signal="timeout" from="NetworkTimer" to="." method="_on_NetworkTimer_timeout"]

@@ -27,6 +27,10 @@ var current_combo_position: int = 0
 var current_step_progress: int = 0
 var showing_complete_message: bool = false
 
+var success_bg_color: String = "#0aaa80"
+var pending_bg_color: String = "#eedd22"
+var pending_text_color: String = "#555555"
+
 @onready var combo_list_label: RichTextLabel = $ComboTrialList
 var button_icon_size: int = 20
 
@@ -38,17 +42,30 @@ func _ready() -> void:
 	load_combo(0)
 
 func load_combo(index: int) -> void:
-	current_combo_index = index
+	var trials_size = 0
+	var combo_database = ComboDatabase.COMBOS
+	var character_index = Global.PLAYER_2_CHARACTER[0]
 	if Global.TRAINING_P1:
-		if index >= ComboDatabase.COMBOS[Global.PLAYER_1_CHARACTER[0]].size():
-			print("All combo trials complete!")
-			return
-		combo_trial = ComboDatabase.COMBOS[Global.PLAYER_1_CHARACTER[0]][index].duplicate()
-	else:
-		if index >= ComboDatabase.COMBOS[Global.PLAYER_2_CHARACTER[0]].size():
-			print("All combo trials complete!")
-			return
-		combo_trial = ComboDatabase.COMBOS[Global.PLAYER_2_CHARACTER[0]][index].duplicate()
+		character_index = Global.PLAYER_1_CHARACTER[0]
+	if Global.ASSIST_COMBO_TRIAL:
+		combo_database = ComboDatabase.ASSIST_COMBOS
+		character_index = Global.PLAYER_2_CHARACTER[1]
+		if Global.TRAINING_P1:
+			character_index = Global.PLAYER_1_CHARACTER[1]
+	
+	
+	trials_size = combo_database[character_index].size()
+
+	if (index < 0):
+		index = trials_size - 1
+	elif (index >= trials_size):
+		index = 0
+
+	current_combo_index = index
+	if index == trials_size:
+		print("All combo trials complete!")
+		return
+	combo_trial = combo_database[character_index][index].duplicate()
 
 	current_combo_position = 0
 	current_step_progress = 0
@@ -100,7 +117,7 @@ func refresh_combo_ui() -> void:
 	_skip_dummy_steps()
 
 	var lines: Array[String] = []
-	lines.append("[color=yellow]Inputs are performed while facing right[/color]")
+	lines.append("[color=white]Inputs are performed while facing right[/color]")
 
 	for idx in range(processed_combo.size()):
 		var item = processed_combo[idx]
@@ -120,9 +137,9 @@ func refresh_combo_ui() -> void:
 		elif idx < current_combo_position:
 			if item["count"] > 1:
 				var progress_text = "%d/%d" % [item["count"], item["count"]]
-				lines.append("[bgcolor=green]" + display + " (" + progress_text + ") [/bgcolor]")
+				lines.append("[bgcolor="+success_bg_color+"]" + display + " (" + progress_text + ") [/bgcolor]")
 			else:
-				lines.append("[bgcolor=green]" + display + "[/bgcolor]")
+				lines.append("[bgcolor="+success_bg_color+"]" + display + "[/bgcolor]")
 
 		elif idx == current_combo_position:
 			if item["count"] > 1:
@@ -131,9 +148,9 @@ func refresh_combo_ui() -> void:
 					item["count"]
 				]
 
-				lines.append("[color=gray][bgcolor=yellow] " + display + " (" + progress_text + ")[/bgcolor][/color]")
+				lines.append("[color="+pending_text_color+"][bgcolor="+pending_bg_color+"] " + display + " (" + progress_text + ")[/bgcolor][/color]")
 			else:
-				lines.append("[color=gray][bgcolor=yellow] " + display + "[/bgcolor][/color]")
+				lines.append("[color="+pending_text_color+"][bgcolor="+pending_bg_color+"] " + display + "[/bgcolor][/color]")
 
 		else:
 			if item["count"] > 1:
@@ -246,3 +263,9 @@ func drop_combo() -> void:
 		current_step_progress = 0
 
 	refresh_combo_ui()
+
+func prev_trial() -> void:
+	load_combo(current_combo_index - 1)
+
+func next_trial() -> void:
+	load_combo(current_combo_index + 1)

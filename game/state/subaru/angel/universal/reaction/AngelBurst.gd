@@ -71,6 +71,7 @@ func enter(state: Dictionary) -> void:
 	state[Enums.StKey.doubleJump] = 0
 	state[Enums.StKey.airDash] = 0
 	state[Enums.StKey.velocity_y] = 0
+	state[Enums.StKey.hitstun] = 0
 	anim.stop(true)
 	anim.play("AngelBurst")
 	SyncManager.play_sound("burst", BurstSound, {"bus": "Sound"})

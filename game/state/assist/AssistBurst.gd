@@ -52,6 +52,7 @@ func enter(state: Dictionary) -> void:
 	state[Enums.StKey.leftfaceOK] = true
 	state[Enums.StKey.hitStopFrame] = 0 # whiff cancel OK
 	state[Enums.StKey.velocity_y] = 0
+	state[Enums.StKey.hitstun] = 0
 	anim.stop(true)
 	anim.play("Burst")
 

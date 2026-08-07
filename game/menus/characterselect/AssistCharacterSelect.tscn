@@ -1,12 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2hu87c1rcfbf"]
+[gd_scene load_steps=4 format=3 uid="uid://b2hu87c1rcfbf"]
 
 [ext_resource type="PackedScene" uid="uid://y8pd0pebt7ce" path="res://game/menus/characterselect/CharacterCursor.tscn" id="1"]
-[ext_resource type="Texture2D" uid="uid://df4xd4vjlbvnt" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SoraButton.png" id="2"]
 [ext_resource type="Script" uid="uid://c5ymi2wtqw2cw" path="res://game/menus/characterselect/AssistCharacterSelect.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://ccy783cf4t7n7" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/FubukiButton.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://byljh45m7svln" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OkaKoroButton.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://krt3luelykkh" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SanaButton.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://2i0bcjhbuw58" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/HakkaButton.png" id="7"]
+[ext_resource type="PackedScene" uid="uid://h0bhajfnumoy" path="res://game/menus/characterselect/assist_character_icons.tscn" id="3_ts2qh"]
 
 [node name="AssistCharacterSelect" type="Node2D"]
 z_index = 500
@@ -19,79 +15,4 @@ gridX = 5
 start_col = 1
 start_row = 1
 
-[node name="AssistCharacterIcons" type="Node2D" parent="."]
-
-[node name="TextureRect" type="TextureRect" parent="AssistCharacterIcons"]
-visible = false
-anchors_preset = -1
-offset_left = 220.0
-offset_top = -167.0
-offset_right = 363.0
-offset_bottom = 5.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("4")
-
-[node name="TextureRect5" type="TextureRect" parent="AssistCharacterIcons"]
-anchors_preset = -1
-offset_left = 372.0
-offset_top = -167.0
-offset_right = 515.0
-offset_bottom = 5.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("7")
-
-[node name="TextureRect2" type="TextureRect" parent="AssistCharacterIcons"]
-anchors_preset = -1
-offset_left = 220.0
-offset_top = 15.0
-offset_right = 363.0
-offset_bottom = 187.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("4")
-
-[node name="TextureRect6" type="TextureRect" parent="AssistCharacterIcons"]
-anchors_preset = -1
-offset_left = 374.0
-offset_top = 15.0
-offset_right = 517.0
-offset_bottom = 187.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("5")
-
-[node name="TextureRect3" type="TextureRect" parent="AssistCharacterIcons"]
-anchors_preset = -1
-offset_left = 220.0
-offset_top = 198.0
-offset_right = 363.0
-offset_bottom = 370.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("2")
-
-[node name="TextureRect4" type="TextureRect" parent="AssistCharacterIcons"]
-visible = false
-anchors_preset = -1
-offset_left = 220.0
-offset_top = 381.0
-offset_right = 363.0
-offset_bottom = 553.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("2")
-
-[node name="TextureRect7" type="TextureRect" parent="AssistCharacterIcons"]
-anchors_preset = -1
-offset_left = 375.0
-offset_top = 198.0
-offset_right = 518.0
-offset_bottom = 370.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("6")
-
-[node name="TextureRect8" type="TextureRect" parent="AssistCharacterIcons"]
-visible = false
-anchors_preset = -1
-offset_left = 375.0
-offset_top = 381.0
-offset_right = 518.0
-offset_bottom = 553.0
-pivot_offset = Vector2(130, 140)
-texture = ExtResource("6")
+[node name="AssistCharacterIcons" parent="." instance=ExtResource("3_ts2qh")]
