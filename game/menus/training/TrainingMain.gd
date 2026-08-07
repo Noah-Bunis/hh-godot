@@ -407,12 +407,9 @@ func get_demo_file_path() -> String:
 		if Global.TRAINING_P1:
 			character_enum = Global.PLAYER_1_CHARACTER[0]
 	var file_name = recording_machine.get_combo_trial_file_name(combo_index, character_enum, is_assist_combo)
-	var user_candidate = "user://combotrialdemos/%s" % file_name
-	if FileAccess.file_exists(user_candidate):
-		return user_candidate
+	print("looking for " + file_name)
 	var packaged_candidate = "res://game/ui/combotrialdemos/%s" % file_name
-	if ResourceLoader.exists(packaged_candidate):
-		return packaged_candidate
+	return packaged_candidate
 	return "user://training_recording.dat"
 
 func play_demo():
@@ -425,6 +422,7 @@ func play_demo():
 		if (self is ComboTrialMain):
 			prepare_for_demo_playback()
 		$CanvasLayer/MessageLabel.text = "Playing demo"
+		print(demo_file_path)
 		start_replay()
 	else:
 		$CanvasLayer/MessageLabel.text = "No recording found"

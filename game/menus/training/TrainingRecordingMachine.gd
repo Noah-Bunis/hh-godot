@@ -39,12 +39,15 @@ func save_recording():
 		recordings[self.section][i] = temp_recording[i]
 	recordings_size[self.section] = self.index
 	save_recording_to_file("user://training_recording.dat")
-
 	self.index = 0
 
 func save_recording_to_combo_trial(combo_index: int, character_enum: int, is_assist_combo: bool = false):
+	for i in range(0, self.index):
+		recordings[self.section][i] = temp_recording[i]
+	recordings_size[self.section] = self.index
 	var file_path = get_combo_trial_file_path(combo_index, character_enum, is_assist_combo)
 	save_recording_to_file(file_path)
+	self.index = 0
 
 func get_combo_trial_file_name(combo_index: int, character_enum: int, is_assist_combo: bool = false) -> String:
 	var prefix = "assist" if is_assist_combo else "point"
@@ -53,7 +56,7 @@ func get_combo_trial_file_name(combo_index: int, character_enum: int, is_assist_
 
 func get_combo_trial_file_path(combo_index: int, character_enum: int, is_assist_combo: bool = false) -> String:
 	var file_name = get_combo_trial_file_name(combo_index, character_enum, is_assist_combo)
-	return "user://combotrialdemos/%s" % file_name
+	return "res://game/ui/combotrialdemos/%s" % file_name
 
 func get_character_enum_name(character_enum: int, is_assist_combo: bool = false) -> String:
 	var enum_keys: Array = []
