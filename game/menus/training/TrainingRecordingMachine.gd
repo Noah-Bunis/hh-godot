@@ -8,7 +8,7 @@ var section: int = 0
 var index:int = 0
 
 const size = 5
-const max_recording_size = 600
+const max_recording_size = 3600
 
 func _init():
 	recordings.resize(size)
