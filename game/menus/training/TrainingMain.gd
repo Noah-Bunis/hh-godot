@@ -394,8 +394,32 @@ func start_pre_record():
 func prepare_for_demo_playback() -> void:
 	pass
 
+func get_demo_file_path() -> String:
+	var combo_index = $CanvasLayer/ComboTrialListener.current_combo_index
+	var character_enum = Global.PLAYER_2_CHARACTER[0]
+	var is_assist_combo = false
+	if Global.ASSIST_COMBO_TRIAL:
+		is_assist_combo = true
+		character_enum = Global.PLAYER_2_CHARACTER[1]
+		if Global.TRAINING_P1:
+			character_enum = Global.PLAYER_1_CHARACTER[1]
+	else:
+		if Global.TRAINING_P1:
+			character_enum = Global.PLAYER_1_CHARACTER[0]
+	var file_name = recording_machine.get_combo_trial_file_name(combo_index, character_enum, is_assist_combo)
+	var user_candidate = "user://combotrialdemos/%s" % file_name
+	if FileAccess.file_exists(user_candidate):
+		return user_candidate
+	var packaged_candidate = "res://game/ui/combotrialdemos/%s" % file_name
+	if ResourceLoader.exists(packaged_candidate):
+		return packaged_candidate
+	return "user://training_recording.dat"
+
 func play_demo():
-	if recording_machine.load_recording_from_file("user://training_recording.dat"):
+	var demo_file_path = "user://training_recording.dat"
+	if (self is ComboTrialMain):
+		demo_file_path = get_demo_file_path()
+	if recording_machine.load_recording_from_file(demo_file_path):
 		recording_machine.switch_section(recording_machine.section)
 		recording_machine.index = 0
 		if (self is ComboTrialMain):
@@ -415,7 +439,20 @@ func save_record():
 	recording_state = RecordingStates.Idle
 	$CanvasLayer/MessageLabel.text = "Saved recording"
 	is_recording = false
-	recording_machine.save_recording()
+	if (self is ComboTrialMain):
+		var character_enum = Global.PLAYER_2_CHARACTER[0]
+		var is_assist_combo = false
+		if Global.ASSIST_COMBO_TRIAL:
+			is_assist_combo = true
+			character_enum = Global.PLAYER_2_CHARACTER[1]
+			if Global.TRAINING_P1:
+				character_enum = Global.PLAYER_1_CHARACTER[1]
+		else:
+			if Global.TRAINING_P1:
+				character_enum = Global.PLAYER_1_CHARACTER[0]
+		recording_machine.save_recording_to_combo_trial($CanvasLayer/ComboTrialListener.current_combo_index, character_enum, is_assist_combo)
+	else:
+		recording_machine.save_recording()
 	return_control_to_player()
 
 func stop_record():
@@ -471,7 +508,8 @@ func input_helper(event):
 			loadstate()
 	elif (Global.TRAINING_P1 and Input.is_action_just_pressed("player1_record")) or (not Global.TRAINING_P1 and Input.is_action_just_pressed("player2_record")):
 		if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):
-			recording_fsm_record_input()
+			#if not (self is ComboTrialMain): #WARN DEBUG FUNCTION FOR RECORDING COMBO TRIALS ENABLE ME BEFORE BUILDING
+				recording_fsm_record_input()
 	elif (Global.TRAINING_P1 and Input.is_action_just_pressed("player1_replay")) or (not Global.TRAINING_P1 and Input.is_action_just_pressed("player2_replay")):
 		if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):
 			if (self is ComboTrialMain):
