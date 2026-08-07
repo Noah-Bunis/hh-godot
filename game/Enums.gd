@@ -120,7 +120,7 @@ enum PointCharacters {
 	Suisei,
 	Kanata,
 	Flayon,
-	Kurokami,
+	Eight,
 	Nine,
 	Ten,
 	Eleven,

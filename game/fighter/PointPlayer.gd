@@ -312,9 +312,6 @@ func setup(playerData:PlayerSetup):
 			Enums.PointCharacters.Flayon:
 				state_factory = load("res://game/state/flayon/flayonstatefactory.gd").new()
 				yCameraOffset = 11993088
-			Enums.PointCharacters.Kurokami:
-				state_factory = load("res://game/state/kurokami/kurokamistatefactory.gd").new()
-				yCameraOffset = 11993088
 			_:
 				printerr("invalid point character given")
 		super.state_factory_setup(state_factory)

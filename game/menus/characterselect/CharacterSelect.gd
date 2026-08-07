@@ -26,7 +26,7 @@ var character = [
 	[Enums.PointCharacters.Ollie, Enums.PointCharacters.Suisei, Enums.PointCharacters.Kanata],
 	[Enums.PointCharacters.Mio, Enums.PointCharacters.Subaru, Enums.PointCharacters.Oga],
 	[Enums.PointCharacters.Random, Enums.PointCharacters.Random, Enums.PointCharacters.Random],
-	[Enums.PointCharacters.Flayon, Enums.PointCharacters.Kurokami, Enums.PointCharacters.Random]
+	[Enums.PointCharacters.Flayon, Enums.PointCharacters.Random, Enums.PointCharacters.Random]
 	]
 
 var assist2 = [
@@ -273,8 +273,6 @@ func resolve_characters(row: int, col: int):
 			return ["res://game/fighter/SuiseiPlayer.tscn", Enums.PointCharacters.Suisei]
 		Enums.PointCharacters.Flayon:
 			return ["res://game/fighter/FlayonPlayer.tscn", Enums.PointCharacters.Flayon]
-		Enums.PointCharacters.Kurokami:
-			return ["res://game/fighter/KurokamiPlayer.tscn", Enums.PointCharacters.Kurokami]
 		_:
 			return ["res://game/fighter/SubaruPlayer.tscn", Enums.PointCharacters.Subaru]
 
@@ -404,8 +402,6 @@ func match_color(enumChara:int, is_assist=false) -> String:
 			Enums.PointCharacters.Suisei:
 				color = "res://game/assets/sprites/suisei/ColorPalettes/"
 			Enums.PointCharacters.Flayon:
-				color = "res://game/assets/sprites/subaru/ColorPalettes/"
-			Enums.PointCharacters.Kurokami:
 				color = "res://game/assets/sprites/subaru/ColorPalettes/"
 			_:
 				color = "res://game/assets/sprites/subaru/ColorPalettes/"
