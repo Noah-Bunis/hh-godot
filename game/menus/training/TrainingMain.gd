@@ -229,7 +229,19 @@ func reload_scene():
 func control_the_dummy():
 	if (not dummy_input.player == null):
 		dummy_input.disconnect_signals()
-	if (Global.TRAINING_P1):
+	if (self is ComboTrialMain):
+		player_input = fighter_game.get_node("ServerInputInterpreter")
+		fighter_game.ServerPlayer.input_interpreter = player_input
+		fighter_game.ClientPlayer.input_interpreter = dummy_input
+		fighter_game.AssistPlayer1.input_interpreter = player_input
+		fighter_game.AssistPlayer2.input_interpreter = dummy_input
+		if (fighter_game.Hato1 != null):
+			fighter_game.Hato1.input_interpreter = player_input
+		if (fighter_game.Hato2 != null):
+			fighter_game.Hato2.input_interpreter = dummy_input
+		dummy_input.player = fighter_game.ClientPlayer
+		record_left_face_ref = fighter_game.ServerPlayer.currentState[Enums.StKey.leftface]
+	elif (Global.TRAINING_P1):
 		player_input = fighter_game.get_node("ServerInputInterpreter")
 		fighter_game.ServerPlayer.input_interpreter = dummy_input
 		fighter_game.ClientPlayer.input_interpreter = player_input
@@ -258,7 +270,18 @@ func control_the_dummy():
 func return_control_to_player():
 	if (not dummy_input.player == null):
 		dummy_input.disconnect_signals()
-	if (Global.TRAINING_P1):
+	if (self is ComboTrialMain):
+		player_input = fighter_game.get_node("ServerInputInterpreter")
+		fighter_game.ServerPlayer.input_interpreter = player_input
+		fighter_game.ClientPlayer.input_interpreter = dummy_input
+		fighter_game.AssistPlayer1.input_interpreter = player_input
+		fighter_game.AssistPlayer2.input_interpreter = dummy_input
+		if (fighter_game.Hato1 != null):
+			fighter_game.Hato1.input_interpreter = player_input
+		if (fighter_game.Hato2 != null):
+			fighter_game.Hato2.input_interpreter = dummy_input
+		dummy_input.player = fighter_game.ClientPlayer
+	elif (Global.TRAINING_P1):
 		player_input = fighter_game.get_node("ServerInputInterpreter")
 		fighter_game.ServerPlayer.input_interpreter = player_input
 		fighter_game.ClientPlayer.input_interpreter = dummy_input
