@@ -68,6 +68,11 @@ const DISPLAY_NAMES: Dictionary = {
 	"KanataAirFiftyKGHit": "Right DownRight Down DownLeft Left A air",
 	"KanataFiftyKGHit": "Right DownRight Down DownLeft Left A",
 	
+	"KanataSuperFiftyRekkaA":"Right DownRight Down DownLeft Left C",
+	
+	"KanataWingStanceEnter":"Down DownRight Right A or B or C",
+	"KanataWingStanceC":"   ↪ C",
+	
 	"GrappleFollowUp": "Down DownRight Right A or B (air ok)",
 	"AirGrapple": "Down DownRight Right A or B air",
 	"Grapple": "Down DownRight Right A or B",
