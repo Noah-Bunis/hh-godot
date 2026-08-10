@@ -1,24 +1,8 @@
 extends Node2D
 
-const ICON_PATHS: Dictionary = {
-	"A": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0000.png",
-	"B": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0001.png",
-	"C": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0002.png",
-	"D": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0003.png",
-
-	"Up": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0005.png",
-	"Right": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0007.png",
-	"Down": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0009.png",
-	"Left": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0011.png",
-
-	"UpRight": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0006.png",
-	"DownRight": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0008.png",
-	"UpLeft": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0012.png",
-	"DownLeft": "res://game/assets/sprites/UI/MainMenus/MenuTutorials/Input_0010.png",
-}
-
 var ComboDatabase = load("res://game/ui/ComboTrials.gd")
 var display_names: Dictionary = load("res://game/ui/ComboTrialDisplayNames.gd").DISPLAY_NAMES
+var icon_paths: Dictionary = load("res://game/ui/IconPaths.gd").ICON_PATHS
 var combo_trial: Dictionary = {}
 var current_combo_index = 0
 
@@ -177,7 +161,7 @@ func _format_display_text(text: String) -> String:
 	var parts: Array[String] = []
 
 	for token in tokens:
-		if ICON_PATHS.has(token):
+		if icon_paths.has(token):
 			parts.append(_bbcode_icon(token))
 		else:
 			parts.append(token)
@@ -186,7 +170,7 @@ func _format_display_text(text: String) -> String:
 
 
 func _bbcode_icon(name: String) -> String:
-	var path = ICON_PATHS.get(name, "")
+	var path = icon_paths.get(name, "")
 
 	if path == "":
 		return name
@@ -207,7 +191,7 @@ func _dummy_text(step: String) -> String:
 	var parts: Array[String] = []
 
 	for token in tokens:
-		if ICON_PATHS.has(token):
+		if icon_paths.has(token):
 			parts.append(_bbcode_icon(token))
 		elif display_names.has(token):
 			parts.append(_format_display_text(display_names.get(token, token)))

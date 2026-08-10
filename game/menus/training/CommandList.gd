@@ -5,6 +5,8 @@ signal close_menu()
 var menu_close_delay: int
 var rendering_complete: bool
 var index: int
+var icon_paths: Dictionary = load("res://game/ui/IconPaths.gd").ICON_PATHS
+var button_icon_size: int = 20
 
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
@@ -117,19 +119,30 @@ func load_player_move_list(point, assist, container):
 			printerr("invalid assist character given")
 
 func load_move_list(move_list, container):
-	var newLabel: Label
+	var newLabel: RichTextLabel
 	var newText: String = ""
 	for row in move_list:
 		newText = ""
-		for item in row:
-			newText += str(item) + "   "
-		newLabel = Label.new()
+		for i in row.size():
+			var item_string := str(row[i])
+			for j in item_string.length():
+				var character := item_string[j]
+				if _should_parse_icon(item_string, j):
+					newText += _bbcode_icon(character)
+				else:
+					newText += character
+			newText += "   "
+		newLabel = RichTextLabel.new()
+		newLabel.bbcode_enabled = true
+		newLabel.fit_content = true
 		newLabel.text = newText
 		newLabel.custom_minimum_size.x = 600
 		newLabel.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART 
 		container.add_child(newLabel)
 	newText = " "
-	newLabel = Label.new()
+	newLabel = RichTextLabel.new()
+	newLabel.bbcode_enabled = true
+	newLabel.fit_content = true
 	newLabel.text = newText
 	container.add_child(newLabel)
 
@@ -200,3 +213,39 @@ func input_helper(event: InputEvent):
 		scroll_right()
 	elif Util.is_right_pressed(false):
 		scroll_right()
+
+
+func _bbcode_icon(name: String) -> String:
+	var path = icon_paths.get(name, "")
+	if path == "":
+		return name
+	return "[img width=%d height=%d]%s[/img]"% [button_icon_size, button_icon_size, path]
+
+func _should_parse_icon(text: String, index: int) -> bool:
+	var character := text[index]
+	if not icon_paths.has(character):
+		return false
+
+	if character in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+		if text.length() == 1:
+			return false
+
+		var previous := text[index - 1] if index > 0 else ""
+		var next := text[index + 1] if index < text.length() - 1 else ""
+
+		if next == " " or (next == "" and previous != ""):
+			return false
+
+	if character in ["A", "B", "C", "D", "X"]:
+		if text.length() == 1:
+			return true
+
+		var previous := text[index - 1] if index > 0 else ""
+		var next := text[index + 1] if index < text.length() - 1 else ""
+
+		return (
+			(previous != "" and (previous.is_valid_int() or previous in ["[", "]", "+"]))
+			or
+			(next != "" and (next.is_valid_int() or next in ["[", "]", "+"]))
+		)
+	return true
