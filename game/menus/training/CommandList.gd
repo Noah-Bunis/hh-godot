@@ -127,7 +127,7 @@ func load_move_list(move_list, container):
 			var item_string := str(row[i])
 			for j in item_string.length():
 				var character := item_string[j]
-				if _should_parse_icon(item_string, j):
+				if _should_parse_icon(item_string, j, i):
 					newText += _bbcode_icon(character)
 				else:
 					newText += character
@@ -221,13 +221,15 @@ func _bbcode_icon(name: String) -> String:
 		return name
 	return "[img width=%d height=%d]%s[/img]"% [button_icon_size, button_icon_size, path]
 
-func _should_parse_icon(text: String, index: int) -> bool:
+func _should_parse_icon(text: String, index: int, row: int) -> bool:
 	var character := text[index]
 	if not icon_paths.has(character):
 		return false
 
 	if character in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
 		if text.length() == 1:
+			return false
+		if row != 0:
 			return false
 
 		var previous := text[index - 1] if index > 0 else ""
@@ -244,8 +246,8 @@ func _should_parse_icon(text: String, index: int) -> bool:
 		var next := text[index + 1] if index < text.length() - 1 else ""
 
 		return (
-			(previous != "" and (previous.is_valid_int() or previous in ["[", "]", "+"]))
+			(previous != "" and (previous.is_valid_int() or previous in ["[", "]", "+", ">"]))
 			or
-			(next != "" and (next.is_valid_int() or next in ["[", "]", "+"]))
+			(next != "" and (next.is_valid_int() or next in ["[", "]", "+", ">"]))
 		)
 	return true

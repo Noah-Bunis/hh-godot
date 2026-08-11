@@ -28,7 +28,7 @@ const DISPLAY_NAMES: Dictionary = {
 	"Jump6B": "Right B air", 
 	"Jump6C": "Right C air",
 	"Jump8C": "Up C air",
-	"DuckPunch": "Right Down DownRight B (air ok)", "MioCards":"Right Down DownRight A or B or C (air ok)",
+	"DuckPunch": "Right Down DownRight B (air ok)", "MioCards":"Right Down DownRight X(air ok)",
 	"SubaruStarBall": "Down DownRight Right A (air ok)",
 	"Stinger": "Down DownLeft Left B",
 	"AirStinger": "Down DownLeft Left B air",
@@ -38,7 +38,7 @@ const DISPLAY_NAMES: Dictionary = {
 	"AngelHH9": "Down DownLeft Left C",
 	"AngelHH10": "Down DownRight Right D",
 	
-	"SummonHato": "Down DownRight Right A or B or C",
+	"SummonHato": "Down DownRight Right X",
 	"Hato5A": "Release A",
 	"Hato5B": "Release B",
 	"Hato5C": "Release C (air ok)",
@@ -70,7 +70,7 @@ const DISPLAY_NAMES: Dictionary = {
 	
 	"KanataSuperFiftyRekkaA":"Right DownRight Down DownLeft Left C",
 	
-	"KanataWingStanceEnter":"Down DownRight Right A or B or C",
+	"KanataWingStanceEnter":"Down DownRight Right X",
 	"KanataWingStanceC":"   ↪ C",
 	
 	"GrappleFollowUp": "Down DownRight Right A or B (air ok)",
@@ -79,7 +79,7 @@ const DISPLAY_NAMES: Dictionary = {
 	"Flight5A": "A flight",
 	"Flight5BEarly": "B flight",
 	"Flight5CEarly": "C flight",
-	"FlightEnter": "Down DownLeft Left A or B or C",
+	"FlightEnter": "Down DownLeft Left X",
 
 	"HammerStartup" : "Tap D then Hold Left",
 	"HammerFollowup" : "Release Left Early",
@@ -89,7 +89,7 @@ const DISPLAY_NAMES: Dictionary = {
 	"JumpStartup" : "Tap D then Hold Down",
 	"JumpFollowup" : "Release Down Early",
 	"JumpJustFollowup" : "Release Down Perfect",
-	"AssistAirSuperAttack" : "Release A or B or C",
+	"AssistAirSuperAttack" : "Release X",
 
 	"AssistSubaruStarBall": "D",
 	
