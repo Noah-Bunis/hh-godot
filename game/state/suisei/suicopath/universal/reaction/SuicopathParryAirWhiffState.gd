@@ -30,6 +30,7 @@ func _init():
 func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("AngelAirParry")
+	state[Enums.StKey.hitstun] = 0
 	state[Enums.StKey.accel_y] = 0
 	state[Enums.StKey.velocity_y] = 0
 	state[Enums.StKey.velocity_x] = 0

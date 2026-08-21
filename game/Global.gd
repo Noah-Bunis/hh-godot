@@ -1,6 +1,6 @@
 extends Node
 
-const BATTLE_ENGINE_VERSION = "HHv0.8.0010"
+const BATTLE_ENGINE_VERSION = "HHv0.8.0012"
 
 func get_battle_version() -> String:
 	if (len(Build.INTERNAL_BATTLE_ENGINE_KEY) < 50):
@@ -98,8 +98,6 @@ func load_new_color(is_p1, is_assist):
 			color_slot = PLAYER_2_COLOR[0]
 			instance = PLAYER_2_COLOR_INSTANCE[0]
 			
-	#if (instance != null and is_instance_valid(instance)):
-		#instance.queue_free() # Refcounted auto garbage collects
 	instance = load(color_slot)
 	
 	if (is_p1):
@@ -145,6 +143,7 @@ const BGM_LIST = [
 	'Yume Hanabi',
 	'Homenobi',
 	'Palette',
+	'Beginning',
 	'Heroine Audition',
 	'WIM',
 	'This MU is (2-8) At Best',
@@ -168,6 +167,7 @@ const BGM_UID_LIST = [
 	'uid://dbiyw2ycctnsw', #'Yume Hanabi',
 	'uid://baxokql4qdh6x', #'Homenobi',
 	'uid://cco7o17v7g0oh', #'Palette',
+	'uid://bdadh04yuigie', #'Beginning',
 	'uid://bta8h85cknuxa', #'Heroine Audition',
 	'uid://dpprd47eukupb', #'WIM',
 	'uid://63an0yld6m2s', #'This MU is (2-8) At Best',

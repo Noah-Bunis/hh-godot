@@ -1,4 +1,4 @@
-[gd_scene load_steps=216 format=3 uid="uid://cbwy2j4nbkk2j"]
+[gd_scene load_steps=223 format=3 uid="uid://cbwy2j4nbkk2j"]
 
 [ext_resource type="Script" uid="uid://dgsx3duqjaeo5" path="res://game/fighter/PointPlayer.gd" id="1_m4qvm"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="2_xm7kd"]
@@ -50,6 +50,7 @@
 [ext_resource type="Texture2D" uid="uid://bu8ufwlv8wp2h" path="res://game/assets/sprites/flayon/AirDash/Timeline 1_0002.png" id="61_ta16v"]
 [ext_resource type="Texture2D" uid="uid://bxpowiqwqay7i" path="res://game/assets/sprites/flayon/AirDash/Timeline 1_0000.png" id="62_kpeac"]
 [ext_resource type="Texture2D" uid="uid://u1rynvv2jbro" path="res://game/assets/sprites/flayon/AirDash/Timeline 1_0001.png" id="63_f32ml"]
+[ext_resource type="Texture2D" uid="uid://dgqa30mse0lke" path="res://game/assets/sprites/flayon/Burst/Timeline 1_0002.png" id="64_i4l5q"]
 [ext_resource type="Texture2D" uid="uid://ddslrqsj1skn7" path="res://game/assets/sprites/flayon/Walk/Timeline 1_0002.png" id="64_m4qvm"]
 [ext_resource type="Texture2D" uid="uid://6oexsrfbjd0c" path="res://game/assets/sprites/flayon/Walk/Timeline 1_0001.png" id="65_xm7kd"]
 [ext_resource type="Texture2D" uid="uid://d25indahdv1tp" path="res://game/assets/sprites/flayon/Walk/Timeline 1_0000.png" id="66_ujttm"]
@@ -83,10 +84,16 @@
 [ext_resource type="Texture2D" uid="uid://blbri08jcqx8k" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0000.png" id="107_8hpu6"]
 [ext_resource type="Texture2D" uid="uid://dbvr5y4if1fdi" path="res://game/assets/sprites/flayon/Jump/Timeline 1_0002.png" id="107_rgqmm"]
 [ext_resource type="Texture2D" uid="uid://bqpyoldx8w30y" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0001.png" id="108_4p678"]
+[ext_resource type="Texture2D" uid="uid://c3h40i4mamblw" path="res://game/assets/sprites/Empty_0000.png" id="109_5mqlr"]
+[ext_resource type="Texture2D" uid="uid://kf52g55kt6lk" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0000.png" id="109_23vwi"]
 [ext_resource type="Texture2D" uid="uid://bxl1bm3tewtyl" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0002.png" id="109_wkc6h"]
 [ext_resource type="Texture2D" uid="uid://bad4me2l0t4iw" path="res://game/assets/sprites/flayon/Skid/Timeline 1_0000.png" id="110_4p678"]
+[ext_resource type="Texture2D" uid="uid://drk2i34eq7vy2" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0004.png" id="110_5mqlr"]
 [ext_resource type="Texture2D" uid="uid://clc5laoa1chbr" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0003.png" id="110_d6y3q"]
 [ext_resource type="Texture2D" uid="uid://cvvtyqowd7j74" path="res://game/assets/sprites/flayon/StandParry/Timeline 1_0000.png" id="110_ukakn"]
+[ext_resource type="Texture2D" uid="uid://dyxy775maouow" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0001.png" id="111_5murs"]
+[ext_resource type="Texture2D" uid="uid://umpnxo1l4xu4" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0002.png" id="112_i4l5q"]
+[ext_resource type="Texture2D" uid="uid://dnmy5jjl854wj" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0003.png" id="113_en3gp"]
 [ext_resource type="Texture2D" uid="uid://cncs4p75jsuhy" path="res://game/assets/sprites/flayon/RTrus/Timeline 1_0000.png" id="122_2b0jr"]
 [ext_resource type="Texture2D" uid="uid://qcgw14mhvy7f" path="res://game/assets/sprites/flayon/Flight/Timeline 1_0000.png" id="122_8hpu6"]
 [ext_resource type="Texture2D" uid="uid://buvpxkha6v2ry" path="res://game/assets/sprites/flayon/Flight/Timeline 1_0001.png" id="123_4p678"]
@@ -634,7 +641,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(0, 100)]
+"values": [Vector2(-20, 100)]
 }
 
 [sub_resource type="Animation" id="16"]
@@ -766,10 +773,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.28333333, 0.7833333, 0.8333333, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.28333333, 0.33333334, 0.38333333, 0.43333334, 0.5, 0.5833334, 0.6666667, 0.7833333, 0.8333333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("57_mrj0t"), ExtResource("58_t00t0"), ExtResource("106_m4qvm"), ExtResource("88_0rw8g"), ExtResource("107_rgqmm")]
+"values": [ExtResource("57_mrj0t"), ExtResource("58_t00t0"), ExtResource("64_i4l5q"), ExtResource("58_t00t0"), ExtResource("64_i4l5q"), ExtResource("58_t00t0"), ExtResource("64_i4l5q"), ExtResource("58_t00t0"), ExtResource("106_m4qvm"), ExtResource("88_0rw8g"), ExtResource("107_rgqmm")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1275,7 +1282,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(10, 100)]
+"values": [Vector2(20, 100)]
 }
 
 [sub_resource type="Animation" id="Animation_6wc6i"]
@@ -1289,7 +1296,7 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.2),
+"times": PackedFloat32Array(0, 0.13333334, 0.23333333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("161_4r26g"), ExtResource("162_7c5e4"), ExtResource("163_o4gjw")]
@@ -1304,7 +1311,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(10, 100)]
+"values": [Vector2(20, 100)]
 }
 
 [sub_resource type="Animation" id="Animation_23vwi"]
@@ -1333,7 +1340,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(10, 100)]
+"values": [Vector2(20, 100)]
 }
 
 [sub_resource type="Animation" id="Animation_s1gn8"]
@@ -1376,10 +1383,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.049999997, 0.15),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("73_f32ml"), ExtResource("122_8hpu6"), ExtResource("123_4p678")]
+"values": [ExtResource("151_ujttm")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1391,7 +1398,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(-80, 110)]
+"values": [Vector2(-60, 110)]
 }
 
 [sub_resource type="Animation" id="Animation_qfokg"]
@@ -1728,10 +1735,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.38888887, 0.46666664, 0.52222216, 0.5666666, 0.67777777),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("73_f32ml")]
+"values": [ExtResource("109_5mqlr"), ExtResource("109_23vwi"), ExtResource("111_5murs"), ExtResource("112_i4l5q"), ExtResource("113_en3gp"), ExtResource("110_5mqlr")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1743,7 +1750,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(-100, 160)]
+"values": [Vector2(-30, 130)]
 }
 
 [sub_resource type="Animation" id="11"]
@@ -2294,7 +2301,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(0, 100)]
+"values": [Vector2(-20, 100)]
 }
 
 [sub_resource type="Animation" id="12"]
@@ -2474,12 +2481,12 @@ position = Vector2(40.118195, -194.70605)
 scale = Vector2(15.663086, 12.974396)
 
 [node name="Hitbox2" parent="." instance=ExtResource("151_0ymqg")]
-fixed_position_x = -14435712
-fixed_position_y = -8136510
-fixed_scale_x = 220696
-fixed_scale_y = 910074
-position = Vector2(-220.27148, -124.15329)
-scale = Vector2(3.3675537, 13.886627)
+fixed_position_x = 22435712
+fixed_position_y = -15136510
+fixed_scale_x = 1220696
+fixed_scale_y = 410074
+position = Vector2(342.3418, -230.96481)
+scale = Vector2(18.626343, 6.2572327)
 
 [node name="Hurtbox1" parent="." instance=ExtResource("152_d42n6")]
 fixed_position_y = -10087936

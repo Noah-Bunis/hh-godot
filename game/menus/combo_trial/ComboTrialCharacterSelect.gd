@@ -6,7 +6,7 @@ var all_characters = [
 	[Enums.AllCharacters.Hakka, Enums.AllCharacters.Fubuki, Enums.AllCharacters.Ollie, Enums.AllCharacters.Suisei, Enums.AllCharacters.Kanata, Enums.AllCharacters.AssistOllie, Enums.AllCharacters.AssistSuisei, Enums.AllCharacters.AssistKanata,],
 	[Enums.AllCharacters.OkaKoro, Enums.AllCharacters.Fubuki, Enums.AllCharacters.Mio, Enums.AllCharacters.Subaru, Enums.AllCharacters.Oga, Enums.AllCharacters.AssistMio, Enums.AllCharacters.AssistSubaru, Enums.AllCharacters.AssistOga],
 	[Enums.AllCharacters.Sana, Enums.AllCharacters.Sora, Enums.AllCharacters.Random, Enums.AllCharacters.Random, Enums.AllCharacters.Random, Enums.AllCharacters.Random, Enums.AllCharacters.Random, Enums.AllCharacters.Random],
-	[Enums.AllCharacters.Fubuki, Enums.AllCharacters.Fubuki, Enums.AllCharacters.Flayon, Enums.AllCharacters.Random, Enums.PointCharacters.Random, Enums.AllCharacters.Flayon, Enums.AllCharacters.Random, Enums.AllCharacters.Random]
+	[Enums.AllCharacters.Fubuki, Enums.AllCharacters.Fubuki, Enums.AllCharacters.Flayon, Enums.AllCharacters.Random, Enums.AllCharacters.Random, Enums.AllCharacters.Random, Enums.AllCharacters.Random, Enums.AllCharacters.Random]
 	]
 
 func _ready():

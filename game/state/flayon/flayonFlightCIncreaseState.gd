@@ -30,9 +30,9 @@ func _init():
 			Enums.StKey.hit_box_colliding_frame : 254, 
 			Enums.StKey.Hit1PosX : 14629186, Enums.StKey.Hit1PosY : -18760254,
 			Enums.StKey.Hit1ScaleX : 1626496, Enums.StKey.Hit1ScaleY : 850290,
-			Enums.StKey.Hit2PosX : 12155775, Enums.StKey.Hit2PosY : -17468801,
-			Enums.StKey.Hit2ScaleX : 997940, Enums.StKey.Hit2ScaleY : 947094,
-			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : true,
+			Enums.StKey.Hit2PosX : 22435712, Enums.StKey.Hit2PosY : -15136510,
+			Enums.StKey.Hit2ScaleX : 1220696, Enums.StKey.Hit2ScaleY : 410074,
+			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.Hurt1PosX : -262144, Enums.StKey.Hurt1PosY : -13471104,
 			Enums.StKey.Hurt1ScaleX : 822078, Enums.StKey.Hurt1ScaleY : 1236954,
 			Enums.StKey.Hurt2PosX : 12976128, Enums.StKey.Hurt2PosY : -20774912,
@@ -51,7 +51,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*55,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*65,
 			},
-		11 : {
+		14 : {
 			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
@@ -64,6 +64,7 @@ func _init():
 func enter(state: Dictionary) -> void:
 	super.enter(state)
 	state[Enums.StKey.kara_OK] = false
+	state[Enums.StKey.drag_x] = Util.ICE_FRICTION
 	anim.play("FlightCIncrease")
 
 func physics_tick(state: Dictionary) -> void:
@@ -71,6 +72,10 @@ func physics_tick(state: Dictionary) -> void:
 	state[Enums.StKey.super_meter] -= Util.FLIGHT_ATTACK_METER_DRAIN
 	if (state[Enums.StKey.frame] == 4):
 		SyncManager.play_sound("airtech", Global.AirTechSound, {"bus": "Sound"})
+	elif (state[Enums.StKey.frame] == 6):
+		state[Enums.StKey.velocity_y] = 0
+		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*30, state[Enums.StKey.velocity_x])
+	
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
