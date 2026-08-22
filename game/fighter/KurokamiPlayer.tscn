@@ -1,4 +1,4 @@
-[gd_scene load_steps=211 format=3 uid="uid://c1rd33xsv2ply"]
+[gd_scene load_steps=218 format=3 uid="uid://c1rd33xsv2ply"]
 
 [ext_resource type="Script" uid="uid://dgsx3duqjaeo5" path="res://game/fighter/PointPlayer.gd" id="1_cnkmf"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="2_ahu1b"]
@@ -141,6 +141,11 @@
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="128_ctypp"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="129_pxbka"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="130_i8k0d"]
+[ext_resource type="Texture2D" uid="uid://172kbsdjoevw" path="res://game/assets/sprites/kurokami/Tetsuzanko/Timeline 1_0000.png" id="139_8qfo6"]
+[ext_resource type="Texture2D" uid="uid://bxa177r2epb3l" path="res://game/assets/sprites/kurokami/Tetsuzanko/Timeline 1_0001.png" id="140_7qefs"]
+[ext_resource type="Texture2D" uid="uid://bsuxwqyqfppwo" path="res://game/assets/sprites/kurokami/Tetsuzanko/Timeline 1_0002.png" id="141_iiywk"]
+[ext_resource type="Texture2D" uid="uid://oytolkrt2dg2" path="res://game/assets/sprites/kurokami/Tetsuzanko/Timeline 1_0003.png" id="142_ffcfl"]
+[ext_resource type="Texture2D" uid="uid://c5fa8jo45584d" path="res://game/assets/sprites/kurokami/Tetsuzanko/Timeline 1_0004.png" id="143_hjlae"]
 
 [sub_resource type="SGRectangleShape2D" id="1"]
 extents_x = 2063232
@@ -302,7 +307,7 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.13333334, 0.18333334),
+"times": PackedFloat32Array(0, 0.13333334, 0.21666667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("23_pprro"), ExtResource("24_0d52k"), ExtResource("25_qplap")]
@@ -2098,6 +2103,63 @@ tracks/1/keys = {
 "values": [Vector2(0, 100)]
 }
 
+[sub_resource type="Animation" id="Animation_k6tb7"]
+resource_name = "Tetsuzanko"
+length = 0.8166684
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("139_8qfo6"), ExtResource("140_7qefs"), ExtResource("141_iiywk"), ExtResource("142_ffcfl"), ExtResource("143_hjlae")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-30, 110)]
+}
+
+[sub_resource type="Animation" id="Animation_8qfo6"]
+length = 0.4500017
+step = 0.016666668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-30, 110)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.1, 0.13333334, 0.23333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("139_8qfo6"), ExtResource("140_7qefs"), ExtResource("141_iiywk"), ExtResource("142_ffcfl"), ExtResource("143_hjlae")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wc0pe"]
 _data = {
 &"2A": SubResource("44"),
@@ -2151,6 +2213,7 @@ _data = {
 &"KO": SubResource("35"),
 &"Knockdown": SubResource("27"),
 &"LandingRecovery": SubResource("73"),
+&"LightTetsuzanko": SubResource("Animation_8qfo6"),
 &"PreJump": SubResource("10"),
 &"RESET": SubResource("Animation_janba"),
 &"RTrus": SubResource("Animation_dyl2j"),
@@ -2160,6 +2223,7 @@ _data = {
 &"StandHighHit": SubResource("3"),
 &"StandParry": SubResource("51"),
 &"StandParryCatch": SubResource("69"),
+&"Tetsuzanko": SubResource("Animation_k6tb7"),
 &"ThrowHurt": SubResource("8"),
 &"Wakeup": SubResource("28"),
 &"j3C": SubResource("25"),
@@ -2200,12 +2264,12 @@ script = ExtResource("128_ctypp")
 auto_reset = false
 
 [node name="Hitbox1" parent="." instance=ExtResource("129_pxbka")]
-fixed_position_x = 6767169
-fixed_position_y = -33619964
-fixed_scale_x = 1019159
-fixed_scale_y = -339693
-position = Vector2(103.258804, -512.99994)
-scale = Vector2(15.551132, -5.183304)
+fixed_position_x = 8598114
+fixed_position_y = -23068672
+fixed_scale_x = 895742
+fixed_scale_y = 475488
+position = Vector2(131.19681, -352)
+scale = Vector2(13.667938, 7.255371)
 
 [node name="Hitbox2" parent="." instance=ExtResource("129_pxbka")]
 fixed_position_x = 11010048
@@ -2216,25 +2280,25 @@ position = Vector2(168, -288.706)
 scale = Vector2(13.795029, 28.429092)
 
 [node name="Hurtbox1" parent="." instance=ExtResource("130_i8k0d")]
-fixed_position_x = -327680
-fixed_position_y = -27787266
-fixed_scale_x = 334968
-fixed_scale_y = 357786
-position = Vector2(-5, -424.00003)
-scale = Vector2(5.111206, 5.459381)
+fixed_position_x = 7367040
+fixed_position_y = -20185090
+fixed_scale_x = 850886
+fixed_scale_y = 903770
+position = Vector2(112.41211, -308.00003)
+scale = Vector2(12.98349, 13.790436)
 
 [node name="Hurtbox2" parent="." instance=ExtResource("130_i8k0d")]
-fixed_position_x = -979648
-fixed_position_y = -11908288
-fixed_scale_x = 646568
-fixed_scale_y = -1254072
-position = Vector2(-14.948242, -181.70605)
-scale = Vector2(9.865845, -19.13562)
+fixed_position_x = 983040
+fixed_position_y = -22413310
+fixed_scale_x = 430035
+fixed_scale_y = -705015
+position = Vector2(15, -341.99997)
+scale = Vector2(6.5618134, -10.757675)
 
 [node name="Hurtbox3" parent="." instance=ExtResource("130_i8k0d")]
-fixed_position_x = 8767169
-fixed_position_y = -12000000
-fixed_scale_x = 400000
-fixed_scale_y = -1245535
-position = Vector2(133.77638, -183.10547)
-scale = Vector2(6.1035156, -19.005356)
+fixed_position_x = 5898240
+fixed_position_y = -11010049
+fixed_scale_x = 561893
+fixed_scale_y = -1088870
+position = Vector2(90, -168.00002)
+scale = Vector2(8.573807, -16.614838)

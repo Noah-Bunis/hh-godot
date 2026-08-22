@@ -19,13 +19,11 @@ func _init():
 		8 : {
 			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : false,
-			Enums.StKey.Hit2Disable : false,
-			Enums.StKey.Hit1PosX : 11796481, Enums.StKey.Hit1PosY : -15925248,
-			Enums.StKey.Hit1ScaleX : 1260160, Enums.StKey.Hit1ScaleY : 252545,
-			Enums.StKey.Hit2PosX : 17498114, Enums.StKey.Hit2PosY : -23068672,
-			Enums.StKey.Hit2ScaleX : 995742, Enums.StKey.Hit2ScaleY : 475488,
+			Enums.StKey.Hit2Disable : true,
+			Enums.StKey.Hit1PosX : 8598114, Enums.StKey.Hit1PosY : -23068672,
+			Enums.StKey.Hit1ScaleX : 995742, Enums.StKey.Hit1ScaleY : 475488,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
-			Enums.StKey.Hurt1PosX : 17367040, Enums.StKey.Hurt1PosY : -20185090,
+			Enums.StKey.Hurt1PosX : 7367040, Enums.StKey.Hurt1PosY : -20185090,
 			Enums.StKey.Hurt1ScaleX : 850886, Enums.StKey.Hurt1ScaleY : 903770,
 			Enums.StKey.Hurt2PosX : 983040, Enums.StKey.Hurt2PosY : -22413310,
 			Enums.StKey.Hurt2ScaleX : 430035, Enums.StKey.Hurt2ScaleY : -705015,
@@ -34,8 +32,8 @@ func _init():
 			Enums.StKey.hit_box_colliding_frame : 254,
 			Enums.StKey.attack_damage: 40,
 			Enums.StKey.hitstop: 8,
-			Enums.StKey.hitstun: Util.DEFAULT_LIGHT_HITSTUN,
-			Enums.StKey.blockstun: Util.DEFAULT_LIGHT_BLOCKSTUN,
+			Enums.StKey.hitstun: Util.DEFAULT_HITSTUN,
+			Enums.StKey.blockstun: Util.DEFAULT_BLOCKSTUN,
 			Enums.StKey.attack_type : Enums.AttackType.Strike,
 			Enums.StKey.counter_hit: Enums.AttackType.Strike,
 			Enums.StKey.counter_launch_dir_x: Util.BASE_SHORT_STRIKE_X_PUSHBACK,
@@ -45,10 +43,12 @@ func _init():
 			Enums.StKey.launch_dir_x: Util.BASE_STRIKE_X_PUSHBACK,
 			Enums.StKey.launch_dir_y: Util.BASE_AIR_Y_PUSHBACK,
 			},
-		11 : { 
+		13 : { 
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
-			Enums.StKey.Hurt1Disable : true,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
+			Enums.StKey.Hurt1PosX : 7367040, Enums.StKey.Hurt1PosY : -20185090,
+			Enums.StKey.Hurt1ScaleX : 850886, Enums.StKey.Hurt1ScaleY : 903770,
+			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
 			Enums.StKey.Hurt2PosX : 983040, Enums.StKey.Hurt2PosY : -22413310,
 			Enums.StKey.Hurt2ScaleX : 430035, Enums.StKey.Hurt2ScaleY : -705015,
 			Enums.StKey.Hurt3PosX : 5898240, Enums.StKey.Hurt3PosY : -11010049,
@@ -64,7 +64,7 @@ func enter(state: Dictionary) -> void:
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 3):
-		state[Enums.StKey.velocity_x] = Util.fixed_max(state[Enums.StKey.velocity_x], SGFixed.ONE*18)
+		state[Enums.StKey.velocity_x] = Util.fixed_max(state[Enums.StKey.velocity_x], SGFixed.ONE*22)
 		
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

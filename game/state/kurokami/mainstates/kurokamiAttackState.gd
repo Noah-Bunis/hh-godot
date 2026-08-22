@@ -29,9 +29,9 @@ func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
 		if (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-			state[Enums.StKey.cancelState] = "RyukenShiki"
+			state[Enums.StKey.cancelState] = "Tetsuzanko"
 		elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
-			state[Enums.StKey.cancelState] = "RyukenShiki"
+			state[Enums.StKey.cancelState] = "LightTetsuzanko"
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

@@ -66,7 +66,8 @@ func _init():
 		"AirAssistCall2": preload("res://game/state/kurokami/kurokamiAirAssistCall2.gd"),
 		"AirAssistCallSuper": preload("res://game/state/kurokami/kurokamiAirAssistCallSuper.gd"),
 
-		"RyukenShiki": preload("res://game/state/kurokami/kurokamiLightDPState.gd"),
+		"Tetsuzanko": preload("res://game/state/kurokami/kurokamiTetsuzankoState.gd"),
+		"LightTetsuzanko": preload("res://game/state/kurokami/kurokamiLightTetsuzankoState.gd"),
 		
 		"LandingRecovery": preload("res://game/state/kurokami/kurokamiLandingRecovery.gd"),
 		
@@ -100,9 +101,9 @@ func common_idle_transitions(state: Dictionary, interpreter: InputInterpreter) -
 	elif (interpreter.is_holding_a_direction(Enums.Numpad.N5, state[Enums.StKey.leftface]) and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "StandParryWhiff"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-		return "RyukenShiki"
+		return "Tetsuzanko"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
-		return "RyukenShiki"
+		return "LightTetsuzanko"
 	elif (interpreter.is_stick_dashing(true, state[Enums.StKey.leftface]) and state[Enums.StKey.stateName] != "Run"):
 		return "Run"
 	elif (interpreter.is_button_dashing(true, state[Enums.StKey.leftface])):
@@ -184,10 +185,6 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 			interpreter.is_holding_a_direction(Enums.Numpad.N8, state[Enums.StKey.leftface])) 
 			and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "AirParryWhiff"
-	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-		return "RyukenShiki"
-	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
-		return "RyukenShiki"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(true, state[Enums.StKey.leftface])):
 		return "ForwardAirDash"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(false, state[Enums.StKey.leftface])):
