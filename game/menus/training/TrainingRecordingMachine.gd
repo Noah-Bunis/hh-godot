@@ -64,4 +64,3 @@ func string_recording_frame():
 
 func string_replaying_frame():
 	return "Replaying " + ": " + str(self.index)  + "/" + str(recordings_size[self.section])
-

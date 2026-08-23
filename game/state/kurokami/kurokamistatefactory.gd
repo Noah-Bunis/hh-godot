@@ -68,6 +68,8 @@ func _init():
 
 		"Tetsuzanko": preload("res://game/state/kurokami/kurokamiTetsuzankoState.gd"),
 		"LightTetsuzanko": preload("res://game/state/kurokami/kurokamiLightTetsuzankoState.gd"),
+
+		"DashPunch": preload("res://game/state/kurokami/kurokamiDashPunchState.gd"),
 		
 		"LandingRecovery": preload("res://game/state/kurokami/kurokamiLandingRecovery.gd"),
 		
@@ -104,6 +106,10 @@ func common_idle_transitions(state: Dictionary, interpreter: InputInterpreter) -
 		return "Tetsuzanko"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
 		return "LightTetsuzanko"
+	elif (interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
+		return "DashPunch"
+	elif (interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+		return "DashPunch"
 	elif (interpreter.is_stick_dashing(true, state[Enums.StKey.leftface]) and state[Enums.StKey.stateName] != "Run"):
 		return "Run"
 	elif (interpreter.is_button_dashing(true, state[Enums.StKey.leftface])):

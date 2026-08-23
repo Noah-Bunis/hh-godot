@@ -87,3 +87,7 @@ func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 			state[Enums.StKey.cancelState] = "Stand5C"
 		elif (interpreter.is_button_down(Enums.InputFlags.BDown)):
 			state[Enums.StKey.cancelState] = "Stand5B"
+
+
+func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
+	pass

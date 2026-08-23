@@ -24,7 +24,7 @@ func _ready():
 		[Enums.PointCharacters.Ollie, Enums.PointCharacters.Suisei, Enums.PointCharacters.Kanata],
 		[Enums.PointCharacters.Mio, Enums.PointCharacters.Subaru, Enums.PointCharacters.Oga],
 		[Enums.PointCharacters.Subaru, Enums.PointCharacters.Subaru, Enums.PointCharacters.Subaru],
-		[Enums.PointCharacters.Flayon, Enums.PointCharacters.Subaru, Enums.PointCharacters.Subaru]
+		[Enums.PointCharacters.Flayon, Enums.PointCharacters.Kurokami, Enums.PointCharacters.Subaru]
 		]
 
 	assist2 = [
