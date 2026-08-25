@@ -118,7 +118,7 @@ func physics_tick(state: Dictionary) -> void:
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*40,
 			Enums.StKey.chip_damage: 4,
 			Enums.StKey.min_damage:6,
-			Enums.StKey.attack_damage: 35,
+			Enums.StKey.attack_damage: 40,
 			Enums.StKey.hitstun: 23 - - Util.BONUS_JUGGLE_HITSTUN,
 			Enums.StKey.blockstun: Util.DEFAULT_BLOCKSTUN,
 			Enums.StKey.block_dir_x : Util.BASE_STRIKE_X_PUSHBACK,

@@ -116,6 +116,7 @@ func physics_tick(state: Dictionary) -> void:
 			Enums.StKey.guard: Enums.GuardType.Mid,
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*15 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*60,
+			Enums.StKey.attack_damage: 65,
 			Enums.StKey.chip_damage: 6,
 			Enums.StKey.min_damage:8,
 			Enums.StKey.hitstun: 50 - - Util.BONUS_JUGGLE_HITSTUN,
