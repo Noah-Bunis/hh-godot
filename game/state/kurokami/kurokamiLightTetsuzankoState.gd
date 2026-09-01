@@ -5,6 +5,8 @@ class_name kurokamiLightTetsuzankoState
 var initial_player_distance = 0
 var current_player_distance = 0
 
+var voice = preload("res://game/assets/voice/fubuki/fbk_kurokami doke.wav")
+
 func _init():
 	endFrame = 27
 	anim_data = {
@@ -75,7 +77,9 @@ func enter(state: Dictionary) -> void:
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
-	if (state[Enums.StKey.frame] == 4):
+	if (state[Enums.StKey.frame] == 2):
+		SyncManager.play_sound("KurokamiVoice", voice, {"bus": "Voice"})
+	elif (state[Enums.StKey.frame] == 4):
 		initial_player_distance = state[Enums.StKey.opponent_pos_x] - state["_pos_x"]
 		state[Enums.StKey.velocity_x] += Util.fixed_max(SGFixed.ONE*30, state[Enums.StKey.velocity_x])
 	if (state[Enums.StKey.frame] >= 8):

@@ -2,6 +2,8 @@ extends KurokamiAttackState
 
 class_name KurokamiDashPunchState
 
+var voice = preload("res://game/assets/voice/fubuki/fbk_kurokami kieroshort.wav")
+
 func _init():
 	endFrame = 33
 	
@@ -80,6 +82,7 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*40, state[Enums.StKey.velocity_x])
+		SyncManager.play_sound("KurokamiVoice", voice, {"bus": "Voice"})
 	elif (state[Enums.StKey.frame] == 17):
 		state[Enums.StKey.drag_x] = Util.HYPER_FRICTION
 

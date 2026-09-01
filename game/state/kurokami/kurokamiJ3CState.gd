@@ -2,8 +2,6 @@ extends KurokamiAirAttackState
 
 class_name Kurokamij3CState
 
-var voice = preload("res://game/assets/voice/fubuki/fbk_kurokami baka nanoka.wav")
-
 func _init():
 	endFrame = 40
 	
@@ -48,6 +46,5 @@ func enter(state: Dictionary) -> void:
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 4):
-		SyncManager.play_sound("kurokamiVoice", voice, {"bus": "Voice"})
-		state[Enums.StKey.velocity_y] = SGFixed.ONE * 18
+		state[Enums.StKey.velocity_y] = SGFixed.ONE * 12
 		state[Enums.StKey.velocity_x] = SGFixed.ONE * 30
