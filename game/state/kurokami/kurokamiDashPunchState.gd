@@ -2,7 +2,7 @@ extends KurokamiAttackState
 
 class_name KurokamiDashPunchState
 
-var voice = preload("res://game/assets/voice/fubuki/fbk_kurokami kieroshort.wav")
+var voice = preload("res://game/assets/voice/fubuki/fbk_kurokami kiero.wav")
 
 func _init():
 	endFrame = 33

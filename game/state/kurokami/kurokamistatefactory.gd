@@ -69,6 +69,10 @@ func _init():
 		"Tetsuzanko": preload("res://game/state/kurokami/kurokamiTetsuzankoState.gd"),
 		"LightTetsuzanko": preload("res://game/state/kurokami/kurokamiLightTetsuzankoState.gd"),
 
+		"SokoNe": preload("res://game/state/kurokami/kurokamiSokoNeState.gd"),
+		"LightSokoNe": preload("res://game/state/kurokami/kurokamiLightSokoNeState.gd"),
+		
+
 		"DashPunch": preload("res://game/state/kurokami/kurokamiDashPunchState.gd"),
 		
 		"LandingRecovery": preload("res://game/state/kurokami/kurokamiLandingRecovery.gd"),
@@ -192,9 +196,13 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 			and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "AirParryWhiff"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(true, state[Enums.StKey.leftface])):
-		return "ForwardAirDash"
+		return ""
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(false, state[Enums.StKey.leftface])):
 		return "BackwardAirDash"
+	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
+		return "SokoNe"
+	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+		return "LightSokoNe"
 	elif (Global.assist_ok(state, interpreter)):
 		if (interpreter.is_low_blocking(state[Enums.StKey.leftface])):
 			return "AirAssistCall2"
