@@ -58,6 +58,8 @@ func resolve_characters(row: int, col: int):
 			return ["res://game/fighter/SuiseiPlayer.tscn", Enums.PointCharacters.Suisei, false]
 		Enums.AllCharacters.Flayon:
 			return ["res://game/fighter/FlayonPlayer.tscn", Enums.PointCharacters.Flayon, false]
+		Enums.AllCharacters.Kurokami:
+			return ["res://game/fighter/KurokamiPlayer.tscn", Enums.PointCharacters.Kurokami, false]
 		_:
 			return ["res://game/fighter/SubaruPlayer.tscn", Enums.PointCharacters.Subaru, true]
 

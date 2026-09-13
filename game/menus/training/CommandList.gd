@@ -88,6 +88,8 @@ func load_player_move_list(point, assist, container):
 			load_move_list(Enums.SuiseiMoveList, container)
 		Enums.PointCharacters.Flayon:
 			load_move_list(Enums.FlayonMoveList, container)
+		Enums.PointCharacters.Kurokami:
+			load_move_list(Enums.FlayonMoveList, container)
 		_:
 			printerr("invalid point character given")
 	match assist:

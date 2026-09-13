@@ -83,7 +83,6 @@ func physics_tick(state: Dictionary) -> void:
 	elif (state[Enums.StKey.frame] == 18):
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*0, state[Enums.StKey.velocity_x] - 54)
 	if (state[Enums.StKey.frame] >= 18):
-		print(initial_player_distance," ",current_player_distance)
 		current_player_distance = state[Enums.StKey.opponent_pos_x] - state["_pos_x"]
 		anim_data = {
 		0 : {

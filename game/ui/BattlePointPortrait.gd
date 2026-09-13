@@ -20,6 +20,8 @@ func load_portrait(enum_point_chara, point_color, enum_assist_chara, assist_colo
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SuiseiButtonReal.png"
 		Enums.PointCharacters.Flayon:
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/FlayonButtonReal.png"
+		Enums.PointCharacters.Kurokami:
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SubaruButtonReal.png"
 		_:
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SubaruButtonReal.png"
 	character_sprite.texture = load(portrait)

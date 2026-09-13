@@ -17,6 +17,7 @@ func _init():
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.attack_damage: 28,
 			Enums.StKey.hitstun: 18,
+            Enums.StKey.blockstun: Util.DEFAULT_BLOCKSTUN-5,
 			Enums.StKey.hitstop: 5,
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*5,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*40,

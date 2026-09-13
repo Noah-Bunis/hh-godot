@@ -332,6 +332,8 @@ func point_name_abbrev(point) -> String:
 			return "SUI"
 		Enums.PointCharacters.Flayon:
 			return "FLA"
+		Enums.PointCharacters.Kurokami:
+			return "KUR"
 		_:
 			printerr("invalid point character given")
 			return "???"

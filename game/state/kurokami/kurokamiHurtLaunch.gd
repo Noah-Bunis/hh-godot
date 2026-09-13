@@ -4,7 +4,7 @@ class_name KurokamiHurtLaunchState
 
 func _init() -> void:
 	super._init()
-	HurtSound = preload("res://game/assets/voice/flayon/mxf_Augh.wav")
+	HurtSound = preload("res://game/assets/voice/fubuki/fbk_kurokami kuso2.wav")
 
 func enter(state: Dictionary) -> void:
 	super.enter(state)

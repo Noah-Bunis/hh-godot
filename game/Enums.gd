@@ -97,6 +97,7 @@ enum AllCharacters {
 	Suisei,
 	Kanata,
 	Flayon,
+	Kurokami,
 	Fubuki,
 	Sora,
 	Sana,
