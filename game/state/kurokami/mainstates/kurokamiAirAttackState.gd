@@ -58,10 +58,10 @@ func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
-		if (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-			state[Enums.StKey.cancelState] = "RyukenShiki"
-		elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
-			state[Enums.StKey.cancelState] = "RyukenShiki"
+		if (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirSokoNe"
+		elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirLightSokoNe"
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

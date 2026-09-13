@@ -3,7 +3,7 @@ extends KurokamiAirIdleState
 class_name KurokamiBackwardAirDashState
 
 func _init():
-	endFrame = 10
+	endFrame = 12
 	anim_data = {
 		0 : { 
 			Enums.StKey.Hit1Disable : true,

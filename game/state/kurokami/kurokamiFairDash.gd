@@ -3,7 +3,7 @@ extends KurokamiAirIdleState
 class_name KurokamiForwardAirDashState
 
 func _init():
-	endFrame = 16
+	endFrame = 10
 	anim_data = {
 		0 : { 
 			Enums.StKey.Hit1Disable : true,
@@ -31,7 +31,7 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 
 	if (state[Enums.StKey.frame] == Util.AIR_DASH_STARTUP):
-		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*40, state[Enums.StKey.velocity_x])
+		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*30, state[Enums.StKey.velocity_x])
 		state[Enums.StKey.accel_y] = 0
 		state[Enums.StKey.velocity_y] = 0
 		SyncManager.play_sound("airdash", Global.AirdashSound, {"bus": "Sound"})

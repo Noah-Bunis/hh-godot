@@ -170,6 +170,7 @@ enum Projectiles {
 	AssistSubaruStarBall,
 	AssistOllieProtonCannon,
 	HakkaTags,
+	KurokamiFlamePillar
 }
 
 enum AttackType {

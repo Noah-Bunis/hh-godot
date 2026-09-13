@@ -71,6 +71,8 @@ func _init():
 
 		"SokoNe": preload("res://game/state/kurokami/kurokamiSokoNeState.gd"),
 		"LightSokoNe": preload("res://game/state/kurokami/kurokamiLightSokoNeState.gd"),
+		"AirSokoNe": preload("res://game/state/kurokami/kurokamiAirSokoNeState.gd"),
+		"AirLightSokoNe": preload("res://game/state/kurokami/kurokamiAirLightSokoNeState.gd"),
 		
 
 		"DashPunch": preload("res://game/state/kurokami/kurokamiDashPunchState.gd"),
@@ -114,6 +116,10 @@ func common_idle_transitions(state: Dictionary, interpreter: InputInterpreter) -
 		return "DashPunch"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
 		return "DashPunch"
+	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
+		return "SokoNe"
+	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+		return "LightSokoNe"
 	elif (interpreter.is_stick_dashing(true, state[Enums.StKey.leftface]) and state[Enums.StKey.stateName] != "Run"):
 		return "Run"
 	elif (interpreter.is_button_dashing(true, state[Enums.StKey.leftface])):
@@ -196,13 +202,13 @@ func common_jump_transitions_default(state: Dictionary, interpreter: InputInterp
 			and interpreter.is_button_down(Enums.InputFlags.BDown | Enums.InputFlags.CDown)):
 		return "AirParryWhiff"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(true, state[Enums.StKey.leftface])):
-		return ""
+		return "ForwardAirDash"
 	elif (state[Enums.StKey.airDash] > 0 and interpreter.is_air_dashing(false, state[Enums.StKey.leftface])):
 		return "BackwardAirDash"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
-		return "SokoNe"
+		return "AirSokoNe"
 	elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
-		return "LightSokoNe"
+		return "AirLightSokoNe"
 	elif (Global.assist_ok(state, interpreter)):
 		if (interpreter.is_low_blocking(state[Enums.StKey.leftface])):
 			return "AirAssistCall2"

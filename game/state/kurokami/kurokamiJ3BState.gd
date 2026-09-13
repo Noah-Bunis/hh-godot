@@ -39,7 +39,10 @@ func _init():
 
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
-	
+
+func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
+	pass
+
 func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("j3C")

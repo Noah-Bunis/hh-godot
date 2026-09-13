@@ -52,6 +52,8 @@ func setup(playerData:PlayerSetup):
 				state_factory = preload("res://game/state/projectiles/hakka/HakkaTagsStateFactory.gd").new()
 			Enums.Projectiles.SuicopathChainsaw:
 				state_factory = preload("res://game/state/projectiles/suisei/ChainsawStateFactory.gd").new()
+			Enums.Projectiles.KurokamiFlamePillar:
+				state_factory = preload("res://game/state/projectiles/kurokami/KurokamiFlamePillarStateFactory.gd").new()
 			_:
 				printerr("invalid projectile character given")
 		super.state_factory_setup(state_factory)
