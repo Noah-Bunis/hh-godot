@@ -8,7 +8,7 @@ func _init():
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
-			Enums.StKey.Hurt1PosX : 327680, Enums.StKey.Hurt1PosY : -22085634,
+			Enums.StKey.Hurt1PosX : 327680, Enums.StKey.Hurt1PosY : -26085634,
 			Enums.StKey.Hurt1ScaleX : 357090, Enums.StKey.Hurt1ScaleY : 554574,
 			Enums.StKey.Hurt2PosX : 131072, Enums.StKey.Hurt2PosY : -14352384,
 			Enums.StKey.Hurt2ScaleX : 401098, Enums.StKey.Hurt2ScaleY : 853100,

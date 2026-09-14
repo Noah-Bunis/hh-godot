@@ -25,7 +25,7 @@ func _init():
 			Enums.StKey.Hurt1ScaleX : 603537, Enums.StKey.Hurt1ScaleY : 1371143,
 			Enums.StKey.Hurt2PosX : 6546271, Enums.StKey.Hurt2PosY : -15362432,
 			Enums.StKey.Hurt2ScaleX : 445784, Enums.StKey.Hurt2ScaleY : 765625,
-			Enums.StKey.hit_box_colliding_frame : 4,
+			Enums.StKey.hit_box_colliding_frame : 254,
 			Enums.StKey.attack_damage: 32,
 			Enums.StKey.min_damage: 3,
 			Enums.StKey.guard: Enums.GuardType.High,
@@ -53,15 +53,19 @@ func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
-		if ((interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or
-				interpreter.is_holding_a_direction(Enums.Numpad.N2, state[Enums.StKey.leftface]) or
-				interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])) and 
-				interpreter.is_button_down(Enums.InputFlags.CDown)):
-			state[Enums.StKey.cancelState] = "Jump2C"
-		elif (interpreter.is_holding_a_direction(Enums.Numpad.N6, state[Enums.StKey.leftface]) and 
-				interpreter.is_button_down(Enums.InputFlags.CDown)):
-			state[Enums.StKey.cancelState] = "Jump6C"
-		elif (interpreter.is_button_down(Enums.InputFlags.CDown)):
-			state[Enums.StKey.cancelState] = "Jump5C"
+		if (interpreter.is_button_down(Enums.InputFlags.CDown)):
+			if (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])):
+				state[Enums.StKey.cancelState] = "Jump3C"
+			else:
+				state[Enums.StKey.cancelState] = "Jump5C"
+		elif (interpreter.is_button_down(Enums.InputFlags.BDown)):
+			if (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])):
+				state[Enums.StKey.cancelState] = "Jump3B"
+			else:
+				state[Enums.StKey.cancelState] = "Jump5B"
 		elif (interpreter.is_button_down(Enums.InputFlags.ADown)):
-			state[Enums.StKey.cancelState] = "Jump5A"
+			if (interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])):
+				state[Enums.StKey.cancelState] = "Jump3A"
+			else:
+				state[Enums.StKey.cancelState] = "Jump5A"
+

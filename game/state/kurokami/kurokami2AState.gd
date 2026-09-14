@@ -20,7 +20,7 @@ func _init():
 			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hit1PosX : 11927554, Enums.StKey.Hit1PosY : -1310720,
-			Enums.StKey.Hit1ScaleX : 831158, Enums.StKey.Hit1ScaleY : -157143,
+			Enums.StKey.Hit1ScaleX : 851158, Enums.StKey.Hit1ScaleY : -167143,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
 			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -9087936,
 			Enums.StKey.Hurt1ScaleX : 603537, Enums.StKey.Hurt1ScaleY : 971143,

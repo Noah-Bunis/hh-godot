@@ -14,7 +14,7 @@ func _init():
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true, Enums.StKey.Hurt3Disable : true,
-			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -15087936,
+			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -19087936,
 			Enums.StKey.Hurt1ScaleX : 603537, Enums.StKey.Hurt1ScaleY : 1371143,
 			},
 		23 : {
@@ -22,9 +22,11 @@ func _init():
 			Enums.StKey.Summon : "kurokamiflamepillar",
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
-			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true, Enums.StKey.Hurt3Disable : true,
-			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -15087936,
+			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true, Enums.StKey.Hurt3Disable : false,
+			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -19087936,
 			Enums.StKey.Hurt1ScaleX : 603537, Enums.StKey.Hurt1ScaleY : 1371143,
+			Enums.StKey.Hurt3PosX : 9562144, Enums.StKey.Hurt3PosY : -20538944,
+			Enums.StKey.Hurt3ScaleX : 383139, Enums.StKey.Hurt3ScaleY : 370037,
 			}
 	}
 
