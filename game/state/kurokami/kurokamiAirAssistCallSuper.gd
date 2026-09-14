@@ -3,7 +3,7 @@ extends KurokamiAirAssistCallState
 class_name KurokamiAirAssistCallSuperState
 
 func _init():
-	CallSound = preload("res://game/assets/voice/flayon/mxf_ive_been_waiting_for_this.wav")
+	CallSound = preload("res://game/assets/voice/fubuki/fbk_kurokami waruina.wav")
 	endFrame = Util.BASE_AIR_ASSIST_RECOVERY
 	anim_data = {
 		0 : {
@@ -26,4 +26,3 @@ func _init():
 func battery_meter(state: Dictionary) -> void:
 	state[Enums.StKey.assist_meter] -= Util.ASSIST_STOCK*2
 	state[Enums.StKey.sync_rate] = SGFixed.mul(state[Enums.StKey.sync_rate], 5536)
-

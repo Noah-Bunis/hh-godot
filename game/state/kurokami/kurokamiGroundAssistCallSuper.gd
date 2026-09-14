@@ -3,7 +3,7 @@ extends KurokamiGroundAssistCallState
 class_name KurokamiGroundAssistCallSuperState
 
 func _init():
-	CallSound = preload("res://game/assets/voice/flayon/mxf_ive_been_waiting_for_this.wav")
+	CallSound = preload("res://game/assets/voice/fubuki/fbk_kurokami waruina.wav")
 	endFrame = Util.BASE_ASSIST_RECOVERY
 	
 	anim_data = {

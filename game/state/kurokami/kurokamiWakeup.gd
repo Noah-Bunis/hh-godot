@@ -15,4 +15,3 @@ func _init():
 			# Enums.StKey.Hit1PosX : 2025, Enums.StKey.Hit1PosY : -13828096,
 			},
 	}
-
