@@ -31,6 +31,8 @@ func _init():
 func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("AirSokoNe")
+	var initial_vel_x = 0
+	var initial_vel_y = 0
 	state[Enums.StKey.super_meter] += SGFixed.ONE*200
 
 # Writing _delta instead of delta here prevents the unused variable warning.

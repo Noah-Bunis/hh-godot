@@ -62,6 +62,10 @@ func setup(playerData:PlayerSetup):
 
 func on_attack_hit(attack_type: int, opponent_hit_data: Dictionary) -> void:
 	super.on_attack_hit(attack_type, opponent_hit_data)
+	if (opponent_hit_data["hitType"] == Enums.HitType.Strike):
+		var owner = Global.PLAYER_2_NODE_INSTANCE[0] if team else Global.PLAYER_1_NODE_INSTANCE[0]
+		if (is_instance_valid(owner)):
+			owner.currentState[Enums.StKey.projectile_hit] = true
 	if (currentState[Enums.StKey.projectile_hp] <= 1):
 		fighterState.change_state("Destroy")
 		$NetworkAnimationPlayer.speed_scale = 1

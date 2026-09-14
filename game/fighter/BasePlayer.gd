@@ -129,6 +129,7 @@ func _save_state() -> Dictionary:
 		Enums.StKey.cancelState : currentState.get(Enums.StKey.cancelState, ""),
 		Enums.StKey.hitstun : currentState.get(Enums.StKey.hitstun, 0),
 		Enums.StKey.hitCount : currentState.get(Enums.StKey.hitCount, 0),
+		Enums.StKey.projectile_hit : currentState.get(Enums.StKey.projectile_hit, false),
 		Enums.StKey.comboTime : currentState.get(Enums.StKey.comboTime, 0),
 		Enums.StKey.doubleJump : currentState.get(Enums.StKey.doubleJump, 1),
 		Enums.StKey.airDash : currentState.get(Enums.StKey.airDash, 1),
@@ -166,6 +167,7 @@ func _load_state(state: Dictionary) -> void:
 	currentState[Enums.StKey.cancelState] = state.get(Enums.StKey.cancelState, "")
 	currentState[Enums.StKey.hitstun] = state.get(Enums.StKey.hitstun, 0)
 	currentState[Enums.StKey.hitCount] = state.get(Enums.StKey.hitCount, 0)
+	currentState[Enums.StKey.projectile_hit] = state.get(Enums.StKey.projectile_hit, false)
 	currentState[Enums.StKey.comboTime] = state.get(Enums.StKey.comboTime, 0)
 	currentState[Enums.StKey.doubleJump] = state.get(Enums.StKey.doubleJump, 1)
 	currentState[Enums.StKey.airDash] = state.get(Enums.StKey.airDash, 1)

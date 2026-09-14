@@ -87,6 +87,7 @@ enum StKey {
 	WarpOffScreen,
 	hit_cooldown, # 85
 	hit_box_colliding_frame_attack_data,
+	projectile_hit,
 }
 
 enum AllCharacters {

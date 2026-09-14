@@ -70,6 +70,8 @@ func _init():
 func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("Tetsuzanko")
+	var initial_player_distance = 0
+	var current_player_distance = 0
 	state[Enums.StKey.drag_x] = Util.FRICTION
 	state[Enums.StKey.super_meter] += SGFixed.ONE*200
 
