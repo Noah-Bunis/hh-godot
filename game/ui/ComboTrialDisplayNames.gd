@@ -73,6 +73,7 @@ const DISPLAY_NAMES: Dictionary = {
 	
 	"KanataWingStanceEnter":"Down DownRight Right X",
 	"KanataWingStanceC":"   ↪ C",
+	"KanataWingStanceB":"   ↪ B",
 	
 	"GrappleFollowUp": "Down DownRight Right A UI_COMBO_WORD_OR B UI_COMBO_WORD_AIR_OK",
 	"AirGrapple": "Down DownRight Right A UI_COMBO_WORD_OR B UI_COMBO_WORD_AIR",

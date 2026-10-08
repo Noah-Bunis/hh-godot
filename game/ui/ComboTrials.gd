@@ -418,7 +418,29 @@ Enums.PointCharacters.Kanata: [
 	20:"Stand6C",
 	21:"Stand6C",
 	22:"Stand6C",
-	23:"KanataSuperFiftyRekkaA"}
+	23:"KanataSuperFiftyRekkaA"},
+	{
+	0: "DUMMY: KanataWingStanceEnter",
+	1: "KanataWingStanceB",
+	2: "DUMMY: A + B + C",
+	3: "Jump6C",
+	4: "KanataAirFiftyKGHit",
+	5: "DUMMY: hold A",
+	6: "Jump6C",
+	7: "KanataAirFiftyKGHit",
+	8: "DUMMY: hold A",
+	9: "Crouch3C",
+	10: "Jump5C",
+	11: "KanataAirFiftyKGHit",
+	12: "DUMMY: hold A",
+	13: "Jump5C",
+	14: "KanataAirFiftyKGHit",
+	15: "DUMMY: hold A",
+	16: "Jump5C",
+	17: "KanataAirFiftyKGHit",
+	18: "KanataAirFiftyKGHit",
+	19: "KanataAirFiftyRekkaA"
+	}
 ],
 Enums.PointCharacters.Flayon: [
 	{0: "Jump2C",
