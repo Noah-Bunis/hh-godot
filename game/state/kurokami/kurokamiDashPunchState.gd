@@ -84,7 +84,7 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*40, state[Enums.StKey.velocity_x])
 		SyncManager.play_sound("KurokamiVoice", voice, {"bus": "Voice"})
 	elif (state[Enums.StKey.frame] == 17):
-		state[Enums.StKey.drag_x] = Util.HYPER_FRICTION
+		state[Enums.StKey.drag_x] = Util.SLIPPERY_FRICTION
 
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass

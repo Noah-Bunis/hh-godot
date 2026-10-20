@@ -47,12 +47,12 @@ func _init():
 			Enums.StKey.chip_damage: 4,
 			Enums.StKey.min_damage:6,
 			Enums.StKey.attack_damage: 40,
-			Enums.StKey.hitstun: 23 - - Util.BONUS_JUGGLE_HITSTUN,
+			Enums.StKey.hitstun: 23 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else 35,
 			Enums.StKey.blockstun: Util.DEFAULT_BLOCKSTUN,
 			Enums.StKey.block_dir_x : -SGFixed.ONE*45,
 			Enums.StKey.counter_hit: Enums.AttackType.WallBouncer,
 			Enums.StKey.counter_hitstun: 50,
-			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*15 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
+			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*10 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*40,
 			},
 		14 : { 
@@ -82,7 +82,9 @@ func physics_tick(state: Dictionary) -> void:
 		SyncManager.play_sound("KurokamiVoice", voice, {"bus": "Voice"})
 	elif (state[Enums.StKey.frame] == 4):
 		initial_player_distance = state[Enums.StKey.opponent_pos_x] - state["_pos_x"]
-		state[Enums.StKey.velocity_x] += Util.fixed_max(SGFixed.ONE*30, state[Enums.StKey.velocity_x])
+		state[Enums.StKey.velocity_x] += Util.fixed_max(SGFixed.ONE*35, state[Enums.StKey.velocity_x])
+	if (state[Enums.StKey.frame] == 8):
+		state[Enums.StKey.drag_x] = Util.HYPER_FRICTION
 	if (state[Enums.StKey.frame] >= 8):
 		current_player_distance = state[Enums.StKey.opponent_pos_x] - state["_pos_x"]
 	anim_data = {
@@ -123,12 +125,12 @@ func physics_tick(state: Dictionary) -> void:
 			Enums.StKey.chip_damage: 4,
 			Enums.StKey.min_damage:6,
 			Enums.StKey.attack_damage: 40,
-			Enums.StKey.hitstun: 23 - - Util.BONUS_JUGGLE_HITSTUN,
+			Enums.StKey.hitstun: 23 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else 35,
 			Enums.StKey.blockstun: Util.DEFAULT_BLOCKSTUN,
 			Enums.StKey.block_dir_x : -SGFixed.ONE*45,
 			Enums.StKey.counter_hit: Enums.AttackType.WallBouncer,
 			Enums.StKey.counter_hitstun: 50,
-			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*15 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
+			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*10 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*40,
 			},
 		14 : { 

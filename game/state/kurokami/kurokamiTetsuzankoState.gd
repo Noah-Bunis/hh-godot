@@ -42,8 +42,8 @@ func _init():
 			Enums.StKey.Hurt3ScaleX : 519159, Enums.StKey.Hurt3ScaleY : -739693,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher,
 			Enums.StKey.guard: Enums.GuardType.Mid,
-			Enums.StKey.launch_dir_x : -SGFixed.ONE*15 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
-			Enums.StKey.launch_dir_y : -SGFixed.ONE*60,
+			Enums.StKey.launch_dir_x : -SGFixed.ONE*10 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
+			Enums.StKey.launch_dir_y : -SGFixed.ONE*75,
 			Enums.StKey.attack_damage: 65,
 			Enums.StKey.chip_damage: 6,
 			Enums.StKey.min_damage:8,
@@ -52,8 +52,8 @@ func _init():
 			Enums.StKey.block_dir_x : -SGFixed.ONE*60,
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.counter_hitstun: 80,
-			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*15 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
-			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*60,
+			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*10 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
+			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*75,
 			},
 		24 : { 
 			Enums.StKey.Hit1Disable : true,
@@ -73,7 +73,6 @@ func enter(state: Dictionary) -> void:
 	anim.play("Tetsuzanko")
 	var initial_player_distance = 0
 	var current_player_distance = 0
-	state[Enums.StKey.drag_x] = Util.FRICTION
 	state[Enums.StKey.super_meter] += SGFixed.ONE*200
 
 func physics_tick(state: Dictionary) -> void:
@@ -84,7 +83,7 @@ func physics_tick(state: Dictionary) -> void:
 		initial_player_distance = state[Enums.StKey.opponent_pos_x] - state["_pos_x"]
 		state[Enums.StKey.velocity_x] = SGFixed.ONE*55
 	elif (state[Enums.StKey.frame] == 18):
-		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*0, state[Enums.StKey.velocity_x] - 54)
+		state[Enums.StKey.drag_x] = Util.HYPER_FRICTION
 	if (state[Enums.StKey.frame] >= 18):
 		current_player_distance = state[Enums.StKey.opponent_pos_x] - state["_pos_x"]
 		anim_data = {
@@ -120,8 +119,8 @@ func physics_tick(state: Dictionary) -> void:
 			Enums.StKey.Hurt3ScaleX : 519159, Enums.StKey.Hurt3ScaleY : -739693,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher,
 			Enums.StKey.guard: Enums.GuardType.Mid,
-			Enums.StKey.launch_dir_x : -SGFixed.ONE*15 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
-			Enums.StKey.launch_dir_y : -SGFixed.ONE*60,
+			Enums.StKey.launch_dir_x : -SGFixed.ONE*10 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
+			Enums.StKey.launch_dir_y : -SGFixed.ONE*75,
 			Enums.StKey.attack_damage: 65,
 			Enums.StKey.chip_damage: 6,
 			Enums.StKey.min_damage:8,
@@ -130,8 +129,8 @@ func physics_tick(state: Dictionary) -> void:
 			Enums.StKey.block_dir_x : -SGFixed.ONE*60,
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.counter_hitstun: 80,
-			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*15 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
-			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*60,
+			Enums.StKey.counter_launch_dir_x : -SGFixed.ONE*10 if ((initial_player_distance > 0 and current_player_distance > 0) or (initial_player_distance < 0 and current_player_distance < 0)) else SGFixed.ONE*5,
+			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*75,
 			},
 		24 : { 
 			Enums.StKey.Hit1Disable : true,
