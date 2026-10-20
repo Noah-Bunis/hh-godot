@@ -48,6 +48,6 @@ func enter(state: Dictionary) -> void:
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
-	if (state[Enums.StKey.frame] == 4):
+	if (state[Enums.StKey.frame] == 6):
 		state[Enums.StKey.velocity_y] = SGFixed.ONE * 12
 		state[Enums.StKey.velocity_x] = SGFixed.ONE * 10
