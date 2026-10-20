@@ -104,6 +104,7 @@ enum AllCharacters {
 	Sana,
 	OkaKoro,
 	Hakka,
+	Rikka,
 	AssistSubaru,
 	AssistMio,
 	AssistOga,
@@ -136,6 +137,7 @@ enum AssistCharacters {
 	Sana,
 	OkaKoro,
 	Hakka,
+	Rikka,
 	Subaru,
 	Mio,
 	Oga,
@@ -159,6 +161,7 @@ enum Projectiles {
 	HighMioCannon,
 	SubaruStarBall,
 	SubaruBatterSetBall,
+	SubaruEXBatterSetBall,
 	OllieRook,
 	OllieBishop,
 	OllieKnight,
@@ -172,6 +175,9 @@ enum Projectiles {
 	AssistSubaruStarBall,
 	AssistOllieProtonCannon,
 	HakkaTags,
+	RikkaBall,
+	RikkaBigBall,
+	RikkaSuperBall,
 	KurokamiFlamePillar
 }
 
@@ -291,9 +297,6 @@ enum Numpad {
 	N8,
 	N9
 }
-#
-#func suicopath_scissors_OK(state: Dictionary, interpreter: InputInterpreter) -> bool:
-	#return level_1_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M63214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])
 
 func level_1_OK(state: Dictionary) -> bool:
 	return state[Enums.StKey.super_meter] >= Util.LEVEL_ONE_SUPER
@@ -316,6 +319,7 @@ const SpecialInput: Dictionary = {
 	"DAirDash" : [17, [Numpad.N2, Numpad.N5, Numpad.N2]],
 	"M236" : [20, [Numpad.N6, Numpad.N3, Numpad.N2], [Numpad.N5, Numpad.N6, Numpad.N3, Numpad.N2], [Numpad.N9, Numpad.N6, Numpad.N3, Numpad.N2]],
 	"M214" : [20, [Numpad.N4, Numpad.N1, Numpad.N2], [Numpad.N5, Numpad.N4, Numpad.N1, Numpad.N2], [Numpad.N7, Numpad.N4, Numpad.N1, Numpad.N2]],
+	"M214Quick" : [15, [Numpad.N4, Numpad.N1, Numpad.N2], [Numpad.N5, Numpad.N4, Numpad.N1, Numpad.N2], [Numpad.N7, Numpad.N4, Numpad.N1, Numpad.N2]],
 	"M214Strict" : [20, [Numpad.N4, Numpad.N1, Numpad.N2], [Numpad.N7, Numpad.N4, Numpad.N1, Numpad.N2]],
 	"M623" : [25, [Numpad.N3, Numpad.N2, Numpad.N5, Numpad.N6], [Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N5, Numpad.N6], [Numpad.N9, Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N5, Numpad.N6], [Numpad.N3, Numpad.N2, Numpad.N6], [Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N6], [Numpad.N3, Numpad.N2, Numpad.N3, Numpad.N6], [Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N3, Numpad.N6], [Numpad.N9, Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N3, Numpad.N6]],
 	"M41236" : [25, [Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N1, Numpad.N4], [Numpad.N5, Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N1, Numpad.N4], [Numpad.N9, Numpad.N6, Numpad.N3, Numpad.N2, Numpad.N1, Numpad.N4], 
@@ -346,17 +350,17 @@ const SpecialInput: Dictionary = {
 const UniversalMoveList: Array = [
 	["Basic Controls"],
 	["Movement"],
-	["j6A+B or j4A+B", "AirDash", "", "Can double jump after"],
+	["j6A+B / j4A+B", "AirDash", "", "Can double jump after"],
 	["Offense"],
-	["5D (Air OK)", "Assist1", "", "", ""],
-	["2D (Air OK)", "Assist2", "", "", ""],
+	["5D", "UI_COMBO_WORD_AIR_OK", "Assist1", "", "", ""],
+	["2D", "UI_COMBO_WORD_AIR_OK", "Assist2", "", "", ""],
 	["Multiple assist calls", "Assist Chain", "", "Assist character cancels into any assist attack"],
-	["236D (Air OK)", "AssistSuper", "1 meter + 2 assist stock", ""],
+	["236D", "UI_COMBO_WORD_AIR_OK", "AssistSuper", "1 meter + 2 assist stock", ""],
 	["A+D", "Throw / Air Throw", "", ""],
 	["A+B+C", "Raibu Cancel", "1 super bar", ""],
 	["Defense"],
 	["Hold any button during opponent's air combo", "Air Recovery", "", ""],
-	["4[B+C] Hold", "Funny Defense", "", "pushes back attackers more"],
+	["4[B+C]", "UI_COMBO_WORD_HOLD", "Funny Defense", "", "pushes back attackers more"],
 	["A+B+C+D", "Burst", "1 meter + 2 assist stock, burst super meter cost increases after use", ""],
 	["(Check HH mechanics writeup for more detail and hidden mechanics)", "", "", ""],
 ]
@@ -370,16 +374,16 @@ const SubaruMoveList: = [
 	["j6C", "Super Clean Hit Swing", "", "Even cleaner hit at mid range"],
 	["j2C", "BreadLoops", "", "Teyah! Combo tool and corner carry"],
 	["Specials"],
-	["236A (Air OK)", "Star Ball", "", "Hit projectile with strikes to change trajectory"],
-	["236B (Air OK)", "Pleiades Star Ball", "", "Hit projectile with strikes to enhance projectile"],
+	["236A", "UI_COMBO_WORD_AIR_OK", "Star Ball", "", "Hit projectile with strikes to change trajectory"],
+	["236B", "UI_COMBO_WORD_AIR_OK", "Pleiades Star Ball", "", "Hit projectile with strikes to enhance projectile"],
 	["236B > Any special (except fireballs)", "", "follow up rekka to hit projectile"],
-	["214A (Air OK)", "Batter Swing", "", ""],
-	["214B (Air OK)", "Steal Home", "", "Low profile"],
-	["623A or 623B (Air OK)", "Duck Punch", "", "Full invul reversal"],
+	["214A", "UI_COMBO_WORD_AIR_OK", "Batter Swing", "", ""],
+	["214B", "UI_COMBO_WORD_AIR_OK", "Steal Home", "", "Low profile"],
+	["623A / 623B", "UI_COMBO_WORD_AIR_OK", "Duck Punch", "", "Full invul reversal"],
 	["Supers"],
-	["236C (Air OK)", "Hollow Limit : Pleiades Star Barrage", "Level 1", ""],
+	["236C", "UI_COMBO_WORD_AIR_OK", "Hollow Limit : Pleiades Star Barrage", "Level 1", ""],
 	["632146C", "Hollow Limit : Shubonic Arm", "Level 2", "Full invul reversal"],
-	["214214C", "Hollow Limit : Angel Install", "Level 5", "oh no"],
+	["214214C", "Hollow Limit : Angel Install", "Level 5", "[color=red] oh no"],
 	["(Angel mode) 632146A", "Hollow Limit : Heaven Breaker", "", ""],
 ]
 
@@ -391,10 +395,10 @@ const MioMoveList: = [
 	["6C", "Chariot Pulse", "", "Whiffs on most crouchers"],
 	["j2C", "Reverse Temperance Crash", "", "Instant overhead"],
 	["Specials"],
-	["236A or 236B or 236C", "HATO ON", "", "Summon Hatotaurus"],
-	["236[A] or 236[B] or 236[C]", "Summon Concentration", "", "Build sync rate quickly when held"],
-	["214A or 214B or 214C", "Unsummon", "", "Unsummons Hatotaurus"],
-	["623A or 623B or 623C (Air OK)", "Card Toss", "", ""],
+	["236A / 236B / 236C", "HATO ON", "", "Summon Hatotaurus"],
+	["236[A] / 236[B] / 236[C]", "Summon Concentration", "", "Build sync rate quickly when held"],
+	["214A / 214B / 214C", "Unsummon", "", "Unsummons Hatotaurus"],
+	["623A / 623B / 623C", "UI_COMBO_WORD_AIR_OK", "Card Toss", "", ""],
 	["Supers"],
 	["41236C", "Mio Cannon", "Level 1", "Ground bounces on normal hit"],
 	["Hato Attacks"],
@@ -432,7 +436,7 @@ const OllieMoveList: = [
 	["Kureiji Ollie"],
 	["Unique Movement"],
 	["Run", "", "", "Starts with a back sway"],
-	["Hold 2", "Low profile", "", "A super low crouch, blocking is still OK"],
+	["2", "UI_COMBO_WORD_HOLD", "Low profile", "", "A super low crouch, blocking is still OK"],
 	["Command Normals"],
 	["Missing moves", "WARNING", "", "No close B"],
 	["Ground Throws", "", "", "Throw hits at mid range"],
@@ -444,14 +448,14 @@ const OllieMoveList: = [
 	["jump Normals", "", "", "Many jump normals have reverse gatlings / rebeats"],
 	["anti-air Normals", "", "", "Some anti air normals have reverse gatlings / rebeats"],
 	["Specials"],
-	["214X (Air OK)", "Udin Formation", "", "Summons chess pieces, can hold the button"],
-	["214[X] (Ground Only)", "Pop Pop Udin Formation", "", "Summons enhanced chess pieces, can be held with negative edge"],
+	["214X", "UI_COMBO_WORD_AIR_OK", "Udin Formation", "", "Summons chess pieces, can hold the button"],
+	["214[X]", "Pop Pop Udin Formation", "", "Summons enhanced chess pieces, can be held with negative edge"],
 	["]A[", "Rook", "", "Release A for horizontal space control"],
 	["]B[", "Bishop", "", "Release B for diagonal space control"],
 	["]C[", "Pegasus", "", "Release C for ...knight shaped? space control"],
 	["Supers"],
 	["236B", "Smollie Queen", "Level 1", "Hold D to hold smollie in place"],
-	["236B > ]D[", "Smollie, hold down the neutral", "", "Steer smollie with 4 and 6 inputs"],
+	["236B >]D[", "Smollie, hold down the neutral", "", "Steer smollie with 4 and 6 inputs"],
 	["236C", "Bzzt Boom!", "Level 2", "Here's my Jollie's best!"],
 ]
 
@@ -472,17 +476,17 @@ const KanataMoveList: = [
 	["j6C", "The Great Grappler's Duster Kick", "", "Floaty gravity. Wallbounces on normal hit"],
 	["jump Normals", "", "", "Only jA hits high, all other jump normals hit mid"],
 	["Specials"],
-	["63214A (Air OK)", "50KG Grip Strength", "", "Kanata's signature command grab, steerable left and right"],
-	["63214[A] (Air OK)", "25KG Grip Strength", "", "Alternate version that only launches opponent"],
-	["22X (Air OK)", "Dodge Roll", "", ""],
-	["236X (Air OK)", "Wing Stance", "", "Enter stance with followups"],
-	["236X > A (Air OK)", "Wing Shield", "", ""],
-	["236X > A > A (Air OK)", "Moon Jump", "", "Steerable in 4 directions"],
-	["236X > B (Air OK)", "Wing Tackle", "", "Enter stance with followups"],
-	["236X > C (Air OK)", "Tokusha-seizon Wandarada-!!", "Level 1", "Fight on, Kanata! Metered command run followup."],
-	["236X > D (Air OK)", "Wing Stance Exit", "", "Time to get fancy!"],
+	["63214A", "UI_COMBO_WORD_AIR_OK", "50KG Grip Strength", "", "Kanata's signature command grab, steerable left and right"],
+	["63214[A]", "UI_COMBO_WORD_AIR_OK", "25KG Grip Strength", "", "Alternate version that only launches opponent"],
+	["22X", "UI_COMBO_WORD_AIR_OK", "Dodge Roll", "", ""],
+	["236X", "UI_COMBO_WORD_AIR_OK", "Wing Stance", "", "Enter stance with followups"],
+	["236X >A", "UI_COMBO_WORD_AIR_OK", "Wing Shield", "", ""],
+	["236X >A >A", "UI_COMBO_WORD_AIR_OK", "Moon Jump", "", "Steerable in 4 directions"],
+	["236X >B", "UI_COMBO_WORD_AIR_OK", "Wing Tackle", "", "Enter stance with followups"],
+	["236X >C", "UI_COMBO_WORD_AIR_OK", "Tokusha-seizon Wandarada-!!", "Level 1", "Fight on, Kanata! Metered command run followup."],
+	["236X >D", "UI_COMBO_WORD_AIR_OK", "Wing Stance Exit", "", "Time to get fancy!"],
 	["Supers"],
-	["214B (Air Only)", "Chaos Soul Wing", "Level 2", "Ground bounces multiple times on normal hit"],
+	["j214B", "Chaos Soul Wing", "Level 2", "Ground bounces multiple times on normal hit"],
 	["63214C", "Other-Worldly 50KG Grip Strength", "Level 3", "Blazing fast invincible command grab, steerable left and right"],
 ]
 
@@ -497,12 +501,12 @@ const SuiseiMoveList: = [
 	["6A", "", "", "two hitting upper body invul attack"],
 	["j6B", "", "", ""],
 	["Specials"],
-	["236B or A (Air OK)", "Caramel Thrust", "", "Stance cancel on hit"],
-	["214B or A (Air OK)", "Yoru wo Matsuyo", "", "Rekka special, follow ups can whiff cancel"],
-	["214B->A (Air OK)", "", "", "Launcher"],
-	["214B->B (Air OK)", "", "", "Multi hit"],
-	["214B->2B (Air OK)", "", "", "Steerable ender"],
-	["Rekka->C", "", "", "Stance cancel on whiff and hit"],
+	["236B / 236A", "UI_COMBO_WORD_AIR_OK", "Caramel Thrust", "", "Stance cancel on hit"],
+	["214B / 214A", "UI_COMBO_WORD_AIR_OK", "Yoru wo Matsuyo", "", "Rekka special, follow ups can whiff cancel"],
+	["214B >A", "UI_COMBO_WORD_AIR_OK", "", "", "Launcher"],
+	["214B >B", "UI_COMBO_WORD_AIR_OK", "", "", "Multi hit"],
+	["214B >2B", "UI_COMBO_WORD_AIR_OK", "", "", "Steerable ender"],
+	["Rekka >C", "", "", "Stance cancel on whiff and hit"],
 	["Supers"],
 	["", "None", "", ""],
 	["", "", "", ""],
@@ -542,10 +546,10 @@ const FlayonMoveList: = [
 	["j2C", "Pizza Cutter", "", "Multi hit crossup"],
 	["j6C", "", "", ""],
 	["Specials"],
-	["236A or B (Air OK)", "Grappler's Soul", "", "Command Grab, cancel into normals or jump on hit"],
-	["623A or B (Air OK)", "Ryuken-shiki", "", "DP, delay cancels into air throw"],
+	["236A / 236B", "UI_COMBO_WORD_AIR_OK", "Grappler's Soul", "", "Command Grab, cancel into normals or jump on hit"],
+	["623A / 623B", "UI_COMBO_WORD_AIR_OK", "Ryuken-shiki", "", "DP, delay cancels into air throw"],
 	["Flight"],
-	["214X (Air OK)", "Flight", "", "Spend super meter to fly"],
+	["214X", "UI_COMBO_WORD_AIR_OK", "Flight", "", "Spend super meter to fly"],
 	["Airdash cancel", "", "", "Cancel Flight normals into 4 way airdash"],
 	["Reverse Chains", "", "", "Flight Normals are reverse chain OK"],
 	["Increase Moves", "", "", "Some Flight Normals can be held to enhance them"],
@@ -561,6 +565,7 @@ const FubukiMoveList: = [
 	["5D", "Akai na...", "", "Dashing rapid slash, low profile"],
 	["2D", "Kurokami Flip", "", "Invul reversal, ground bounces on second hit"],
 	["236D", "Hi Friend!", "Level 1 and 2 assist stocks", "Full invul"],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", "Fubuki=the=Kon!-edge"],
 ]
 
@@ -570,6 +575,7 @@ const SoraMoveList: = [
 	["5D", "Nun-Nun Step", "", "Wallbounces on normal hit"],
 	["2D", "Nun-Nun Fence", "", "Invul reversal, Groundbounces on normal hit."],
 	["236D", "Colossal Piano", "Level 1 and 2 assist stocks", ""],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -579,6 +585,7 @@ const OkakoroMoveList: = [
 	["5D", "Koro Hammer", "", "Hold back to charge, release at just timing for an enhanced attack"],
 	["2D", "Ogayu Advance!", "", "Hold down to charge, release at just timing for an enhanced attack"],
 	["236D", "Super jump challenge", "Level 1 and 2 assist stocks", "Release A, B, or C to bounce on the opponent"],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -588,6 +595,7 @@ const SanaMoveList: = [
 	["5[D]", "Sanallite", "", "Hold D. Pulls in your point character towards Sana"],
 	["2[D]", "The Tsukumo System", "", "Hold D and steer Sana left or right"],
 	["236[D]", "Astrogirl", "Level 1 and 2 assist stocks", "Hold D and steer Sana in all 4 directions"],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", "Hold D to pull yourself away from block pressure"],
 ]
 
@@ -597,6 +605,17 @@ const HakkaMoveList: = [
 	["5D", "Exorcist Tags", "", "Multi hit projectile"],
 	["2D", "Shattered Wings", "", "Anti air and command jump"],
 	["236[D]", "Metal Scream Galaxy", "Level 1 and 2 assist stocks", "Hold and release D for 3 different levels of charge"],
+	["[D]", "", "Hold D to stay on field", ""],
+	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
+]
+
+const RikkaMoveList: = [
+	["Assist: Rikka"],
+	["Attacks"],
+	["5D", "Tuning Guitar", "", "4 way Steering"],
+	["2D", "Tone Tuning Guitar", "", "2 way Steering, Multi hit"],
+	["236[D]", "Holoroid Tuning Guitar", "Level 1 and 2 assist stocks", "4 way Steering and Multi hit"],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -607,7 +626,7 @@ const AssistSubaruMoveList: = [
 	["2D", "Fly Ball", "", "Anti Air. Try hitting a 5D fireball with this"],
 	["j2D", "Ground Ball", "", "Air Knockdown. Try hitting a 5D fireball with this"],
 	["236D", "Hollow Limit: Star Ball Beam", "Level 1 and 2 assist stocks", "Subaru fires off 4 star balls. Hitting star ball changes trajectory"],
-	["[D]", "Bases Loaded", "", "Hold D. Keep Subaru on field"],
+	["[D]", "Bases Loaded", "", "Hold D to Keep Subaru on field"],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -620,6 +639,7 @@ const AssistMioMoveList: = [
 	["]B[", "Cut", "", ""],
 	["]C[", "Launch", "", ""],
 	["236D", "Card Teleport", "Level 1 and 2 assist stocks", "Mio teleports a fixed distance forwards"],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -627,10 +647,10 @@ const AssistOgaMoveList: = [
 	["Assist: Aragami Oga"],
 	["Attacks"],
 	["5D", "Light Punch", "", "Guard: High"],
-	["2D", "High Jump", "", ""],
+	["2D", "Hero's Corridor", "", ""],
 	["jD", "DiveKick", "", "Guard: Mid"],
-	["j2D", "Fast Fall", "", ""],
 	["236[D]", "Tuna Punch", "Level 1 and 2 assist stocks", "Release D to do an overhead punch. (Air version hits mid)"],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -639,7 +659,8 @@ const AssistOllieMoveList: = [
 	["Attacks"],
 	["5D", "Head Dango", "", ""],
 	["2D", "Idol's hair pin", "", ""],
-	["236[D]", "Bzzt Boom Replica", "Level 1 and 2 assist stocks", ""],
+	["236D", "Bzzt Boom Replica", "Level 1 and 2 assist stocks", ""],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -648,7 +669,8 @@ const AssistKanataMoveList: = [
 	["Attacks"],
 	["5D", "Fifty KG Grip Strength", "", ""],
 	["2D", "", "", ""],
-	["236[D]", "Super Ginger Crusher", "Level 1 and 2 assist stocks", ""],
+	["236D", "Super Ginger Crusher", "Level 1 and 2 assist stocks", ""],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]
 
@@ -658,13 +680,24 @@ const AssistSuiseiMoveList: = [
 	["5D", "Caramel Thrust", "", ""],
 	["jD", "", "", ""],
 	["2D", "Bibbidi", "", "Change to Suicopath Mode"],
-	["236[D]", "", "Level 1 and 2 assist stocks", "Change to Suicopath Mode"],
+	["236D", "", "Level 1 and 2 assist stocks", "Change to Suicopath Mode"],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 	["Suicopath Mode"],
 	["5D", "", "", ""],
 	["jD", "Four Lines Crash", "", ""],
 	["2D", "Bobbidi", "", "Change to Suisei Mode"],
-	["236[D]", "Kyou mo Hasami", "Level 1 and 2 assist stocks", ""],
-	["j236[D]", "Stellar Stellar", "Level 1 and 2 assist stocks", ""],
+	["236D", "Kyou mo Hasami", "Level 1 and 2 assist stocks", ""],
+	["j236D", "Stellar Stellar", "Level 1 and 2 assist stocks", ""],
+	["[D]", "", "Hold D to stay on field", ""],
+	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
+]
+
+const AssistFlayonMoveList: = [
+	["Assist: Machina X Flayon"],
+	["Attacks"],
+	["5D", "Wave Fang 2", "", ""],
+	["2D", "Ryuken-shiki 2", "", ""],
+	["236D", "Air Rave SP", "Level 1 and 2 assist stocks", ""],
+	["[D]", "", "Hold D to stay on field", ""],
 	["6D Guard Cancel", "", "Level 1 and 2 assist stocks", ""],
 ]

@@ -47,7 +47,7 @@ func _init():
 			Enums.StKey.Hurt2PosX : -12124160, Enums.StKey.Hurt2PosY : -5046271,
 			Enums.StKey.Hurt2ScaleX : 871868, Enums.StKey.Hurt2ScaleY : 393004,
 			Enums.StKey.hit_box_colliding_frame : 2,
-			Enums.StKey.attack_damage: 35,
+			Enums.StKey.attack_damage: 40,
 			Enums.StKey.attack_type : Enums.AttackType.Strike,
 			Enums.StKey.meter_build: 0,
 			Enums.StKey.hitstop: 3,

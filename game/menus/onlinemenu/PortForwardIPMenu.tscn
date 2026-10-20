@@ -65,7 +65,7 @@ offset_right = -18.0
 offset_bottom = 149.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("1")
-text = "Direct IP connection (Needs port forwarding)"
+text = "UI_MENU_DIRECT_IP"
 
 [node name="OnlineButtons" type="VBoxContainer" parent="CanvasLayer"]
 visible = false
@@ -100,7 +100,7 @@ columns = 2
 [node name="HostLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Host"
+text = "UI_MENU_HOST"
 
 [node name="HostField" type="LineEdit" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -111,7 +111,7 @@ text = "127.0.0.1"
 [node name="PortLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Port"
+text = "UI_MENU_PORT"
 
 [node name="PortField" type="LineEdit" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -125,14 +125,14 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_top = NodePath("../PortField")
 focus_neighbor_right = NodePath("../ClientButton")
-text = "Server"
+text = "UI_MENU_SERVER"
 
 [node name="ClientButton" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_left = NodePath("../ServerButton")
 focus_neighbor_top = NodePath("../PortField")
-text = "Client"
+text = "UI_MENU_CLIENT"
 
 [node name="Earthbound" type="Sprite2D" parent="."]
 visible = false

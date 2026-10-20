@@ -2,42 +2,42 @@
 
 [ext_resource type="Script" uid="uid://dmwt0jdrxharp" path="res://game/fighter/puppet/PuppetPlayer.gd" id="1"]
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://do687u82bkwlx" path="res://game/assets/sprites/mio/HatoHurt/Timeline 1_0000.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://clpl7rxvc2p30" path="res://game/assets/sprites/mio/HatoGongPunch/Timeline 1_0001.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://bq3cjdvtt408l" path="res://game/assets/sprites/mio/HatoHurt/Timeline 1_0000.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://c7m5opnf2y5ke" path="res://game/assets/sprites/mio/HatoGongPunch/Timeline 1_0001.png" id="4"]
 [ext_resource type="PackedScene" uid="uid://sdxa076t7wfp" path="res://game/fighter/effects/shadow.tscn" id="4_oqx41"]
-[ext_resource type="Texture2D" uid="uid://3mq3jyy0cjgn" path="res://game/assets/sprites/mio/HatoGongPunch/Timeline 1_0002.png" id="5"]
-[ext_resource type="Texture2D" uid="uid://cclt6vk88123m" path="res://game/assets/sprites/mio/HatoGongPunch/Timeline 1_0000.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://d1bm4gupfxo1g" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0000.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://batf5j5sgthh5" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0004.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://ucnb2lf07jgw" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0005.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://c1qfoxxu77s2h" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0007.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://px5uyrorno1o" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0006.png" id="11"]
-[ext_resource type="Texture2D" uid="uid://cm6kooaeqkaqp" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0002.png" id="12"]
-[ext_resource type="Texture2D" uid="uid://b8024oxef0180" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0001.png" id="13"]
-[ext_resource type="Texture2D" uid="uid://b0qavmgx2g6d6" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0003.png" id="14"]
-[ext_resource type="Texture2D" uid="uid://b44jhpn78wh2f" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0000.png" id="15"]
-[ext_resource type="Texture2D" uid="uid://btyeey1ww0r4" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0001.png" id="16"]
-[ext_resource type="Texture2D" uid="uid://dpx4fvuhmt1ll" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0002.png" id="17"]
-[ext_resource type="Texture2D" uid="uid://cqniiwu7yfh6y" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0003.png" id="18"]
-[ext_resource type="Texture2D" uid="uid://ywib4myug261" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0004.png" id="19"]
-[ext_resource type="Texture2D" uid="uid://daipuin1c5js" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0005.png" id="20"]
-[ext_resource type="Texture2D" uid="uid://5dlmpceasmbb" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0006.png" id="21"]
-[ext_resource type="Texture2D" uid="uid://dgql0regrgq0e" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0007.png" id="22"]
-[ext_resource type="Texture2D" uid="uid://bbl3ca7yiyfu3" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0002.png" id="23"]
-[ext_resource type="Texture2D" uid="uid://dy3ptmxurjurs" path="res://game/assets/sprites/mio/HatoBackWalk/Timeline 1_0000.png" id="23_wyh2y"]
-[ext_resource type="Texture2D" uid="uid://b8bx2brp03fyh" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0003.png" id="24"]
-[ext_resource type="Texture2D" uid="uid://dli3l6n2wt2kk" path="res://game/assets/sprites/mio/HatoBackWalk/Timeline 1_0001.png" id="24_21arw"]
-[ext_resource type="Texture2D" uid="uid://bocfg1fmwdw7p" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0000.png" id="25"]
-[ext_resource type="Texture2D" uid="uid://cfn5da1u3kk8l" path="res://game/assets/sprites/mio/HatoBackWalk/Timeline 1_0002.png" id="25_mtaia"]
-[ext_resource type="Texture2D" uid="uid://cxr766lg1m5f7" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0001.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://b2aelpmcgxghq" path="res://game/assets/sprites/mio/HatoGongPunch/Timeline 1_0002.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bnm6tex25j1jp" path="res://game/assets/sprites/mio/HatoGongPunch/Timeline 1_0000.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://dynrrg8pd6sy4" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0000.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://dhnwen3t6lc62" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0004.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://dpbhouuygb3nw" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0005.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://hueeubtrml5m" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0007.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://dk86ufywvjgud" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0006.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://1d4dpuyxx7ub" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0002.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://b4axyloenacip" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0001.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://dqoynmq7vcu6a" path="res://game/assets/sprites/mio/HatoOra/Timeline 1_0003.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://cn1bvqkj1sga4" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0000.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://bt4thoyeg6v3n" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0001.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://dausv1xidttrs" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0002.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://c88plwlrnojhe" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0003.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://i31iouvmsrja" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0004.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://diif40c1xrktv" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0005.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://3abwpk80p6o0" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0006.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://c6fall7d7mknr" path="res://game/assets/sprites/mio/HatoSlam/Timeline 1_0007.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://cvy5b0gisp1p8" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0002.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://df7oitrqkf5e2" path="res://game/assets/sprites/mio/HatoBackWalk/Timeline 1_0000.png" id="23_wyh2y"]
+[ext_resource type="Texture2D" uid="uid://7mi1drx203eo" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0003.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://omrh1mdnoryh" path="res://game/assets/sprites/mio/HatoBackWalk/Timeline 1_0001.png" id="24_21arw"]
+[ext_resource type="Texture2D" uid="uid://ck0w774500lr5" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0000.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://c16nkhg5udrae" path="res://game/assets/sprites/mio/HatoBackWalk/Timeline 1_0002.png" id="25_mtaia"]
+[ext_resource type="Texture2D" uid="uid://blo4ic25tlwvd" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0001.png" id="26"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="29"]
-[ext_resource type="Texture2D" uid="uid://ofot8d4uvceq" path="res://game/assets/sprites/mio/HatoForwardWalk/Timeline 1_0000.png" id="30_x08d0"]
-[ext_resource type="Texture2D" uid="uid://dsr5o8lgbmigb" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0004.png" id="30_xl0cu"]
-[ext_resource type="Texture2D" uid="uid://c2pkufxpm41f5" path="res://game/assets/sprites/mio/HatoForwardWalk/Timeline 1_0001.png" id="31_xl0cu"]
-[ext_resource type="Texture2D" uid="uid://b6rod2av7stf" path="res://game/assets/sprites/mio/HatoForwardWalk/Timeline 1_0002.png" id="32_yr2ma"]
-[ext_resource type="Texture2D" uid="uid://dc0cyhut4ygt8" path="res://game/assets/sprites/mio/HatoIdle/Timeline 1_0001.png" id="34_rohpp"]
-[ext_resource type="Texture2D" uid="uid://dplonmflqisvs" path="res://game/assets/sprites/mio/HatoIdle/Timeline 1_0002.png" id="35_oqx41"]
-[ext_resource type="Texture2D" uid="uid://crftursjndnd5" path="res://game/assets/sprites/mio/HatoIdle/Timeline 1_0000.png" id="39"]
+[ext_resource type="Texture2D" uid="uid://bppirgwj0qgk7" path="res://game/assets/sprites/mio/HatoForwardWalk/Timeline 1_0000.png" id="30_x08d0"]
+[ext_resource type="Texture2D" uid="uid://dp2coibfuwd3j" path="res://game/assets/sprites/mio/HatoCards/Timeline 1_0004.png" id="30_xl0cu"]
+[ext_resource type="Texture2D" uid="uid://gha6utn1ggpp" path="res://game/assets/sprites/mio/HatoForwardWalk/Timeline 1_0001.png" id="31_xl0cu"]
+[ext_resource type="Texture2D" uid="uid://bufkc615fyywq" path="res://game/assets/sprites/mio/HatoForwardWalk/Timeline 1_0002.png" id="32_yr2ma"]
+[ext_resource type="Texture2D" uid="uid://uraubs0xtxn5" path="res://game/assets/sprites/mio/HatoIdle/Timeline 1_0001.png" id="34_rohpp"]
+[ext_resource type="Texture2D" uid="uid://ckxgqwxigk0he" path="res://game/assets/sprites/mio/HatoIdle/Timeline 1_0002.png" id="35_oqx41"]
+[ext_resource type="Texture2D" uid="uid://cetiuut8tdcgl" path="res://game/assets/sprites/mio/HatoIdle/Timeline 1_0000.png" id="39"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="46"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="47"]
 
@@ -372,7 +372,7 @@ fixed_position_x = 1127680
 fixed_position_y = -28966912
 fixed_scale_x = 1320100
 fixed_scale_y = 3282263
-position = Vector2(17.207031, -442)
+position = Vector2(511, -477)
 scale = Vector2(20.143127, 50.08336)
 
 [node name="Hitbox1" parent="." instance=ExtResource("46")]
@@ -380,5 +380,5 @@ fixed_position_x = 19988482
 fixed_position_y = -21233664
 fixed_scale_x = 2533967
 fixed_scale_y = 1171559
-position = Vector2(305, -324)
+position = Vector2(754, -383)
 scale = Vector2(38.6653, 17.8766)

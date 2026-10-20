@@ -46,7 +46,7 @@ offset_top = 208.0
 offset_right = 689.0
 offset_bottom = 338.0
 scale = Vector2(2, 2)
-text = "Logging in to Server..."
+text = "UI_MENU_LOGGING_IN"
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 1
@@ -58,7 +58,7 @@ offset_top = 10.0
 offset_right = 495.0
 offset_bottom = 140.0
 scale = Vector2(1.56009, 1.2171)
-text = "Netplay:"
+text = "UI_MENU_NETPLAY"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 1
@@ -73,35 +73,35 @@ theme = ExtResource("2_5ikgm")
 [node name="HostLabel" type="Label" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Private Room"
+text = "UI_MENU_PRIVATE_ROOM"
 
 [node name="CreateRoomButton" type="Button" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Create Room"
+text = "UI_MENU_CREATE_ROOM"
 
 [node name="JoinRoomButton" type="Button" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Join Room"
+text = "UI_MENU_JOIN_ROOM"
 
 [node name="HostLabel2" type="Label" parent="GridContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Public Room"
+text = "UI_MENU_PUBLIC_ROOM"
 
 [node name="CreatePublicRoomButton" type="Button" parent="GridContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Create Room"
+text = "UI_MENU_CREATE_ROOM"
 
 [node name="FindPublicRoomButton" type="Button" parent="GridContainer"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Find Room"
+text = "UI_MENU_FIND_ROOM"
 
 [node name="HostLabel3" type="Label" parent="GridContainer"]
 layout_mode = 2
@@ -110,7 +110,7 @@ size_flags_horizontal = 3
 [node name="ChangeControlsButton" type="Button" parent="GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Change Controls"
+text = "UI_MENU_CHANGE_CONTROLS"
 
 [node name="LP" type="Sprite2D" parent="."]
 position = Vector2(185, 817)

@@ -2,45 +2,45 @@
 
 [ext_resource type="Script" uid="uid://k6cy4i87ew67" path="res://game/fighter/assist/hakka/HakkaPlayer.gd" id="1"]
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="2"]
-[ext_resource type="Texture2D" uid="uid://c5sr8u34ebiek" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0007.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dyeep11bcsvi5" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0007.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://sdxa076t7wfp" path="res://game/fighter/effects/shadow.tscn" id="4_b8xsb"]
-[ext_resource type="Texture2D" uid="uid://cdnkc8g2vprg5" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0000.png" id="5_dvncu"]
-[ext_resource type="Texture2D" uid="uid://107n3412hw4r" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0009.png" id="5_g6gcy"]
-[ext_resource type="Texture2D" uid="uid://bvfb5ekutukf7" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0001.png" id="6_yfkjc"]
-[ext_resource type="Texture2D" uid="uid://c3d53ic464oh0" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0006.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://cdi4shj5dta3d" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0002.png" id="7_6qsqq"]
-[ext_resource type="Texture2D" uid="uid://c342i7d02fj3m" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0003.png" id="8_1ns5d"]
-[ext_resource type="Texture2D" uid="uid://cjpgidrdkk53x" path="res://game/assets/sprites/assists/hakka/GunFlame/Timeline 1_0002.png" id="8_sudv1"]
-[ext_resource type="Texture2D" uid="uid://djcd7dluu4i18" path="res://game/assets/sprites/assists/hakka/GunFlame/Timeline 1_0000.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://c2l0vupwor1xq" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0000.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://dav4s7tcwcac4" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0001.png" id="10_a4llx"]
-[ext_resource type="Texture2D" uid="uid://b3phr80tvm3en" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0003.png" id="11_b8xsb"]
-[ext_resource type="Texture2D" uid="uid://cjowute6yvyg8" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0004.png" id="11_h30a6"]
-[ext_resource type="Texture2D" uid="uid://cpey474w7icdo" path="res://game/assets/sprites/assists/hakka/GunFlame/Timeline 1_0001.png" id="13"]
-[ext_resource type="Texture2D" uid="uid://wnxecxbtt0eu" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0003.png" id="16"]
-[ext_resource type="Texture2D" uid="uid://cj744ycysh7tv" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0001.png" id="17"]
-[ext_resource type="Texture2D" uid="uid://b0seww6iq5nxj" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0000.png" id="18"]
-[ext_resource type="Texture2D" uid="uid://hr2jcew0wo1o" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0008.png" id="18_a4llx"]
-[ext_resource type="Texture2D" uid="uid://c32xig5fo7ybr" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0002.png" id="19"]
-[ext_resource type="Texture2D" uid="uid://b73hdn30h7oha" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0000.png" id="22"]
-[ext_resource type="Texture2D" uid="uid://bwl4nfnwha4g8" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0002.png" id="23"]
-[ext_resource type="Texture2D" uid="uid://b7sgcggmypc6e" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0004.png" id="25"]
-[ext_resource type="Texture2D" uid="uid://x2pkym06sqcg" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0005.png" id="26"]
-[ext_resource type="Texture2D" uid="uid://d2j5bp0jiianw" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0000.png" id="26_6qsqq"]
-[ext_resource type="Texture2D" uid="uid://plx3akjxgekn" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0001.png" id="27_1ns5d"]
-[ext_resource type="Texture2D" uid="uid://dj4mny1p5onl4" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0002.png" id="28_0ju5x"]
-[ext_resource type="Texture2D" uid="uid://v0rkbfuk2k31" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0001.png" id="29_ck4to"]
-[ext_resource type="Texture2D" uid="uid://c3p4jc0bhdkdu" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0003.png" id="29_vakkw"]
+[ext_resource type="Texture2D" uid="uid://dtknfqy2ab3vi" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0000.png" id="5_dvncu"]
+[ext_resource type="Texture2D" uid="uid://tlh0b2qmb27k" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0009.png" id="5_g6gcy"]
+[ext_resource type="Texture2D" uid="uid://cf2onglm5ktqj" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0001.png" id="6_yfkjc"]
+[ext_resource type="Texture2D" uid="uid://huadivv4dw13" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0006.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bpg5d0ldqwrtv" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0002.png" id="7_6qsqq"]
+[ext_resource type="Texture2D" uid="uid://banjx1k2drw38" path="res://game/assets/sprites/assists/hakka/AirHurt/Timeline 1_0003.png" id="8_1ns5d"]
+[ext_resource type="Texture2D" uid="uid://c8i18f7to07g6" path="res://game/assets/sprites/assists/hakka/GunFlame/Timeline 1_0002.png" id="8_sudv1"]
+[ext_resource type="Texture2D" uid="uid://cf4b2whg42t08" path="res://game/assets/sprites/assists/hakka/GunFlame/Timeline 1_0000.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://py8j8xl4st28" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0000.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://cchq6c4amhfeb" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0001.png" id="10_a4llx"]
+[ext_resource type="Texture2D" uid="uid://cp122tvkqxspd" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0003.png" id="11_b8xsb"]
+[ext_resource type="Texture2D" uid="uid://ksbnl4l0mtq0" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0004.png" id="11_h30a6"]
+[ext_resource type="Texture2D" uid="uid://dgvyynvkwjdqi" path="res://game/assets/sprites/assists/hakka/GunFlame/Timeline 1_0001.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://c120x2pdyr2t0" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0003.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://cvxuqannuadxd" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0001.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://b8ntun3271wrf" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0000.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://fqtvlgquoc0s" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0008.png" id="18_a4llx"]
+[ext_resource type="Texture2D" uid="uid://bakrh3fe1moxd" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0002.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://jxpth8xhgpjn" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0000.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://b6qkll5xu0r1q" path="res://game/assets/sprites/assists/hakka/Badlands/Timeline 1_0002.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://2tvagonpaxh0" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0004.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://ci8tmg36j40d" path="res://game/assets/sprites/assists/hakka/GalaxyPunch/Timeline 1_0005.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://chphyas0jh07r" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0000.png" id="26_6qsqq"]
+[ext_resource type="Texture2D" uid="uid://ir51tql60eu5" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0001.png" id="27_1ns5d"]
+[ext_resource type="Texture2D" uid="uid://cmno6iwf427ks" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0002.png" id="28_0ju5x"]
+[ext_resource type="Texture2D" uid="uid://bf6ujht7wlva1" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0001.png" id="29_ck4to"]
+[ext_resource type="Texture2D" uid="uid://bdpbp0g5h68jh" path="res://game/assets/sprites/assists/hakka/Burst/Timeline 1_0003.png" id="29_vakkw"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="30"]
-[ext_resource type="Texture2D" uid="uid://qkpcyxp7yymg" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0002.png" id="30_wcvts"]
+[ext_resource type="Texture2D" uid="uid://cytl6q3qf8r" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0002.png" id="30_wcvts"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="31"]
-[ext_resource type="Texture2D" uid="uid://6qfnjwii0n7m" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0003.png" id="31_3w26m"]
-[ext_resource type="Texture2D" uid="uid://ce3y56n7c4gdo" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0000.png" id="31_ck4to"]
+[ext_resource type="Texture2D" uid="uid://b5ahcxf6y60gq" path="res://game/assets/sprites/assists/hakka/Exit/Timeline 1_0003.png" id="31_3w26m"]
+[ext_resource type="Texture2D" uid="uid://b21ib4mtumag7" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0000.png" id="31_ck4to"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="32"]
-[ext_resource type="Texture2D" uid="uid://c0tskyd7vmcj4" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0001.png" id="32_wcvts"]
-[ext_resource type="Texture2D" uid="uid://tq7jpwpmpnav" path="res://game/assets/sprites/Empty_0000.png" id="33"]
-[ext_resource type="Texture2D" uid="uid://xewe5yx7h4uf" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0002.png" id="33_3w26m"]
-[ext_resource type="Texture2D" uid="uid://djrcfnltoi3xd" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0003.png" id="34_m28nt"]
+[ext_resource type="Texture2D" uid="uid://dlftfwmsk4yb3" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0001.png" id="32_wcvts"]
+[ext_resource type="Texture2D" uid="uid://c3h40i4mamblw" path="res://game/assets/sprites/Empty_0000.png" id="33"]
+[ext_resource type="Texture2D" uid="uid://6g4wjoxoveqy" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0002.png" id="33_3w26m"]
+[ext_resource type="Texture2D" uid="uid://bqqetuh46hcq2" path="res://game/assets/sprites/assists/hakka/GroundHurt/Timeline 1_0003.png" id="34_m28nt"]
 
 [sub_resource type="SGRectangleShape2D" id="1"]
 extents_x = 2063232
@@ -501,7 +501,7 @@ auto_reset = false
 fixed_position_y = -11337728
 fixed_scale_x = 686985
 fixed_scale_y = 1074037
-position = Vector2(0, -173)
+position = Vector2(422, -215)
 scale = Vector2(10.4826, 16.3885)
 
 [node name="Hurtbox2" parent="." instance=ExtResource("30")]
@@ -509,7 +509,7 @@ fixed_position_x = -262144
 fixed_position_y = -15138816
 fixed_scale_x = 655293
 fixed_scale_y = 1488884
-position = Vector2(-4, -231)
+position = Vector2(393.99997, -247)
 scale = Vector2(9.99898, 22.7186)
 
 [node name="Hitbox1" parent="." instance=ExtResource("31")]
@@ -517,7 +517,7 @@ fixed_position_x = -1048576
 fixed_position_y = -20905984
 fixed_scale_x = 2592796
 fixed_scale_y = 981041
-position = Vector2(-16, -319)
+position = Vector2(709, -332)
 scale = Vector2(39.5629, 14.9695)
 
 [node name="Hitbox2" parent="." instance=ExtResource("31")]
@@ -525,5 +525,5 @@ fixed_position_x = 19857410
 fixed_position_y = -12451842
 fixed_scale_x = 942229
 fixed_scale_y = -901102
-position = Vector2(303, -190)
+position = Vector2(558, -244.00002)
 scale = Vector2(14.3773, -13.7497)

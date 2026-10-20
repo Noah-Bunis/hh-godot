@@ -41,7 +41,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*30,
 			Enums.StKey.counter_launch_dir_y: SGFixed.ONE*40,
 			},
-		35 : {
+		37 : {
 			Enums.StKey.counterOK : false,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
@@ -62,8 +62,8 @@ func enter(state: Dictionary) -> void:
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
-	if (state[Enums.StKey.frame] >= 14 and state[Enums.StKey.frame] <= 21):
-		state[Enums.StKey.velocity_x] = Util.fixed_max(state[Enums.StKey.velocity_x], SGFixed.ONE*20)
+	if (state[Enums.StKey.frame] >= 10 and state[Enums.StKey.frame] <= 21):
+		state[Enums.StKey.velocity_x] = Util.fixed_max(state[Enums.StKey.velocity_x], SGFixed.ONE*25)
 
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
@@ -73,8 +73,3 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
-#	if (state[Enums.StKey.hitStopFrame] >= 0):
-#		if (interpreter.is_dashing(true, state[Enums.StKey.leftface])):
-#			state[Enums.StKey.cancelState] = "Run"
-#		elif (interpreter.is_dashing(false, state[Enums.StKey.leftface])):
-#			state[Enums.StKey.cancelState] = "BackDash"

@@ -52,7 +52,7 @@ grow_horizontal = 2
 scale = Vector2(1.95114, 1.97515)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-text = "WOW"
+text = "UI_STATUS_WOW"
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 self_modulate = Color(0.819608, 0.231373, 0.231373, 1)
@@ -82,7 +82,7 @@ scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Regaining sync..."
+text = "UI_STATUS_REGAINING_SYNC"
 
 [node name="PingLabel" type="Label" parent="CanvasLayer"]
 visible = false
@@ -97,7 +97,7 @@ scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Regaining sync..."
+text = "UI_STATUS_REGAINING_SYNC"
 
 [node name="RollbackFrameLabel" type="Label" parent="CanvasLayer"]
 visible = false
@@ -112,7 +112,7 @@ scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Regaining sync..."
+text = "UI_STATUS_REGAINING_SYNC"
 
 [node name="WinCounterP1" parent="CanvasLayer" instance=ExtResource("4")]
 visible = false
@@ -155,12 +155,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Close Menu"
+text = "UI_REPLAY_CLOSE_MENU"
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ExitButton")
-text = "Close"
+text = "UI_BUTTON_CLOSE"
 
 [node name="CloseNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
@@ -173,7 +173,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Replay Takeover"
+text = "UI_REPLAY_TAKEOVER"
 
 [node name="TakeoverButton" type="OptionButton" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
@@ -189,11 +189,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Load Takeover State"
+text = "UI_REPLAY_LOAD_TAKEOVER"
 
 [node name="LoadStateButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
-text = "Load (Back button works too)"
+text = "UI_REPLAY_LOAD_BACK_HINT"
 
 [node name="LoadStateNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
@@ -209,7 +209,7 @@ theme_override_fonts/font = SubResource("2")
 
 [node name="ChangeControlsButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
-text = "Change Controls"
+text = "UI_MENU_CHANGE_CONTROLS"
 
 [node name="ChangeControlsEmpty" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
@@ -225,7 +225,7 @@ theme_override_fonts/font = SubResource("2")
 
 [node name="ResetButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
-text = "Reset"
+text = "UI_BUTTON_RESET"
 
 [node name="ResetNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
@@ -238,12 +238,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Quit Training"
+text = "UI_MENU_QUIT_TRAINING"
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../CloseButton")
-text = "Quit"
+text = "UI_BUTTON_QUIT"
 
 [node name="ExitNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2

@@ -2,6 +2,8 @@ extends FlayonFlightBaseState
 
 class_name FlayonFlight2CIncreaseState
 
+var VoiceSound = preload("res://game/assets/voice/flayon/MXF_running noises.wav")
+
 func _init():
 	endFrame = 30
 	
@@ -38,8 +40,8 @@ func _init():
 			Enums.StKey.Hurt2PosX : 15435712, Enums.StKey.Hurt2PosY : -7136510,
 			Enums.StKey.Hurt2ScaleX : 920696, Enums.StKey.Hurt2ScaleY : 910074,
 			Enums.StKey.attack_damage: 40,
-			Enums.StKey.min_damage: 7,
-			Enums.StKey.chip_damage: 4,
+			Enums.StKey.min_damage: 9,
+			Enums.StKey.chip_damage: 10,
 			Enums.StKey.meter_build: SGFixed.ONE*1000,
 			Enums.StKey.guard: Enums.GuardType.Mid,
 			Enums.StKey.attack_type : Enums.AttackType.GroundBouncer,
@@ -75,6 +77,8 @@ func physics_tick(state: Dictionary) -> void:
 	elif (state[Enums.StKey.frame] == 8):
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*25, state[Enums.StKey.velocity_x])
 		state[Enums.StKey.velocity_y] = SGFixed.ONE*55
+	elif (state[Enums.StKey.frame] == 6):
+		SyncManager.play_sound("FlayonVoice", VoiceSound, {"bus": "Voice"})
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass

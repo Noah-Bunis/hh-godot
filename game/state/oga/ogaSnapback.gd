@@ -2,6 +2,8 @@ extends OgaAttackState
 
 class_name OgaSnapbackState
 
+var voice = preload("res://game/assets/voice/oga/oga_dete koi.wav")
+
 func _init():
 	endFrame = 20
 	
@@ -76,6 +78,12 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("Snapback")
 	state[Enums.StKey.super_meter] -= Util.LEVEL_ONE_SUPER
+
+func physics_tick(state: Dictionary) -> void:
+	super.physics_tick(state)
+	if (state[Enums.StKey.frame] == 3):
+		SyncManager.play_sound("OgaVoice", voice, {"bus": "Voice"})
+		SyncManager.play_sound("OgaVoiceReverb", voice, {"bus": "ReverbVoice"})
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

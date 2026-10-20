@@ -30,7 +30,7 @@ func enter(state: Dictionary) -> void:
 	anim.play("FlightEnter")
 	state[Enums.StKey.drag_x] = 0 #Util.ICE_FRICTION
 	state[Enums.StKey.accel_y] = 0
-	state[Enums.StKey.super_meter] -= SGFixed.ONE*500
+	#state[Enums.StKey.super_meter] -= SGFixed.ONE*500
 	state[Enums.StKey.kara_OK] = false # No instant air kar
 
 func physics_tick(state: Dictionary) -> void:
@@ -41,6 +41,7 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.accel_y] = 65536
 	elif (state[Enums.StKey.frame] == 3):
 		state[Enums.StKey.hitStopFrame] = 0
+	self.enforce_min_height(state)
 
 func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 	super.handle_input(state, interpreter)

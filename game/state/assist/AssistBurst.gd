@@ -60,7 +60,7 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.velocity_x] = 0
-		state[Enums.StKey.velocity_y] = -SGFixed.ONE * 50
+		state[Enums.StKey.velocity_y] = -SGFixed.ONE * 40
 		state[Enums.StKey.accel_y] = Util.GRAVITY
 	elif (state[Enums.StKey.frame] == 10):
 		state[Enums.StKey.velocity_y] = 0

@@ -24,11 +24,11 @@ script = ExtResource("1")
 
 [node name="Options" type="GridContainer" parent="CanvasLayer"]
 anchors_preset = -1
-offset_left = 87.0
-offset_top = 90.0
-offset_right = 727.0
-offset_bottom = 428.0
-scale = Vector2(2.74607, 2.44857)
+offset_left = 32.000008
+offset_top = 24.000008
+offset_right = 989.0
+offset_bottom = 488.0
+scale = Vector2(2.449141, 2.1522746)
 theme = ExtResource("2_xm26x")
 columns = 3
 
@@ -37,7 +37,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Battle Version:"
+text = "UI_MENU_BATTLE_VERSION"
 horizontal_alignment = 2
 
 [node name="VersionLabelReadout" type="Label" parent="CanvasLayer/Options"]
@@ -58,13 +58,13 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Fullscreen"
+text = "UI_OPTIONS_FULLSCREEN"
 horizontal_alignment = 2
 
 [node name="FullScreenButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../GoBackButton")
-text = "Change"
+text = "UI_BUTTON_CHANGE"
 
 [node name="FullScreenEmpty" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
@@ -77,26 +77,43 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "VSync"
+text = "UI_OPTIONS_VSYNC"
 horizontal_alignment = 2
 
 [node name="VsyncButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
-text = "Change"
+text = "UI_BUTTON_CHANGE"
 
 [node name="VsyncEmpty" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "ON"
+text = "UI_TRAINING_ON"
+
+[node name="LanguageLabel" type="Label" parent="CanvasLayer/Options"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("1")
+text = "UI_OPTIONS_LANGUAGE"
+horizontal_alignment = 2
+
+[node name="LanguageOption" type="OptionButton" parent="CanvasLayer/Options"]
+layout_mode = 2
+
+[node name="LanguageEmpty" type="Label" parent="CanvasLayer/Options"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("1")
 
 [node name="MainVolumeLabel" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Main Volume"
+text = "UI_OPTIONS_MAIN_VOLUME"
 horizontal_alignment = 2
 
 [node name="MainVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
@@ -119,7 +136,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Music"
+text = "UI_OPTIONS_MUSIC"
 horizontal_alignment = 2
 
 [node name="MusicVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
@@ -142,7 +159,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Sound"
+text = "UI_OPTIONS_SOUND"
 horizontal_alignment = 2
 
 [node name="SoundVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
@@ -165,7 +182,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Voice"
+text = "UI_OPTIONS_VOICE"
 horizontal_alignment = 2
 
 [node name="VoiceVolumeMeter" type="HSlider" parent="CanvasLayer/Options"]
@@ -188,12 +205,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Save Replays"
+text = "UI_OPTIONS_SAVE_REPLAYS"
 horizontal_alignment = 2
 
 [node name="ReplayLogsButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
-text = "Change"
+text = "UI_BUTTON_CHANGE"
 
 [node name="ReplayLogsEmpty" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
@@ -206,12 +223,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Debug Rollback Logs"
+text = "UI_OPTIONS_DEBUG_ROLLBACK_LOGS"
 horizontal_alignment = 2
 
 [node name="DebugRollbackLogsButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
-text = "Change"
+text = "UI_BUTTON_CHANGE"
 
 [node name="DebugRollbackLogsEmpty" type="Label" parent="CanvasLayer/Options"]
 custom_minimum_size = Vector2(350, 0)
@@ -219,19 +236,19 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "WOW"
+text = "UI_STATUS_WOW"
 
 [node name="GetLogDirLabel" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Get Logs Path"
+text = "UI_OPTIONS_GET_LOGS_PATH"
 horizontal_alignment = 2
 
 [node name="GetLogDirButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
-text = "Copy to clipboard"
+text = "UI_OPTIONS_COPY_CLIPBOARD"
 
 [node name="GetLogDirEmpty" type="Label" parent="CanvasLayer/Options"]
 custom_minimum_size = Vector2(350, 0)
@@ -245,15 +262,33 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Reset Controls File"
+text = "UI_OPTIONS_RESET_CONTROLS"
 horizontal_alignment = 2
 
 [node name="ClearControlsButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
-text = "Clear Controls"
+text = "UI_BUTTON_CLEAR_CONTROLS"
 
 [node name="ClearControlsEmpty" type="Label" parent="CanvasLayer/Options"]
 custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("1")
+
+[node name="ChangeControlsLabel" type="Label" parent="CanvasLayer/Options"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("1")
+text = "UI_MENU_EDIT_CONTROLS"
+horizontal_alignment = 2
+
+[node name="ChangeControlsButton" type="Button" parent="CanvasLayer/Options"]
+layout_mode = 2
+text = "UI_BUTTON_CHANGE"
+
+[node name="ChangeControlsEmpty" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -264,12 +299,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Reset to default"
+text = "UI_OPTIONS_RESET_DEFAULT"
 horizontal_alignment = 2
 
 [node name="ResetButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
-text = "Reset"
+text = "UI_BUTTON_RESET"
 
 [node name="ResetEmpty" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
@@ -282,13 +317,13 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Go Back"
+text = "UI_BUTTON_GO_BACK"
 horizontal_alignment = 2
 
 [node name="GoBackButton" type="Button" parent="CanvasLayer/Options"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../FullScreenButton")
-text = "Exit Options"
+text = "UI_BUTTON_EXIT_OPTIONS"
 
 [node name="GoBackEmpty" type="Label" parent="CanvasLayer/Options"]
 layout_mode = 2
@@ -309,6 +344,7 @@ texture = ExtResource("3")
 
 [connection signal="pressed" from="CanvasLayer/Options/FullScreenButton" to="." method="_on_FullScreenButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/VsyncButton" to="." method="_on_VsyncButton_pressed"]
+[connection signal="item_selected" from="CanvasLayer/Options/LanguageOption" to="." method="_on_LanguageOption_item_selected"]
 [connection signal="value_changed" from="CanvasLayer/Options/MainVolumeMeter" to="." method="_on_MainVolumeMeter_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Options/MainVolumeMeter" to="CanvasLayer/Options/MainVolumeNumber" method="_on_SuperMeter_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Options/MusicVolumeMeter" to="." method="_on_MusicVolumeMeter_value_changed"]
@@ -321,5 +357,6 @@ texture = ExtResource("3")
 [connection signal="pressed" from="CanvasLayer/Options/DebugRollbackLogsButton" to="." method="_on_DebugRollbackLogsButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/GetLogDirButton" to="." method="_on_GetLogsDirButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/ClearControlsButton" to="." method="_on_ClearControlsButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Options/ChangeControlsButton" to="." method="_on_ChangeControlsButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/ResetButton" to="." method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/Options/GoBackButton" to="." method="_on_GoBackButton_pressed"]

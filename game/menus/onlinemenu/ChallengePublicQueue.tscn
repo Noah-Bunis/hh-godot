@@ -43,7 +43,7 @@ offset_bottom = 368.0
 grow_horizontal = 2
 scale = Vector2(2.34642, 3.78326)
 theme_override_fonts/font = SubResource("1")
-text = "New Challenger:"
+text = "UI_MENU_NEW_CHALLENGER"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 offset_left = 1246.0
@@ -55,7 +55,7 @@ scale = Vector2(2, 2)
 [node name="ChallengerName" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Challenger Name"
+text = "UI_MENU_CHALLENGER_NAME"
 
 [node name="Empty" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -64,14 +64,14 @@ size_flags_horizontal = 3
 [node name="PingLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Ping: ???ms"
+text = "UI_MENU_PING_UNKNOWN"
 
 [node name="InputDelayLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("3")
-text = "Input Delay: 2"
+text = "UI_MENU_INPUT_DELAY_DEFAULT"
 
 [node name="InputDelayMeter" type="HSlider" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -88,13 +88,13 @@ size_flags_horizontal = 3
 [node name="Accept" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "GO!"
+text = "UI_MENU_GO"
 
 [node name="Decline" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 button_mask = 0
-text = "Decline"
+text = "UI_MENU_DECLINE"
 
 [node name="ChallengeCount" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -103,7 +103,7 @@ size_flags_horizontal = 3
 [node name="ChallengeTimer" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Time: 10"
+text = "UI_LABEL_TIMER_INITIAL"
 
 [node name="Background" type="Sprite2D" parent="."]
 self_modulate = Color(0.0313726, 0.137255, 0.262745, 1)

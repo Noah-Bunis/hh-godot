@@ -2,6 +2,7 @@ extends "res://game/state/ollie/mainstates/ollieAttackState.gd"
 
 class_name OllieEXStarBallState
 
+var Voice = preload("res://game/assets/voice/ollie/oll_fight back.wav")
 var sound = preload("res://game/assets/sfx/Parry8Bit.wav")
 
 func _init():
@@ -48,6 +49,9 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.hitStopFrame] = 0
 	elif (state[Enums.StKey.frame] == 6):
 		SyncManager.play_sound("SubaruStarBallSound", sound, {"bus": "Sound"})
+	elif (state[Enums.StKey.frame] == 10):	
+		SyncManager.play_sound("OllieVoice", Voice, {"bus": "Voice"})
+		SyncManager.play_sound("OllieVoiceReverb", Voice, {"bus": "ReverbVoice"})
 
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass

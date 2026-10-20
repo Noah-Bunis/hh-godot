@@ -56,8 +56,8 @@ func change_portrait(enumChara: int, is_assist=false):
 				color = "res://game/assets/sprites/kanata/ColorPalettes/"
 				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/KanataPortrait"
 			Enums.AssistCharacters.Flayon:
-				color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
-				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FubukiPortrait"
+				color = "res://game/assets/sprites/flayon/ColorPalettes/"
+				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FlayonPortrait"
 			Enums.AssistCharacters.Eight:
 				color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
 				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FubukiPortrait"
@@ -85,6 +85,9 @@ func change_portrait(enumChara: int, is_assist=false):
 			Enums.AssistCharacters.Hakka:
 				color = "res://game/assets/sprites/assists/hakka/ColorPalettes/"
 				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/HakkaPortrait"
+			Enums.AssistCharacters.Rikka:
+				color = "res://game/assets/sprites/assists/rikka/ColorPalettes/"
+				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/RikkaPortrait"
 			Enums.AssistCharacters.Sana:
 				color = "res://game/assets/sprites/assists/sana/ColorPalettes/"
 				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SanaPortrait"
@@ -115,9 +118,9 @@ func change_portrait(enumChara: int, is_assist=false):
 				color = "res://game/assets/sprites/kanata/ColorPalettes/"
 				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/KanataPortrait"
 			Enums.PointCharacters.Flayon:
-				color = "res://game/assets/sprites/subaru/ColorPalettes/"
-				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/RandomPortrait"
-			Enums.PointCharacters.Kurokami:
+				color = "res://game/assets/sprites/flayon/ColorPalettes/"
+				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FlayonPortrait"
+			Enums.PointCharacters.Eight:
 				color = "res://game/assets/sprites/subaru/ColorPalettes/"
 				portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SubaruPortrait"
 			Enums.PointCharacters.Nine:
@@ -168,8 +171,8 @@ func change_portrait_all_character(enumChara: int, is_assist=false):
 			color = "res://game/assets/sprites/kanata/ColorPalettes/"
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/KanataPortrait"
 		Enums.AllCharacters.AssistFlayon:
-			color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
-			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FubukiPortrait"
+			color = "res://game/assets/sprites/flayon/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FlayonPortrait"
 		Enums.AllCharacters.Fubuki:
 			color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FubukiPortrait"
@@ -182,6 +185,9 @@ func change_portrait_all_character(enumChara: int, is_assist=false):
 		Enums.AllCharacters.Hakka:
 			color = "res://game/assets/sprites/assists/hakka/ColorPalettes/"
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/HakkaPortrait"
+		Enums.AllCharacters.Rikka:
+			color = "res://game/assets/sprites/assists/rikka/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/RikkaPortrait"
 		Enums.AllCharacters.Sana:
 			color = "res://game/assets/sprites/assists/sana/ColorPalettes/"
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/SanaPortrait"
@@ -207,8 +213,8 @@ func change_portrait_all_character(enumChara: int, is_assist=false):
 			color = "res://game/assets/sprites/kanata/ColorPalettes/"
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/KanataPortrait"
 		Enums.AllCharacters.Flayon:
-			color = "res://game/assets/sprites/subaru/ColorPalettes/"
-			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/RandomPortrait"
+			color = "res://game/assets/sprites/flayon/ColorPalettes/"
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/Portraits/FlayonPortrait"
 		_:
 			color = "res://game/assets/sprites/subaru/ColorPalettes/"
 			portrait = "res://game/assets/sprites/subaru/SubaruPortrait"

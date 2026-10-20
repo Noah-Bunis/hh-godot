@@ -2,6 +2,8 @@ extends FlayonAirAttackState
 
 class_name Flayon3CState
 
+var VoiceSound = preload("res://game/assets/voice/flayon/MXF_grunt3.wav")
+
 func _init():
 	endFrame = 40
 	
@@ -63,6 +65,8 @@ func physics_tick(state: Dictionary) -> void:
 	if (state[Enums.StKey.frame] == 10):
 		state[Enums.StKey.velocity_y] = -SGFixed.ONE*40
 		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*10, state[Enums.StKey.velocity_x])
+	elif (state[Enums.StKey.frame] == 5):
+		SyncManager.play_sound("FlayonVoice", VoiceSound, {"bus": "Voice"})
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass

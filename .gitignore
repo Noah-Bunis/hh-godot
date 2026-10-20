@@ -31,3 +31,6 @@ serverkey
 game/Build.gd
 game/Build.gd.uid
 BuildCommands.md
+
+sg-physics-2d/lib/~libsgphysics2d.windows.template_debug.x86_64.dll
+webrtc/lib/~libwebrtc_native.windows.template_debug.x86_64.dll

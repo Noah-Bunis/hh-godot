@@ -1,0 +1,3 @@
+extends AssistAirExitState
+
+class_name RikkaAssistAirExitState

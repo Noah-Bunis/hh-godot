@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://delgirqnq1vas"]
+[gd_scene load_steps=11 format=3 uid="uid://delgirqnq1vas"]
 
 [ext_resource type="Script" uid="uid://irk3qummfdvc" path="res://game/menus/characterselect/CharacterIconsNode.gd" id="1_5l5au"]
 [ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="2_g6j5k"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://wjn7vjouxyfg" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SubaruButton.png" id="7_bx3fi"]
 [ext_resource type="Texture2D" uid="uid://dcarq7pxg1ypk" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OgaButton.png" id="8_0juh2"]
 [ext_resource type="Texture2D" uid="uid://msynft5xabux" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/UnknownButton.png" id="9_qrcdu"]
+[ext_resource type="Texture2D" uid="uid://di4aqnlwq312w" path="res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/FlayonButton.png" id="10_g6j5k"]
 
 [node name="CharacterIconsNode" type="Node2D"]
 z_index = 100
@@ -66,12 +67,12 @@ offset_bottom = 346.0
 texture = ExtResource("8_0juh2")
 
 [node name="7" type="TextureRect" parent="."]
-visible = false
 anchors_preset = -1
 offset_left = 1.0
 offset_top = 357.0
 offset_right = 137.0
 offset_bottom = 525.0
+texture = ExtResource("9_qrcdu")
 
 [node name="8" type="TextureRect" parent="."]
 anchors_preset = -1
@@ -79,15 +80,15 @@ offset_left = 146.0
 offset_top = 356.0
 offset_right = 282.0
 offset_bottom = 524.0
-texture = ExtResource("9_qrcdu")
+texture = ExtResource("10_g6j5k")
 
 [node name="9" type="TextureRect" parent="."]
-visible = false
 anchors_preset = -1
 offset_left = 292.0
 offset_top = 356.0
 offset_right = 428.0
 offset_bottom = 524.0
+texture = ExtResource("9_qrcdu")
 
 [node name="10" type="TextureRect" parent="."]
 visible = false

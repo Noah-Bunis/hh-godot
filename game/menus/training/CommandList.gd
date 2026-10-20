@@ -5,6 +5,8 @@ signal close_menu()
 var menu_close_delay: int
 var rendering_complete: bool
 var index: int
+var icon_paths: Dictionary = load("res://game/ui/IconPaths.gd").ICON_PATHS
+var button_icon_size: int = 20
 
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
@@ -103,6 +105,8 @@ func load_player_move_list(point, assist, container):
 			load_move_list(Enums.SanaMoveList, container)
 		Enums.AssistCharacters.Hakka:
 			load_move_list(Enums.HakkaMoveList, container)
+		Enums.AssistCharacters.Rikka:
+			load_move_list(Enums.RikkaMoveList, container)
 		Enums.AssistCharacters.Subaru:
 			load_move_list(Enums.AssistSubaruMoveList, container)
 		Enums.AssistCharacters.Mio:
@@ -115,23 +119,38 @@ func load_player_move_list(point, assist, container):
 			load_move_list(Enums.AssistKanataMoveList, container)
 		Enums.AssistCharacters.Suisei:
 			load_move_list(Enums.AssistSuiseiMoveList, container)
+		Enums.AssistCharacters.Flayon:
+			load_move_list(Enums.AssistFlayonMoveList, container)
 		_:
 			printerr("invalid assist character given")
 
 func load_move_list(move_list, container):
-	var newLabel: Label
+	var newLabel: RichTextLabel
 	var newText: String = ""
 	for row in move_list:
 		newText = ""
-		for item in row:
-			newText += str(item) + "   "
-		newLabel = Label.new()
+		for i in row.size():
+			var item_string := tr(str(row[i]))
+			if i == 0 and item_string.begins_with("j"):
+				item_string = tr("UI_COMBO_WORD_AIR") + " " + item_string.substr(1)
+			for j in item_string.length():
+				var character := item_string[j]
+				if _should_parse_icon(item_string, j, i):
+					newText += _bbcode_icon(character)
+				else:
+					newText += character
+			newText += "   "
+		newLabel = RichTextLabel.new()
+		newLabel.bbcode_enabled = true
+		newLabel.fit_content = true
 		newLabel.text = newText
 		newLabel.custom_minimum_size.x = 600
 		newLabel.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART 
 		container.add_child(newLabel)
 	newText = " "
-	newLabel = Label.new()
+	newLabel = RichTextLabel.new()
+	newLabel.bbcode_enabled = true
+	newLabel.fit_content = true
 	newLabel.text = newText
 	container.add_child(newLabel)
 
@@ -192,7 +211,7 @@ func _input(event):
 func input_helper(event: InputEvent):
 	if event.is_action_pressed("player1_start") or event.is_action_pressed("player2_start"):
 		_on_CloseButton_pressed()
-	elif event.is_action_pressed("player1_cancel") or event.is_action_pressed("player2_cancel"):
+	elif event.is_action_pressed("player1_cancel") or event.is_action_pressed("player2_cancel") or event.is_action_pressed("menu_back_b"):
 		_on_CloseButton_pressed()
 	elif Util.is_left_pressed(true):
 		scroll_left()
@@ -202,3 +221,41 @@ func input_helper(event: InputEvent):
 		scroll_right()
 	elif Util.is_right_pressed(false):
 		scroll_right()
+
+
+func _bbcode_icon(name: String) -> String:
+	var path = icon_paths.get(name, "")
+	if path == "":
+		return name
+	return "[img width=%d height=%d]%s[/img]"% [button_icon_size, button_icon_size, path]
+
+func _should_parse_icon(text: String, index: int, row: int) -> bool:
+	var character := text[index]
+	if not icon_paths.has(character):
+		return false
+
+	if character in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
+		if text.length() == 1:
+			return false
+		if row != 0:
+			return false
+
+		var previous := text[index - 1] if index > 0 else ""
+		var next := text[index + 1] if index < text.length() - 1 else ""
+
+		if next == " " or (next == "" and previous != ""):
+			return false
+
+	if character in ["A", "B", "C", "D", "X"]:
+		if text.length() == 1:
+			return true
+
+		var previous := text[index - 1] if index > 0 else ""
+		var next := text[index + 1] if index < text.length() - 1 else ""
+
+		return (
+			(previous != "" and (previous.is_valid_int() or previous in ["[", "]", "+", ">"]))
+			or
+			(next != "" and (next.is_valid_int() or next in ["[", "]", "+", ">"]))
+		)
+	return true

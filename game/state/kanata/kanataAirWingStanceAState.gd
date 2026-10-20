@@ -65,9 +65,6 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.velocity_y] = -SGFixed.ONE*30
 		state[Enums.StKey.accel_y] = Util.KANATA_GRAVITY
 
-func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
-	pass
-
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
 

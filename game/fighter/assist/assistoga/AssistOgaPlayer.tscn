@@ -1,43 +1,48 @@
-[gd_scene load_steps=57 format=3 uid="uid://cex7bi83cd6is"]
+[gd_scene load_steps=62 format=3 uid="uid://cex7bi83cd6is"]
 
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="1"]
 [ext_resource type="Script" uid="uid://nw75wt37wcme" path="res://game/fighter/assist/assistoga/AssistOgaPlayer.gd" id="1_x5iwt"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="2"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="3"]
-[ext_resource type="Texture2D" uid="uid://igtkvel8o20w" path="res://game/assets/sprites/oga/6C/Timeline 1_0005.png" id="3_2wa87"]
+[ext_resource type="Texture2D" uid="uid://blwl58pn85hyh" path="res://game/assets/sprites/oga/6C/Timeline 1_0005.png" id="3_2wa87"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://sdxa076t7wfp" path="res://game/fighter/effects/shadow.tscn" id="4_ww82q"]
-[ext_resource type="Texture2D" uid="uid://c1gafs68egv8t" path="res://game/assets/sprites/oga/StandHighHurt/Timeline 1_0000.png" id="6"]
-[ext_resource type="Texture2D" uid="uid://pc8c5cdhibqr" path="res://game/assets/sprites/oga/jA/Timeline 1_0002.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://o5b6evkexvyp" path="res://game/assets/sprites/oga/jA/Timeline 1_0001.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://occ1l51h4jty" path="res://game/assets/sprites/oga/jC/Timeline 1_0002.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://6sv7g5en6dms" path="res://game/assets/sprites/oga/jC/Timeline 1_0001.png" id="10"]
-[ext_resource type="Texture2D" uid="uid://cq655h8wjsb22" path="res://game/assets/sprites/oga/6C/Timeline 1_0001.png" id="11"]
-[ext_resource type="Texture2D" uid="uid://jd66420wemcj" path="res://game/assets/sprites/oga/6C/Timeline 1_0000.png" id="12"]
-[ext_resource type="Texture2D" uid="uid://d1c5ryvtrob7g" path="res://game/assets/sprites/oga/6C/Timeline 1_0003.png" id="13"]
-[ext_resource type="Texture2D" uid="uid://bhrn5c1xhwy3" path="res://game/assets/sprites/oga/6C/Timeline 1_0002.png" id="14"]
-[ext_resource type="Texture2D" uid="uid://t03upxt5dqjq" path="res://game/assets/sprites/oga/Intro/Timeline 1_0026.png" id="15"]
-[ext_resource type="Texture2D" uid="uid://ddw5chbpxxo3e" path="res://game/assets/sprites/oga/StandHighHurt/Timeline 1_0001.png" id="16"]
-[ext_resource type="Texture2D" uid="uid://cbultr0ijlliy" path="res://game/assets/sprites/oga/AirBlcok/Timeline 1_0000.png" id="17"]
-[ext_resource type="Texture2D" uid="uid://dpl2lnq8ju56x" path="res://game/assets/sprites/oga/ForwardAirdash/Timeline 1_0000.png" id="18"]
-[ext_resource type="Texture2D" uid="uid://crilectlycxhe" path="res://game/assets/sprites/oga/6C/Timeline 1_0004.png" id="18_ww82q"]
-[ext_resource type="Texture2D" uid="uid://b47crqexuq2sp" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0001.png" id="19"]
-[ext_resource type="Texture2D" uid="uid://k4exjcxpmgsb" path="res://game/assets/sprites/oga/Knockdown/Timeline 1_0001.png" id="20"]
-[ext_resource type="Texture2D" uid="uid://bvlartiewkuhg" path="res://game/assets/sprites/oga/ForwardAirdash/Timeline 1_0001.png" id="21"]
-[ext_resource type="Texture2D" uid="uid://7ow246ri14h2" path="res://game/assets/sprites/oga/Knockdown/Timeline 1_0000.png" id="22"]
-[ext_resource type="Texture2D" uid="uid://ohf2mal36s7s" path="res://game/assets/sprites/oga/jC/Timeline 1_0000.png" id="23"]
-[ext_resource type="Texture2D" uid="uid://c102ygt8opr3q" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0003.png" id="24"]
-[ext_resource type="Texture2D" uid="uid://tq7jpwpmpnav" path="res://game/assets/sprites/Empty_0000.png" id="25"]
-[ext_resource type="Texture2D" uid="uid://dfi73xxjhv5vu" path="res://game/assets/sprites/oga/5A/Timeline 1_0001.png" id="26"]
-[ext_resource type="Texture2D" uid="uid://bap5keubtfq2r" path="res://game/assets/sprites/oga/5A/Timeline 1_0002.png" id="27"]
-[ext_resource type="Texture2D" uid="uid://be52qxm7tef63" path="res://game/assets/sprites/oga/5A/Timeline 1_0000.png" id="29"]
-[ext_resource type="Texture2D" uid="uid://benf61lec0gy3" path="res://game/assets/sprites/oga/Knockdown/Timeline 1_0003.png" id="30"]
-[ext_resource type="Texture2D" uid="uid://bwk11ciqu5hje" path="res://game/assets/sprites/oga/Idle/Timeline 1_0000.png" id="31"]
-[ext_resource type="Texture2D" uid="uid://dkcneohijdyh4" path="res://game/assets/sprites/oga/StandHighHurt/Timeline 1_0002.png" id="32"]
-[ext_resource type="Texture2D" uid="uid://bfrbcdukps6fb" path="res://game/assets/sprites/oga/jA/Timeline 1_0000.png" id="33"]
-[ext_resource type="Texture2D" uid="uid://bygt0emnr3ulu" path="res://game/assets/sprites/oga/BackAirdash/Timeline 1_0000.png" id="34"]
-[ext_resource type="Texture2D" uid="uid://buxb68hnu2q2r" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0002.png" id="62"]
-[ext_resource type="Texture2D" uid="uid://bs0ka0xb62d3e" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0000.png" id="63"]
+[ext_resource type="Texture2D" uid="uid://dkh3gkgcngqo" path="res://game/assets/sprites/oga/StandHighHurt/Timeline 1_0000.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bu30ghuasoim1" path="res://game/assets/sprites/oga/jA/Timeline 1_0002.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://bf4ujnoxudchg" path="res://game/assets/sprites/oga/jA/Timeline 1_0001.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cnhhfxxhbhtbw" path="res://game/assets/sprites/oga/jC/Timeline 1_0002.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://xdengw300vov" path="res://game/assets/sprites/oga/jC/Timeline 1_0001.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://p7lefune2hrn" path="res://game/assets/sprites/oga/6C/Timeline 1_0001.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://bl0wui7sj2cin" path="res://game/assets/sprites/oga/6C/Timeline 1_0000.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://cl5hqkird0ck0" path="res://game/assets/sprites/oga/6C/Timeline 1_0003.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://l255qwvxfx4x" path="res://game/assets/sprites/oga/6C/Timeline 1_0002.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://dckwowcwkk82" path="res://game/assets/sprites/oga/Intro/Timeline 1_0026.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://1mi5u4v3gibo" path="res://game/assets/sprites/oga/StandHighHurt/Timeline 1_0001.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://ddnm30f50tvf8" path="res://game/assets/sprites/oga/AirBlcok/Timeline 1_0000.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://52dakn2rvk1a" path="res://game/assets/sprites/oga/6C/Timeline 1_0004.png" id="18_ww82q"]
+[ext_resource type="Texture2D" uid="uid://cpl7vgfy8vvif" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0001.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://tiqy0mavsf6r" path="res://game/assets/sprites/oga/Knockdown/Timeline 1_0001.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://dvty8fpp1nbg2" path="res://game/assets/sprites/oga/Knockdown/Timeline 1_0000.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://b6s6chusa36d5" path="res://game/assets/sprites/oga/jC/Timeline 1_0000.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://dxym6teeth8a7" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0003.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://dtknxhcbysqck" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0004.png" id="24_att4u"]
+[ext_resource type="Texture2D" uid="uid://c3h40i4mamblw" path="res://game/assets/sprites/Empty_0000.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://13lu72qw321r" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0005.png" id="25_gfbft"]
+[ext_resource type="Texture2D" uid="uid://c861qwlqmbpp" path="res://game/assets/sprites/oga/5A/Timeline 1_0001.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://qnowmi05rer8" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0006.png" id="26_fw07m"]
+[ext_resource type="Texture2D" uid="uid://ccss4g74fo0e1" path="res://game/assets/sprites/oga/5A/Timeline 1_0002.png" id="27"]
+[ext_resource type="Texture2D" uid="uid://wuqq1ugmu1bf" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0007.png" id="27_imvmm"]
+[ext_resource type="Texture2D" uid="uid://bbqvv87wfferq" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0008.png" id="28_g2oin"]
+[ext_resource type="Texture2D" uid="uid://bp37madn02kbo" path="res://game/assets/sprites/oga/5A/Timeline 1_0000.png" id="29"]
+[ext_resource type="Texture2D" uid="uid://dv7i3s213wjyh" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0009.png" id="29_n8quh"]
+[ext_resource type="Texture2D" uid="uid://c4h1cefnxnbn4" path="res://game/assets/sprites/oga/Knockdown/Timeline 1_0003.png" id="30"]
+[ext_resource type="Texture2D" uid="uid://bsjcabiavwoyv" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0010.png" id="30_p0vgf"]
+[ext_resource type="Texture2D" uid="uid://bp7chg1atk3d0" path="res://game/assets/sprites/oga/Idle/Timeline 1_0000.png" id="31"]
+[ext_resource type="Texture2D" uid="uid://dbxfijuuwr7wk" path="res://game/assets/sprites/oga/SlashMode/Timeline 1_0011.png" id="31_ddu3b"]
+[ext_resource type="Texture2D" uid="uid://23d07w3gw3o3" path="res://game/assets/sprites/oga/StandHighHurt/Timeline 1_0002.png" id="32"]
+[ext_resource type="Texture2D" uid="uid://485lp06alxdo" path="res://game/assets/sprites/oga/jA/Timeline 1_0000.png" id="33"]
+[ext_resource type="Texture2D" uid="uid://mkr2wh7qyt0f" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0002.png" id="62"]
+[ext_resource type="Texture2D" uid="uid://dm1f4i8f8n4ps" path="res://game/assets/sprites/oga/AirHurt/Timeline 1_0000.png" id="63"]
 
 [sub_resource type="SGRectangleShape2D" id="1"]
 extents_x = 2063232
@@ -191,8 +196,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="22"]
 resource_name = "BackAirDash"
-length = 0.1
-loop_mode = 1
+length = 1.0000036
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -201,10 +205,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 1,
-"values": [ExtResource("34")]
+"values": []
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -213,10 +217,10 @@ tracks/1/path = NodePath("Sprite2D:offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1000000),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [Vector2(0, 100)]
+"values": []
 }
 
 [sub_resource type="Animation" id="14"]
@@ -250,8 +254,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="16"]
 resource_name = "DP"
-length = 0.1
-loop_mode = 1
+length = 0.5833361
 step = 0.0166667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -260,10 +263,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.14999966, 0.21666667, 0.24999967, 0.28333366, 0.34999967, 0.41666666, 0.51666665),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("18"), ExtResource("21")]
+"values": [ExtResource("24_att4u"), ExtResource("25_gfbft"), ExtResource("26_fw07m"), ExtResource("27_imvmm"), ExtResource("28_g2oin"), ExtResource("29_n8quh"), ExtResource("30_p0vgf"), ExtResource("31_ddu3b")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -275,7 +278,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1000000),
 "update": 0,
-"values": [Vector2(0, 90)]
+"values": [Vector2(100, -100)]
 }
 
 [sub_resource type="Animation" id="19"]
@@ -527,7 +530,7 @@ material = ExtResource("2")
 position = Vector2(11, -385)
 scale = Vector2(1.428, 1.428)
 texture = ExtResource("3_2wa87")
-offset = Vector2(80, 60)
+offset = Vector2(100, -100)
 
 [node name="Shadow" parent="." instance=ExtResource("4_ww82q")]
 position = Vector2(-8, -4)

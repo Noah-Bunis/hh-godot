@@ -22,7 +22,7 @@ func enter(state: Dictionary) -> void:
 	anim.play("FlightUpwardAirdash")
 	state[Enums.StKey.drag_x] = 0
 	state[Enums.StKey.accel_y] = 0
-	state[Enums.StKey.super_meter] -= SGFixed.ONE*700
+	state[Enums.StKey.super_meter] -= SGFixed.ONE*300
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
@@ -33,6 +33,7 @@ func physics_tick(state: Dictionary) -> void:
 	elif (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.hitStopFrame] = 0
 		SyncManager.play_sound("airdash", Global.AirdashSound, {"bus": "Sound"})
+	self.enforce_min_height_additive(state)
 	
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	super.special_cancel(state,interpreter)

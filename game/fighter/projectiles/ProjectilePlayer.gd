@@ -46,10 +46,18 @@ func setup(playerData:PlayerSetup):
 				state_factory = SubaruStarBallStateFactory.new()
 			Enums.Projectiles.SubaruBatterSetBall:
 				state_factory = preload("res://game/state/projectiles/subaru/SubaruBatterSetBallStateFactory.gd").new()
+			Enums.Projectiles.SubaruEXBatterSetBall:
+				state_factory = preload("res://game/state/projectiles/subaru/SubaruEXBatterSetBallStateFactory.gd").new()
 			Enums.Projectiles.AssistSubaruStarBall:
 				state_factory = preload("res://game/state/projectiles/subaru/AssistSubaruStarBallStateFactory.gd").new()
 			Enums.Projectiles.HakkaTags:
 				state_factory = preload("res://game/state/projectiles/hakka/HakkaTagsStateFactory.gd").new()
+			Enums.Projectiles.RikkaBall:
+				state_factory = preload("res://game/state/projectiles/rikka/RikkaBallStateFactory.gd").new()
+			Enums.Projectiles.RikkaBigBall:
+				state_factory = preload("res://game/state/projectiles/rikka/RikkaRedBallStateFactory.gd").new()
+			Enums.Projectiles.RikkaSuperBall:
+				state_factory = preload("res://game/state/projectiles/rikka/RikkaSuperBallStateFactory.gd").new()
 			Enums.Projectiles.SuicopathChainsaw:
 				state_factory = preload("res://game/state/projectiles/suisei/ChainsawStateFactory.gd").new()
 			Enums.Projectiles.KurokamiFlamePillar:

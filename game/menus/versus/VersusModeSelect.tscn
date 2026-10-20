@@ -59,7 +59,7 @@ offset_right = -24.0
 offset_bottom = 149.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("1")
-text = "Versus Modes"
+text = "UI_MENU_VERSUS_MODES"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 anchors_preset = -1
@@ -75,7 +75,7 @@ columns = 2
 layout_mode = 2
 size_flags_horizontal = 3
 button_mask = 0
-text = "2 Player"
+text = "UI_MENU_TWO_PLAYER"
 
 [node name="HostLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -85,7 +85,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 button_mask = 0
-text = "Versus CPU"
+text = "UI_MENU_VERSUS_CPU"
 
 [node name="HostLabel2" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2

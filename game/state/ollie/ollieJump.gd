@@ -23,6 +23,9 @@ func enter(state: Dictionary) -> void:
 	SyncManager.play_sound("jump", Global.JumpSound, {"bus": "Sound"})
 
 func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
+	if (state[Enums.StKey.frame] == 0):
+		if (interpreter.is_holding_a_direction(Enums.Numpad.N5, state[Enums.StKey.leftface])):
+			state[Enums.StKey.velocity_y] = SGFixed.mul(state[Enums.StKey.velocity_y], 49536)
 	common_jump_transitions_default(state, interpreter)
 
 func has_property(state: Dictionary,property: int) -> bool:

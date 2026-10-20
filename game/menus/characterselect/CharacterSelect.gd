@@ -25,20 +25,20 @@ var WinCounterP2
 var character = [
 	[Enums.PointCharacters.Ollie, Enums.PointCharacters.Suisei, Enums.PointCharacters.Kanata],
 	[Enums.PointCharacters.Mio, Enums.PointCharacters.Subaru, Enums.PointCharacters.Oga],
-	[Enums.PointCharacters.Random, Enums.PointCharacters.Random, Enums.PointCharacters.Random],
-	[Enums.PointCharacters.Flayon, Enums.PointCharacters.Kurokami, Enums.PointCharacters.Random]
+	[Enums.PointCharacters.Random, Enums.PointCharacters.Flayon, Enums.PointCharacters.Random],
+	[Enums.PointCharacters.Random, Enums.PointCharacters.Random, Enums.PointCharacters.Random]
 	]
 
 var assist2 = [
-	[Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.Hakka],
+	[Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata, Enums.AssistCharacters.Rikka, Enums.AssistCharacters.Hakka],
 	[Enums.AssistCharacters.Mio, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Oga, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.OkaKoro],
-	[Enums.AssistCharacters.Random, Enums.AssistCharacters.Random, Enums.AssistCharacters.Random, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Sana],
+	[Enums.AssistCharacters.Random, Enums.AssistCharacters.Flayon, Enums.AssistCharacters.Random, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Sana],
 	[Enums.AssistCharacters.Random, Enums.AssistCharacters.Random, Enums.AssistCharacters.Random, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Sana]
 	]
 var assist1 = [
-	[Enums.AssistCharacters.Hakka, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata],
+	[Enums.AssistCharacters.Hakka, Enums.AssistCharacters.Rikka, Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata],
 	[Enums.AssistCharacters.OkaKoro, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.Mio, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Oga],
-	[Enums.AssistCharacters.Sana, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Random, Enums.AssistCharacters.Random, Enums.AssistCharacters.Random],
+	[Enums.AssistCharacters.Sana, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Random, Enums.AssistCharacters.Flayon, Enums.AssistCharacters.Random],
 	[Enums.AssistCharacters.Sana, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Random, Enums.AssistCharacters.Random, Enums.AssistCharacters.Random]
 	]
 
@@ -61,6 +61,8 @@ var p1_color_number: int = 1
 var p2_color_number: int = 1
 var a1_color_number: int = 1
 var a2_color_number: int = 1
+var p1_color_capture: Dictionary = {}
+var p2_color_capture: Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -123,9 +125,11 @@ func update_a2_portrait(row:int,col:int):
 	resolve_assist_portrait(row, col, false)
 
 func update_p1():
+	begin_color_capture(true, P1Cursor.input_prefix, false, Callable(self, "complete_p1_selection"))
+
+func complete_p1_selection():
 	p1_assist_select = AssistSelect.instantiate() 
 	add_child(p1_assist_select)
-	p1_color_number = select_color(P1Cursor.input_prefix)
 	p1_active_cursor = p1_assist_select
 	p1_assist_select.position.x = 966
 	p1_assist_select.position.y = 300
@@ -136,8 +140,9 @@ func update_p1():
 	p1_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(AkiMC, "p1_call"))
 	update_a1_portrait(p1_assist_select.cursor_row(), p1_assist_select.cursor_col())
 	var charaData = resolve_characters(P1Cursor.row, P1Cursor.col)
-	
+	p1_color_number = fit_color_number_to_character(charaData[1], false, p1_color_number)
 	P1Portrait.change_color_number(p1_color_number)
+	
 	unload_character(charaData[0],true,false)
 	Global.PLAYER_1_NODE_PATH[0] = charaData[0]
 	Global.PLAYER_1_CHARACTER[0] = charaData[1]
@@ -148,9 +153,11 @@ func update_p1():
 func update_p2():
 #	Global.PLAYER_2_COLOR[0] = "res://game/assets/sprites/subaru/ColorPalettes/2.png"
 #	P2Portrait.material.set_shader_param("palette", load(Global.PLAYER_2_COLOR[0]))
+	begin_color_capture(false, P2Cursor.input_prefix, false, Callable(self, "complete_p2_selection"))
+
+func complete_p2_selection():
 	p2_assist_select = AssistSelect.instantiate() 
 	add_child(p2_assist_select)
-	p2_color_number = select_color(P2Cursor.input_prefix)
 	p2_active_cursor = p2_assist_select
 	p2_assist_select.position.x = 966
 	p2_assist_select.position.y = 300
@@ -161,6 +168,7 @@ func update_p2():
 	p2_assist_select.get_node("CharacterCursor").connect("select_chara", Callable(AkiMC, "p2_call"))
 	update_a2_portrait(p2_assist_select.cursor_row(), p2_assist_select.cursor_col())
 	var charaData = resolve_characters(P2Cursor.row, P2Cursor.col)
+	p2_color_number = fit_color_number_to_character(charaData[1], false, p2_color_number)
 	P2Portrait.change_color_number(p2_color_number)
 	unload_character(charaData[0],false,false)
 	Global.PLAYER_2_NODE_PATH[0] = charaData[0]
@@ -171,10 +179,14 @@ func update_p2():
 
 #@rpc("any_peer", "call_local", "reliable")
 func update_a1():
+	var cursor = p1_assist_select.get_node("CharacterCursor")
+	begin_color_capture(true, cursor.input_prefix, true, Callable(self, "complete_a1_selection"))
+
+func complete_a1_selection():
 	var charaData = resolve_assists(p1_assist_select.cursor_row(), p1_assist_select.cursor_col(), true)
-	unload_character(charaData[0], true,true)
-	a1_color_number = select_color(p1_assist_select.get_node("CharacterCursor").input_prefix)
+	a1_color_number = fit_color_number_to_character(charaData[1], true, a1_color_number)
 	A1Portrait.change_color_number(a1_color_number)
+	unload_character(charaData[0], true,true)
 	p1_active_cursor = null
 	Global.PLAYER_1_NODE_PATH[1] = charaData[0]
 	Global.PLAYER_1_CHARACTER[1] = charaData[1]
@@ -183,10 +195,14 @@ func update_a1():
 	ready_up_peer()
 
 func update_a2():
+	var cursor = p2_assist_select.get_node("CharacterCursor")
+	begin_color_capture(false, cursor.input_prefix, true, Callable(self, "complete_a2_selection"))
+
+func complete_a2_selection():
 	var charaData = resolve_assists(p2_assist_select.cursor_row(), p2_assist_select.cursor_col(), false)
-	unload_character(charaData[0],false,true)
-	a2_color_number = select_color(p2_assist_select.get_node("CharacterCursor").input_prefix)
+	a2_color_number = fit_color_number_to_character(charaData[1], true, a2_color_number)
 	A2Portrait.change_color_number(a2_color_number)
+	unload_character(charaData[0],false,true)
 	p2_active_cursor = null
 	Global.PLAYER_2_NODE_PATH[1] = charaData[0]
 	Global.PLAYER_2_CHARACTER[1] = charaData[1]
@@ -220,36 +236,7 @@ func _physics_process(_delta):
 	physics_tick()
 
 func physics_tick():
-	if (p1_button_map == null and Input.is_action_just_pressed("player1_cancel")):
-		if (not P1Cursor.selected):
-			go_to_prev_scene()
-		else:
-			if (p1_assist_select != null and p1_assist_select.is_selected()):
-				p1_assist_select.deselect()
-				p1_active_cursor = p1_assist_select
-				p1_ready = false
-			else:
-				p1_assist_select.queue_free()
-				remove_child(p1_assist_select)
-				A1Portrait.clear_portrait()
-				p1_assist_select = null
-				p1_active_cursor = P1Cursor
-				P1Cursor.deselect()
-	if (p2_button_map == null and Input.is_action_just_pressed("player2_cancel")):
-		if (not P2Cursor.selected):
-			go_to_prev_scene()
-		else:
-			if (p2_assist_select != null and p2_assist_select.is_selected()):
-				p2_assist_select.deselect()
-				p2_active_cursor = p2_assist_select
-				p2_ready = false
-			else:
-				p2_assist_select.queue_free()
-				remove_child(p2_assist_select)
-				A2Portrait.clear_portrait()
-				p2_assist_select = null
-				p2_active_cursor = P2Cursor
-				P2Cursor.deselect()
+	process_color_captures()
 
 func resolve_characters(row: int, col: int):
 	var enumChara: int = character[row][col]
@@ -273,8 +260,6 @@ func resolve_characters(row: int, col: int):
 			return ["res://game/fighter/SuiseiPlayer.tscn", Enums.PointCharacters.Suisei]
 		Enums.PointCharacters.Flayon:
 			return ["res://game/fighter/FlayonPlayer.tscn", Enums.PointCharacters.Flayon]
-		Enums.PointCharacters.Kurokami:
-			return ["res://game/fighter/KurokamiPlayer.tscn", Enums.PointCharacters.Kurokami]
 		_:
 			return ["res://game/fighter/SubaruPlayer.tscn", Enums.PointCharacters.Subaru]
 
@@ -298,6 +283,8 @@ func resolve_assists(row:int, col:int, is_p1):
 			return ["res://game/fighter/assist/okakoro/OkaKoroPlayer.tscn", Enums.AssistCharacters.OkaKoro]
 		Enums.AssistCharacters.Hakka:
 			return ["res://game/fighter/assist/hakka/HakkaPlayer.tscn", Enums.AssistCharacters.Hakka]
+		Enums.AssistCharacters.Rikka:
+			return ["res://game/fighter/assist/rikka/RikkaPlayer.tscn", Enums.AssistCharacters.Rikka]
 		Enums.AssistCharacters.Subaru:
 			return ["res://game/fighter/assist/assistsubaru/AssistSubaruPlayer.tscn", Enums.AssistCharacters.Subaru]
 		Enums.AssistCharacters.Mio:
@@ -311,7 +298,7 @@ func resolve_assists(row:int, col:int, is_p1):
 		Enums.AssistCharacters.Suisei:
 			return ["res://game/fighter/assist/assistsuisei/AssistSuiseiPlayer.tscn", Enums.AssistCharacters.Suisei]
 		Enums.AssistCharacters.Flayon:
-			return ["res://game/fighter/assist/fubuki/FubukiPlayer.tscn", Enums.AssistCharacters.Fubuki]
+			return ["res://game/fighter/assist/flayon/AssistFlayonPlayer.tscn", Enums.AssistCharacters.Flayon]
 		_:
 			return ["res://game/fighter/assist/fubuki/FubukiPlayer.tscn", Enums.AssistCharacters.Fubuki]
 
@@ -373,6 +360,8 @@ func match_color(enumChara:int, is_assist=false) -> String:
 				color = "res://game/assets/sprites/assists/hakka/ColorPalettes/"
 			Enums.AssistCharacters.Sana:
 				color = "res://game/assets/sprites/assists/sana/ColorPalettes/"
+			Enums.AssistCharacters.Rikka:
+				color = "res://game/assets/sprites/assists/rikka/ColorPalettes/"
 			Enums.AssistCharacters.Subaru:
 				color = "res://game/assets/sprites/subaru/ColorPalettes/"
 			Enums.AssistCharacters.Mio:
@@ -386,7 +375,7 @@ func match_color(enumChara:int, is_assist=false) -> String:
 			Enums.AssistCharacters.Suisei:
 				color = "res://game/assets/sprites/suisei/ColorPalettes/"
 			Enums.AssistCharacters.Flayon:
-				color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
+				color = "res://game/assets/sprites/flayon/ColorPalettes/"
 			_:
 				color = "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
 	else:
@@ -404,9 +393,7 @@ func match_color(enumChara:int, is_assist=false) -> String:
 			Enums.PointCharacters.Suisei:
 				color = "res://game/assets/sprites/suisei/ColorPalettes/"
 			Enums.PointCharacters.Flayon:
-				color = "res://game/assets/sprites/subaru/ColorPalettes/"
-			Enums.PointCharacters.Kurokami:
-				color = "res://game/assets/sprites/subaru/ColorPalettes/"
+				color = "res://game/assets/sprites/flayon/ColorPalettes/"
 			_:
 				color = "res://game/assets/sprites/subaru/ColorPalettes/"
 	return color
@@ -450,6 +437,41 @@ func _input(event):
 func input_helper(event):
 	button_set_initiate(event)
 	try_react_to_new_controller(event)
+	back_button(event)
+
+func back_button(event):
+	if (p1_color_capture.is_empty() and p1_button_map == null and (Input.is_action_just_pressed("player1_cancel") or Util.is_action_pressed_player_specific(event, "menu_back_b", true))):
+		if (not P1Cursor.selected):
+			go_to_prev_scene()
+			return
+		else:
+			if (p1_assist_select != null and p1_assist_select.is_selected()):
+				p1_assist_select.deselect()
+				p1_active_cursor = p1_assist_select
+				p1_ready = false
+			else:
+				p1_assist_select.queue_free()
+				remove_child(p1_assist_select)
+				A1Portrait.clear_portrait()
+				p1_assist_select = null
+				p1_active_cursor = P1Cursor
+				P1Cursor.deselect()
+	if (p2_color_capture.is_empty() and p2_button_map == null and (Input.is_action_just_pressed("player2_cancel") or Util.is_action_pressed_player_specific(event, "menu_back_b", false))):
+		if (not P2Cursor.selected):
+			go_to_prev_scene()
+			return
+		else:
+			if (p2_assist_select != null and p2_assist_select.is_selected()):
+				p2_assist_select.deselect()
+				p2_active_cursor = p2_assist_select
+				p2_ready = false
+			else:
+				p2_assist_select.queue_free()
+				remove_child(p2_assist_select)
+				A2Portrait.clear_portrait()
+				p2_assist_select = null
+				p2_active_cursor = P2Cursor
+				P2Cursor.deselect()
 
 func button_set_initiate(event):
 	if event.is_action_pressed("player1_start"):
@@ -494,7 +516,85 @@ func button_set_initiate(event):
 				p2_assist_select.enable(false)
 
 
-func select_color(input_prefix) -> int:
+func begin_color_capture(is_p1: bool, input_prefix: String, is_assist: bool, callback: Callable):
+	var selection_action = ""
+	for action in ["a", "b", "c", "d"]:
+		if (Input.is_action_pressed(input_prefix + action)):
+			selection_action = input_prefix + action
+			break
+	var capture = {
+		"input_prefix": input_prefix,
+		"selection_action": selection_action,
+		"is_assist": is_assist,
+		"callback": callback
+	}
+	if (is_p1):
+		p1_color_capture = capture
+	else:
+		p2_color_capture = capture
+	apply_color_capture(is_p1, capture)
+	if (selection_action.is_empty()):
+		finish_color_capture(is_p1, callback)
+
+func process_color_captures():
+	process_color_capture(true)
+	process_color_capture(false)
+
+func process_color_capture(is_p1: bool):
+	var capture = p1_color_capture if is_p1 else p2_color_capture
+	if (capture.is_empty()):
+		return
+	if (Input.is_action_pressed(capture["selection_action"])):
+		apply_color_capture(is_p1, capture)
+	else:
+		finish_color_capture(is_p1, capture["callback"])
+
+func apply_color_capture(is_p1: bool, capture: Dictionary):
+	var selected_character = get_selected_character_enum(is_p1, capture["is_assist"])
+	var color_number = get_color_number_from_input(capture["input_prefix"])
+	color_number = fit_color_number_to_character(selected_character, capture["is_assist"], color_number)
+	if (is_p1):
+		if (capture["is_assist"]):
+			a1_color_number = color_number
+			A1Portrait.change_color_number(color_number)
+		else:
+			p1_color_number = color_number
+			P1Portrait.change_color_number(color_number)
+	else:
+		if (capture["is_assist"]):
+			a2_color_number = color_number
+			A2Portrait.change_color_number(color_number)
+		else:
+			p2_color_number = color_number
+			P2Portrait.change_color_number(color_number)
+
+func finish_color_capture(is_p1: bool, callback: Callable):
+	if (is_p1):
+		p1_color_capture = {}
+	else:
+		p2_color_capture = {}
+	callback.call()
+
+func get_selected_character_enum(is_p1: bool, is_assist: bool) -> int:
+	if (is_assist):
+		var assist_select = p1_assist_select if is_p1 else p2_assist_select
+		var row = assist_select.cursor_row()
+		var col = assist_select.cursor_col()
+		return assist1[row][col] if is_p1 else assist2[row][col]
+	var cursor = P1Cursor if is_p1 else P2Cursor
+	return character[cursor.row][cursor.col]
+
+func fit_color_number_to_character(enum_chara: int, is_assist: bool, color_number: int) -> int:
+	var palette_directory = match_color(enum_chara, is_assist)
+	var available_palette_numbers: Array[int] = []
+	for palette_number in range(1, Util.MAX_COLOR_PALETTE_NUMBER + 1):
+		if (ResourceLoader.exists(palette_directory + str(palette_number) + ".png")):
+			available_palette_numbers.append(palette_number)
+	if (available_palette_numbers.is_empty()):
+		return 1
+	return available_palette_numbers[(color_number - 1) % available_palette_numbers.size()]
+
+func get_color_number_from_input(input_prefix: String) -> int:
 	var input_vector: Vector2 = Vector2(
 			-Input.get_action_strength(input_prefix+"left") + Input.get_action_strength(input_prefix+"right"), 
 			-Input.get_action_strength(input_prefix+"down") + Input.get_action_strength(input_prefix+"up"))
@@ -552,6 +652,9 @@ func select_color(input_prefix) -> int:
 	color_number %= Util.MAX_COLOR_PALETTE_NUMBER
 	color_number += 1
 	return color_number
+
+func select_color(input_prefix: String) -> int:
+	return get_color_number_from_input(input_prefix)
 
 func go_to_prev_scene():
 	get_tree().change_scene_to_file("res://game/menus/buttonmap/ControllerPickMenuScreen.tscn")

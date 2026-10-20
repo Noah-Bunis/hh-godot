@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://h0bhajfnumoy" path="res://game/menus/characterselect/assist_character_icons.tscn" id="5_dsoce"]
 [ext_resource type="PackedScene" uid="uid://delgirqnq1vas" path="res://game/menus/characterselect/character_icons_node.tscn" id="6_2hk1s"]
 [ext_resource type="Shader" uid="uid://dinoskkj75qym" path="res://game/assets/shaders/ColorSwapAntiAlias.gdshader" id="53_0bet7"]
-[ext_resource type="Texture2D" uid="uid://7j6rx4336gr2" path="res://game/assets/sprites/assists/hakka/ColorPalettes/2.png" id="54_pky06"]
+[ext_resource type="Texture2D" uid="uid://7j6rx4336gr2" path="res://game/assets/sprites/assists/rikka/ColorPalettes/2.png" id="54_pky06"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b2baf"]
 resource_local_to_scene = true
@@ -57,12 +57,13 @@ script = ExtResource("1_7gm1j")
 [node name="PresentationLayer" parent="." instance=ExtResource("2_fsr0o")]
 
 [node name="P2Cursor" parent="PresentationLayer" index="10"]
-is_p1 = true
+gridY = 3
 gridX = 8
 start_col = 3
 
 [node name="P1Cursor" parent="PresentationLayer" index="11"]
 position = Vector2(960, 392)
+gridY = 3
 gridX = 8
 start_col = 3
 
@@ -93,9 +94,6 @@ position = Vector2(1188, 144)
 script = null
 
 [node name="WOOD" parent="AssistPointCharacterIconsNode" index="0"]
-visible = false
-
-[node name="8" parent="AssistPointCharacterIconsNode" index="8"]
 visible = false
 
 [editable path="PresentationLayer"]

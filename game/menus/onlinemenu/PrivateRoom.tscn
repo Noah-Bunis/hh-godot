@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://rghsr4xkme1m"]
+[gd_scene load_steps=9 format=3 uid="uid://rghsr4xkme1m"]
 
 [ext_resource type="Script" uid="uid://bqourwt6u6d5m" path="res://game/menus/training/FastSlider.gd" id="2"]
+[ext_resource type="Script" uid="uid://cbuh2gofsg4ua" path="res://game/menus/onlinemenu/never_lose_focus.gd" id="2_giwl6"]
 [ext_resource type="Script" uid="uid://7pwdp6l0cxh8" path="res://game/menus/onlinemenu/PrivateRoom.gd" id="3"]
 [ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="3_xqwvp"]
 [ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="6"]
@@ -54,7 +55,7 @@ offset_bottom = 886.0
 scale = Vector2(1.24678, 1.18851)
 theme_override_fonts/font = SubResource("1")
 theme_override_font_sizes/font_size = 20
-text = "(Nothing)"
+text = "UI_STATUS_NOTHING"
 
 [node name="SpectatorLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -66,7 +67,7 @@ offset_right = 354.0
 offset_bottom = 579.0
 scale = Vector2(0.981321, 0.965868)
 theme_override_font_sizes/font_size = 20
-text = "(Nothing)"
+text = "UI_STATUS_NOTHING"
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 visible = false
@@ -82,7 +83,7 @@ grow_horizontal = 2
 scale = Vector2(1.24678, 1.18851)
 theme_override_fonts/font = SubResource("1")
 theme_override_font_sizes/font_size = 30
-text = "(Nothing)"
+text = "UI_STATUS_NOTHING"
 
 [node name="NameLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -94,7 +95,7 @@ offset_right = -332.0
 offset_bottom = 116.0
 scale = Vector2(1.24678, 1.18851)
 theme_override_font_sizes/font_size = 20
-text = "(Nothing)"
+text = "UI_STATUS_NOTHING"
 
 [node name="SessionIDLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -118,7 +119,7 @@ offset_right = 674.0
 offset_bottom = 1150.0
 scale = Vector2(0.944353, 1.17029)
 theme_override_font_sizes/font_size = 20
-text = "Battle Version: "
+text = "UI_LABEL_BATTLE_VERSION"
 
 [node name="RoomIDLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -131,7 +132,7 @@ offset_bottom = 94.0
 grow_horizontal = 2
 scale = Vector2(1.23896, 1.81123)
 theme_override_font_sizes/font_size = 16
-text = "RoomID: "
+text = "UI_LABEL_ROOM_ID_PREFIX"
 
 [node name="RoomIDField" type="LineEdit" parent="CanvasLayer"]
 anchors_preset = -1
@@ -142,12 +143,12 @@ offset_bottom = 44.0
 scale = Vector2(1.86698, 1.74891)
 size_flags_horizontal = 3
 focus_neighbor_bottom = NodePath("../GridContainer/HideRoomID")
-text = "Room ID"
+text = "UI_MENU_ROOM_ID"
 max_length = 40
 editable = false
 secret = true
 
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer" node_paths=PackedStringArray("home_control")]
 anchors_preset = -1
 offset_left = 282.0
 offset_top = 74.0
@@ -156,11 +157,13 @@ offset_bottom = 474.0
 scale = Vector2(2, 2)
 theme = ExtResource("3_xqwvp")
 columns = 3
+script = ExtResource("2_giwl6")
+home_control = NodePath("CopyRoomID")
 
 [node name="CopyRoomID" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Copy Room ID"
+text = "UI_MENU_COPY_ROOM_ID"
 
 [node name="Empty3" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -169,11 +172,11 @@ size_flags_horizontal = 3
 [node name="HideRoomID" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Hide/UnHide RoomId"
+text = "UI_MENU_HIDE_ROOM_ID"
 
 [node name="InputDelayLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
-text = "Input Delay: 2"
+text = "UI_MENU_INPUT_DELAY_DEFAULT"
 
 [node name="Empty4" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2

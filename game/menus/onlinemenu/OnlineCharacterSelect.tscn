@@ -55,7 +55,7 @@
 [ext_resource type="Script" uid="uid://ds4bds8ylrmqi" path="res://game/menus/characterselect/PlayerSelectFlash.gd" id="66"]
 [ext_resource type="Shader" uid="uid://dinoskkj75qym" path="res://game/assets/shaders/ColorSwapAntiAlias.gdshader" id="66_fj7xv"]
 [ext_resource type="Script" uid="uid://bjc0r8bue6an" path="res://game/menus/onlinemenu/OnlineCharacterSelect.gd" id="67"]
-[ext_resource type="Texture2D" uid="uid://7j6rx4336gr2" path="res://game/assets/sprites/assists/hakka/ColorPalettes/2.png" id="67_q3mc5"]
+[ext_resource type="Texture2D" uid="uid://7j6rx4336gr2" path="res://game/assets/sprites/assists/rikka/ColorPalettes/2.png" id="67_q3mc5"]
 [ext_resource type="Script" uid="uid://cv1fa8k03ytiy" path="res://game/menus/characterselect/CurtainFlash.gd" id="68"]
 [ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="69"]
 
@@ -180,9 +180,6 @@ delay = 80
 [node name="CharacterIconsNode" parent="." instance=ExtResource("6_tgc0a")]
 position = Vector2(750, 144)
 
-[node name="8" parent="CharacterIconsNode" index="8"]
-visible = false
-
 [node name="KimiNoHiroin" type="Node2D" parent="."]
 z_index = 120
 position = Vector2(529, 89)
@@ -287,7 +284,7 @@ offset = Vector2(40, 0)
 
 [node name="P2Cursor" parent="." instance=ExtResource("7")]
 position = Vector2(966, 392)
-gridY = 4
+gridY = 3
 gridX = 3
 start_col = 1
 start_row = 1
@@ -296,7 +293,7 @@ deselect_ok = false
 [node name="P1Cursor" parent="." instance=ExtResource("7")]
 position = Vector2(962, 392)
 is_p1 = true
-gridY = 4
+gridY = 3
 gridX = 3
 start_col = 1
 start_row = 1
@@ -372,7 +369,7 @@ offset_right = -483.0
 offset_bottom = 157.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("9")
-text = "WOW"
+text = "UI_STATUS_WOW"
 
 [node name="DebugLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -384,7 +381,7 @@ offset_right = -483.0
 offset_bottom = 304.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("9")
-text = "WOW"
+text = "UI_STATUS_WOW"
 
 [node name="P1Name" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -396,7 +393,7 @@ offset_right = -640.0
 offset_bottom = 1008.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("9")
-text = "WOW"
+text = "UI_STATUS_WOW"
 horizontal_alignment = 1
 
 [node name="P2Name" type="Label" parent="CanvasLayer"]
@@ -409,7 +406,7 @@ offset_right = 592.0
 offset_bottom = 1008.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("9")
-text = "WOW"
+text = "UI_STATUS_WOW"
 horizontal_alignment = 1
 
 [node name="RemainingTime" type="Label" parent="CanvasLayer"]

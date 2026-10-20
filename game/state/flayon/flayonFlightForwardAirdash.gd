@@ -33,7 +33,8 @@ func physics_tick(state: Dictionary) -> void:
 	elif (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.hitStopFrame] = 0
 		SyncManager.play_sound("airdash", Global.AirdashSound, {"bus": "Sound"})
-	
+	self.enforce_min_height(state)
+
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	super.special_cancel(state,interpreter)
 	if (state[Enums.StKey.hitStopFrame] >= 0):

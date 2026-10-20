@@ -70,7 +70,7 @@ offset_right = -24.0
 offset_bottom = 149.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("1")
-text = "Room Settings: "
+text = "UI_MENU_ROOM_SETTINGS"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 anchors_preset = -1
@@ -89,7 +89,7 @@ size_flags_horizontal = 3
 [node name="CreateRoomButton" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Create Room"
+text = "UI_MENU_CREATE_ROOM"
 
 [node name="PlayerCountLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -100,8 +100,8 @@ theme_override_fonts/font = SubResource("3")
 [node name="PlayerCountMeter" type="HSlider" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 min_value = 2.0
-max_value = 8.0
-value = 8.0
+max_value = 16.0
+value = 16.0
 tick_count = 7
 ticks_on_borders = true
 script = ExtResource("14")

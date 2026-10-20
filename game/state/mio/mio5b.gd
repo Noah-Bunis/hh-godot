@@ -3,7 +3,7 @@ extends MioAttackState
 class_name Mio5BState
 
 func _init():
-	endFrame = 25
+	endFrame = 26
 	
 	anim_data = {
 		0 : {

@@ -2,6 +2,11 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 
+@onready var BUTTON_MAP_MENU = preload("res://game/menus/buttonmap/ButtonMapMenuScreen.tscn")
+var button_menu
+var button_map_paused_before_open: bool
+var last_input_event: InputEvent
+
 # holoheavenbugreport@gmail.com
 
 var Main_volume = 0
@@ -9,9 +14,13 @@ var BGM_volume = -10
 var Sound_volume = -10
 var Voice_volume = -10
 var DebugRollbackLogsEnabled: bool = false
+var language_mode: String = "en"
 
 func _ready():
 	load_startup_config()
+	$CanvasLayer/Options/LanguageOption.add_item("English", 0)
+	$CanvasLayer/Options/LanguageOption.add_item("日本語", 1)
+	$CanvasLayer/Options/LanguageOption.select(1 if language_mode == "ja" else 0)
 	$CanvasLayer/Options/FullScreenButton.grab_focus()
 	$CanvasLayer/Options/VsyncEmpty.text = bool_to_on_off_string(DisplayServer.window_get_vsync_mode() != DisplayServer.VSYNC_DISABLED)
 	$CanvasLayer/Options/MainVolumeMeter.value = db_conversion(Main_volume, $CanvasLayer/Options/MainVolumeMeter.max_value)
@@ -26,6 +35,7 @@ func db_conversion(internal_volume, meter_max):
 	return (internal_volume * 2) + meter_max
 
 func _input(event):
+	last_input_event = event
 	if event.is_action_pressed("ui_cancel"):
 		_on_GoBackButton_pressed()
 
@@ -46,9 +56,17 @@ func _on_VsyncButton_pressed():
 
 func bool_to_on_off_string(input_bool: bool):
 	if (input_bool):
-		return "ON"
+		return tr("UI_TRAINING_ON")
 	else:
-		return "OFF"
+		return tr("UI_TRAINING_OFF")
+
+func _on_LanguageOption_item_selected(index: int) -> void:
+	language_mode = "ja" if index == 1 else "en"
+	apply_language()
+	Util.write_to_config_file("Language", "Locale", language_mode)
+
+func apply_language() -> void:
+	TranslationServer.set_locale(language_mode)
 
 func _on_ResetButton_pressed():
 	_on_MainVolumeMeter_value_changed(0 + $CanvasLayer/Options/MainVolumeMeter.max_value)
@@ -71,9 +89,9 @@ func _on_ReplayLogsButton_pressed():
 
 func replay_text_update():
 	if (Global.replay_logging_enabled):
-		$CanvasLayer/Options/ReplayLogsEmpty.text = "ON"
+		$CanvasLayer/Options/ReplayLogsEmpty.text = tr("UI_TRAINING_ON")
 	else:
-		$CanvasLayer/Options/ReplayLogsEmpty.text = "OFF"
+		$CanvasLayer/Options/ReplayLogsEmpty.text = tr("UI_TRAINING_OFF")
 
 func _on_GoBackButton_pressed():
 	get_tree().change_scene_to_file("res://game/menus/mainmenu/MainMenu.tscn")
@@ -115,13 +133,13 @@ func _on_DebugRollbackLogsButton_pressed():
 
 func update_debug_rollback_log():
 	if (DebugRollbackLogsEnabled):
-		$CanvasLayer/Options/DebugRollbackLogsEmpty.text = "ON, Warning: log files take up lots of storage space!"
+		$CanvasLayer/Options/DebugRollbackLogsEmpty.text = tr("UI_STATUS_ROLLBACK_LOG_WARNING_ON")
 	else:
-		$CanvasLayer/Options/DebugRollbackLogsEmpty.text = "OFF, if you want to help catch rollback desyncs, enable this"
+		$CanvasLayer/Options/DebugRollbackLogsEmpty.text = tr("UI_STATUS_ROLLBACK_LOG_WARNING_OFF")
 
 func _on_GetLogsDirButton_pressed():
 	DisplayServer.clipboard_set(ProjectSettings.globalize_path("user://"))
-	$CanvasLayer/Options/GetLogDirEmpty.text = "Copied file path"
+	$CanvasLayer/Options/GetLogDirEmpty.text = tr("UI_STATUS_COPIED_FILE_PATH")
 
 func _on_ClearControlsButton_pressed() -> void:
 	var config = ConfigFile.new()
@@ -136,11 +154,30 @@ func _on_ClearControlsButton_pressed() -> void:
 	
 	config.clear()
 	config.save("user://controllersettings.cfg")
-	$CanvasLayer/Options/ClearControlsEmpty.text = "Cleared controllersettings.cfg"
+	$CanvasLayer/Options/ClearControlsEmpty.text = tr("UI_STATUS_CLEARED_CONTROLS_FILE")
 	
 	Util.try_create_new_controller_file()
 	Util.set_input_map_ui_controls()
 	Util.init_global_input_map()
+
+func _on_ChangeControlsButton_pressed() -> void:
+	button_map_paused_before_open = get_tree().paused
+	button_menu = BUTTON_MAP_MENU.instantiate()
+	button_menu.configure_single_player(last_input_event, true)
+	set_process_input(false)
+	var focus_owner = get_viewport().gui_get_focus_owner()
+	if (focus_owner != null):
+		focus_owner.release_focus()
+	$CanvasLayer.add_child(button_menu)
+	button_menu.connect("complete", Callable(self, "button_set_complete"))
+
+func button_set_complete() -> void:
+	get_tree().paused = button_map_paused_before_open
+	button_menu.disconnect("complete", Callable(self, "button_set_complete"))
+	button_menu.queue_free()
+	button_menu = null
+	set_process_input(true)
+	$CanvasLayer/Options/ChangeControlsButton.call_deferred("grab_focus")
 
 func load_startup_config():
 	var config = ConfigFile.new()
@@ -151,7 +188,12 @@ func load_startup_config():
 	# If the file didn't load, ignore it.
 	if err != OK:
 		print("Config File Error: " + str(err))
+		language_mode = Global.resolve_locale(config)
+		apply_language()
 		return
+
+	language_mode = Global.resolve_locale(config)
+	apply_language()
 	
 	Main_volume = config.get_value("SoundOptions", "MainVolume", 0)
 	BGM_volume = config.get_value("SoundOptions", "MusicVolume", -10)

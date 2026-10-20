@@ -6,7 +6,8 @@ func _init():
 	endFrame = 60
 	
 	anim_data = {
-		0 : { 
+		0 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : true,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
@@ -41,7 +42,8 @@ func _init():
 			Enums.StKey.hitstun : 300,
 			Enums.StKey.hitstop: 1,
 			},
-		2 : { 
+		2 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,

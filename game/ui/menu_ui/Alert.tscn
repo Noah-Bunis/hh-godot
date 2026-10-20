@@ -21,12 +21,12 @@ layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "Are you sure you want to exit?"
+text = "UI_ALERT_EXIT_TITLE"
 clip_text = true
 
 [node name="ContentLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-text = "This will end the match for everyone and return to the match setup screen."
+text = "UI_ALERT_EXIT_MATCH"
 clip_text = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -38,12 +38,12 @@ size_flags_horizontal = 3
 
 [node name="OkButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "OK"
+text = "UI_BUTTON_OK"
 script = ExtResource("3")
 
 [node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Cancel"
+text = "UI_BUTTON_CANCEL"
 script = ExtResource("3")
 
 [node name="Spacer2" type="Control" parent="VBoxContainer/HBoxContainer"]

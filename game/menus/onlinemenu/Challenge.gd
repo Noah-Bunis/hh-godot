@@ -49,5 +49,5 @@ func _on_decline_challenge_pressed():
 	emit_signal("accept_result", false, from.session_id)
 
 func _on_InputDelayMeter_value_changed(value):
-	$CanvasLayer/GridContainer/InputDelayLabel.set_text("Input Delay: " + str(int(value)))
+	$CanvasLayer/GridContainer/InputDelayLabel.text = tr("UI_LABEL_INPUT_DELAY").format({"frames": int(value)})
 	SyncManager.set_input_delay(int($CanvasLayer/GridContainer/InputDelayMeter.value))

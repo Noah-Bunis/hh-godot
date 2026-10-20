@@ -2,6 +2,8 @@ extends MioAirAttackState
 
 class_name MioAirCardsState
 
+var Voice = preload("res://game/assets/voice/mio/mio_poi.wav")
+
 func _init():
 	endFrame = 40
 
@@ -45,7 +47,8 @@ func physics_tick(state: Dictionary) -> void:
 	elif (state[Enums.StKey.frame] == 8):
 		state[Enums.StKey.velocity_y] = -SGFixed.ONE*30
 		state[Enums.StKey.velocity_x] = -SGFixed.ONE*15
-
+		SyncManager.play_sound("MioVoice", Voice, {"bus": "Voice"})
+		
 func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
 	if (event_cause == Enums.Reaction.GroundLand):
 		if (state[Enums.StKey.frame] > 5):

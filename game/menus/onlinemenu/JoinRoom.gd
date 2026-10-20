@@ -24,11 +24,11 @@ func _ready() -> void:
 
 func _on_OnlineLobby_error(message: String) -> void:
 	print("ERROR: %s" % message)
-	$CanvasLayer/MessageLabel.text = "ERROR: " + message
+	$CanvasLayer/MessageLabel.text = tr("UI_LABEL_ERROR").format({"message": message})
 
 func _on_OnlineLobby_match_joined(match_id: String) -> void:
 	print("Joined private match: %s" % match_id)
-	$CanvasLayer/MessageLabel.text = "Joined private match: " + match_id
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_JOINED_PRIVATE_MATCH").format({"match_id": match_id})
 	get_tree().change_scene_to_file("res://game/menus/onlinemenu/PrivateRoom.tscn")
 
 func _input(event):
@@ -48,4 +48,4 @@ func _on_create_private_room_pressed():
 
 func _on_paste_button_pressed():
 	$CanvasLayer/GridContainer/RoomIDField.text = DisplayServer.clipboard_get()
-	$CanvasLayer/MessageLabel.text = "Pasted from clipboard"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_PASTED_CLIPBOARD")

@@ -44,12 +44,12 @@ func setup_training():
 		fighter_game.get_node("ClientInputInterpreter").set_script(CPUInputInterpreter)
 		dummy_input = fighter_game.get_node("ClientInputInterpreter")
 		dummy_input.input_prefix = "player2_"
-		$CanvasLayer/WinStreakLabel.text = "Wins: " + str(Global.P1_WIN_STREAK)
+		$CanvasLayer/WinStreakLabel.text = tr("UI_LABEL_WINS").format({"count": Global.P1_WIN_STREAK})
 	else:
 		fighter_game.get_node("ServerInputInterpreter").set_script(CPUInputInterpreter)
 		dummy_input = fighter_game.get_node("ServerInputInterpreter")
 		dummy_input.input_prefix = "player1_"
-		$CanvasLayer/WinStreakLabel.text = "Wins: " + str(Global.P2_WIN_STREAK)
+		$CanvasLayer/WinStreakLabel.text = tr("UI_LABEL_WINS").format({"count": Global.P2_WIN_STREAK})
 	fighter_game.menu = load("res://game/menus/rematchmenu/SinglePlayerRematchControl.tscn")
 	return_control_to_player()
 

@@ -21,4 +21,4 @@ offset_right = 33.99997
 offset_bottom = 165.37494
 scale = Vector2(1.6, 1.6)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-text = "Combo Trial:"
+text = "UI_LABEL_COMBO_TRIAL"

@@ -30,7 +30,7 @@ func join_an_online_match() -> void:
 	OnlineMatch.connect("match_not_ready", Callable(self, "_on_OnlineMatch_match_not_ready"))
 	
 	print ("Joined the matchmaking queue...")
-	$CanvasLayer/MessageLabel.text = "Joined the matchmaking queue..."
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_MATCHMAKING_QUEUED")
 	reset_without_retry()
 	OnlineMatch.start_matchmaking(Global.nakama_socket)
 
@@ -56,20 +56,20 @@ func timeout():
 func _on_OnlineMatch_error(message: String) -> void:
 	print("ERROR: %s" % message)
 	reset()
-	$CanvasLayer/MessageLabel.text = "ERROR: " + message
+	$CanvasLayer/MessageLabel.text = tr("UI_LABEL_ERROR").format({"message": message})
 
 func _on_OnlineMatch_disconnected() -> void:
 	print("Disconnected from match.")
 	reset()
-	$CanvasLayer/MessageLabel.text = "Disconnected from match"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_DISCONNECTED")
 
 func _on_OnlineMatch_match_created(match_id: String) -> void:
 	print("Private match created: %s" % match_id)
-	$CanvasLayer/MessageLabel.text = "Private match created: " + match_id
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_PRIVATE_MATCH_CREATED").format({"match_id": match_id})
 
 func _on_OnlineMatch_match_joined(match_id: String) -> void:
 	print("Joined private match: %s" % match_id)
-	$CanvasLayer/MessageLabel.text = "Joined private match: " + match_id
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_JOINED_PRIVATE_MATCH").format({"match_id": match_id})
 
 func _on_OnlineMatch_matchmaker_matched(players: Dictionary) -> void:
 	print("Joined match via matchmaker")
@@ -78,12 +78,12 @@ func _on_OnlineMatch_matchmaker_matched(players: Dictionary) -> void:
 
 func _on_OnlineMatch_player_joined(player: OnlineMatch.Player) -> void:
 	print("Player joined: %s" % Util.display_username(player.username))
-	$CanvasLayer/MessageLabel.text = "Player joined: " + Util.display_username(player.username)
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_PLAYER_JOINED").format({"player_name": Util.display_username(player.username)})
 
 func _on_OnlineMatch_player_left(player: OnlineMatch.Player) -> void:
 	print("Player left: %s" % Util.display_username(player.username))
 	reset()
-	$CanvasLayer/MessageLabel.text = "Player left: " + Util.display_username(player.username)
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_PLAYER_LEFT").format({"player_name": Util.display_username(player.username)})
 
 func _on_OnlineMatch_player_status_changed(player: OnlineMatch.Player, status) -> void:
 	print("Player status changed: %s -> %s" % [Util.display_username(player.username), status])
@@ -105,7 +105,7 @@ func _on_OnlineMatch_match_not_ready() -> void:
 
 func _on_OnlineMatch_match_ready(players: Dictionary) -> void:
 	print("The match is ready to start! Here are players:")
-	$CanvasLayer/MessageLabel.text = "Match is starting!"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_MATCH_STARTING")
 	for player in players.values():
 		print ("- %s" % Util.display_username(player.username))
 		print ("- %s" % player.session_id)

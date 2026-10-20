@@ -24,7 +24,7 @@ func _init():
 			Enums.StKey.Hurt1ScaleX : 1122078, Enums.StKey.Hurt1ScaleY : 1236954,
 			Enums.StKey.hit_box_colliding_frame : 254,
 			Enums.StKey.attack_damage: 20,
-			Enums.StKey.min_damage: 3,
+			Enums.StKey.min_damage: 4,
 			Enums.StKey.meter_build: 0,
 			Enums.StKey.guard: Enums.GuardType.High,
 			Enums.StKey.hitstun: Util.DEFAULT_HITSTUN,
@@ -54,6 +54,7 @@ func enter(state: Dictionary) -> void:
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	state[Enums.StKey.super_meter] -= Util.FLIGHT_ATTACK_METER_DRAIN
+	self.enforce_min_height(state)
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

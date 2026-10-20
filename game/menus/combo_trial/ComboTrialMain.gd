@@ -13,6 +13,15 @@ func _ready() -> void:
 
 	self.connect("prev_trial", Callable($CanvasLayer/ComboTrialListener, "prev_trial"))
 	self.connect("next_trial", Callable($CanvasLayer/ComboTrialListener, "next_trial"))
+	$CanvasLayer/ComboTrialListener.connect("combo_loaded", Callable(self, "_on_combo_loaded"))
+	_on_combo_loaded($CanvasLayer/ComboTrialListener.current_reset_position)
+
+func _on_combo_loaded(reset_position_name: String) -> void:
+	var reset_position: int = TrainingResetPosition.get(reset_position_name, TrainingResetPosition.CENTER)
+	_apply_training_reset_position(reset_position)
+
+func prepare_for_demo_playback() -> void:
+	_on_combo_loaded($CanvasLayer/ComboTrialListener.current_reset_position)
 
 func exit():
 	get_tree().change_scene_to_file("res://game/menus/combo_trial/ComboTrialCharacterSelect.tscn")

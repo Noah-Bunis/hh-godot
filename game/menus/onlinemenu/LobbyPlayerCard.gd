@@ -19,23 +19,23 @@ func _ready() -> void:
 
 func update_ping(new_ping: int, msg):
 	ping = new_ping
-	$PingLabel.set_text("Ping: " + str(ping) + "ms")
+	$PingLabel.text = tr("UI_LABEL_PING").format({"ping": ping})
 
 func update_status(new_status: int):
 	if (new_status == OnlineLobby.CHALLENGE_STATE.IN_GAME):
-		$StatusLabel.text = "In a Game"
+		$StatusLabel.text = tr("UI_LABEL_STATUS_IN_GAME")
 		$Background.self_modulate = Color("#550606")
 	elif (new_status == OnlineLobby.CHALLENGE_STATE.CHALLENGING):
-		$StatusLabel.text = "Challenging"
+		$StatusLabel.text = tr("UI_LABEL_STATUS_CHALLENGING")
 		$Background.self_modulate = Color("#ddaa30")
 	elif (new_status == OnlineLobby.CHALLENGE_STATE.DECIDING):
-		$StatusLabel.text = "Deciding"
+		$StatusLabel.text = tr("UI_LABEL_STATUS_DECIDING")
 		$Background.self_modulate = Color("#184b9b")
 	elif (new_status == OnlineLobby.CHALLENGE_STATE.SPECTATING):
-		$StatusLabel.text = "Spectating"
+		$StatusLabel.text = tr("UI_MENU_SPECTATE")
 		$Background.self_modulate = Color("#580f8a")
 	else:
-		$StatusLabel.text = "Ready"
+		$StatusLabel.text = tr("UI_LABEL_STATUS_READY")
 		$Background.self_modulate = Color("#146c76")
 
 func set_player(p_player: OnlineLobby.Player):
@@ -55,9 +55,9 @@ func _on_spectate_pressed():
 func set_challenging(p_challenging: bool):
 	challenging = p_challenging
 	if (challenging):
-		$Challenge.text = "Cancel"
+		$Challenge.text = tr("UI_BUTTON_CANCEL")
 	else:
-		$Challenge.text = "Challenge"
+		$Challenge.text = tr("UI_MENU_CHALLENGE")
 
 func get_challenging():
 	return challenging
@@ -65,9 +65,9 @@ func get_challenging():
 func set_spectating(p_spectating: bool):
 	spectating = p_spectating
 	if (spectating):
-		$Spectate.text = "Cancel"
+		$Spectate.text = tr("UI_BUTTON_CANCEL")
 	else:
-		$Spectate.text = "Spectate"
+		$Spectate.text = tr("UI_MENU_SPECTATE")
 		
 func get_spectating():
 	return spectating

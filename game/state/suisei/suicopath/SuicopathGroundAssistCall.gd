@@ -57,7 +57,10 @@ func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.frame] > 1):
-		super.meter_cancel(state, interpreter)
+		if (boost_OK(state, interpreter)):
+			state[Enums.StKey.cancelState] = "AngelBoostCancel"
+		elif (state[Enums.StKey.frame] >= Util.ASSIST_CANCEL_LOCKOUT):
+			super.meter_cancel(state, interpreter)
 	if (burst_OK(state, interpreter)):
 		change_state.call("AngelBurst")
 

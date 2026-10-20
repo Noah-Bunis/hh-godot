@@ -3,7 +3,7 @@ extends SubaruAttackState
 class_name SubaruStingerState
 
 func _init():
-	endFrame = 35
+	endFrame = 40
 	
 	anim_data = {
 		0 : {
@@ -48,7 +48,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*30,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*55,
 			},
-		20 : { 
+		22 : { 
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,

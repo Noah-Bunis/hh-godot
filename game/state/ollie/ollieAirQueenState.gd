@@ -2,6 +2,8 @@ extends "res://game/state/ollie/mainstates/ollieAirAttackState.gd"
 
 class_name OllieAirEXStarBallState
 
+var Voice = preload("res://game/assets/voice/ollie/oll_fight back.wav")
+
 func _init():
 	endFrame = 45
 	
@@ -47,6 +49,9 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.velocity_x] = SGFixed.mul(state[Enums.StKey.velocity_x], SGFixed.HALF)
 		state[Enums.StKey.velocity_y] = SGFixed.ONE*-10
 		state[Enums.StKey.accel_y] = SGFixed.ONE
+	elif (state[Enums.StKey.frame] == 10):	
+		SyncManager.play_sound("OllieVoice", Voice, {"bus": "Voice"})
+		SyncManager.play_sound("OllieVoiceReverb", Voice, {"bus": "ReverbVoice"})
 	elif (state[Enums.StKey.frame] == 23):
 		state[Enums.StKey.accel_y] = Util.GRAVITY
 

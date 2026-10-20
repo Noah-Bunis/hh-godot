@@ -60,7 +60,7 @@ offset_top = 191.0
 offset_right = -26.0
 offset_bottom = 321.0
 scale = Vector2(2, 2)
-text = "Logging in to Server..."
+text = "UI_MENU_LOGGING_IN"
 
 [node name="NameLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -85,7 +85,7 @@ scale = Vector2(2.62065, 3.92985)
 [node name="HostLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Display Name"
+text = "UI_MENU_DISPLAY_NAME"
 
 [node name="HostField" type="LineEdit" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -96,7 +96,7 @@ focus_neighbor_bottom = NodePath("../PortField")
 layout_mode = 2
 size_flags_horizontal = 3
 button_mask = 0
-text = "Login"
+text = "UI_BUTTON_LOGIN"
 
 [node name="Earthbound" type="Sprite2D" parent="."]
 visible = false

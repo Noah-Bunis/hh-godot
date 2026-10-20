@@ -1,4 +1,4 @@
-[gd_scene load_steps=223 format=3 uid="uid://cbwy2j4nbkk2j"]
+[gd_scene load_steps=226 format=3 uid="uid://cbwy2j4nbkk2j"]
 
 [ext_resource type="Script" uid="uid://dgsx3duqjaeo5" path="res://game/fighter/PointPlayer.gd" id="1_m4qvm"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="2_xm7kd"]
@@ -56,6 +56,7 @@
 [ext_resource type="Texture2D" uid="uid://d25indahdv1tp" path="res://game/assets/sprites/flayon/Walk/Timeline 1_0000.png" id="66_ujttm"]
 [ext_resource type="Texture2D" uid="uid://da3w1rl4dfpuk" path="res://game/assets/sprites/flayon/TohnoDP/Timeline 1_0001.png" id="69_lfwk2"]
 [ext_resource type="Texture2D" uid="uid://bebbakox21hbv" path="res://game/assets/sprites/flayon/CrouchBlock/Timeline 1_0000.png" id="71_8hpu6"]
+[ext_resource type="Texture2D" uid="uid://68i8oc7clpah" path="res://game/assets/sprites/flayon/TohnoDP/Timeline 1_0002.png" id="71_xpm3i"]
 [ext_resource type="Texture2D" uid="uid://cixyt7er3ms0t" path="res://game/assets/sprites/flayon/Crouch/Timeline 1_0000.png" id="73_f32ml"]
 [ext_resource type="Texture2D" uid="uid://dlwo1cgh0b2ov" path="res://game/assets/sprites/flayon/CrouchHurt/Timeline 1_0000.png" id="73_jefqy"]
 [ext_resource type="Texture2D" uid="uid://cmdloci1l5bys" path="res://game/assets/sprites/flayon/CrouchHurt/Timeline 1_0001.png" id="74_0rw8g"]
@@ -88,10 +89,12 @@
 [ext_resource type="Texture2D" uid="uid://kf52g55kt6lk" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0000.png" id="109_23vwi"]
 [ext_resource type="Texture2D" uid="uid://bxl1bm3tewtyl" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0002.png" id="109_wkc6h"]
 [ext_resource type="Texture2D" uid="uid://bad4me2l0t4iw" path="res://game/assets/sprites/flayon/Skid/Timeline 1_0000.png" id="110_4p678"]
+[ext_resource type="Texture2D" uid="uid://fta334tsaxdv" path="res://game/assets/sprites/flayon/Idle/Timeline 1_0001.png" id="110_5i547"]
 [ext_resource type="Texture2D" uid="uid://drk2i34eq7vy2" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0004.png" id="110_5mqlr"]
 [ext_resource type="Texture2D" uid="uid://clc5laoa1chbr" path="res://game/assets/sprites/flayon/StandHurt/Timeline 1_0003.png" id="110_d6y3q"]
 [ext_resource type="Texture2D" uid="uid://cvvtyqowd7j74" path="res://game/assets/sprites/flayon/StandParry/Timeline 1_0000.png" id="110_ukakn"]
 [ext_resource type="Texture2D" uid="uid://dyxy775maouow" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0001.png" id="111_5murs"]
+[ext_resource type="Texture2D" uid="uid://dpc4cdn64gvu6" path="res://game/assets/sprites/flayon/Idle/Timeline 1_0002.png" id="111_xpm3i"]
 [ext_resource type="Texture2D" uid="uid://umpnxo1l4xu4" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0002.png" id="112_i4l5q"]
 [ext_resource type="Texture2D" uid="uid://dnmy5jjl854wj" path="res://game/assets/sprites/flayon/Intro/Timeline 1_0003.png" id="113_en3gp"]
 [ext_resource type="Texture2D" uid="uid://cncs4p75jsuhy" path="res://game/assets/sprites/flayon/RTrus/Timeline 1_0000.png" id="122_2b0jr"]
@@ -947,10 +950,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.28333333, 0.41666666, 0.53333336),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.11666667, 0.28333333, 0.41666666, 0.53333336),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("150_xm7kd"), ExtResource("69_lfwk2"), ExtResource("106_m4qvm"), ExtResource("88_0rw8g")]
+"values": [ExtResource("71_xpm3i"), ExtResource("150_xm7kd"), ExtResource("69_lfwk2"), ExtResource("106_m4qvm"), ExtResource("88_0rw8g")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -1696,7 +1699,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="41"]
 resource_name = "Idle"
-length = 0.91667014
+length = 0.75000316
 loop_mode = 1
 step = 0.0166667
 tracks/0/type = "value"
@@ -1706,10 +1709,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.36666667, 0.51666665),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ExtResource("90_f32ml")]
+"values": [ExtResource("90_f32ml"), ExtResource("110_5i547"), ExtResource("111_xpm3i")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -2473,20 +2476,20 @@ script = ExtResource("150_1jibv")
 auto_reset = false
 
 [node name="Hitbox1" parent="." instance=ExtResource("151_0ymqg")]
-fixed_position_x = 2629186
-fixed_position_y = -12760256
-fixed_scale_x = 1026496
-fixed_scale_y = 850290
-position = Vector2(40.118195, -194.70605)
-scale = Vector2(15.663086, 12.974396)
+fixed_position_x = 8629186
+fixed_position_y = -15760254
+fixed_scale_x = 1526496
+fixed_scale_y = 1350290
+position = Vector2(131.67093, -240.48239)
+scale = Vector2(23.29248, 20.60379)
 
 [node name="Hitbox2" parent="." instance=ExtResource("151_0ymqg")]
 fixed_position_x = 22435712
-fixed_position_y = -15136510
-fixed_scale_x = 1220696
-fixed_scale_y = 410074
-position = Vector2(342.3418, -230.96481)
-scale = Vector2(18.626343, 6.2572327)
+fixed_position_y = -18136510
+fixed_scale_x = 1020696
+fixed_scale_y = 910074
+position = Vector2(342.3418, -276.74118)
+scale = Vector2(15.574585, 13.886627)
 
 [node name="Hurtbox1" parent="." instance=ExtResource("152_d42n6")]
 fixed_position_y = -10087936

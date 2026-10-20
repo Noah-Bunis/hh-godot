@@ -19,6 +19,9 @@ const credits = {
 	"Guest Developer" : [
 		"Keyboard Noah",
 	],
+	"Localization" : [
+		"JP - Keyboard Noah",
+	],
 	"Infinite and Bug Hunters" : [
 		"りてら",
 		"J.Comet Bravo",
@@ -86,7 +89,7 @@ const credits = {
 		"Holofans, FG developers, and FG fans everywhere",
 		],
 	"-----------------" : [
-		"Thank you so much for playing our game (demo)!",
+		"Thank you so much for playing our game!",
 		],
 	"A Game By" : 
 		["tMOE and qJOE"],

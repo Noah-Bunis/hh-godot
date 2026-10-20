@@ -40,7 +40,7 @@ func _init():
 			Enums.StKey.hitstun: 26,
 			Enums.StKey.hitstop: 10,
 			Enums.StKey.counter_hitstun: 10,
-			Enums.StKey.attack_damage: 40,
+			Enums.StKey.attack_damage: 45,
 			Enums.StKey.min_damage: 4,
 		},
 		58 : {

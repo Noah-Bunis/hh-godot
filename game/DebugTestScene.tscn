@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bpnhk7e6k24tq"]
 
-[ext_resource path="res://game/assets/shaders/ColorSwapMat.tres" type="Material" id=1]
-[ext_resource path="res://game/assets/sprites/UI/CharacterSelect/Portraits/SubaruPortraitReal.png" type="Texture2D" id=2]
+[ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="1"]
+[ext_resource type="Texture2D" uid="uid://btpgttpclji8t" path="res://game/assets/sprites/UI/CharacterSelect/Portraits/SoraPortrait.png" id="2_ms527"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = ExtResource( 1 )
-position = Vector2( 796, 538 )
-texture = ExtResource( 2 )
+material = ExtResource("1")
+position = Vector2(796, 538)
+texture = ExtResource("2_ms527")

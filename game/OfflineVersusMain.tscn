@@ -63,7 +63,7 @@ scale = Vector2(1.57576, 0.666667)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Ping:160 ms"
+text = "UI_LABEL_CURRENT_PING"
 horizontal_alignment = 1
 
 [node name="HoldStartLabel" type="Label" parent="CanvasLayer"]
@@ -80,7 +80,7 @@ scale = Vector2(1.96386, 5.2058)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "Hold Start..."
+text = "UI_STATUS_HOLD_START"
 horizontal_alignment = 1
 
 [node name="RollbackFrameLabel" type="Label" parent="CanvasLayer"]
@@ -95,7 +95,7 @@ scale = Vector2(0.824673, 0.591117)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
-text = "RollbackFrame: 2F"
+text = "UI_LABEL_CURRENT_ROLLBACK"
 horizontal_alignment = 1
 
 [node name="SyncLostLabel" type="Label" parent="CanvasLayer"]
@@ -111,7 +111,7 @@ scale = Vector2(2, 2)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
-text = "Regaining sync..."
+text = "UI_STATUS_REGAINING_SYNC"
 
 [node name="WinCounterP1" parent="CanvasLayer" instance=ExtResource("4")]
 offset_left = -475.0
@@ -168,12 +168,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("3")
-text = "Close Menu"
+text = "UI_REPLAY_CLOSE_MENU"
 
 [node name="CloseButton" type="Button" parent="CanvasLayer/PauseMenu"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../ExitButton")
-text = "Close"
+text = "UI_BUTTON_CLOSE"
 
 [node name="CloseNumber" type="Label" parent="CanvasLayer/PauseMenu"]
 layout_mode = 2
@@ -189,9 +189,26 @@ theme_override_fonts/font = SubResource("3")
 
 [node name="CommandListButton" type="Button" parent="CanvasLayer/PauseMenu"]
 layout_mode = 2
-text = "Command List"
+text = "UI_BUTTON_COMMAND_LIST"
 
 [node name="CommandListNumber" type="Label" parent="CanvasLayer/PauseMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("3")
+
+[node name="ChangeControlsLabel" type="Label" parent="CanvasLayer/PauseMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("3")
+text = "UI_MENU_EDIT_CONTROLS"
+
+[node name="ChangeControlsButton" type="Button" parent="CanvasLayer/PauseMenu"]
+layout_mode = 2
+text = "UI_BUTTON_CHANGE"
+
+[node name="ChangeControlsNumber" type="Label" parent="CanvasLayer/PauseMenu"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -202,12 +219,12 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("3")
-text = "Quit Versus"
+text = "UI_MENU_QUIT_VERSUS"
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/PauseMenu"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../CloseButton")
-text = "Quit"
+text = "UI_BUTTON_QUIT"
 
 [node name="ExitNumber" type="Label" parent="CanvasLayer/PauseMenu"]
 layout_mode = 2
@@ -227,4 +244,5 @@ scale = Vector2(2.87118, 3.02479)
 
 [connection signal="pressed" from="CanvasLayer/PauseMenu/CloseButton" to="CanvasLayer/PauseMenu" method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/CommandListButton" to="CanvasLayer/PauseMenu" method="_on_CommandListButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseMenu/ChangeControlsButton" to="CanvasLayer/PauseMenu" method="_on_ChangeControlsButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/ExitButton" to="CanvasLayer/PauseMenu" method="_on_ExitButton_pressed"]

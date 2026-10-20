@@ -28,16 +28,16 @@ func _ready():
 
 func _on_OnlineLobby_error(message: String) -> void:
 	print("ERROR: %s" % message)
-	$CanvasLayer/MessageLabel.text = "ERROR: " + message
+	$CanvasLayer/MessageLabel.text = tr("UI_LABEL_ERROR").format({"message": message})
 
 func _on_OnlineLobby_match_created(match_id: String) -> void:
 	print("Created new public lobby: %s" % match_id)
-	$CanvasLayer/MessageLabel.text = "Created new public lobby: " + match_id
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_PUBLIC_LOBBY_CREATED").format({"match_id": match_id})
 	OnlineLobby.join_public_lobby(Global.nakama_socket, match_id)
 
 func _on_OnlineLobby_match_joined(match_id: String) -> void:
 	print("Joined private match: %s" % match_id)
-	$CanvasLayer/MessageLabel.text = "Joined private match: " + match_id
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_JOINED_PRIVATE_MATCH").format({"match_id": match_id})
 	get_tree().change_scene_to_file("res://game/menus/onlinemenu/PrivateRoom.tscn")
 
 func exit():

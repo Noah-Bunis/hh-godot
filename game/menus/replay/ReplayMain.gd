@@ -41,14 +41,14 @@ func report_error(msg):
 	error_label.text = msg
 
 func data_updated():
-	message_label.text = "Data updated"
+	message_label.text = tr("UI_STATUS_DATA_UPDATED")
 
 func load_finished():
-	message_label.text = "Load complete!"
+	message_label.text = tr("UI_STATUS_LOAD_COMPLETE")
 	is_waiting = false
 
 func load_progress(progress, full):
-	message_label.text = "Loading: " + str(progress) + "/" + str(full)
+	message_label.text = tr("UI_STATUS_LOADING").format({"progress": progress, "total": full})
 
 func setup_main() -> void:
 	signal_connect()
@@ -241,11 +241,11 @@ func rewind():
 		current_tick = rewind_tick
 	replay_speed = 0
 	error_label.text = ""
-	message_label.text = "rewinding..."
+	message_label.text = tr("UI_STATUS_REWINDING")
 
 func speed_up_replay():
 	replay_speed = 4
-	message_label.text = "fast forwarding..."
+	message_label.text = tr("UI_STATUS_FAST_FORWARDING")
 
 func normal_speed():
 	replay_speed = 1
@@ -281,12 +281,12 @@ func control_the_dummy(is_p1):
 	if (not is_p1):
 		fighter_game.get_node("ServerInputInterpreter").set_script(ReplayInputInterpreterScript)
 		fighter_game.get_node("ClientInputInterpreter").set_script(InputInterpreterScript)
-		message_label.text = "takeover p2"
+		message_label.text = tr("UI_STATUS_TAKEOVER_P2")
 		takeover_is_p1 = false
 	else:
 		fighter_game.get_node("ClientInputInterpreter").set_script(ReplayInputInterpreterScript)
 		fighter_game.get_node("ServerInputInterpreter").set_script(InputInterpreterScript)
-		message_label.text = "takeover p1"
+		message_label.text = tr("UI_STATUS_TAKEOVER_P1")
 		takeover_is_p1 = true
 	takeover_savestate()
 
@@ -336,7 +336,7 @@ func takeover_loadstate():
 		SyncManager._call_load_state(takeover_state)
 		current_tick = takeover_tick
 	else:
-		message_label.text = "not currently in replay takeover state"
+		message_label.text = tr("UI_STATUS_NO_REPLAY_TAKEOVER")
 
 func input_helper(event):
 	if Input.is_action_just_pressed("player1_start") or Input.is_action_just_pressed("player1_record"):

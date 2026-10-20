@@ -48,7 +48,7 @@ func _init():
 			Enums.StKey.hit_box_colliding_frame : 20,
 			Enums.StKey.guard: Enums.GuardType.High,
 			Enums.StKey.attack_damage: 70,
-			Enums.StKey.min_damage: 20,
+			Enums.StKey.min_damage: 40,
 			Enums.StKey.chip_damage: 7,
 			Enums.StKey.hitstun: 80,
 			Enums.StKey.meter_build: 0,

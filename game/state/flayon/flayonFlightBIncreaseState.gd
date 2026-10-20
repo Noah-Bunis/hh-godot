@@ -36,8 +36,8 @@ func _init():
 			Enums.StKey.Hurt1ScaleX : 822078, Enums.StKey.Hurt1ScaleY : 1236954,
 			Enums.StKey.hit_box_colliding_frame : 3,
 			Enums.StKey.attack_damage: 40,
-			Enums.StKey.min_damage: 6,
-			Enums.StKey.chip_damage:3,
+			Enums.StKey.min_damage: 9,
+			Enums.StKey.chip_damage: 7,
 			Enums.StKey.meter_build: SGFixed.ONE*1800,
 			Enums.StKey.guard: Enums.GuardType.High,
 			Enums.StKey.attack_type : Enums.AttackType.WallBouncer,
@@ -69,6 +69,7 @@ func physics_tick(state: Dictionary) -> void:
 	state[Enums.StKey.super_meter] -= Util.FLIGHT_ATTACK_METER_DRAIN
 	if (state[Enums.StKey.frame] == 4):
 		SyncManager.play_sound("airtech", Global.AirTechSound, {"bus": "Sound"})
+	self.enforce_min_height(state)
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

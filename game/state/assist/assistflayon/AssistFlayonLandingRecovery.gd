@@ -1,0 +1,3 @@
+extends AssistLandingRecoveryState
+
+class_name AssistFlayonLandingRecoveryState

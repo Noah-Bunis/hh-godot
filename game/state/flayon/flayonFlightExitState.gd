@@ -29,6 +29,8 @@ func enter(state: Dictionary) -> void:
 		state[Enums.StKey.velocity_y] = SGFixed.mul(state[Enums.StKey.velocity_y], 35536)
 	state[Enums.StKey.velocity_x] = SGFixed.mul(state[Enums.StKey.velocity_x], 35536)
 
+	self.enforce_min_height(state)
+
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
 

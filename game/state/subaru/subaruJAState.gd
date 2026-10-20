@@ -3,7 +3,7 @@ extends SubaruAirAttackState
 class_name SubarujAState
 
 func _init():
-	endFrame = 13
+	endFrame = 20
 	
 	anim_data = {
 		0 : {

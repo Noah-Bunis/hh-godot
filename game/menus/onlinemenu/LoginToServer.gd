@@ -16,13 +16,13 @@ var nakama_session: NakamaSession
 var nakama_socket: NakamaSocket
 
 func connect_to_nakama() -> void:
-	$CanvasLayer/MessageLabel.text = "Connecting to server"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_CONNECTING_SERVER")
 	# Connect to a local Nakama instance using all the default settings.
 	if (not Global.LOCAL_SERVER):
 		nakama_client = Nakama.create_client(Build.SERVER_KEY, Build.SERVER_IP, Build.SERVER_PORT, 'http', 
 			Nakama.DEFAULT_TIMEOUT, NakamaLogger.LOG_LEVEL.ERROR)
 	else:
-		$CanvasLayer/MessageLabel.text = "connecting to local server"
+		$CanvasLayer/MessageLabel.text = tr("UI_STATUS_CONNECTING_LOCAL_SERVER")
 		print("connecting to local server")
 		nakama_client = Nakama.create_client(Build.SERVER_KEY, '127.0.0.1', Build.SERVER_PORT, 'http', 
 			Nakama.DEFAULT_TIMEOUT, NakamaLogger.LOG_LEVEL.ERROR)
@@ -32,14 +32,14 @@ func connect_to_nakama() -> void:
 	if nakama_session.is_exception():
 		print ("Unable to connect to Nakama")
 		print (nakama_session.get_exception().message)
-		$CanvasLayer/MessageLabel.text = "Unable to connect to server"
+		$CanvasLayer/MessageLabel.text = tr("UI_STATUS_UNABLE_CONNECT_SERVER")
 		return
 		
 	var name_update = await nakama_client.update_account_async(nakama_session, Util.create_username(device_id, Global.user_display_name), Global.user_display_name)
 	if name_update.is_exception():
 		print ("Unable to create display name")
 		print (name_update.get_exception().message)
-		$CanvasLayer/MessageLabel.text = "Unable to create username, try changing your name on the main menu"
+		$CanvasLayer/MessageLabel.text = tr("UI_STATUS_USERNAME_FAILED")
 		return
 #		get_tree().quit()
 
@@ -49,7 +49,7 @@ func connect_to_nakama() -> void:
 		if nakama_session.is_exception():
 			print ("Unable to connect to Nakama")
 			print (nakama_session.get_exception().message)
-			$CanvasLayer/MessageLabel.text = "Unable to connect to server and update username"
+			$CanvasLayer/MessageLabel.text = tr("UI_STATUS_USERNAME_UPDATE_FAILED")
 			return
 		
 	# Open a realtime socket to Nakama.
@@ -60,7 +60,7 @@ func connect_to_nakama() -> void:
 	Global.nakama_session = nakama_session
 	
 	print ("Connected to Nakama!")
-	$CanvasLayer/MessageLabel.text = "Connected to server"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_CONNECTED_SERVER")
 	
 	get_tree().change_scene_to_file("res://game/menus/onlinemenu/OnlineModes.tscn")
 

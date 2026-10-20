@@ -2,6 +2,8 @@ extends "res://game/state/kanata/mainstates/kanataAttackState.gd"
 
 class_name KanataWingStanceCState
 
+var Voice = preload("res://game/assets/voice/kanata/amk_tasukete.wav")
+
 func _init():
 	endFrame = 6
 	
@@ -79,9 +81,12 @@ func enter(state: Dictionary) -> void:
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
-	if (state[Enums.StKey.frame] >= 5):
+	if (state[Enums.StKey.frame] == 4):
+		SyncManager.play_sound("KanataVoice", Voice, {"bus": "Voice"})
+		SyncManager.play_sound("KanataVoiceReverb", Voice, {"bus": "ReverbVoice"})
+	elif (state[Enums.StKey.frame] >= 5):
 		state[Enums.StKey.velocity_x] = SGFixed.ONE*60
-
+	
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
 

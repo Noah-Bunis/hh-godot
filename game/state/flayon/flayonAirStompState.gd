@@ -2,6 +2,8 @@ extends FlayonAirAttackState
 
 class_name FlayonAirStompState
 
+var VoiceSound = preload("res://game/assets/voice/flayon/mxf_you will be killed by demons.wav")
+
 func _init():
 	endFrame = 60
 	
@@ -96,7 +98,10 @@ func physics_tick(state: Dictionary) -> void:
 	if (state[Enums.StKey.frame] == 5):
 		state[Enums.StKey.velocity_y] =	-SGFixed.ONE*40
 		state[Enums.StKey.accel_y] = Util.GRAVITY
-
+	elif (state[Enums.StKey.frame] == 2):
+		SyncManager.play_sound("FlayonVoice", VoiceSound, {"bus": "Voice"})
+		SyncManager.play_sound("FlayonVoiceReverb", VoiceSound, {"bus": "ReverbVoice"})
+	
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
 		if (boost_OK(state, interpreter)):

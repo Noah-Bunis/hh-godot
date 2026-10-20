@@ -5,7 +5,7 @@ class_name SubaruStarBallState
 var sound = preload("res://game/assets/sfx/Parry8Bit.wav")
 
 func _init():
-	endFrame = 37
+	endFrame = 43
 	
 	anim_data = {
 		0 : {

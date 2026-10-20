@@ -106,6 +106,8 @@ func setup(playerData:PlayerSetup):
 				state_factory = load("res://game/state/assist/okakoro/Okakorostatefactory.gd").new()
 			Enums.AssistCharacters.Hakka:
 				state_factory = load("res://game/state/assist/hakka/Hakkastatefactory.gd").new()
+			Enums.AssistCharacters.Rikka:
+				state_factory = load("res://game/state/assist/rikka/Rikkastatefactory.gd").new()
 			Enums.AssistCharacters.Subaru:
 				state_factory = load("res://game/state/assist/assistsubaru/assistsubarustatefactory.gd").new()
 				dim_sprite()
@@ -123,6 +125,9 @@ func setup(playerData:PlayerSetup):
 				dim_sprite()
 			Enums.AssistCharacters.Kanata:
 				state_factory = load("res://game/state/assist/assistkanata/assistkanatastatefactory.gd").new()
+				dim_sprite()
+			Enums.AssistCharacters.Flayon:
+				state_factory = load("res://game/state/assist/assistflayon/AssistFlayonstatefactory.gd").new()
 				dim_sprite()
 			_:
 				state_factory = FubukiStateFactory.new()
@@ -154,7 +159,7 @@ func warp_off_screen() -> void:
 		leftface = currentState[Enums.StKey.leftface],
 	})
 	fixed_position.x = 0
-	fixed_position.y = -SGFixed.ONE * 30000
+	fixed_position.y = Util.ASSIST_WARP_POSITION_Y
 	sync_to_physics_engine()
 
 func anim_updates() -> void:
@@ -250,6 +255,8 @@ func summonHelper(entity: String, uninterrupted:bool=true) -> void:
 				SyncManager.play_sound("superflash", Global.SuperFlashSound, {"bus": "Sound"})
 			elif (entity == "meterDump"):
 				emit_signal("battery_player", -Util.LEVEL_ONE_SUPER, 0, 0)
+			elif (entity == "sync_down"):
+				emit_signal("battery_player", 0, -8536, -SGFixed.ONE*70) #-8536
 		if (entity == "knockdowndust"):
 			summonVFX("KnockdownVFX", Global.KnockdownDustVFX)
 		elif (entity == "WallBounceDust"):

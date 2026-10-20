@@ -1,7 +1,7 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bt3lvyqtd78u0"]
 
 [ext_resource type="Shader" uid="uid://dinoskkj75qym" path="res://game/assets/shaders/ColorSwapAntiAlias.gdshader" id="2"]
-[ext_resource type="Texture2D" uid="uid://c8y8dl682no4b" path="res://game/assets/sprites/assists/fubuki/ColorPalettes/4.png" id="2_yeeje"]
+[ext_resource type="Texture2D" uid="uid://dmvbowg6pxlgd" path="res://game/assets/sprites/assists/rikka/ColorPalettes/7.png" id="2_yeeje"]
 
 [resource]
 resource_local_to_scene = true

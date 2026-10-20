@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cy2q43araihnj"]
+[gd_scene load_steps=8 format=3 uid="uid://cy2q43araihnj"]
 
 [ext_resource type="Script" uid="uid://bqourwt6u6d5m" path="res://game/menus/training/FastSlider.gd" id="2"]
 [ext_resource type="Script" uid="uid://bs82yov06fpxc" path="res://game/menus/onlinemenu/Challenge.gd" id="3"]
-[ext_resource type="FontFile" uid="uid://d28sv0htum78d" path="res://game/assets/monogram_extended.ttf" id="6"]
-[ext_resource type="Texture2D" uid="uid://biq18vleavg8w" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="4_5t124"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="6"]
+[ext_resource type="Texture2D" uid="uid://doomqcq3aygwy" path="res://game/assets/sprites/UI/MainMenus/WIMScreen.png" id="12"]
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("6")])
@@ -23,6 +24,7 @@ cache/0/16/0/scale = 1.0
 
 [node name="Challenge" type="Node2D"]
 z_index = 1000
+z_as_relative = false
 scale = Vector2(0.904932, 0.904932)
 script = ExtResource("3")
 
@@ -39,7 +41,7 @@ offset_right = 540.0
 offset_bottom = 368.0
 scale = Vector2(1.5, 1)
 theme_override_fonts/font = SubResource("1")
-text = "New Challenger:"
+text = "UI_MENU_NEW_CHALLENGER"
 
 [node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
 anchors_preset = -1
@@ -52,7 +54,7 @@ scale = Vector2(2, 2)
 [node name="ChallengerName" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Challenger Name"
+text = "UI_MENU_CHALLENGER_NAME"
 
 [node name="Empty" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -62,14 +64,14 @@ size_flags_horizontal = 3
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Ping: ???ms"
+text = "UI_MENU_PING_UNKNOWN"
 
 [node name="InputDelayLabel" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("3")
-text = "Input Delay: 2"
+text = "UI_MENU_INPUT_DELAY_DEFAULT"
 
 [node name="InputDelayMeter" type="HSlider" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
@@ -86,13 +88,15 @@ size_flags_horizontal = 3
 [node name="CopyRoomID" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "GO!"
+theme = ExtResource("4_5t124")
+text = "UI_MENU_GO"
 
 [node name="HideRoomID" type="Button" parent="CanvasLayer/GridContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("4_5t124")
 button_mask = 0
-text = "Decline"
+text = "UI_MENU_DECLINE"
 
 [node name="ChallengeCount" type="Label" parent="CanvasLayer/GridContainer"]
 layout_mode = 2

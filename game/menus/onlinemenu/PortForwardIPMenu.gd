@@ -46,9 +46,9 @@ func _on_ServerButton_pressed() -> void:
 	var result = peer.create_server(int(port_field.text), 1)
 	if (result == OK):
 		multiplayer.multiplayer_peer = peer
-		message_label.text = "Server:Searching for connection"
+		message_label.text = tr("UI_LABEL_SERVER_SEARCHING")
 	else:
-		message_label.text = "Server ERROR: " + str(result)
+		message_label.text = tr("UI_LABEL_SERVER_ERROR").format({"error": result})
 		multiplayer.multiplayer_peer = null
 
 func _on_ClientButton_pressed() -> void:
@@ -56,18 +56,18 @@ func _on_ClientButton_pressed() -> void:
 	var result = peer.create_client(host_field.text, int(port_field.text))
 	if (result == OK):
 		multiplayer.multiplayer_peer = peer
-		message_label.text = "Client:Searching for connection"
+		message_label.text = tr("UI_LABEL_CLIENT_SEARCHING")
 	else:
-		message_label.text = "Client ERROR: " + str(result)
+		message_label.text = tr("UI_LABEL_CLIENT_ERROR").format({"error": result})
 		multiplayer.multiplayer_peer = null
 
 func _on_network_peer_connected(peer_id: int):
-	message_label.text = "CONNECTED"
+	message_label.text = tr("UI_STATUS_SERVER_CONNECTED")
 	SyncManager.add_peer(peer_id)
 	start_character_select()
 
 func _on_network_peer_disconnected(peer_id: int):
-	message_label.text = "Disconnected"
+	message_label.text = tr("UI_STATUS_SERVER_DISCONNECTED")
 	SyncManager.clear_peers()
 	multiplayer.multiplayer_peer = null
 

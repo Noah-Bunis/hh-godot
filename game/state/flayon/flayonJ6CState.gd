@@ -68,7 +68,3 @@ func physics_tick(state: Dictionary) -> void:
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
-
-func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
-	pass
-	

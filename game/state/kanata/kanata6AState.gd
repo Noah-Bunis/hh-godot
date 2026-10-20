@@ -14,7 +14,7 @@ func _init():
 			Enums.StKey.Hurt3PosX : 5111808, Enums.StKey.Hurt3PosY : -6225920,
 			Enums.StKey.Hurt3ScaleX : 1150714, Enums.StKey.Hurt3ScaleY : -810479,
 			},
-		4 : {
+		5 : {
 			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
@@ -23,17 +23,15 @@ func _init():
 			Enums.StKey.Hurt3ScaleX : 1171536, Enums.StKey.Hurt3ScaleY : -410041,
 			Enums.StKey.hit_box_colliding_frame : 254,
 			},
-		6 : {
+		8 : {
 			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : false,
-			Enums.StKey.Hit1PosX : 11468800, Enums.StKey.Hit1PosY : -12976128,
-			Enums.StKey.Hit1ScaleX : 1515966, Enums.StKey.Hit1ScaleY : 595636,
-			Enums.StKey.Hit2PosX : 13369344, Enums.StKey.Hit2PosY : -23855108,
-			Enums.StKey.Hit2ScaleX : 976525, Enums.StKey.Hit2ScaleY : 1236496,
+			Enums.StKey.Hit2PosX : 12369344, Enums.StKey.Hit2PosY : -23855108,
+			Enums.StKey.Hit2ScaleX : 876525, Enums.StKey.Hit2ScaleY : 1036496,
 			Enums.StKey.Hurt1Disable : true,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : false,
-			Enums.StKey.Hurt3PosX : -410041, Enums.StKey.Hurt3PosY : -3538944,
-			Enums.StKey.Hurt3ScaleX : 1171536, Enums.StKey.Hurt3ScaleY : -410041,
+			Enums.StKey.Hurt3PosX : -410041, Enums.StKey.Hurt3PosY : -3638944,
+			Enums.StKey.Hurt3ScaleX : 1171536, Enums.StKey.Hurt3ScaleY : 610041,
 			Enums.StKey.attack_damage: 60,
 			Enums.StKey.hitstop : 9,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher,

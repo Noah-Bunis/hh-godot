@@ -2,6 +2,8 @@ extends SubaruAirAttackState
 
 class_name SubaruAirEXStarBallState
 
+var VoiceSound = preload("res://game/assets/voice/subaru/sbr_Left Right.wav")
+
 func _init():
 	endFrame = 35
 	
@@ -18,7 +20,7 @@ func _init():
 			Enums.StKey.Hurt3PosX : 6094848, Enums.StKey.Hurt3PosY : -4784128,
 			Enums.StKey.Hurt3ScaleX : 1171400, Enums.StKey.Hurt3ScaleY : -464723,
 			},
-		1 : {
+		3 : {
 			Enums.StKey.Summon : "superFlash",
 			Enums.StKey.Hurt1Disable : true,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable: true,
 			Enums.StKey.Hit1Disable : false,
@@ -30,28 +32,8 @@ func _init():
 			Enums.StKey.attack_type : Enums.AttackType.BurstLock,
 			Enums.StKey.counter_hit : Enums.AttackType.BurstLock,
 		},
-		2 : {
-			Enums.StKey.Summon : "subarubattersetball",
-			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
-			Enums.StKey.Hurt1PosX : -458752, Enums.StKey.Hurt1PosY : -22282238,
-			Enums.StKey.Hurt1ScaleX : 339834, Enums.StKey.Hurt1ScaleY : 629832,
-			Enums.StKey.Hurt2PosX : -655360, Enums.StKey.Hurt2PosY : -18219008,
-			Enums.StKey.Hurt2ScaleX : 548413, Enums.StKey.Hurt2ScaleY : -906915,
-			Enums.StKey.Hurt3PosX : 1572864, Enums.StKey.Hurt3PosY : -10485762,
-			Enums.StKey.Hurt3ScaleX : 554342, Enums.StKey.Hurt3ScaleY : -1021119,
-			},
-		5 : {
-			Enums.StKey.Summon : "subarubattersetball",
-			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
-			Enums.StKey.Hurt1PosX : -458752, Enums.StKey.Hurt1PosY : -22282238,
-			Enums.StKey.Hurt1ScaleX : 339834, Enums.StKey.Hurt1ScaleY : 629832,
-			Enums.StKey.Hurt2PosX : -655360, Enums.StKey.Hurt2PosY : -18219008,
-			Enums.StKey.Hurt2ScaleX : 548413, Enums.StKey.Hurt2ScaleY : -906915,
-			Enums.StKey.Hurt3PosX : 1572864, Enums.StKey.Hurt3PosY : -10485762,
-			Enums.StKey.Hurt3ScaleX : 554342, Enums.StKey.Hurt3ScaleY : -1021119,
-			},
-		8 : {
-			Enums.StKey.Summon : "subarustarball",
+		4 : {
+			Enums.StKey.Summon : "subaruEXbattersetball",
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
 			Enums.StKey.Hurt1PosX : -458752, Enums.StKey.Hurt1PosY : -22282238,
 			Enums.StKey.Hurt1ScaleX : 339834, Enums.StKey.Hurt1ScaleY : 629832,
@@ -72,9 +54,13 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.hitStopFrame] = 0
-	elif (state[Enums.StKey.frame] == 4):
+	elif (state[Enums.StKey.frame] == 3):
+		SyncManager.play_sound("SubaruVoice", VoiceSound, {"bus": "Voice"})
+		SyncManager.play_sound("SubaruVoiceReverb", VoiceSound, {"bus": "ReverbVoice"})
+	elif (state[Enums.StKey.frame] == 1):
 		state[Enums.StKey.velocity_x] = SGFixed.mul(state[Enums.StKey.velocity_x], SGFixed.HALF)
-		state[Enums.StKey.accel_y] = SGFixed.ONE
+		state[Enums.StKey.velocity_y] = Util.fixed_min(SGFixed.ONE*-15, state[Enums.StKey.velocity_y])
+		state[Enums.StKey.accel_y] = 35536
 	elif (state[Enums.StKey.frame] == 23):
 		state[Enums.StKey.accel_y] = Util.GRAVITY
 
@@ -90,7 +76,23 @@ func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 			change_state.call("AirBoostCancel")
 
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
-	pass
+	if (state[Enums.StKey.hitStopFrame] >= 0):
+		if (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirBatterSwing"
+	
+	if (state[Enums.StKey.frame] >= 13 and state[Enums.StKey.frame] <= 20):
+		if (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirBatterSwing"
+	elif (state[Enums.StKey.frame] >= 21):
+		if (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "DuckPunch"
+		elif (interpreter.special_input_button(Enums.SpecialInput.M623, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "LightDuckPunch"
+		elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirBatterSwing"
+		elif (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
+			state[Enums.StKey.cancelState] = "AirStinger"
+
 
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass

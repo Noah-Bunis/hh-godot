@@ -35,6 +35,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*120,
 			},
 		19 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
 			Enums.StKey.Hurt1PosX : 7536640, Enums.StKey.Hurt1PosY : -23461888,

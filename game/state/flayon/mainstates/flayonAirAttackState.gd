@@ -88,3 +88,11 @@ func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 			state[Enums.StKey.cancelState] = "Jump5B"
 		elif (interpreter.is_button_down(Enums.InputFlags.ADown)):
 			state[Enums.StKey.cancelState] = "Jump5A"
+
+func enforce_min_height(state: Dictionary):
+	if (state["_pos_y"] <= Util.MAX_FLIGHT_HEIGHT):
+		state[Enums.StKey.velocity_y] = -SGFixed.mul(state["_pos_y"] - Util.MAX_FLIGHT_HEIGHT, 2536)
+
+func enforce_min_height_additive(state: Dictionary):
+	if (state["_pos_y"] <= Util.MAX_FLIGHT_HEIGHT):
+		state[Enums.StKey.velocity_y] -= SGFixed.mul(state["_pos_y"] - Util.MAX_FLIGHT_HEIGHT, 2536)

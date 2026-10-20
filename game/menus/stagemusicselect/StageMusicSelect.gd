@@ -111,8 +111,8 @@ func update_UI():
 	else:
 		cursor.position.y = 624
 	
-	$CanvasLayer/StageLabel.text = "STAGE: " + Global.STAGE_LIST[stage_id]
-	$CanvasLayer/BGMLabel.text = "BGM: " + Global.BGM_LIST[bgm_id]
+	$CanvasLayer/StageLabel.text = tr("UI_LABEL_STAGE").format({"stage": Global.STAGE_LIST[stage_id]})
+	$CanvasLayer/BGMLabel.text = tr("UI_LABEL_BGM").format({"bgm": Global.BGM_LIST[bgm_id]})
 
 func update_selected_index():
 	selected_index = (selected_index + 1) % 2
@@ -162,5 +162,5 @@ func _input(event):
 		elif Input.is_action_just_pressed(input_prefix+"d"):
 			Global.BGM_IS_ASSIST = true
 			setup_match()
-		elif Input.is_action_just_pressed("player1_cancel") or Input.is_action_just_pressed("player2_cancel"):
+		elif Input.is_action_just_pressed("player1_cancel") or Input.is_action_just_pressed("player2_cancel") or Input.is_action_just_pressed("menu_back_b"):
 			go_to_prev_scene()

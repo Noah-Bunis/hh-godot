@@ -2,6 +2,8 @@ extends SuicopathAttackState
 
 class_name SuicopathChainHurricaneState
 
+var Voice = preload("res://game/assets/voice/suisei/sui_crush rotten apples.wav")
+
 func _init():
 	endFrame = 40
 	
@@ -45,6 +47,13 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("SuicopathChainsawSuper")
 	state[Enums.StKey.super_meter] -= Util.LEVEL_TWO_SUPER
+
+func physics_tick(state: Dictionary) -> void:
+	super.physics_tick(state)
+	if (state[Enums.StKey.frame] == 5):
+		SyncManager.play_sound("SuicopathVoice", Voice, {"bus": "Voice"})
+		SyncManager.play_sound("SuicopathVoiceReverb", Voice, {"bus": "ReverbVoice"})
+	
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

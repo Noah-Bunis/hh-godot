@@ -36,7 +36,7 @@ func delete_replay(button: Button):
 				button.queue_free()
 				$CanvasLayer/GridContainer/GridContainer.remove_child(button)
 			else:
-				$CanvasLayer/MessageLabel.text = "Couldn't delete"
+				$CanvasLayer/MessageLabel.text = tr("UI_STATUS_COULD_NOT_DELETE")
 
 func create_replay_dir_if_empty():
 	if not DirAccess.dir_exists_absolute(REPLAY_LOG_FILE_DIRECTORY):
@@ -59,7 +59,7 @@ func dir_contents():
 			make_replay_item(file)
 	else:
 		print("An error occurred when trying to access the path.")
-		$CanvasLayer/ErrorLabel.text = "Can't open replay directory"
+		$CanvasLayer/ErrorLabel.text = tr("UI_STATUS_CANNOT_OPEN_REPLAY_DIR")
 
 func _input(event):
 	input_help(event)
@@ -79,7 +79,7 @@ func next_scene():
 		Global.REPLAY_FILE_NAME = most_recent_focus.text
 		get_tree().change_scene_to_file("res://game/menus/replay/ReplayMain.tscn")
 	else:
-		$CanvasLayer/ErrorLabel.text = "No replay selected"
+		$CanvasLayer/ErrorLabel.text = tr("UI_STATUS_NO_REPLAY_SELECTED")
 
 func prev_scene():
 	MainMenuMusicControl.play_cursor_deselect()
@@ -88,7 +88,7 @@ func prev_scene():
 func _on_DeleteModeButton_pressed():
 	delete_mode = !delete_mode
 	if (delete_mode):
-		$CanvasLayer/MessageLabel.text = "Select replay to delete"
+		$CanvasLayer/MessageLabel.text = tr("UI_STATUS_SELECT_REPLAY_DELETE")
 		$Earthbound2.modulate = Color("#f00033")
 	else:
 		$CanvasLayer/MessageLabel.text = ""

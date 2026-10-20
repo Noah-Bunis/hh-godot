@@ -10,13 +10,53 @@ var ButtonMap2: Node2D
 
 var p1_ready: bool = false
 var p2_ready: bool = false
+var single_player_mode: bool = false
+var single_player_is_p1: bool = true
+var single_player_is_gamepad: bool = false
+var audio_players: Array[AudioStreamPlayer] = []
+var audio_player_process_modes: Array[int] = []
+
+func configure_single_player(event: InputEvent, fallback_is_p1: bool) -> void:
+	single_player_mode = true
+	single_player_is_p1 = fallback_is_p1
+	single_player_is_gamepad = event is InputEventJoypadButton or event is InputEventJoypadMotion
+
+	if (single_player_is_gamepad):
+		if (event.device == Global.p1_device_id):
+			single_player_is_p1 = true
+		elif (event.device == Global.p2_device_id):
+			single_player_is_p1 = false
+	elif (Global.p1_is_gamepad != Global.p2_is_gamepad):
+		single_player_is_p1 = not Global.p1_is_gamepad
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_tree().paused = true
 	process_mode = PROCESS_MODE_ALWAYS
+	audio_players = [MainMenuMusicControl.audio_player, MainMenuMusicControl.menu_sounds]
+	for audio_player in audio_players:
+		audio_player_process_modes.append(audio_player.process_mode)
+		audio_player.process_mode = Node.PROCESS_MODE_ALWAYS
+	get_tree().paused = true
 	p1_ready = false
 	p2_ready = false
+	if (single_player_mode):
+		p1_ready = not single_player_is_p1
+		p2_ready = single_player_is_p1
+		var player_menu: Node2D
+		if (single_player_is_gamepad):
+			player_menu = BUTTON_MAP_MENU.instantiate()
+		else:
+			player_menu = KEY_BUTTON_MAP_MENU.instantiate()
+		add_child(player_menu)
+		if (single_player_is_p1):
+			ButtonMap1 = player_menu
+			player_menu.position = Vector2(43, 92)
+		else:
+			ButtonMap2 = player_menu
+			player_menu.position = Vector2(1243, 92)
+		player_menu.set_is_p1(single_player_is_p1)
+		player_menu.connect("button_set_complete", Callable(self, "button_set_complete"))
+		return
 	
 	if (Global.p1_is_gamepad):
 		ButtonMap1 = BUTTON_MAP_MENU.instantiate()
@@ -63,6 +103,9 @@ func button_set_complete(is_p1:bool):
 
 func exit():
 	emit_signal("complete")
+	for index in range(audio_players.size()):
+		if is_instance_valid(audio_players[index]):
+			audio_players[index].process_mode = audio_player_process_modes[index]
 
 func free_button_map():
 	if (ButtonMap1 != null):
@@ -74,5 +117,5 @@ func free_button_map():
 	super.queue_free()
 
 func _input(event):
-	if event.is_action_pressed("player1_start") or event.is_action_pressed("player2_start"):
+	if (not single_player_mode and (event.is_action_pressed("player1_start") or event.is_action_pressed("player2_start"))):
 		exit()

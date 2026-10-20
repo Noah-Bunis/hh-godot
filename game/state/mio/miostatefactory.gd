@@ -54,6 +54,13 @@ func _init():
 		"CrouchParryCatch": preload("res://game/state/mio/mioCrouchParryCatchState.gd"),
 		"AirParryCatch": preload("res://game/state/mio/mioAirParryCatchState.gd"),
 		
+		"GroundAssistCall2": MioGroundAssistCall2State,
+		"GroundAssistCallSuper": MioGroundAssistCallSuperState,
+		"GroundAssistCall": MioGroundAssistCallState,
+		"AirAssistCall": MioAirAssistCallState,
+		"AirAssistCall2": MioAirAssistCall2State,
+		"AirAssistCallSuper": MioAirAssistCallSuperState,
+
 		"GroundThrowHit": preload("res://game/state/mio/mioGroundThrowHit.gd"),
 		"AirThrowHit": MioAirThrowHitState,
 		"AirBackThrowHit": MioAirBackThrowHitState,

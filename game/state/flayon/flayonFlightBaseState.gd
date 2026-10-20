@@ -49,7 +49,6 @@ func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 	if (state[Enums.StKey.super_meter] <= 0):
 		change_state.call("FlightNoFuel")
 
-
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
 
@@ -75,9 +74,9 @@ func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	super.special_cancel(state,interpreter)
 	if (state[Enums.StKey.hitStopFrame] >= 0):
-		if (interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
-				interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface]) or 
-				interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
+		if (interpreter.special_input_button(Enums.SpecialInput.M214Quick, Enums.InputFlags.ADown, state[Enums.StKey.leftface]) or 
+				interpreter.special_input_button(Enums.SpecialInput.M214Quick, Enums.InputFlags.BDown, state[Enums.StKey.leftface]) or 
+				interpreter.special_input_button(Enums.SpecialInput.M214Quick, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
 			state[Enums.StKey.cancelState] = "FlightExit"
 		elif (interpreter.is_air_dashing_four_way(Enums.Numpad.N6, state[Enums.StKey.leftface])):
 			state[Enums.StKey.cancelState] = "FlightForwardAirdash"

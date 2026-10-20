@@ -1,50 +1,50 @@
 [gd_scene load_steps=60 format=3 uid="uid://datk6jsq1vgku"]
 
-[ext_resource type="Texture2D" uid="uid://47amdmbstwek" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0001.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c3lnfbn0kf1ks" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0001.png" id="1"]
 [ext_resource type="Script" uid="uid://bxmv1ls882bw0" path="res://game/fighter/assist/sora/SoraPlayer.gd" id="1_lyuip"]
-[ext_resource type="Texture2D" uid="uid://bgcnxw70j615g" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0004.png" id="2"]
-[ext_resource type="Texture2D" uid="uid://wtf2ya2hnydh" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0000.png" id="3"]
-[ext_resource type="Texture2D" uid="uid://brffcyn14lgj0" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0000.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dhyd0ylc2ar1v" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0004.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bd5paglk6a6uu" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0000.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://dc0al2pnqqlof" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0000.png" id="4"]
 [ext_resource type="PackedScene" uid="uid://sdxa076t7wfp" path="res://game/fighter/effects/shadow.tscn" id="4_ho45h"]
-[ext_resource type="Texture2D" uid="uid://cuxb7gocnoy8x" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0003.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://bytxtbkpqm116" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0003.png" id="5"]
 [ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="6"]
-[ext_resource type="Texture2D" uid="uid://dwa4abvuni1jr" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0002.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://5apqwl5y2urs" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0001.png" id="8"]
-[ext_resource type="Texture2D" uid="uid://dhpc4u6tbmrrn" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0002.png" id="9"]
-[ext_resource type="Texture2D" uid="uid://cilyxbwxk7dks" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0002.png" id="11"]
-[ext_resource type="Texture2D" uid="uid://dykcrtqpige2s" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0000.png" id="12"]
-[ext_resource type="Texture2D" uid="uid://3tk3ummxqcnp" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0000.png" id="13"]
-[ext_resource type="Texture2D" uid="uid://bh4urbuo0fgtf" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0000.png" id="14"]
-[ext_resource type="Texture2D" uid="uid://dy6s5wm7m2oof" path="res://game/assets/sprites/assists/sora/CaptainPlanet/Timeline 1_0000.png" id="15"]
-[ext_resource type="Texture2D" uid="uid://0ouwca4ay7ro" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0001.png" id="16"]
-[ext_resource type="Texture2D" uid="uid://d3711db04ryjt" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0003.png" id="17"]
-[ext_resource type="Texture2D" uid="uid://cch1md6qubkqj" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0003.png" id="18"]
-[ext_resource type="Texture2D" uid="uid://86olpkjmxk4a" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0000.png" id="19"]
-[ext_resource type="Texture2D" uid="uid://ba1rwb06m5s7k" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0001.png" id="20"]
-[ext_resource type="Texture2D" uid="uid://ih2sobaik25h" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0002.png" id="21"]
-[ext_resource type="Texture2D" uid="uid://vfk6nd58a4bj" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0003.png" id="22"]
-[ext_resource type="Texture2D" uid="uid://7q7hff3erpin" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0002.png" id="23"]
-[ext_resource type="Texture2D" uid="uid://bbmw7wmpjbl55" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0000.png" id="24"]
-[ext_resource type="Texture2D" uid="uid://cd6kmy58yjbul" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0004.png" id="25"]
-[ext_resource type="Texture2D" uid="uid://dqpqswstwsf8j" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0005.png" id="26"]
-[ext_resource type="Texture2D" uid="uid://dwgqs1bwt6ur2" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0006.png" id="27"]
-[ext_resource type="Texture2D" uid="uid://brpdbqjm105v0" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0007.png" id="28"]
-[ext_resource type="Texture2D" uid="uid://dw0o7h1akpokn" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0001.png" id="29"]
-[ext_resource type="Texture2D" uid="uid://mcp0ygmfon3v" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0002.png" id="30"]
-[ext_resource type="Texture2D" uid="uid://i31tuku38gmn" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0003.png" id="31"]
-[ext_resource type="Texture2D" uid="uid://cbvv583lbcfmq" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0004.png" id="32"]
-[ext_resource type="Texture2D" uid="uid://chi5jjmoyfqdy" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0005.png" id="33"]
-[ext_resource type="Texture2D" uid="uid://cv05fwueaqdog" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0003.png" id="34"]
+[ext_resource type="Texture2D" uid="uid://bumwas4ay1mcu" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0002.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://cldjmadntqtq7" path="res://game/assets/sprites/assists/sora/StepPunch/Timeline 1_0001.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://dynyjtgx8brok" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0002.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://dt4053tejlcn8" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0002.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://dxwj7td6ti52w" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0000.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://dpj2jfnsvpn1r" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0000.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://dodyc8yuvkrat" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0000.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://blvltf7w2fqia" path="res://game/assets/sprites/assists/sora/CaptainPlanet/Timeline 1_0000.png" id="15"]
+[ext_resource type="Texture2D" uid="uid://bp7yk0wae7ejy" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0001.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://brn105n6klq6b" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0003.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://caer0jjoxxbag" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0003.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://dhveu8m6as7wq" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0000.png" id="19"]
+[ext_resource type="Texture2D" uid="uid://dhwjajlj24lkj" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0001.png" id="20"]
+[ext_resource type="Texture2D" uid="uid://cgp1x6qdhnolk" path="res://game/assets/sprites/assists/sora/Fence/Timeline 1_0002.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://c1c0pcsejkkle" path="res://game/assets/sprites/assists/sora/Knockdown/Timeline 1_0003.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://c0cvnaacnnolg" path="res://game/assets/sprites/assists/sora/HurtStand/Timeline 1_0002.png" id="23"]
+[ext_resource type="Texture2D" uid="uid://c0y34mrktl5l7" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0000.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://ctclpajmb0qh2" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0004.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://ckvmpufm2t846" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0005.png" id="26"]
+[ext_resource type="Texture2D" uid="uid://6waj0pgtd4u7" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0006.png" id="27"]
+[ext_resource type="Texture2D" uid="uid://cafgspt0aiafc" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0007.png" id="28"]
+[ext_resource type="Texture2D" uid="uid://c20hds0lj2cbj" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0001.png" id="29"]
+[ext_resource type="Texture2D" uid="uid://lp3hxptxjolv" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0002.png" id="30"]
+[ext_resource type="Texture2D" uid="uid://bu1y233pjwtge" path="res://game/assets/sprites/assists/sora/Burst/Timeline 1_0003.png" id="31"]
+[ext_resource type="Texture2D" uid="uid://b8jmakmx1bgjj" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0004.png" id="32"]
+[ext_resource type="Texture2D" uid="uid://b4hnps4n3nk8c" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0005.png" id="33"]
+[ext_resource type="Texture2D" uid="uid://d3o2lhddxokj8" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0003.png" id="34"]
 [ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="35"]
-[ext_resource type="Texture2D" uid="uid://cgegrs4lqew1o" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0001.png" id="36"]
-[ext_resource type="Texture2D" uid="uid://ckkd52omm8r3e" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0002.png" id="37"]
-[ext_resource type="Texture2D" uid="uid://dsss3pt6dw172" path="res://game/assets/sprites/assists/sora/CaptainPlanet/Timeline 1_0002.png" id="38"]
-[ext_resource type="Texture2D" uid="uid://cg8hqm60mk4j7" path="res://game/assets/sprites/assists/sora/CaptainPlanet/Timeline 1_0001.png" id="39"]
-[ext_resource type="Texture2D" uid="uid://tq7jpwpmpnav" path="res://game/assets/sprites/Empty_0000.png" id="40"]
+[ext_resource type="Texture2D" uid="uid://81jgdiibo6ht" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0001.png" id="36"]
+[ext_resource type="Texture2D" uid="uid://bnh55muwdmt65" path="res://game/assets/sprites/assists/sora/Exit/Timeline 1_0002.png" id="37"]
+[ext_resource type="Texture2D" uid="uid://dl3twgegfloua" path="res://game/assets/sprites/assists/sora/CaptainPlanet/Timeline 1_0002.png" id="38"]
+[ext_resource type="Texture2D" uid="uid://c6lw3bkmsixks" path="res://game/assets/sprites/assists/sora/CaptainPlanet/Timeline 1_0001.png" id="39"]
+[ext_resource type="Texture2D" uid="uid://c3h40i4mamblw" path="res://game/assets/sprites/Empty_0000.png" id="40"]
 [ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="46"]
 [ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="47"]
-[ext_resource type="Texture2D" uid="uid://bb3h50sukoofn" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0001.png" id="62"]
-[ext_resource type="Texture2D" uid="uid://m6kropccmm5" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0003.png" id="63"]
+[ext_resource type="Texture2D" uid="uid://dlmr7jbkt00d1" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0001.png" id="62"]
+[ext_resource type="Texture2D" uid="uid://cgdk0xqieytei" path="res://game/assets/sprites/assists/sora/HurtAir/Timeline 1_0003.png" id="63"]
 
 [sub_resource type="SGRectangleShape2D" id="1"]
 extents_x = 2063232
@@ -425,8 +425,8 @@ script = ExtResource("1_lyuip")
 material = ExtResource("35")
 position = Vector2(3, -503)
 scale = Vector2(1.428, 1.428)
-texture = ExtResource("32")
-offset = Vector2(0, 130)
+texture = ExtResource("5")
+offset = Vector2(0, 200)
 
 [node name="Shadow" parent="." instance=ExtResource("4_ho45h")]
 scale = Vector2(2.3363078, 1.7763066)
@@ -449,7 +449,7 @@ auto_reset = false
 fixed_position_y = -14337728
 fixed_scale_x = 1086985
 fixed_scale_y = 1574037
-position = Vector2(0, -218.776)
+position = Vector2(613, -241.00002)
 scale = Vector2(16.5861, 24.0179)
 
 [node name="Hurtbox2" parent="." instance=ExtResource("46")]
@@ -457,7 +457,7 @@ fixed_position_x = 65536
 fixed_position_y = -11993090
 fixed_scale_x = 408108
 fixed_scale_y = 2087212
-position = Vector2(1, -183)
+position = Vector2(520, -221.00002)
 scale = Vector2(6.22723, 31.8483)
 
 [node name="Hitbox1" parent="." instance=ExtResource("47")]
@@ -465,7 +465,7 @@ fixed_position_x = 12189696
 fixed_position_y = -15925248
 fixed_scale_x = 1134105
 fixed_scale_y = 1114853
-position = Vector2(186, -243)
+position = Vector2(647, -249)
 scale = Vector2(17.3051, 17.0113)
 
 [node name="Hitbox2" parent="." instance=ExtResource("47")]
@@ -473,5 +473,5 @@ fixed_position_x = 8060928
 fixed_position_y = -12255232
 fixed_scale_x = 942229
 fixed_scale_y = -901102
-position = Vector2(123, -187)
+position = Vector2(612, -217)
 scale = Vector2(14.3773, -13.7497)

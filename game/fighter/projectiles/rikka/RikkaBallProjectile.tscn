@@ -1,0 +1,116 @@
+[gd_scene load_steps=16 format=3 uid="uid://b2asducu2f8n3"]
+
+[ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="1_1ogi4"]
+[ext_resource type="Script" uid="uid://b3vinramtp4ia" path="res://game/fighter/projectiles/ProjectilePlayer.gd" id="2_0h2oq"]
+[ext_resource type="Texture2D" uid="uid://xj8p08fphwst" path="res://game/assets/sprites/assists/rikka/Ball/Timeline 1_0000.png" id="3_1sdbn"]
+[ext_resource type="Texture2D" uid="uid://dsgcbrk0uiohd" path="res://game/assets/sprites/assists/rikka/Ball/Timeline 1_0001.png" id="4_1sdbn"]
+[ext_resource type="Texture2D" uid="uid://c3h40i4mamblw" path="res://game/assets/sprites/Empty_0000.png" id="4_2jdbx"]
+[ext_resource type="Texture2D" uid="uid://l6g83ksebess" path="res://game/assets/sprites/assists/rikka/Ball/Timeline 1_0002.png" id="5_2jdbx"]
+[ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="5_nsupx"]
+[ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="6_0q7am"]
+[ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="7_c3g2t"]
+[ext_resource type="Script" uid="uid://b010dt6v25trf" path="res://addons/godot-rollback-netcode/NetworkTimer.gd" id="8_hjly7"]
+
+[sub_resource type="SGRectangleShape2D" id="1"]
+extents_x = 4063232
+extents_y = 8847360
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Active"
+length = 0.20000206
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.083333336, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_1sdbn"), ExtResource("4_1sdbn"), ExtResource("5_2jdbx")]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Destroy"
+length = 0.333334
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_2jdbx")]
+}
+
+[sub_resource type="Animation" id="Animation_1ogi4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_1sdbn")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7oabd"]
+_data = {
+&"Active": SubResource("2"),
+&"Destroy": SubResource("3"),
+&"RESET": SubResource("Animation_1ogi4")
+}
+
+[node name="RikkaBall" type="SGCharacterBody2D"]
+material = ExtResource("1_1ogi4")
+script = ExtResource("2_0h2oq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_1ogi4")
+position = Vector2(-7, -234)
+texture = ExtResource("3_1sdbn")
+
+[node name="Pushbox" type="SGCollisionShape2D" parent="."]
+shape = SubResource("1")
+disabled = true
+fixed_position_x = 65536
+fixed_position_y = 196608
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1, 3)
+
+[node name="NetworkAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7oabd")
+}
+script = ExtResource("5_nsupx")
+auto_reset = false
+
+[node name="Hitbox1" parent="." instance=ExtResource("6_0q7am")]
+fixed_position_y = -15000000
+fixed_scale_x = 433869
+fixed_scale_y = 433869
+position = Vector2(0, -228.88184)
+scale = Vector2(6.6203156, 6.6203156)
+
+[node name="Hurtbox1" parent="." instance=ExtResource("7_c3g2t")]
+fixed_position_y = -15000000
+fixed_scale_x = 433869
+fixed_scale_y = 433869
+position = Vector2(0, -228.88184)
+scale = Vector2(6.6203156, 6.6203156)
+
+[node name="ExplosionTimer" type="Node" parent="."]
+script = ExtResource("8_hjly7")
+wait_ticks = 20

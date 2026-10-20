@@ -31,7 +31,7 @@ offset_right = 668.0
 offset_bottom = 809.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("1")
-text = "Currently open Lobbies:"
+text = "UI_MENU_OPEN_LOBBIES"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(800, 500)

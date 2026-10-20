@@ -13,7 +13,7 @@ func _init():
 			Enums.StKey.chip_damage: 6,
 			Enums.StKey.min_damage: 6,
 			Enums.StKey.attack_type : Enums.AttackType.WallBouncer,
-			Enums.StKey.counter_hit: Enums.AttackType.GroundBouncer,
+			Enums.StKey.counter_hit: Enums.AttackType.WallBouncer,
 			Enums.StKey.attack_damage: 25,
 			Enums.StKey.hitstun : 20,
 			Enums.StKey.hitstop : 8,
@@ -21,7 +21,7 @@ func _init():
 			Enums.StKey.meter_build: 0,
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*10,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*30,
-			Enums.StKey.counter_hitstun: 200,
+			Enums.StKey.counter_hitstun: 40,
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*10,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*40,
 #			Enums.StKey.hitstun: 25,
@@ -41,3 +41,8 @@ func enter(state: Dictionary) -> void:
 func reaction(state: Dictionary, _interpreter: InputInterpreter, event_cause: int) -> void:
 	if (event_cause == Enums.Reaction.StrikeHurt):
 		state[Enums.StKey.frame] = 2
+	elif (event_cause == Enums.Reaction.PointAttackHurt):
+		change_state.call("Destroy")
+	elif (event_cause == Enums.Reaction.PointBlockHurt):
+		change_state.call("Destroy")
+	

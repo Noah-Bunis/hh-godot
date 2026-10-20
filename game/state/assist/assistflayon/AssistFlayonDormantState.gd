@@ -1,0 +1,3 @@
+extends AssistDormantState
+
+class_name AssistFlayonDormantState

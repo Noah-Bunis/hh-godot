@@ -23,20 +23,20 @@ func _ready():
 	character = [
 		[Enums.PointCharacters.Ollie, Enums.PointCharacters.Suisei, Enums.PointCharacters.Kanata],
 		[Enums.PointCharacters.Mio, Enums.PointCharacters.Subaru, Enums.PointCharacters.Oga],
-		[Enums.PointCharacters.Subaru, Enums.PointCharacters.Subaru, Enums.PointCharacters.Subaru],
-		[Enums.PointCharacters.Flayon, Enums.PointCharacters.Kurokami, Enums.PointCharacters.Subaru]
+		[Enums.PointCharacters.Subaru, Enums.PointCharacters.Flayon, Enums.PointCharacters.Subaru],
+		[Enums.PointCharacters.Subaru, Enums.PointCharacters.Subaru, Enums.PointCharacters.Subaru]
 		]
 
 	assist2 = [
-		[Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.Hakka],
+		[Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata, Enums.AssistCharacters.Rikka, Enums.AssistCharacters.Hakka],
 		[Enums.AssistCharacters.Mio, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Oga, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.OkaKoro],
-		[Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Sana],
+		[Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Flayon, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Sana],
 		[Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Sana]
 		]
 	assist1 = [
-		[Enums.AssistCharacters.Hakka, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata],
+		[Enums.AssistCharacters.Hakka, Enums.AssistCharacters.Rikka, Enums.AssistCharacters.Ollie, Enums.AssistCharacters.Suisei, Enums.AssistCharacters.Kanata],
 		[Enums.AssistCharacters.OkaKoro, Enums.AssistCharacters.Fubuki, Enums.AssistCharacters.Mio, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Oga],
-		[Enums.AssistCharacters.Sana, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru],
+		[Enums.AssistCharacters.Sana, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Flayon, Enums.AssistCharacters.Subaru],
 		[Enums.AssistCharacters.Sana, Enums.AssistCharacters.Sora, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru, Enums.AssistCharacters.Subaru]
 		]
 	
@@ -158,6 +158,7 @@ func remote_peer_select(row:int, col:int, color_number:int):
 	message_label.text = str(peer) + " " + str(row) + " " + str(col)
 	var charaData = resolve_characters(row, col)
 	if peer == 1:
+		color_number = fit_color_number_to_character(charaData[1], false, color_number)
 		Global.PLAYER_1_NODE_PATH[0] = charaData[0]
 		Global.PLAYER_1_CHARACTER[0] = charaData[1]
 		Global.load_queue.queue_resource(Global.PLAYER_1_NODE_PATH[0])
@@ -168,6 +169,7 @@ func remote_peer_select(row:int, col:int, color_number:int):
 		P1Portrait.change_color_number(p1_color_number)
 		P1SelectFlash.player_call()
 	else:
+		color_number = fit_color_number_to_character(charaData[1], false, color_number)
 		Global.PLAYER_2_NODE_PATH[0] = charaData[0]
 		Global.PLAYER_2_CHARACTER[0] = charaData[1]
 		p2_color_number = color_number
@@ -184,6 +186,7 @@ func remote_peer_assist_select(row:int, col:int, color_number:int):
 	message_label.text = str(peer) + " " + str(row) + " " + str(col)
 	if peer == 1:
 		var charaData = resolve_assists(row, col, true)
+		color_number = fit_color_number_to_character(charaData[1], true, color_number)
 		Global.PLAYER_1_NODE_PATH[1] = charaData[0]
 		Global.PLAYER_1_CHARACTER[1] = charaData[1]
 		Global.load_queue.queue_resource(Global.PLAYER_1_NODE_PATH[1])
@@ -193,6 +196,7 @@ func remote_peer_assist_select(row:int, col:int, color_number:int):
 		P1SelectFlash.player_call()
 	else:
 		var charaData = resolve_assists(row, col, false)
+		color_number = fit_color_number_to_character(charaData[1], true, color_number)
 		Global.PLAYER_2_NODE_PATH[1] = charaData[0]
 		Global.PLAYER_2_CHARACTER[1] = charaData[1]
 		Global.load_queue.queue_resource(Global.PLAYER_2_NODE_PATH[1])
@@ -213,9 +217,10 @@ func update_p1():
 	p1_cursor_pos_row = P1Cursor.row
 	p1_cursor_pos_col = P1Cursor.col
 	p1_color_number = select_color(P1Cursor.input_prefix)
+	var charaData = resolve_characters(P1Cursor.row, P1Cursor.col)
+	p1_color_number = fit_color_number_to_character(charaData[1], false, p1_color_number)
 	P1Portrait.change_color_number(p1_color_number)
 	rpc("remote_peer_select", P1Cursor.row, P1Cursor.col, p1_color_number)
-	var charaData = resolve_characters(P1Cursor.row, P1Cursor.col)
 	Global.PLAYER_1_NODE_PATH[0] = charaData[0]
 	Global.PLAYER_1_CHARACTER[0] = charaData[1]
 	p1_assist_select = AssistSelect.instantiate()
@@ -238,9 +243,10 @@ func update_p2():
 	p2_cursor_pos_row = P2Cursor.row
 	p2_cursor_pos_col = P2Cursor.col
 	p2_color_number = select_color(P2Cursor.input_prefix)
+	var charaData = resolve_characters(P2Cursor.row, P2Cursor.col)
+	p2_color_number = fit_color_number_to_character(charaData[1], false, p2_color_number)
 	P2Portrait.change_color_number(p2_color_number)
 	rpc("remote_peer_select", P2Cursor.row, P2Cursor.col, p2_color_number)
-	var charaData = resolve_characters(P2Cursor.row, P2Cursor.col)
 	Global.PLAYER_2_NODE_PATH[0] = charaData[0]
 	Global.PLAYER_2_CHARACTER[0] = charaData[1]
 	p2_assist_select = AssistSelect.instantiate()
@@ -261,13 +267,13 @@ func update_p2():
 @rpc("any_peer") func update_a1():
 	message_label.text = "a1 update"
 	var charaData = resolve_assists(p1_assist_select.cursor_row(), p1_assist_select.cursor_col(), true)
+	a1_color_number = fit_color_number_to_character(charaData[1], true, select_color(p1_assist_select.get_node("CharacterCursor").input_prefix))
 	Global.PLAYER_1_NODE_PATH[1] = charaData[0]
 	Global.PLAYER_1_CHARACTER[1] = charaData[1]
 	Global.load_queue.queue_resource(Global.PLAYER_1_NODE_PATH[1])
 	
 	p1_assist_pos_row = p1_assist_select.cursor_row()
 	p1_assist_pos_col = p1_assist_select.cursor_col()
-	a1_color_number = select_color(p1_assist_select.get_node("CharacterCursor").input_prefix)
 	A1Portrait.change_color_number(a1_color_number)
 	rpc("remote_peer_assist_select", p1_assist_select.cursor_row(), p1_assist_select.cursor_col(), a1_color_number)
 	p1_ready = true
@@ -277,13 +283,13 @@ func update_p2():
 func update_a2():
 	message_label.text = "a2 update"
 	var charaData = resolve_assists(p2_assist_select.cursor_row(), p2_assist_select.cursor_col(), false)
+	a2_color_number = fit_color_number_to_character(charaData[1], true, select_color(p2_assist_select.get_node("CharacterCursor").input_prefix))
 	Global.PLAYER_2_NODE_PATH[1] = charaData[0]
 	Global.PLAYER_2_CHARACTER[1] = charaData[1]
 	Global.load_queue.queue_resource(Global.PLAYER_2_NODE_PATH[1])
 	
 	p2_assist_pos_row = p2_assist_select.cursor_row()
 	p2_assist_pos_col = p2_assist_select.cursor_col()
-	a2_color_number = select_color(p2_assist_select.get_node("CharacterCursor").input_prefix)
 	A2Portrait.change_color_number(a2_color_number)
 	rpc("remote_peer_assist_select", p2_assist_select.cursor_row(), p2_assist_select.cursor_col(), a2_color_number)
 	p2_ready = true
@@ -294,12 +300,12 @@ func update_a2():
 	peer_ready = true
 	message_label.text = "peer_ready"
 	if (players_ready()):
-		message_label.text = "teams selected!"
+		message_label.text = tr("UI_STATUS_TEAMS_SELECTED")
 		start_loading_process()
 
 func local_ready():
 	if (players_ready()):
-		message_label.text = "locally: teams selected!"
+		message_label.text = tr("UI_STATUS_LOCAL_TEAMS_SELECTED")
 		start_loading_process()
 
 func music_load():
@@ -328,7 +334,7 @@ func start_loading_process():
 	
 	if (SyncManager.spectating):
 		SyncManager.input_delay = 10
-	message_label.text = "Loading teams..."
+	message_label.text = tr("UI_STATUS_LOADING_TEAMS")
 	Global.PLAYER_1_NODE[0] = Global.load_queue.get_resource(Global.PLAYER_1_NODE_PATH[0])
 	Global.PLAYER_1_NODE_INSTANCE[0] = Global.PLAYER_1_NODE[0].instantiate()
 	
@@ -348,7 +354,7 @@ func start_loading_process():
 		Global.PLAYER_2_NODE_INSTANCE[2] = Global.PLAYER_2_NODE[2].instantiate()
 	Global.load_queue.load_stage_art()
 	music_load()
-	message_label.text = "Load complete, waiting on peer"
+	message_label.text = tr("UI_STATUS_WAITING_PEER")
 	rpc_id(1, "peer_load_queue_ready")
 
 func display_colors():
@@ -369,7 +375,7 @@ func display_colors():
 	all_peer_load_ready += 1
 	message_label.text = "# of peers loaded: " + str(all_peer_load_ready)
 	if (is_all_load_ready()):
-		message_label.text = "All peers loading completed!"
+		message_label.text = tr("UI_STATUS_PEERS_LOADING_COMPLETE")
 		if (get_tree().get_multiplayer().is_server()):
 			rpc("go_to_next_scene")
 
@@ -378,7 +384,7 @@ func is_all_load_ready() -> bool:
 
 @rpc("any_peer", "call_local")
 func go_to_next_scene():
-	message_label.text = "going to match..."
+	message_label.text = tr("UI_STATUS_GOING_TO_MATCH")
 	print("go to next scene")
 	get_tree().change_scene_to_file("res://game/DemoMain.tscn")
 
@@ -393,11 +399,11 @@ func input_helper(event):
 	pass
 
 func _on_network_peer_connected(peer_id: int):
-	message_label.text = "CONNECTED "+str(peer_id)
+	message_label.text = tr("UI_STATUS_CONNECTED_PEER").format({"peer_id": peer_id})
 	display_peer_ids()
 
 func _on_network_peer_disconnected(peer_id: int):
-	message_label.text = "Disconnected "+str(peer_id)
+	message_label.text = tr("UI_STATUS_DISCONNECTED_PEER").format({"peer_id": peer_id})
 	display_peer_ids()
 	if (SyncManager.get_player_peer_count() < 1):
 		exit()
@@ -429,7 +435,7 @@ func get_opponent_peer_id() -> int:
 		else:
 			return SyncManager.get_player_peer_ids()[1]
 	printerr ("Main: unable to find opponent peer id")
-	message_label.text = "unable to find opponent's peer id"
+	message_label.text = tr("UI_STATUS_UNABLE_OPPONENT_PEER")
 	return 1
 
 func get_client_player_peer_id() -> int:
@@ -439,7 +445,7 @@ func get_client_player_peer_id() -> int:
 		else:
 			return SyncManager.get_player_peer_ids()[1]
 	printerr ("Main: unable to find client peer id")
-	message_label.text = "unable to find client peer id"
+	message_label.text = tr("UI_STATUS_UNABLE_CLIENT_PEER")
 	return 1
 
 func set_player_names():

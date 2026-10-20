@@ -13,8 +13,8 @@ func _init():
 		2 : {
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hurt1Disable : false,
-			Enums.StKey.attack_damage: 15,
-			Enums.StKey.hit_box_colliding_frame : 1,
+			Enums.StKey.attack_damage: 2,
+			Enums.StKey.hit_box_colliding_frame : 2,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher, 
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*50,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*10,

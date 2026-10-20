@@ -35,7 +35,7 @@ func _init():
 			Enums.StKey.Hit1PosX : 0, Enums.StKey.Hit1PosY : -18087934,
 			Enums.StKey.Hit1ScaleX : 2557910, Enums.StKey.Hit1ScaleY : 1982050,
 			Enums.StKey.Hit2PosX : 0, Enums.StKey.Hit2PosY : -17956864,
-			Enums.StKey.Hit2ScaleX : 1786620, Enums.StKey.Hit2ScaleY : 2721142,
+			Enums.StKey.Hit2ScaleX : 1786620, Enums.StKey.Hit2ScaleY : 2801142,
 			Enums.StKey.attack_damage: 0,
 			Enums.StKey.chip_damage: 0,
 			Enums.StKey.min_damage: 0,
@@ -80,7 +80,7 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.velocity_x] = 0
-		state[Enums.StKey.velocity_y] = -SGFixed.ONE * 40
+		state[Enums.StKey.velocity_y] = -SGFixed.ONE * 35
 		state[Enums.StKey.accel_y] = Util.GRAVITY
 		state[Enums.StKey.super_meter] -= state[Enums.StKey.burst_cost]*Util.LEVEL_ONE_SUPER
 		state[Enums.StKey.assist_meter] -= Util.ASSIST_STOCK

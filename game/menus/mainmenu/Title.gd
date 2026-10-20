@@ -9,7 +9,10 @@ func load_startup_config():
 	# If the file didn't load, ignore it.
 	if err != OK:
 		print("Config File Error: " + str(err))
+		TranslationServer.set_locale(Global.resolve_locale(config))
 		return
+
+	TranslationServer.set_locale(Global.resolve_locale(config))
 
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),
 		config.get_value("SoundOptions", "MainVolume", 0))

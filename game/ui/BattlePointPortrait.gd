@@ -38,6 +38,8 @@ func load_portrait(enum_point_chara, point_color, enum_assist_chara, assist_colo
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/OkaKoroButtonReal.png"
 		Enums.AssistCharacters.Hakka:
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/HakkaButtonReal.png"
+		Enums.AssistCharacters.Rikka:
+			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/RikkaButtonReal.png"
 		Enums.AssistCharacters.Subaru:
 			portrait = "res://game/assets/sprites/UI/CharacterSelect/MiniPortraits/SubaruButtonReal.png"
 		Enums.AssistCharacters.Mio:

@@ -3,7 +3,7 @@ extends SubaruAirAttackState
 class_name SubaruAirStarBallState
 
 func _init():
-	endFrame = 37
+	endFrame = 46
 	
 	anim_data = {
 		0 : {
@@ -74,12 +74,10 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 3):
 		state[Enums.StKey.hitStopFrame] = 0
-	elif (state[Enums.StKey.frame] == 4):
+	elif (state[Enums.StKey.frame] == 2):
 		state[Enums.StKey.velocity_x] = SGFixed.mul(state[Enums.StKey.velocity_x], SGFixed.HALF)
-		state[Enums.StKey.velocity_y] = SGFixed.ONE*-10
+		state[Enums.StKey.velocity_y] = SGFixed.ONE*-13
 		state[Enums.StKey.accel_y] = SGFixed.ONE
-	elif (state[Enums.StKey.frame] == 23):
-		state[Enums.StKey.accel_y] = Util.GRAVITY
 
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
@@ -89,3 +87,12 @@ func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
+
+func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
+	if (event_cause == Enums.Reaction.GroundLand):
+		if (state[Enums.StKey.hitStopFrame] <= 0 and state[Enums.StKey.frame] >= 16):
+			state[Enums.StKey.doubleJump] = 1
+			state[Enums.StKey.airDash] = 1
+			change_state.call("LandingRecovery")
+	else:
+		super.reaction(state, interpreter, event_cause)

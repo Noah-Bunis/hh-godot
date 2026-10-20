@@ -55,7 +55,7 @@ offset_top = 208.0
 offset_right = 689.0
 offset_bottom = 338.0
 scale = Vector2(2, 2)
-text = "Logging in to Server..."
+text = "UI_MENU_LOGGING_IN"
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 1
@@ -68,7 +68,7 @@ offset_right = 491.00012
 offset_bottom = 145.0
 scale = Vector2(1.36835, 1.30464)
 theme_override_fonts/font = SubResource("FontFile_7bihh")
-text = "NameLabel"
+text = "UI_MENU_DISPLAY_NAME"
 
 [node name="LP" type="Sprite2D" parent="."]
 position = Vector2(185, 817)

@@ -16,7 +16,6 @@ func _init():
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.attack_damage: 40,
 			Enums.StKey.hit_box_colliding_frame : 1,
-#			Enums.StKey.hitstun: 25,
 			},
 		60 : {
 			Enums.StKey.Hit1Disable : true,
@@ -34,3 +33,8 @@ func enter(state: Dictionary) -> void:
 func reaction(state: Dictionary, _interpreter: InputInterpreter, event_cause: int) -> void:
 	if (event_cause == Enums.Reaction.StrikeHurt):
 		state[Enums.StKey.frame] = 5
+	elif (event_cause == Enums.Reaction.PointAttackHurt):
+		change_state.call("Destroy")
+	elif (event_cause == Enums.Reaction.PointBlockHurt):
+		change_state.call("Destroy")
+	

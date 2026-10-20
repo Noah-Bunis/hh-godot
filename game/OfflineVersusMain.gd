@@ -36,11 +36,11 @@ func _physics_process(delta):
 			hold_start += 1
 			$CanvasLayer/HoldStartLabel.visible = true
 			input_start()
-			$CanvasLayer/HoldStartLabel.text = "Hold Start... "
+			$CanvasLayer/HoldStartLabel.text = tr("UI_STATUS_HOLD_START")
 			if (Input.get_action_raw_strength("player1_start") >= 0.5):
-				$CanvasLayer/HoldStartLabel.text = $CanvasLayer/HoldStartLabel.text + "P1 "
+				$CanvasLayer/HoldStartLabel.text += "P1 "
 			if (Input.get_action_raw_strength("player2_start") >= 0.5):
-				$CanvasLayer/HoldStartLabel.text = $CanvasLayer/HoldStartLabel.text + "P2 "
+				$CanvasLayer/HoldStartLabel.text += "P2 "
 		else:
 			hold_start = 0
 			$CanvasLayer/HoldStartLabel.visible = false

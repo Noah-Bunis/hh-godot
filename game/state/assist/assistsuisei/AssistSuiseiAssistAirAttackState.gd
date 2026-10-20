@@ -3,7 +3,7 @@ extends AssistAirAttackState
 class_name AssistSuiseiAssistAirAttackState
 
 func _init():
-	endFrame = 30
+	endFrame = 35
 
 	anim_data = {
 		0 : {
@@ -20,10 +20,11 @@ func _init():
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,
 			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -18728636,
 			Enums.StKey.Hurt1ScaleX : 1342691, Enums.StKey.Hurt1ScaleY : 1149402,Enums.StKey.hit_box_colliding_frame : 4,
-			Enums.StKey.attack_damage: 10,
-			Enums.StKey.hitstun: 25,
-			Enums.StKey.min_damage: 3,
-			Enums.StKey.hitstop: 3,
+			Enums.StKey.attack_damage: 20,
+			Enums.StKey.hitstun: 28,
+			Enums.StKey.min_damage: 4,
+			Enums.StKey.chip_damage: 4,
+			Enums.StKey.hitstop: 5,
 			Enums.StKey.counter_hit: Enums.AttackType.Strike,
 			Enums.StKey.counter_hitstun: 5,
 			},
@@ -49,6 +50,6 @@ func enter(state: Dictionary) -> void:
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 6):
-		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*30, state[Enums.StKey.velocity_x])
+		state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*40, state[Enums.StKey.velocity_x])
 	elif (state[Enums.StKey.frame] == 14):
 		state[Enums.StKey.drag_x] = Util.FRICTION

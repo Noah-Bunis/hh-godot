@@ -6,6 +6,7 @@ class_name SubaruPlayer
 
 const SubaruStarBall = preload("res://game/fighter/projectiles/SubaruStarball.tscn")
 const SubaruBatterSetBall = preload("res://game/fighter/projectiles/SubaruBatterSetBall.tscn")
+const SubaruEXBatterSetBall = preload("res://game/fighter/projectiles/SubaruEXBatterSetBall.tscn")
 
 func tick() -> void:
 	super.tick()
@@ -57,4 +58,19 @@ func summonHelper(entity: String, uninterrupted:bool=true) -> void:
 				g_position.y - (SGFixed.ONE*200), 
 				SubaruBatterSetBall,
 				"SubaruBatterSetBall",
+				playerData)
+		elif (entity == "subaruEXbattersetball"):
+			var g_position = get_global_fixed_position()
+			var playerData = PlayerSetup.new(
+					currentState[Enums.StKey.leftface],
+					self.team,
+					Enums.Projectiles.SubaruEXBatterSetBall,
+					self.color_scheme,
+					self.input_interpreter
+				)
+			emit_signal("projectilespawn", 
+				g_position.x + (SGFixed.ONE*100*leftface_mult), 
+				g_position.y - (SGFixed.ONE*200), 
+				SubaruEXBatterSetBall,
+				"SubaruEXBatterSetBall",
 				playerData)

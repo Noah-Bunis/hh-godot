@@ -1,7 +1,6 @@
-[gd_scene load_steps=36 format=3 uid="uid://dwajufq80dc4w"]
+[gd_scene load_steps=34 format=3 uid="uid://dwajufq80dc4w"]
 
 [ext_resource type="Script" uid="uid://by6hd156nj55l" path="res://game/menus/mainmenu/MainMenu.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="2"]
 [ext_resource type="Texture2D" uid="uid://qn5j62sxeijo" path="res://game/assets/sprites/UI/MainMenus/MainScreen.png" id="3"]
 [ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="3_hxaok"]
 [ext_resource type="Texture2D" uid="uid://de1uim16viyi4" path="res://game/assets/sprites/UI/MainMenus/Buttons/ONLINE/Timeline 1_0001.png" id="4"]
@@ -32,130 +31,6 @@
 [ext_resource type="Texture2D" uid="uid://1s43aow0w01p" path="res://game/assets/sprites/UI/MainMenus/Buttons/REPLAYS/Timeline 1_0001.png" id="24"]
 [ext_resource type="Texture2D" uid="uid://3wixddhn3ldf" path="res://game/assets/sprites/UI/MainMenus/Buttons/REPLAYS/Timeline 1_0000.png" id="25"]
 [ext_resource type="Texture2D" uid="uid://dhgojc5ed7lh7" path="res://game/assets/sprites/assists/okakoro/PowerBounceHit/Timeline 1_0002.png" id="26"]
-
-[sub_resource type="FontFile" id="1"]
-fallbacks = Array[Font]([ExtResource("2")])
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/2/0/ascent = 0.0
-cache/0/2/0/descent = 0.0
-cache/0/2/0/underline_position = 0.0
-cache/0/2/0/underline_thickness = 0.0
-cache/0/2/0/scale = 1.0
-cache/0/3/0/ascent = 0.0
-cache/0/3/0/descent = 0.0
-cache/0/3/0/underline_position = 0.0
-cache/0/3/0/underline_thickness = 0.0
-cache/0/3/0/scale = 1.0
-cache/0/4/0/ascent = 0.0
-cache/0/4/0/descent = 0.0
-cache/0/4/0/underline_position = 0.0
-cache/0/4/0/underline_thickness = 0.0
-cache/0/4/0/scale = 1.0
-cache/0/5/0/ascent = 0.0
-cache/0/5/0/descent = 0.0
-cache/0/5/0/underline_position = 0.0
-cache/0/5/0/underline_thickness = 0.0
-cache/0/5/0/scale = 1.0
-cache/0/6/0/ascent = 0.0
-cache/0/6/0/descent = 0.0
-cache/0/6/0/underline_position = 0.0
-cache/0/6/0/underline_thickness = 0.0
-cache/0/6/0/scale = 1.0
-cache/0/7/0/ascent = 0.0
-cache/0/7/0/descent = 0.0
-cache/0/7/0/underline_position = 0.0
-cache/0/7/0/underline_thickness = 0.0
-cache/0/7/0/scale = 1.0
-cache/0/8/0/ascent = 0.0
-cache/0/8/0/descent = 0.0
-cache/0/8/0/underline_position = 0.0
-cache/0/8/0/underline_thickness = 0.0
-cache/0/8/0/scale = 1.0
-cache/0/9/0/ascent = 0.0
-cache/0/9/0/descent = 0.0
-cache/0/9/0/underline_position = 0.0
-cache/0/9/0/underline_thickness = 0.0
-cache/0/9/0/scale = 1.0
-cache/0/10/0/ascent = 0.0
-cache/0/10/0/descent = 0.0
-cache/0/10/0/underline_position = 0.0
-cache/0/10/0/underline_thickness = 0.0
-cache/0/10/0/scale = 1.0
-cache/0/11/0/ascent = 0.0
-cache/0/11/0/descent = 0.0
-cache/0/11/0/underline_position = 0.0
-cache/0/11/0/underline_thickness = 0.0
-cache/0/11/0/scale = 1.0
-cache/0/12/0/ascent = 0.0
-cache/0/12/0/descent = 0.0
-cache/0/12/0/underline_position = 0.0
-cache/0/12/0/underline_thickness = 0.0
-cache/0/12/0/scale = 1.0
-cache/0/13/0/ascent = 0.0
-cache/0/13/0/descent = 0.0
-cache/0/13/0/underline_position = 0.0
-cache/0/13/0/underline_thickness = 0.0
-cache/0/13/0/scale = 1.0
-cache/0/14/0/ascent = 0.0
-cache/0/14/0/descent = 0.0
-cache/0/14/0/underline_position = 0.0
-cache/0/14/0/underline_thickness = 0.0
-cache/0/14/0/scale = 1.0
-cache/0/15/0/ascent = 0.0
-cache/0/15/0/descent = 0.0
-cache/0/15/0/underline_position = 0.0
-cache/0/15/0/underline_thickness = 0.0
-cache/0/15/0/scale = 1.0
-cache/0/17/0/ascent = 0.0
-cache/0/17/0/descent = 0.0
-cache/0/17/0/underline_position = 0.0
-cache/0/17/0/underline_thickness = 0.0
-cache/0/17/0/scale = 1.0
-cache/0/18/0/ascent = 0.0
-cache/0/18/0/descent = 0.0
-cache/0/18/0/underline_position = 0.0
-cache/0/18/0/underline_thickness = 0.0
-cache/0/18/0/scale = 1.0
-cache/0/19/0/ascent = 0.0
-cache/0/19/0/descent = 0.0
-cache/0/19/0/underline_position = 0.0
-cache/0/19/0/underline_thickness = 0.0
-cache/0/19/0/scale = 1.0
-cache/0/20/0/ascent = 0.0
-cache/0/20/0/descent = 0.0
-cache/0/20/0/underline_position = 0.0
-cache/0/20/0/underline_thickness = 0.0
-cache/0/20/0/scale = 1.0
-cache/0/21/0/ascent = 0.0
-cache/0/21/0/descent = 0.0
-cache/0/21/0/underline_position = 0.0
-cache/0/21/0/underline_thickness = 0.0
-cache/0/21/0/scale = 1.0
-cache/0/22/0/ascent = 0.0
-cache/0/22/0/descent = 0.0
-cache/0/22/0/underline_position = 0.0
-cache/0/22/0/underline_thickness = 0.0
-cache/0/22/0/scale = 1.0
-cache/0/23/0/ascent = 0.0
-cache/0/23/0/descent = 0.0
-cache/0/23/0/underline_position = 0.0
-cache/0/23/0/underline_thickness = 0.0
-cache/0/23/0/scale = 1.0
-cache/0/24/0/ascent = 0.0
-cache/0/24/0/descent = 0.0
-cache/0/24/0/underline_position = 0.0
-cache/0/24/0/underline_thickness = 0.0
-cache/0/24/0/scale = 1.0
-cache/0/32/0/ascent = 0.0
-cache/0/32/0/descent = 0.0
-cache/0/32/0/underline_position = 0.0
-cache/0/32/0/underline_thickness = 0.0
-cache/0/32/0/scale = 1.0
 
 [sub_resource type="Animation" id="2"]
 resource_name = "Idle"
@@ -210,7 +85,7 @@ grow_horizontal = 2
 scale = Vector2(3.71277, 3.76316)
 theme = ExtResource("3_hxaok")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-text = "Your Name:"
+text = "UI_MENU_YOUR_NAME"
 
 [node name="DiscordLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -222,10 +97,12 @@ offset_right = 34.0
 offset_bottom = 963.99994
 grow_horizontal = 2
 scale = Vector2(2.8532681, 3.5325994)
+theme = ExtResource("3_hxaok")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("1")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
 theme_override_font_sizes/font_size = 32
-text = "Join our discord!"
+text = "UI_MENU_JOIN_DISCORD"
 
 [node name="DiscordButton" type="TextureButton" parent="CanvasLayer"]
 anchors_preset = -1
@@ -255,7 +132,7 @@ focus_neighbor_bottom = NodePath("../MainMenuButtons/Offline")
 theme = ExtResource("3_hxaok")
 theme_override_fonts/font = ExtResource("7_ax5fe")
 theme_override_font_sizes/font_size = 24
-placeholder_text = "Your Name"
+placeholder_text = "UI_PLACEHOLDER_YOUR_NAME"
 max_length = 30
 emoji_menu_enabled = false
 clear_button_enabled = true

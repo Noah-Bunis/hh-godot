@@ -11,12 +11,12 @@ func _ready() -> void:
 	$Timer.start()
 
 func _physics_process(_delta):
-	$CanvasLayer/GridContainer/ChallengeTimer.text = "Time: " + str(int($Timer.time_left+1))
+	$CanvasLayer/GridContainer/ChallengeTimer.text = tr("UI_LABEL_TIMER").format({"seconds": int($Timer.time_left + 1)})
 
 func update_ping(new_ping: int, msg):
 	var system_time = Time.get_ticks_msec()
 	ping = system_time - msg['local_time']
-	$CanvasLayer/GridContainer/PingLabel.set_text("Ping: " + str(ping/2) + "ms")
+	$CanvasLayer/GridContainer/PingLabel.text = tr("UI_LABEL_PING").format({"ping": ping / 2})
 
 func set_from_queue(p_from: OnlineMatch.Player):
 	from_queue = p_from
@@ -44,7 +44,7 @@ func _on_decline_challenge_pressed():
 	call_deferred("disable_challenge")
 
 func _on_InputDelayMeter_value_changed(value):
-	$CanvasLayer/GridContainer/InputDelayLabel.set_text("Input Delay: " + str(int(value)))
+	$CanvasLayer/GridContainer/InputDelayLabel.text = tr("UI_LABEL_INPUT_DELAY").format({"frames": int(value)})
 	SyncManager.set_input_delay(int($CanvasLayer/GridContainer/InputDelayMeter.value))
 
 func _on_Timer_timeout():

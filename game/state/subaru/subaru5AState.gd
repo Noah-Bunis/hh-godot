@@ -3,20 +3,18 @@ extends SubaruAttackState
 class_name Subaru5AState
 
 func _init():
-	endFrame = 15
+	endFrame = 20
 	
 	anim_data = {
 		0 : {
 			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
-			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
-			Enums.StKey.Hurt1PosX : -9437184, Enums.StKey.Hurt1PosY : -12713984,
-			Enums.StKey.Hurt1ScaleX : 334968, Enums.StKey.Hurt1ScaleY : 357786,
-			Enums.StKey.Hurt2PosX : -4128768, Enums.StKey.Hurt2PosY : -9371647,
-			Enums.StKey.Hurt2ScaleX : 446568, Enums.StKey.Hurt2ScaleY : -774072,
-			Enums.StKey.Hurt3PosX : -2752511, Enums.StKey.Hurt3PosY : -3670016,
-			Enums.StKey.Hurt3ScaleX : 397190, Enums.StKey.Hurt3ScaleY : -382619,
+			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : true,
+			Enums.StKey.Hurt1PosX : 0, Enums.StKey.Hurt1PosY : -8000000,
+			Enums.StKey.Hurt1ScaleX : 705536, Enums.StKey.Hurt1ScaleY : 805536,
+			Enums.StKey.Hurt2PosX : 0, Enums.StKey.Hurt2PosY : -12316198,
+			Enums.StKey.Hurt2ScaleX : 542394, Enums.StKey.Hurt2ScaleY : 1096324,
 			},
 		7 : {
 			Enums.StKey.counterOK : true,

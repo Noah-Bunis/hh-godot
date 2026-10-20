@@ -1,0 +1,3 @@
+extends AssistExitState
+
+class_name AssistFlayonAssistExitState

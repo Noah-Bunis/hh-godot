@@ -14,9 +14,9 @@ func _init():
 			Enums.StKey.Hurt1PosX : 2097152, Enums.StKey.Hurt1PosY : -2555901,
 			Enums.StKey.Hurt1ScaleX : 1244010, Enums.StKey.Hurt1ScaleY : 402320,
 			Enums.StKey.Hurt2PosX : 458752, Enums.StKey.Hurt2PosY : -4915200,
-			Enums.StKey.Hurt2ScaleX : 848843, Enums.StKey.Hurt2ScaleY : -585187,
+			Enums.StKey.Hurt2ScaleX : 848843, Enums.StKey.Hurt2ScaleY : 585187,
 			Enums.StKey.Hurt3PosX : 1835008, Enums.StKey.Hurt3PosY : -13107199,
-			Enums.StKey.Hurt3ScaleX : 806255, Enums.StKey.Hurt3ScaleY : -411904,
+			Enums.StKey.Hurt3ScaleX : 806255, Enums.StKey.Hurt3ScaleY : 411904,
 			},
 		4 : {
 			Enums.StKey.counterOK : true,
@@ -26,7 +26,7 @@ func _init():
 			Enums.StKey.Hurt1PosX : 2097152, Enums.StKey.Hurt1PosY : -2555901,
 			Enums.StKey.Hurt1ScaleX : 1244010, Enums.StKey.Hurt1ScaleY : 402320,
 			Enums.StKey.Hurt2PosX : 458752, Enums.StKey.Hurt2PosY : -4915200,
-			Enums.StKey.Hurt2ScaleX : 848843, Enums.StKey.Hurt2ScaleY : -585187,
+			Enums.StKey.Hurt2ScaleX : 848843, Enums.StKey.Hurt2ScaleY : 585187,
 			Enums.StKey.hit_box_colliding_frame : 254,
 			
 			},
@@ -58,9 +58,9 @@ func _init():
 			Enums.StKey.Hurt1PosX : 2097152, Enums.StKey.Hurt1PosY : -2555901,
 			Enums.StKey.Hurt1ScaleX : 1244010, Enums.StKey.Hurt1ScaleY : 402320,
 			Enums.StKey.Hurt2PosX : -3997696, Enums.StKey.Hurt2PosY : -9895936,
-			Enums.StKey.Hurt2ScaleX : 848843, Enums.StKey.Hurt2ScaleY : -585187,
+			Enums.StKey.Hurt2ScaleX : 848843, Enums.StKey.Hurt2ScaleY : 585187,
 			Enums.StKey.Hurt3PosX : -9437185, Enums.StKey.Hurt3PosY : -19857406,
-			Enums.StKey.Hurt3ScaleX : 806255, Enums.StKey.Hurt3ScaleY : -411904,
+			Enums.StKey.Hurt3ScaleX : 806255, Enums.StKey.Hurt3ScaleY : 411904,
 			},
 	}
 

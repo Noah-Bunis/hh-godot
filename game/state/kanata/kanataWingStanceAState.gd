@@ -62,18 +62,13 @@ func physics_tick(state: Dictionary) -> void:
 	if (state[Enums.StKey.frame] == 7):
 		state[Enums.StKey.velocity_x] = SGFixed.ONE*20
 
-func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
-	pass
-
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
-#		if (not (interpreter.is_holding_a_direction(Enums.Numpad.N4, state[Enums.StKey.leftface]))):
 		if (interpreter.is_button_down(Enums.InputFlags.ADown)):
 			state[Enums.StKey.cancelState] = "KanataWingStanceAA"
 	elif (state[Enums.StKey.frame] >= 8):
-#		if (not (interpreter.is_holding_a_direction(Enums.Numpad.N4, state[Enums.StKey.leftface]))):
 		if (interpreter.is_button_down(Enums.InputFlags.ADown)):
 			change_state.call("KanataWingStanceAA")

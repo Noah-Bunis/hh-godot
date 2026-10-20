@@ -33,8 +33,8 @@ func _init():
 	
 func enter(state: Dictionary) -> void:
 	super.enter(state)
-	state[Enums.StKey.velocity_x] = -SGFixed.ONE*32 # Util.fixed_max(SGFixed.ONE*13, state[Enums.StKey.velocity_x])
-	state[Enums.StKey.accel_x] = 155536
+	state[Enums.StKey.velocity_x] = -SGFixed.ONE*40 # Util.fixed_max(SGFixed.ONE*13, state[Enums.StKey.velocity_x])
+	state[Enums.StKey.accel_x] = 205536
 	state[Enums.StKey.leftfaceOK] = true
 	anim.play("Run")
 

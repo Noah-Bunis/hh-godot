@@ -3,7 +3,6 @@ extends OgaAttackState
 class_name OgaSlashModeState
 
 var voice = preload("res://game/assets/voice/oga/oga_HAAA.wav")
-#var sound = preload("res://game/assets/sfx/Parry8Bit.wav")
 
 func _init():
 	endFrame = 95
@@ -93,7 +92,7 @@ func _init():
 			Enums.StKey.burst_OK: false,
 			Enums.StKey.hitstun: 22, 
 			Enums.StKey.counter_hitstun: 60,
-			Enums.StKey.attack_damage: 60,
+			Enums.StKey.attack_damage: 40,
 			Enums.StKey.meter_build: 0,
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*0,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*55,
@@ -115,13 +114,25 @@ func _init():
 			Enums.StKey.burst_OK: false,
 			Enums.StKey.hitstun: 120,
 			Enums.StKey.counter_hitstun: 180,
-			Enums.StKey.attack_damage: 80,
-			Enums.StKey.min_damage: 40,
+			Enums.StKey.attack_damage: 60,
+			Enums.StKey.min_damage: 20,
 			Enums.StKey.meter_build: 0,
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*10,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*120,
 			},
 		40 : {
+			Enums.StKey.counterOK : true,
+			Enums.StKey.Hit1Disable : true,
+			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
+			Enums.StKey.Hurt1PosX : 7536640, Enums.StKey.Hurt1PosY : -23461888,
+			Enums.StKey.Hurt1ScaleX : 498353, Enums.StKey.Hurt1ScaleY : 442051,
+			Enums.StKey.Hurt2PosX : -1507327, Enums.StKey.Hurt2PosY : -16711681,
+			Enums.StKey.Hurt2ScaleX : 841985, Enums.StKey.Hurt2ScaleY : -836808,
+			Enums.StKey.Hurt3PosX : 983039, Enums.StKey.Hurt3PosY : -4521985,
+			Enums.StKey.Hurt3ScaleX : 838252, Enums.StKey.Hurt3ScaleY : 402529,
+			},
+		69 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : false,Enums.StKey.Hurt3Disable : false,
 			Enums.StKey.Hurt1PosX : 7536640, Enums.StKey.Hurt1PosY : -23461888,
@@ -142,9 +153,10 @@ func enter(state: Dictionary) -> void:
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
-	if (state[Enums.StKey.frame] == 0):
-		SyncManager.play_sound("ogaVoice", voice, {"bus": "Voice"})
-	if (state[Enums.StKey.frame] == 3):
+	if (state[Enums.StKey.frame] == 1):
+		SyncManager.play_sound("OgaVoice", voice, {"bus": "Voice"})
+		SyncManager.play_sound("OgaVoiceReverb", voice, {"bus": "ReverbVoice"})
+	elif (state[Enums.StKey.frame] == 3):
 		state[Enums.StKey.velocity_x] = SGFixed.ONE*90
 	if (state[Enums.StKey.frame] > 5 and state[Enums.StKey.frame] < 20):
 		state[Enums.StKey.velocity_x] = SGFixed.ONE*30

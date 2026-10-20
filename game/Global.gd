@@ -1,11 +1,18 @@
 extends Node
 
-const BATTLE_ENGINE_VERSION = "HHv0.8.0012"
+const BATTLE_ENGINE_VERSION = "HHv0.9.0003"
 
 func get_battle_version() -> String:
 	if (len(Build.INTERNAL_BATTLE_ENGINE_KEY) < 50):
 		return Build.INTERNAL_BATTLE_ENGINE_KEY + BATTLE_ENGINE_VERSION
 	return Build.INTERNAL_BATTLE_ENGINE_KEY.substr(0, 50) + BATTLE_ENGINE_VERSION
+
+func resolve_locale(config: ConfigFile) -> String:
+	var locale = OS.get_locale()
+	if config.has_section_key("Language", "Locale"):
+		locale = str(config.get_value("Language", "Locale"))
+	var language = locale.to_lower().replace("-", "_").get_slice("_", 0)
+	return "ja" if language == "ja" else "en"
 
 var LOCAL_SERVER = false
 var FIGHTER_GAME = preload("res://game/FighterGame.tscn")
@@ -133,6 +140,10 @@ const BGM_LIST = [
 	'Howling',
 	'Silent Night Requiem',
 	'Chuuku No Niwa',
+	'Aniki He',
+	'Ghost',
+	'Suisei Maintenance Song',
+	'Radio Dead World',
 	'The Wahphony',
 	'Detabare Neko',
 	'Mogu Mogu Yummy',
@@ -140,7 +151,11 @@ const BGM_LIST = [
 	'Just Follow Stars',
 	'Graveyard Shift',
 	'Battle At The Top Of The World',
+	'Kingworld',
+	'Little Bit',
 	'Yume Hanabi',
+	'Hozukibiyori',
+	'AHOY',
 	'Homenobi',
 	'Palette',
 	'Beginning',
@@ -157,6 +172,10 @@ const BGM_UID_LIST = [
 	'uid://ia7b4sk853dr', #'Howling',
 	'uid://d3olga2mf7lgs', #'Silent Night Requiem',
 	'uid://bbsjim3t0k5um', #'Chuuku No Niwa',
+	'uid://qvqvoj3rjc4w', #'Aniki He',
+	'uid://cvpbmb1bkjiff', # 'Ghost',
+	'uid://qvwnyhce5hdt', #' Suisei Maintenance Song'
+	'uid://leneiny18em3', #'Radio Dead World'
 	'uid://clyck2abylosw', #'The Wahphony',
 	'uid://degygwfi2hbyh', #'Detabare Neko',
 	'uid://dnd4fo321ckra', #'Mogu Mogu Yummy',
@@ -164,7 +183,11 @@ const BGM_UID_LIST = [
 	'uid://ugrljdf7hfel', #'Just Follow Stars',
 	'uid://dahfik72030wi', #'Graveyard Shift',
 	'uid://bioxo0dlvg08l', # Battle at the top of the world
+	'uid://xcvxiqdbo2a4', # Kingworld,
+	'uid://dokxqfgjftb8d', # Little Bit,
 	'uid://dbiyw2ycctnsw', #'Yume Hanabi',
+	'uid://boit4v0nw2qik', #'Hozukibiyori',
+	'uid://br82ffgkgstjk', #'AHOY',
 	'uid://baxokql4qdh6x', #'Homenobi',
 	'uid://cco7o17v7g0oh', #'Palette',
 	'uid://bdadh04yuigie', #'Beginning',
@@ -300,3 +323,10 @@ const TagVFX = preload("res://game/fighter/effects/AssistTag.tscn")
 const RCSound = preload("res://game/assets/sfx/RomanCancel.wav")
 const WhiffSound = preload("res://game/assets/sfx/Whiff.wav")
 const AirTechSound = preload("res://game/assets/sfx/AirTech.wav")
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventJoypadMotion or event is InputEventJoypadButton:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	elif event is InputEventMouseMotion:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

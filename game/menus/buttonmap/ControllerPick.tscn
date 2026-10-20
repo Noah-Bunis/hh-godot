@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://6ephaqppgy8m"]
+[gd_scene load_steps=4 format=3 uid="uid://6ephaqppgy8m"]
 
 [ext_resource type="Script" uid="uid://d0ww7d3mgee1i" path="res://game/menus/buttonmap/ControllerPick.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://by0jdcp4y7to8" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Controller.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://cmkg8mwmwu0tr" path="res://game/assets/sprites/UI/MainMenus/MenuTutorials/Controller.png" id="2"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="3_gpj4a"]
 
 [node name="ControllerPick" type="Node2D"]
 script = ExtResource("1")
@@ -11,10 +12,15 @@ scale = Vector2(1.6, 1.6)
 texture = ExtResource("2")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -188.0
-offset_top = -87.0
-offset_right = -148.0
-offset_bottom = -56.0
-scale = Vector2(9.37575, 7.3338)
+anchors_preset = -1
+offset_left = -231.0
+offset_top = -62.999996
+offset_right = -191.0
+offset_bottom = 16.000004
+scale = Vector2(3.0189111, 3.1887362)
+theme = ExtResource("3_gpj4a")
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
 text = "1
 "
+horizontal_alignment = 1

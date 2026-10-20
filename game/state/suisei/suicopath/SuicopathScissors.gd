@@ -2,6 +2,8 @@ extends SuicopathAttackState
 
 class_name SuicopathScissorsState
 
+var Voice = preload("res://game/assets/voice/suisei/sui_bokoboko ni shiteruyo.wav")
+
 func _init():
 	endFrame = 40
 	
@@ -27,6 +29,7 @@ func _init():
 			Enums.StKey.counter_hit : Enums.AttackType.BurstLock,
 		},
 		2 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hurt1Disable : true,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.hit_box_colliding_frame : 254,
@@ -48,6 +51,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_y : -SGFixed.ONE*20,
 			},
 		10 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hurt1Disable : true,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.Hurt1PosX : -262144, Enums.StKey.Hurt1PosY : -7471104,
@@ -71,6 +75,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*70,
 			},
 		15 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.Hurt1PosX : -262144, Enums.StKey.Hurt1PosY : -7471104,
@@ -88,6 +93,9 @@ func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	if (state[Enums.StKey.frame] == 1):
 		state[Enums.StKey.velocity_x] = SGFixed.ONE*50
+		SyncManager.play_sound("SuicopathVoice", Voice, {"bus": "Voice"})
+		SyncManager.play_sound("SuicopathVoiceReverb", Voice, {"bus": "ReverbVoice"})
+	
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

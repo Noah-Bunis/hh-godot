@@ -29,7 +29,7 @@ texture = ExtResource("4_7ye67")
 [node name="CloseButton" type="Button" parent="."]
 layout_mode = 2
 theme = ExtResource("1_7ye67")
-text = "Close"
+text = "UI_TRAINING_CLOSE_COMMAND_LIST"
 
 [node name="Moves" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(500, 300)

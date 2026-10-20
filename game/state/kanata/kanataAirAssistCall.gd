@@ -35,11 +35,5 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
 		if (level_2_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M214, Enums.InputFlags.BDown, state[Enums.StKey.leftface])):
 			change_state.call("KanataAirWingHazard")
-	if (state[Enums.StKey.frame] >= 5):
-		if (assist_ok(state, interpreter)):
-			if (interpreter.is_low_blocking(state[Enums.StKey.leftface])):
-				state[Enums.StKey.cancelState] = "AirAssistCall2"
-			elif (level_1_OK(state) and super_assist_meter_ok(state)  and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.DDown, state[Enums.StKey.leftface])):
-				state[Enums.StKey.cancelState] = "AirAssistCallSuper"
-			else:
-				state[Enums.StKey.cancelState] = "AirAssistCall"
+		elif (level_1_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
+			change_state.call("KanataAirWingStanceC")

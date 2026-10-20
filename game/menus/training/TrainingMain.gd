@@ -2,8 +2,18 @@ extends DemoMain
 
 class_name TrainingMain
 
+enum TrainingResetPosition {
+	CENTER,
+	CENTER_SWITCHED,
+	LEFT,
+	LEFT_SWITCHED,
+	RIGHT,
+	RIGHT_SWITCHED,
+}
+
 var meter_refresher: TrainingMeterRefresher
 var savestate: Dictionary
+var last_reset_position: int = TrainingResetPosition.CENTER
 var state_history: Array
 var reaction_save_state: Dictionary
 var dummy_input: InputInterpreter
@@ -15,8 +25,10 @@ var player_input: InputInterpreter
 var record_left_face_ref: bool
 
 var recording_machine
+var replay_restore_player_input: InputInterpreter
 
 var _input_frames_received: Dictionary = {}
+var _reaction_state_active: bool = false
 
 func _init() -> void:
 	super._init()
@@ -50,12 +62,10 @@ func _ready() -> void:
 	$CanvasLayer/TrainingOptionsMenu.connect("reset", Callable(self, "reset"))
 	$CanvasLayer/TrainingOptionsMenu.connect("loadstate", Callable(self, "loadstate_menu"))
 	$CanvasLayer/TrainingOptionsMenu.connect("savestate", Callable(self, "execute_savestate"))
+	$CanvasLayer/TrainingOptionsMenu.connect("play_demo", Callable(self, "play_demo"))
 	$CanvasLayer/TrainingOptionsMenu.command_list = $CanvasLayer/CommandList
 	$CanvasLayer/TrainingOptionsMenu.command_list.connect("close_menu", Callable($CanvasLayer/TrainingOptionsMenu, "command_list_closed"))
 	dummy_input.connect("strike_hurt", Callable(self, "load_reaction_state"))
-	var dummy_player = fighter_game.ClientPlayer if Global.TRAINING_P1 else fighter_game.ServerPlayer
-	#dummy_player.connect("attack_hurt", Callable($CanvasLayer/ComboTrialListener, "attack_hurt"))
-	#dummy_player.connect("combo_exit", Callable($CanvasLayer/ComboTrialListener, "drop_combo"))
 
 func _physics_process(delta):
 	if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):
@@ -72,11 +82,22 @@ func _physics_process(delta):
 		elif (is_replaying):
 			if (recording_machine.has_input()):
 				var input:int = recording_machine.read_input()
-				dummy_input.replay_input = input
+				if (self is ComboTrialMain):
+					var replay_target: InputInterpreter = fighter_game.get_node("ServerInputInterpreter")
+					replay_target.replay_input = input
+					replay_target.is_replaying = true
+				else:
+					dummy_input.replay_input = input
+					dummy_input.is_replaying = true
 				$CanvasLayer/MessageLabel.text = recording_machine.string_replaying_frame()
 			else:
-				dummy_input.is_replaying = false
-				dummy_input.replay_input = 0
+				if (self is ComboTrialMain):
+					var replay_target: InputInterpreter = fighter_game.get_node("ServerInputInterpreter")
+					replay_target.is_replaying = false
+					replay_target.replay_input = 0
+				else:
+					dummy_input.is_replaying = false
+					dummy_input.replay_input = 0
 				stop_replay()
 		update_reaction_save_state()
 		
@@ -100,6 +121,7 @@ func _do_execute_frame_mechanized(tick, delta) -> bool:
 	var peer_dict = {}
 	var p1_input_package = {}
 	var p2_input_package = {}
+	var processing_reaction_state: bool = _reaction_state_active and not _input_frames_received.is_empty()
 	
 	if (not _input_frames_received.is_empty()):
 		p1_input_package = _input_frames_received[1]
@@ -122,6 +144,8 @@ func _do_execute_frame_mechanized(tick, delta) -> bool:
 	dummy_input.in_rollback = false
 	_input_frames_received = {}
 	SyncManager.reset_mechanized_data()
+	if (processing_reaction_state):
+		_reaction_state_active = false
 	return true
 
 func get_input_vector(is_p1: bool) -> Dictionary:
@@ -135,6 +159,27 @@ func get_input_vector(is_p1: bool) -> Dictionary:
 
 func execute_savestate():
 	savestate = SyncManager._call_save_state()
+	var input_source: InputSource = player_input.get_node("InputSource")
+	var input_source_path: String = str(input_source.get_path())
+	var input_source_state: Dictionary = savestate.get(input_source_path, {})
+	if (input_source_state.is_empty()):
+		return
+
+	var button_flags = {
+		"a": Enums.InputFlags.ADown | Enums.InputFlags.AHold | Enums.InputFlags.AUp,
+		"b": Enums.InputFlags.BDown | Enums.InputFlags.BHold | Enums.InputFlags.BUp,
+		"c": Enums.InputFlags.CDown | Enums.InputFlags.CHold | Enums.InputFlags.CUp,
+		"d": Enums.InputFlags.DDown | Enums.InputFlags.DHold | Enums.InputFlags.DUp,
+	}
+	var active_button_flags: int = 0
+	for button in button_flags:
+		var button_action: String = player_input.input_prefix + button
+		if (Input.is_action_pressed(button_action) or Input.is_action_just_pressed(button_action) or Input.is_action_just_released(button_action)):
+			active_button_flags |= button_flags[button]
+	if (active_button_flags != 0):
+		var input_history: Array = input_source_state[InputSource.State.inputHistory]
+		var current_index: int = input_source_state[InputSource.State.zeroIndex]
+		input_history[current_index] &= ~active_button_flags
 	
 func update_reaction_save_state():
 	var new_state = SyncManager._call_save_state()
@@ -168,6 +213,9 @@ func load_reaction_state():
 			p2_input_package[tick] = peer_dict
 			_input_frames_received[1] = p1_input_package
 			_input_frames_received[2] = p2_input_package
+	if (p1_input_package.is_empty()):
+		return
+	_reaction_state_active = true
 	store_rollback_state.call_deferred(_input_frames_received, state_history.size())
 
 func store_rollback_state(p_input_frames_received, rollback_ticks):
@@ -199,24 +247,143 @@ func exit():
 	free_main()
 	MainMenuMusicControl.stop_music()
 
-func reset():
+func reset(position: int = TrainingResetPosition.CENTER):
+	if (_reaction_state_active):
+		return
+	last_reset_position = position
 	sync_clear()
 	$CanvasLayer/TrainingOptionsMenu.hide()
 	fighter_game.stop_glowing_characters()
-	reload_scene()
+	reload_scene(position)
 	#get_tree().reload_current_scene()
 
-func reload_scene():
+func _get_back_reset_position(input_prefix: String) -> int:
+	var left_pressed: bool = Input.get_action_strength(input_prefix + "left") > 0 or Input.get_action_strength(input_prefix + "left_stick") > 0
+	var right_pressed: bool = Input.get_action_strength(input_prefix + "right") > 0 or Input.get_action_strength(input_prefix + "right_stick") > 0
+	var up_pressed: bool = Input.get_action_strength(input_prefix + "up") > 0 or Input.get_action_strength(input_prefix + "up_stick") > 0
+	var down_pressed: bool = Input.get_action_strength(input_prefix + "down") > 0 or Input.get_action_strength(input_prefix + "down_stick") > 0
+
+	if (left_pressed):
+		return TrainingResetPosition.LEFT_SWITCHED if down_pressed else TrainingResetPosition.LEFT
+	if (right_pressed):
+		return TrainingResetPosition.RIGHT_SWITCHED if down_pressed else TrainingResetPosition.RIGHT
+	if (up_pressed):
+		return TrainingResetPosition.CENTER
+	if (down_pressed):
+		return TrainingResetPosition.CENTER_SWITCHED
+	return -1
+
+func reload_scene(position: int = TrainingResetPosition.CENTER):
+	var music_stream = MainMenuMusicControl.audio_player.stream if MainMenuMusicControl != null else null
+	var music_position = MainMenuMusicControl.audio_player.get_playback_position() if MainMenuMusicControl != null else 0.0
+	var music_is_playing = MainMenuMusicControl.audio_player.playing if MainMenuMusicControl != null else false
+	var sfx_stream = MainMenuMusicControl.menu_sounds.stream if MainMenuMusicControl != null else null
+	var sfx_position = MainMenuMusicControl.menu_sounds.get_playback_position() if MainMenuMusicControl != null else 0.0
+	var sfx_is_playing = MainMenuMusicControl.menu_sounds.playing if MainMenuMusicControl != null else false
+
+	if (MainMenuMusicControl != null):
+		MainMenuMusicControl.skip_next_fade_in()
 	super.reload_scene()
+	_apply_training_reset_position(position)
+	setup_training()
 	skip_training_intro()
 	stop_record()
 	stop_replay()
+
+	if (MainMenuMusicControl != null):
+		if (music_stream != null and music_is_playing):
+			MainMenuMusicControl.audio_player.stream = music_stream
+			MainMenuMusicControl.audio_player.play(music_position)
+		if (sfx_stream != null and sfx_is_playing):
+			MainMenuMusicControl.menu_sounds.stream = sfx_stream
+			MainMenuMusicControl.menu_sounds.play(sfx_position)
+
+func _apply_training_reset_position(position: int) -> void:
+	var server_x: int
+	var client_x: int
+	var server_scale_x: int = SGFixed.ONE
+	var client_scale_x: int = -SGFixed.ONE
+
+	match position:
+		TrainingResetPosition.CENTER:
+			server_x = -23292288
+			client_x = 23292288
+		TrainingResetPosition.CENTER_SWITCHED:
+			server_x = 23292288
+			client_x = -23292288
+		TrainingResetPosition.LEFT:
+			server_x = -175570000
+			client_x = -145570000
+		TrainingResetPosition.LEFT_SWITCHED:
+			server_x = -145570000
+			client_x = -175570000
+		TrainingResetPosition.RIGHT:
+			server_x = 145570000
+			client_x = 175570000
+		TrainingResetPosition.RIGHT_SWITCHED:
+			server_x = 175570000
+			client_x = 145570000
+		_:
+			server_x = -23292288
+			client_x = 23292288
+
+	fighter_game.ServerPlayer.fixed_position.x = server_x
+	fighter_game.ServerPlayer.fixed_position.y = 29949952
+	fighter_game.ServerPlayer.fixed_scale.x = server_scale_x
+	fighter_game.ServerPlayer.sync_to_physics_engine()
+
+	fighter_game.ClientPlayer.fixed_position.x = client_x
+	fighter_game.ClientPlayer.fixed_position.y = 29949952
+	fighter_game.ClientPlayer.fixed_scale.x = client_scale_x
+	fighter_game.ClientPlayer.sync_to_physics_engine()
 	
+	if (fighter_game.AssistPlayer1 != null):
+		fighter_game.AssistPlayer1.fixed_position.x = server_x - 16946816
+		fighter_game.AssistPlayer1.fixed_position.y = Util.ASSIST_WARP_POSITION_Y
+		fighter_game.AssistPlayer1.fixed_scale.x = server_scale_x
+		fighter_game.AssistPlayer1.sync_to_physics_engine()
+	if (fighter_game.AssistPlayer2 != null):
+		fighter_game.AssistPlayer2.fixed_position.x = client_x + 16946816
+		fighter_game.AssistPlayer2.fixed_position.y = Util.ASSIST_WARP_POSITION_Y
+		fighter_game.AssistPlayer2.fixed_scale.x = client_scale_x
+		fighter_game.AssistPlayer2.sync_to_physics_engine()
+	
+	if (fighter_game.Hato1 != null):
+		fighter_game.Hato1.fixed_position.x = server_x - 8000000
+		fighter_game.Hato1.fixed_position.y = Util.ASSIST_WARP_POSITION_Y
+		fighter_game.Hato1.fixed_scale.x = server_scale_x
+		fighter_game.Hato1.sync_to_physics_engine()
+	if (fighter_game.Hato2 != null):
+		fighter_game.Hato2.fixed_position.x = client_x + 8000000
+		fighter_game.Hato2.fixed_position.y = Util.ASSIST_WARP_POSITION_Y
+		fighter_game.Hato2.fixed_scale.x = client_scale_x
+		fighter_game.Hato2.sync_to_physics_engine()
+
+	var camera: Camera2D = fighter_game.get_node("Camera3D")
+	var server_position: Vector2 = fighter_game.ServerPlayer.global_position
+	var client_position: Vector2 = fighter_game.ClientPlayer.global_position
+	var camera_target_x: float = (server_position.x + client_position.x) * 0.5
+	var camera_target_y: float = server_position.y + camera.yCameraOffset1
+	if (client_position.y + camera.yCameraOffset2 < camera_target_y):
+		camera_target_y = client_position.y + camera.yCameraOffset2
+	camera.position = camera.camera_clamp(camera_target_x, camera_target_y)
 
 func control_the_dummy():
 	if (not dummy_input.player == null):
 		dummy_input.disconnect_signals()
-	if (Global.TRAINING_P1):
+	if (self is ComboTrialMain):
+		player_input = fighter_game.get_node("ServerInputInterpreter")
+		fighter_game.ServerPlayer.input_interpreter = player_input
+		fighter_game.ClientPlayer.input_interpreter = dummy_input
+		fighter_game.AssistPlayer1.input_interpreter = player_input
+		fighter_game.AssistPlayer2.input_interpreter = dummy_input
+		if (fighter_game.Hato1 != null):
+			fighter_game.Hato1.input_interpreter = player_input
+		if (fighter_game.Hato2 != null):
+			fighter_game.Hato2.input_interpreter = dummy_input
+		dummy_input.player = fighter_game.ClientPlayer
+		record_left_face_ref = fighter_game.ServerPlayer.currentState[Enums.StKey.leftface]
+	elif (Global.TRAINING_P1):
 		player_input = fighter_game.get_node("ServerInputInterpreter")
 		fighter_game.ServerPlayer.input_interpreter = dummy_input
 		fighter_game.ClientPlayer.input_interpreter = player_input
@@ -245,7 +412,18 @@ func control_the_dummy():
 func return_control_to_player():
 	if (not dummy_input.player == null):
 		dummy_input.disconnect_signals()
-	if (Global.TRAINING_P1):
+	if (self is ComboTrialMain):
+		player_input = fighter_game.get_node("ServerInputInterpreter")
+		fighter_game.ServerPlayer.input_interpreter = player_input
+		fighter_game.ClientPlayer.input_interpreter = dummy_input
+		fighter_game.AssistPlayer1.input_interpreter = player_input
+		fighter_game.AssistPlayer2.input_interpreter = dummy_input
+		if (fighter_game.Hato1 != null):
+			fighter_game.Hato1.input_interpreter = player_input
+		if (fighter_game.Hato2 != null):
+			fighter_game.Hato2.input_interpreter = dummy_input
+		dummy_input.player = fighter_game.ClientPlayer
+	elif (Global.TRAINING_P1):
 		player_input = fighter_game.get_node("ServerInputInterpreter")
 		fighter_game.ServerPlayer.input_interpreter = player_input
 		fighter_game.ClientPlayer.input_interpreter = dummy_input
@@ -372,11 +550,47 @@ func recording_fsm_replay_input():
 
 func start_pre_record():
 	recording_state = RecordingStates.PreRecord
-	$CanvasLayer/MessageLabel.text = "Standy for Recording..."
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_RECORDING_READY")
 	control_the_dummy()
 	is_recording = false
 	recording_machine.switch_section(0)
 	is_replaying = false
+
+func prepare_for_demo_playback() -> void:
+	pass
+
+func get_demo_file_path() -> String:
+	var combo_index = $CanvasLayer/ComboTrialListener.current_combo_index
+	var character_enum = Global.PLAYER_2_CHARACTER[0]
+	var is_assist_combo = false
+	if Global.ASSIST_COMBO_TRIAL:
+		is_assist_combo = true
+		character_enum = Global.PLAYER_2_CHARACTER[1]
+		if Global.TRAINING_P1:
+			character_enum = Global.PLAYER_1_CHARACTER[1]
+	else:
+		if Global.TRAINING_P1:
+			character_enum = Global.PLAYER_1_CHARACTER[0]
+	var file_name = recording_machine.get_combo_trial_file_name(combo_index, character_enum, is_assist_combo)
+	print("looking for " + file_name)
+	var packaged_candidate = "res://game/ui/combotrialdemos/%s" % file_name
+	return packaged_candidate
+	return "user://training_recording.dat"
+
+func play_demo():
+	var demo_file_path = "user://training_recording.dat"
+	if (self is ComboTrialMain):
+		demo_file_path = get_demo_file_path()
+	if recording_machine.load_recording_from_file(demo_file_path):
+		recording_machine.switch_section(recording_machine.section)
+		recording_machine.index = 0
+		if (self is ComboTrialMain):
+			prepare_for_demo_playback()
+		$CanvasLayer/MessageLabel.text = tr("UI_STATUS_PLAYING_DEMO")
+		print(demo_file_path)
+		start_replay()
+	else:
+		$CanvasLayer/MessageLabel.text = tr("UI_STATUS_NO_RECORDING")
 
 func start_record():
 	recording_state = RecordingStates.Recording
@@ -386,33 +600,65 @@ func start_record():
 
 func save_record():
 	recording_state = RecordingStates.Idle
-	$CanvasLayer/MessageLabel.text = "Saved recording"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_RECORDING_SAVED")
 	is_recording = false
-	recording_machine.save_recording()
+	if (self is ComboTrialMain):
+		var character_enum = Global.PLAYER_2_CHARACTER[0]
+		var is_assist_combo = false
+		if Global.ASSIST_COMBO_TRIAL:
+			is_assist_combo = true
+			character_enum = Global.PLAYER_2_CHARACTER[1]
+			if Global.TRAINING_P1:
+				character_enum = Global.PLAYER_1_CHARACTER[1]
+		else:
+			if Global.TRAINING_P1:
+				character_enum = Global.PLAYER_1_CHARACTER[0]
+		recording_machine.save_recording_to_combo_trial($CanvasLayer/ComboTrialListener.current_combo_index, character_enum, is_assist_combo)
+	else:
+		recording_machine.save_recording()
 	return_control_to_player()
 
 func stop_record():
 	recording_state = RecordingStates.Idle
-	$CanvasLayer/MessageLabel.text = "Cancelled recording"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_RECORDING_CANCELLED")
 	is_recording = false
 	recording_machine.cancel_recording()
 	return_control_to_player()
 
 func start_replay():
 	recording_state = RecordingStates.Replaying
-	$CanvasLayer/MessageLabel.text = "Replaying"
+	$CanvasLayer/MessageLabel.text = tr("UI_STATUS_REPLAYING")
+	if (self is ComboTrialMain):
+		replay_restore_player_input = player_input
+		player_input = fighter_game.get_node("ServerInputInterpreter")
+		player_input.prep_for_replay()
+		$CanvasLayer/ComboTrialListener.set_auto_advance_on_complete(false)
+		$CanvasLayer/ComboTrialListener.set_hold_completion_for_demo(true)
+	else:
+		replay_restore_player_input = null
+		dummy_input.prep_for_replay()
 	return_control_to_player()
+	if (self is ComboTrialMain):
+		player_input = fighter_game.get_node("ServerInputInterpreter")
 	is_replaying = true
-	dummy_input.prep_for_replay()
 
 func stop_replay():
 	recording_state = RecordingStates.Idle
 	$CanvasLayer/MessageLabel.text = ""
+	if (self is ComboTrialMain):
+		var replay_target: InputInterpreter = fighter_game.get_node("ServerInputInterpreter")
+		replay_target.is_replaying = false
+		replay_target.replay_input = 0
+		$CanvasLayer/ComboTrialListener.set_auto_advance_on_complete(true)
+	else:
+		dummy_input.is_replaying = false
+		dummy_input.replay_input = 0
 	return_control_to_player()
+	if (self is ComboTrialMain and replay_restore_player_input != null):
+		player_input = replay_restore_player_input
 	recording_machine.cancel_replay()
 	is_replaying = false
-	dummy_input.is_replaying = false
-	dummy_input.replay_input = 0
+	replay_restore_player_input = null
 
 func _input(event):
 	pass
@@ -423,10 +669,26 @@ func input_helper(event):
 			toggle_training_menu()
 	elif (Global.TRAINING_P1 and Input.is_action_just_pressed("player1_cancel")) or (not Global.TRAINING_P1 and Input.is_action_just_pressed("player2_cancel")):
 		if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):
-			loadstate()
+			var input_prefix: String = "player1_" if Global.TRAINING_P1 else "player2_"
+			var reset_position: int = _get_back_reset_position(input_prefix)
+			if (reset_position >= 0):
+				reset(reset_position)
+			elif (self is ComboTrialMain):
+				reset(TrainingResetPosition.get($CanvasLayer/ComboTrialListener.current_reset_position, TrainingResetPosition.CENTER))
+			elif (savestate.is_empty()):
+				reset(last_reset_position)
+			else:
+				loadstate()
 	elif (Global.TRAINING_P1 and Input.is_action_just_pressed("player1_record")) or (not Global.TRAINING_P1 and Input.is_action_just_pressed("player2_record")):
 		if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):
-			recording_fsm_record_input()
+			if not (self is ComboTrialMain): #WARN DEBUG FUNCTION FOR RECORDING COMBO TRIALS ENABLE ME BEFORE BUILDING
+				recording_fsm_record_input()
 	elif (Global.TRAINING_P1 and Input.is_action_just_pressed("player1_replay")) or (not Global.TRAINING_P1 and Input.is_action_just_pressed("player2_replay")):
 		if (not $CanvasLayer/TrainingOptionsMenu.is_enabled()):
-			recording_fsm_replay_input()
+			if (self is ComboTrialMain):
+				if (recording_state == RecordingStates.Replaying):
+					stop_replay()
+				else:
+					play_demo()
+			else:
+				recording_fsm_replay_input()

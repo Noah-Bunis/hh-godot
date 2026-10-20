@@ -26,11 +26,5 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
 		if (level_3_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M63214, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
 			change_state.call("KanataSuperFiftyKGWhiff")
-	if (state[Enums.StKey.frame] >= 5):
-		if (assist_ok(state, interpreter)):
-			if (interpreter.is_low_blocking(state[Enums.StKey.leftface])):
-				state[Enums.StKey.cancelState] = "GroundAssistCall2"
-			elif (level_1_OK(state) and super_assist_meter_ok(state)  and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.DDown, state[Enums.StKey.leftface])):
-				state[Enums.StKey.cancelState] = "GroundAssistCallSuper"
-			else:
-				state[Enums.StKey.cancelState] = "GroundAssistCall"
+		elif (level_1_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
+			change_state.call("KanataWingStanceC")

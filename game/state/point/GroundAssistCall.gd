@@ -45,9 +45,7 @@ func battery_meter(state: Dictionary) -> void:
 	state[Enums.StKey.sync_rate] = SGFixed.mul(state[Enums.StKey.sync_rate], 35536)
 
 func special_cancel(state: Dictionary, interpreter: InputInterpreter):
-	if (state[Enums.StKey.hitStopFrame] >= 0):
-		if (level_1_OK(state) and interpreter.special_input_button(Enums.SpecialInput.M236, Enums.InputFlags.CDown, state[Enums.StKey.leftface])):
-			change_state.call("Super1")
+	pass
 
 func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 	super.handle_input(state, interpreter)
@@ -56,7 +54,11 @@ func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.frame] > 1):
-		super.meter_cancel(state, interpreter)
+		if (boost_OK(state, interpreter)):
+			state[Enums.StKey.cancelState] = "BoostCancel"
+		elif (state[Enums.StKey.frame] >= Util.ASSIST_CANCEL_LOCKOUT):
+			super.meter_cancel(state, interpreter)
+
 	if (burst_OK(state, interpreter)):
 		change_state.call("Burst")
 

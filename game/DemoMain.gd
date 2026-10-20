@@ -43,12 +43,12 @@ func free_main() -> void:
 	fighter_game = null
 
 func _on_SyncManager_peer_pinged_back(peer: SyncManager.Peer) -> void:
-	$CanvasLayer/PingLabel.set_text("Ping: " + str((int)(peer.rtt/2.0)) +" ms")
+	$CanvasLayer/PingLabel.text = tr("UI_LABEL_PING").format({"ping": int(peer.rtt / 2.0)})
 	#var rollback_frame:int = SyncManager.rollback_ticks
 	var rollback_frame:int = int(peer.rtt/(33.3333)) - SyncManager.input_delay
 	if (rollback_frame < 0):
 		rollback_frame = 0
-	$CanvasLayer/RollbackFrameLabel.set_text("RollbackFrame: " + str(rollback_frame) +"F")
+	$CanvasLayer/RollbackFrameLabel.text = tr("UI_LABEL_ROLLBACK_FRAME").format({"frames": rollback_frame})
 #	print ("-----")
 #	print ("Peer %s: RTT %s ms | local lag %s | remote lag %s | advantage %s" % [peer.peer_id, peer.rtt, peer.local_lag, peer.remote_lag, peer.calculated_advantage])
 
@@ -120,7 +120,7 @@ func manual_disconnect():
 	var peer_id = multiplayer.get_remote_sender_id()
 	if multiplayer.is_server():
 		peer_ready[peer_id] = true
-		message_label.text = "# of Peers loaded: " + str(len(peer_ready))
+		message_label.text = tr("UI_STATUS_PEERS_LOADED").format({"count": len(peer_ready)})
 		if (all_peers_ready()):
 			match_connector.send_start_signal()
 
@@ -217,7 +217,7 @@ func get_client_player_peer_id() -> int:
 		else:
 			return SyncManager.get_player_peer_ids()[1]
 	printerr ("Main: unable to find client peer id")
-	message_label.text = "unable to find client peer id"
+	message_label.text = tr("UI_STATUS_UNABLE_CLIENT_PEER")
 	quit_online_hard()
 	return 1
 
@@ -233,7 +233,7 @@ func _on_network_peer_disconnected(peer_id: int):
 		SyncManager.remove_peer(peer_id)
 		
 		if not peer.spectator:
-			message_label.text = "Disconnected, Press Back button to exit to lobby"
+			message_label.text = tr("UI_STATUS_DISCONNECTED_BACK")
 			quit_online_hard()
 		
 		if (peer_ready.has(peer_id)):
@@ -312,7 +312,7 @@ func _on_SyncManager_sync_started() -> void:
 		replay_logger = ReplayLogger.new(SyncManager, game_mode_root)
 		if replay_logger.start(REPLAY_LOG_FILE_DIRECTORY + '/' + log_file_name, match_info) != OK:
 			print("Failed to start replay logger")
-			message_label.text = "Failed to start replay logger"
+			message_label.text = tr("UI_STATUS_FAILED_REPLAY_LOGGER")
 			replay_logger.stop()
 	$FighterGame.start_game()
 
@@ -350,6 +350,8 @@ func assist_name_abbrev(assist) -> String:
 			return "SNA"
 		Enums.AssistCharacters.Hakka:
 			return "HAK"
+		Enums.AssistCharacters.Rikka:
+			return "RIK"
 		Enums.AssistCharacters.Subaru:
 			return "SUB"
 		Enums.AssistCharacters.Mio:
@@ -385,7 +387,7 @@ func _on_SyncManager_sync_regained() -> void:
 	sync_lost_label.visible = false
 
 func _on_SyncManager_sync_error(msg: String) -> void:
-	message_label.text = "Fatal sync error: " + msg + " , Press Back button to exit to lobby"
+	message_label.text = tr("UI_STATUS_FATAL_SYNC_ERROR").format({"message": msg})
 	sync_lost_label.visible = false
 	
 	sync_clear()
@@ -478,7 +480,7 @@ func _on_OnlineButton_pressed():
 		SyncManager.spectating = true
 		
 	if (SyncManager.spectating):
-		$CanvasLayer/SpectatorLabel.text = "Spectating"
+		$CanvasLayer/SpectatorLabel.text = tr("UI_LABEL_SPECTATING")
 		Global.was_spectating = true
 	else:
 		$CanvasLayer/SpectatorLabel.text = ""
@@ -499,7 +501,7 @@ func _on_OnlineButton_pressed():
 			$CanvasLayer/P2Name.text = Util.display_username(try_get_player_name(multiplayer.get_unique_id()))
 	SyncManager.reset_network_adaptor()
 	
-	message_label.text = "Game loaded"
+	message_label.text = tr("UI_STATUS_GAME_LOADED")
 
 func try_get_player_name(peer_id: int) -> String:
 	var result = OnlineMatch.get_player_names_by_peer_id()

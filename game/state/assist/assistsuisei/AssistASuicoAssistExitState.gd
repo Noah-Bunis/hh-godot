@@ -13,6 +13,14 @@ func _init():
 			Enums.StKey.Hit1PosX : 0, Enums.StKey.Hit1PosY : -11337728,
 			Enums.StKey.Hit1ScaleX : 686985, Enums.StKey.Hit1ScaleY : 1074037,
 			},
+		2 : {
+			Enums.StKey.Hit1Disable : true,
+			Enums.StKey.Hit2Disable : true,
+			Enums.StKey.Hurt1Disable : false, Enums.StKey.Hurt2Disable : true,
+			Enums.StKey.Hit1PosX : 0, Enums.StKey.Hit1PosY : -11337728,
+			Enums.StKey.Hit1ScaleX : 686985, Enums.StKey.Hit1ScaleY : 1074037,
+			Enums.StKey.Summon : "sync_down",
+			},
 	}
 
 # Writing _delta instead of delta here prevents the unused variable warning.
@@ -33,3 +41,6 @@ func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
 		change_state.call(state[Enums.StKey.cancelState])
 	
 	gatling_cancel(state, interpreter)
+		
+	if (interpreter.is_button_down(Enums.InputFlags.DHold)):
+		state[Enums.StKey.frame] = 1

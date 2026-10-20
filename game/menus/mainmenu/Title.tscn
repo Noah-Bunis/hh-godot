@@ -1,18 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://p50nsj8hxh5e"]
+[gd_scene load_steps=5 format=3 uid="uid://p50nsj8hxh5e"]
 
 [ext_resource type="Script" uid="uid://b0cdk5smm6rgu" path="res://game/menus/mainmenu/Title.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="2"]
 [ext_resource type="Texture2D" uid="uid://b37qabrol6287" path="res://game/assets/sprites/UI/MainMenus/Buttons/UNDER CONSTRUCTION/Timeline 1_0001.png" id="4"]
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="4_4yval"]
 [ext_resource type="Texture2D" uid="uid://dls6321oqqqwg" path="res://game/assets/sprites/UI/MainMenus/HOLOHEAVEN.png" id="5"]
-
-[sub_resource type="FontFile" id="3"]
-fallbacks = Array[Font]([ExtResource("2")])
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="Title" type="Node2D"]
 script = ExtResource("1")
@@ -22,12 +13,13 @@ position = Vector2(960, 540)
 texture = ExtResource("5")
 
 [node name="UNDER CONSTRUCTION" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1367, 778)
 scale = Vector2(2, 2)
 texture = ExtResource("4")
 
 [node name="MessageLabel" type="Label" parent="."]
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 712.0
@@ -36,5 +28,6 @@ offset_right = 1183.0
 offset_bottom = 1132.0
 grow_horizontal = 2
 scale = Vector2(2.38934, 3.25146)
-theme_override_fonts/font = SubResource("3")
+theme = ExtResource("4_4yval")
+theme_override_constants/outline_size = -1
 text = "Exit: Select - Backspace"

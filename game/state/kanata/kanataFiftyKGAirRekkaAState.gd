@@ -52,7 +52,6 @@ func enter(state: Dictionary) -> void:
 	state[Enums.StKey.velocity_x] = 0
 	state[Enums.StKey.velocity_y] = 0
 	state[Enums.StKey.accel_y] = 0
-#	state[Enums.StKey.sync_rate] += SGFixed.ONE*25
 
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)

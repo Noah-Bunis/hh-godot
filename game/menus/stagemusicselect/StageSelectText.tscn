@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://n33w3t786qbh"]
+
+[ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="1_gyftb"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="StageLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -535.0
+offset_top = 479.0
+offset_right = -64.0
+offset_bottom = 609.0
+grow_horizontal = 2
+scale = Vector2(2.53437, 2.89349)
+theme = ExtResource("1_gyftb")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "UI_MENU_STAGE"
+autowrap_mode = 2
+
+[node name="BGMLabel" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -540.0
+offset_top = 46.0
+offset_right = -69.0
+offset_bottom = 176.0
+grow_horizontal = 2
+scale = Vector2(2.61624, 3.11828)
+theme = ExtResource("1_gyftb")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 20
+text = "UI_MENU_BGM"
+autowrap_mode = 2

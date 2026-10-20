@@ -19,7 +19,7 @@ offset_top = 5.0
 offset_right = 131.0
 offset_bottom = 28.0
 scale = Vector2(3.261445, 2.5155106)
-text = "Edit Controls"
+text = "UI_MENU_EDIT_CONTROLS"
 
 [node name="UnmapLabel" type="Label" parent="."]
 anchors_preset = -1
@@ -28,7 +28,7 @@ offset_top = 803.0
 offset_right = 366.0
 offset_bottom = 817.0
 scale = Vector2(2.18883, 3.76177)
-text = "Unmap="
+text = "UI_BUTTON_UNMAP"
 
 [node name="Unmap" type="Sprite2D" parent="."]
 position = Vector2(486, 842)
@@ -69,88 +69,88 @@ columns = 2
 
 [node name="A" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "A (Light)"
+text = "UI_BUTTON_LIGHT"
 
 [node name="0" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="B" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "B (Medium)"
+text = "UI_BUTTON_MEDIUM"
 
 [node name="1" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="C" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "C (Heavy)"
+text = "UI_BUTTON_HEAVY"
 
 [node name="2" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="D" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "D (Assist)"
+text = "UI_BUTTON_ASSIST"
 
 [node name="3" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="AB" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "A+B (Dash)"
+text = "UI_BUTTON_DASH"
 
 [node name="4" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="AD" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "A+D (Throw)"
+text = "UI_BUTTON_THROW"
 
 [node name="5" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="BC" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "B+C (Parry)"
+text = "UI_BUTTON_PARRY"
 
 [node name="6" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="ABC" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "A+B+C (RCancel)"
+text = "UI_BUTTON_R_CANCEL"
 
 [node name="7" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="ABCD" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "A+B+C+D (Burst)"
+text = "UI_BUTTON_BURST"
 
 [node name="8" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="Exit" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "Back"
+text = "UI_BUTTON_BACK"
 
 [node name="9" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="Rec" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "Record"
+text = "UI_BUTTON_RECORD"
 
 [node name="10" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="RePlay" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "Replay"
+text = "UI_BUTTON_REPLAY"
 
 [node name="11" type="Label" parent="GridContainer"]
 layout_mode = 2
 
 [node name="OK" type="Label" parent="GridContainer"]
 layout_mode = 2
-text = "OK!"
+text = "UI_BUTTON_OK_EXCLAIM"

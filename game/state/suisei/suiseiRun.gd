@@ -29,7 +29,7 @@ func _init():
 func enter(state: Dictionary) -> void:
 	super.enter(state)
 	state[Enums.StKey.velocity_x] = Util.fixed_max(SGFixed.ONE*10, state[Enums.StKey.velocity_x])
-	state[Enums.StKey.accel_x] = 10536
+	state[Enums.StKey.accel_x] = 21536
 	state[Enums.StKey.leftfaceOK] = true
 	anim.play("RunStartup")
 

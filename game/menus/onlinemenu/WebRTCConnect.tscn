@@ -31,7 +31,7 @@ offset_right = -126.0
 offset_bottom = 427.0
 scale = Vector2(2.27832, 2.27832)
 theme_override_fonts/font = SubResource("1")
-text = "Waiting for next match..."
+text = "UI_STATUS_WAITING_MATCH"
 
 [node name="Earthbound" type="Sprite2D" parent="."]
 visible = false

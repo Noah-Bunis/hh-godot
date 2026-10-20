@@ -29,7 +29,7 @@ func _init():
 			Enums.StKey.Hurt2PosX : 15435712, Enums.StKey.Hurt2PosY : -7136510,
 			Enums.StKey.Hurt2ScaleX : 920696, Enums.StKey.Hurt2ScaleY : 910074,
 			Enums.StKey.attack_damage: 50,
-			Enums.StKey.min_damage: 15,
+			Enums.StKey.min_damage: 22,
 			Enums.StKey.meter_build: SGFixed.ONE*1000,
 			Enums.StKey.guard: Enums.GuardType.Mid,
 			Enums.StKey.attack_type : Enums.AttackType.Launcher,
@@ -61,6 +61,7 @@ func enter(state: Dictionary) -> void:
 func physics_tick(state: Dictionary) -> void:
 	super.physics_tick(state)
 	state[Enums.StKey.super_meter] -= Util.FLIGHT_ATTACK_METER_DRAIN
+	self.enforce_min_height(state)
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass

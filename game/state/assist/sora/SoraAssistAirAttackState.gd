@@ -20,7 +20,7 @@ func _init():
 			Enums.StKey.Hit1PosX : 12189696, Enums.StKey.Hit1PosY : -15925248,
 			Enums.StKey.Hit1ScaleX : 1134105, Enums.StKey.Hit1ScaleY : 1114853,
 			Enums.StKey.hitstun : 60,
-			Enums.StKey.attack_damage: 60,
+			Enums.StKey.attack_damage: 50,
 			Enums.StKey.attack_type : Enums.AttackType.WallBouncer,
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*60,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*70,

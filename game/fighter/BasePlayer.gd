@@ -40,7 +40,7 @@ var attackData: Dictionary = {
 	Enums.StKey.hitstun: Util.DEFAULT_HITSTUN,
 	Enums.StKey.blockstun: Util.DEFAULT_BLOCKSTUN,
 	Enums.StKey.chip_damage: 0,
-	Enums.StKey.min_damage: 2,
+	Enums.StKey.min_damage: Util.DEFAULT_MIN_DAMAGE,
 	Enums.StKey.burst_OK: true,
 	Enums.StKey.meter_build: SGFixed.ONE*500,
 	Enums.StKey.hit_box_colliding_frame: 1000,
@@ -241,7 +241,7 @@ func anim_updates() -> void:
 	attackData[Enums.StKey.blockstun] = anim_frame.get(Enums.StKey.blockstun, Util.DEFAULT_BLOCKSTUN)
 	attackData[Enums.StKey.hitstop] = anim_frame.get(Enums.StKey.hitstop, Util.DEFAULT_HITSTOP)
 	attackData[Enums.StKey.chip_damage] = anim_frame.get(Enums.StKey.chip_damage, 0)
-	attackData[Enums.StKey.min_damage] = anim_frame.get(Enums.StKey.min_damage, 2)
+	attackData[Enums.StKey.min_damage] = anim_frame.get(Enums.StKey.min_damage, Util.DEFAULT_MIN_DAMAGE)
 	attackData[Enums.StKey.burst_OK] = anim_frame.get(Enums.StKey.burst_OK, true)
 	attackData[Enums.StKey.meter_build] = anim_frame.get(Enums.StKey.meter_build, SGFixed.ONE*600)
 	attackData[Enums.StKey.launch_dir_x] = anim_frame.get(Enums.StKey.launch_dir_x,  Util.BASE_STRIKE_X_PUSHBACK)
@@ -557,10 +557,10 @@ func normal_strike_block(opponent_attack: Dictionary, hit_data: Dictionary) -> v
 		var chip_damage = opponent_attack[Enums.StKey.chip_damage]
 		var attack_damage = opponent_attack[Enums.StKey.attack_damage]
 		if (fighterState.has_property(Enums.StateProperty.ExtraChip)):
-			chip_damage += 10
+			chip_damage += Util.AIR_EXTRA_CHIP
 			currentState[Enums.StKey.assist_meter] -= SGFixed.ONE*800
 		if (currentState[Enums.StKey.assist_meter] < Util.ASSIST_STOCK):
-			chip_damage += 4
+			chip_damage += Util.DANGER_EXTRA_CHIP
 		currentState[Enums.StKey.assist_meter] -= SGFixed.ONE*10*(attack_damage+80)
 		currentState[Enums.StKey.sync_rate] -= 5536*(attack_damage+10)
 		emit_signal("strike_hurt", chip_damage, currentState[Enums.StKey.hitCount], false, true, opponent_attack[Enums.StKey.guard])
@@ -623,10 +623,10 @@ func just_strike_block(opponent_attack: Dictionary, hit_data: Dictionary) -> voi
 		var chip_damage = opponent_attack[Enums.StKey.chip_damage]
 		var attack_damage = opponent_attack[Enums.StKey.attack_damage]
 		if (fighterState.has_property(Enums.StateProperty.ExtraChip)):
-			chip_damage += 10
+			chip_damage += Util.AIR_EXTRA_CHIP
 			currentState[Enums.StKey.assist_meter] -= SGFixed.ONE*800
 		if (currentState[Enums.StKey.assist_meter] < Util.ASSIST_STOCK):
-			chip_damage += 4
+			chip_damage += Util.DANGER_EXTRA_CHIP
 		currentState[Enums.StKey.assist_meter] -= SGFixed.ONE*7*(attack_damage+80)
 #		currentState[Enums.StKey.sync_rate] -= 5536*(attack_damage+10)
 		emit_signal("strike_hurt", chip_damage, currentState[Enums.StKey.hitCount], false, true, opponent_attack[Enums.StKey.guard])

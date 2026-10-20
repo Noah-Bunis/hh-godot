@@ -4,6 +4,12 @@ class_name InputInterpreter
 
 var input_prefix := "player1_"
 
+var is_replaying: bool = false
+var replay_input: int = 0
+
+func prep_for_replay() -> void:
+	is_replaying = true
+
 const numpad_to_dir = [
 	{
 		Enums.Numpad.N1 : Enums.InputFlags.DOWN | Enums.InputFlags.RIGHT,
@@ -57,13 +63,19 @@ func _get_local_input() -> Dictionary:
 	return read_input()
 
 func read_input() -> Dictionary:
+	var bit_input := 0
+	if (is_replaying):
+		bit_input = replay_input
+		var input := {}
+		input[Enums.PlayerInput.InputVector] = bit_input
+		return input
+
 	var input_vector: Vector2 = Vector2(
 			-Input.get_action_strength(input_prefix+"left") + Input.get_action_strength(input_prefix+"right"), 
 			-Input.get_action_strength(input_prefix+"down") + Input.get_action_strength(input_prefix+"up"))
 	var input_vector_stick: Vector2 = Vector2(
 			-Input.get_action_strength(input_prefix+"left_stick") + Input.get_action_strength(input_prefix+"right_stick"), 
 			-Input.get_action_strength(input_prefix+"down_stick") + Input.get_action_strength(input_prefix+"up_stick"))
-	var bit_input = 0
 	var virtual_deadzone = 0
 
 	if (input_vector.x == 0 and input_vector.y == 0):

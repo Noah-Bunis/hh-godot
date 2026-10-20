@@ -3,7 +3,7 @@ extends "res://game/state/kanata/mainstates/kanataAttackState.gd"
 class_name KanataWingStanceBState
 
 func _init():
-	endFrame = 42
+	endFrame = 50
 	
 	anim_data = {
 		0 : {
@@ -41,7 +41,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*30,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*100,
 			},
-		35 : {
+		37 : {
 			Enums.StKey.counterOK : false,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hit2Disable : true,
@@ -56,14 +56,18 @@ func _init():
 # Writing _delta instead of delta here prevents the unused variable warning.
 func enter(state: Dictionary) -> void:
 	super.enter(state)
-	state[Enums.StKey.drag_x] = Util.SLIPPERY_FRICTION
+	state[Enums.StKey.drag_x] = Util.ICE_FRICTION
 	anim.play("WingStanceB")
 
 func physics_tick(state: Dictionary) -> void:
+	
 	super.physics_tick(state)
-	if (state[Enums.StKey.frame] >= 14 and state[Enums.StKey.frame] <= 21):
+	if (state[Enums.StKey.frame] == 1):
+		state[Enums.StKey.accel_x] = 125536
+	elif (state[Enums.StKey.frame] >= 14 and state[Enums.StKey.frame] <= 25):
 		state[Enums.StKey.drag_x] = Util.FRICTION
-		state[Enums.StKey.velocity_x] = Util.fixed_max(state[Enums.StKey.velocity_x], SGFixed.ONE*33)
+		state[Enums.StKey.accel_x] = 0
+		state[Enums.StKey.velocity_x] = Util.fixed_max(state[Enums.StKey.velocity_x], SGFixed.ONE*45)
 
 func jump_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
@@ -73,8 +77,3 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 
 func gatling_cancel(state: Dictionary, interpreter: InputInterpreter):
 	pass
-#	if (state[Enums.StKey.hitStopFrame] >= 0):
-#		if (interpreter.is_dashing(true, state[Enums.StKey.leftface])):
-#			state[Enums.StKey.cancelState] = "Run"
-#		elif (interpreter.is_dashing(false, state[Enums.StKey.leftface])):
-#			state[Enums.StKey.cancelState] = "BackDash"

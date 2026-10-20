@@ -1,0 +1,114 @@
+[gd_scene load_steps=26 format=3 uid="uid://qk2gq0ghlutu"]
+
+[ext_resource type="Material" uid="uid://bt3lvyqtd78u0" path="res://game/assets/shaders/ColorSwapMat.tres" id="1_k0npk"]
+[ext_resource type="Script" uid="uid://b7fhdj087awib" path="res://game/fighter/projectiles/SubaruStarBallProjectilePlayer.gd" id="2_c4lfc"]
+[ext_resource type="Texture2D" uid="uid://41ncsbbw7htf" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0000.png" id="3_tpeld"]
+[ext_resource type="Texture2D" uid="uid://chtjtg26ywble" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0001.png" id="4_1j03p"]
+[ext_resource type="Texture2D" uid="uid://cifuuc45u85iu" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0002.png" id="5_x4mgf"]
+[ext_resource type="Texture2D" uid="uid://dp5tgtq1ahdur" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0003.png" id="6_m68ch"]
+[ext_resource type="Texture2D" uid="uid://ctjmk70bayi5o" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0004.png" id="7_dvpa4"]
+[ext_resource type="Texture2D" uid="uid://bibukc4eo0mrv" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0005.png" id="8_7k1rq"]
+[ext_resource type="Texture2D" uid="uid://dy5bj7f5ynifq" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0006.png" id="9_o7iuc"]
+[ext_resource type="Texture2D" uid="uid://dwke08l2fvh42" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0007.png" id="10_uysfj"]
+[ext_resource type="Texture2D" uid="uid://b1o400e8thxwq" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0008.png" id="11_wnbfq"]
+[ext_resource type="Texture2D" uid="uid://bn0eqecjn08dy" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0009.png" id="12_nuegv"]
+[ext_resource type="Texture2D" uid="uid://ddj023t7b5tva" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0010.png" id="13_w76mv"]
+[ext_resource type="Texture2D" uid="uid://yl72iktf0ugs" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0011.png" id="14_mnipt"]
+[ext_resource type="Texture2D" uid="uid://do514cwmukr0j" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0012.png" id="15_re6w3"]
+[ext_resource type="Texture2D" uid="uid://bcocl6w1ju6tf" path="res://game/assets/sprites/subaru/StarBall/Timeline 1_0013.png" id="16_7bexn"]
+[ext_resource type="Texture2D" uid="uid://dq4i2i3hlfowx" path="res://game/assets/sprites/VFX/Airdash/Timeline 1_0000.png" id="17_awxie"]
+[ext_resource type="Script" uid="uid://dv11pt6y7wasy" path="res://addons/godot-rollback-netcode/NetworkAnimationPlayer.gd" id="18_ibiys"]
+[ext_resource type="PackedScene" uid="uid://bvgu0aev8rq4g" path="res://game/fighter/Hitbox.tscn" id="19_jj4w8"]
+[ext_resource type="PackedScene" uid="uid://cwoqesvdf08m3" path="res://game/fighter/Hurtbox.tscn" id="20_xsrrw"]
+[ext_resource type="Script" uid="uid://b010dt6v25trf" path="res://addons/godot-rollback-netcode/NetworkTimer.gd" id="21_4gpvf"]
+
+[sub_resource type="SGRectangleShape2D" id="1"]
+extents_x = 4063232
+extents_y = 8847360
+
+[sub_resource type="Animation" id="2"]
+resource_name = "Active"
+length = 0.80000323
+loop_mode = 1
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.26666668, 0.33333334, 0.4, 0.45, 0.5, 0.56666666, 0.6166667, 0.68333334, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_tpeld"), ExtResource("4_1j03p"), ExtResource("5_x4mgf"), ExtResource("6_m68ch"), ExtResource("7_dvpa4"), ExtResource("8_7k1rq"), ExtResource("9_o7iuc"), ExtResource("10_uysfj"), ExtResource("11_wnbfq"), ExtResource("12_nuegv"), ExtResource("13_w76mv"), ExtResource("14_mnipt"), ExtResource("15_re6w3"), ExtResource("16_7bexn")]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Destroy"
+length = 0.333334
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_awxie")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nbgyr"]
+_data = {
+&"Active": SubResource("2"),
+&"Destroy": SubResource("3")
+}
+
+[node name="SubaruEXStarBall" type="SGCharacterBody2D"]
+material = ExtResource("1_k0npk")
+script = ExtResource("2_c4lfc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("1_k0npk")
+position = Vector2(80, -49)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("9_o7iuc")
+
+[node name="Pushbox" type="SGCollisionShape2D" parent="."]
+shape = SubResource("1")
+disabled = true
+fixed_position_x = 65536
+fixed_position_y = 196608
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(1, 3)
+
+[node name="NetworkAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_nbgyr")
+}
+script = ExtResource("18_ibiys")
+auto_reset = false
+
+[node name="Hitbox1" parent="." instance=ExtResource("19_jj4w8")]
+fixed_position_x = 5177343
+fixed_position_y = -3538944
+fixed_scale_x = 895578
+fixed_scale_y = 896115
+position = Vector2(78.999985, -54)
+scale = Vector2(13.665436, 13.67363)
+
+[node name="Hurtbox1" parent="." instance=ExtResource("20_xsrrw")]
+fixed_position_x = 5242880
+fixed_position_y = -3276800
+fixed_scale_x = 889958
+fixed_scale_y = 892596
+position = Vector2(80, -50)
+scale = Vector2(13.5797, 13.6199)
+
+[node name="ExplosionTimer" type="Node" parent="."]
+script = ExtResource("21_4gpvf")
+wait_ticks = 60

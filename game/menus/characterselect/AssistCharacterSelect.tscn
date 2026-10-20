@@ -10,7 +10,7 @@ script = ExtResource("3")
 
 [node name="CharacterCursor" parent="." instance=ExtResource("1")]
 position = Vector2(75, 103)
-gridY = 4
+gridY = 3
 gridX = 5
 start_col = 1
 start_row = 1

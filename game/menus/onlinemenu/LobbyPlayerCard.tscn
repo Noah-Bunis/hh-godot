@@ -18,13 +18,13 @@ texture = ExtResource("12")
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_kamf2")
-text = "Challenge"
+text = "UI_MENU_CHALLENGE"
 
 [node name="Spectate" type="Button" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_kamf2")
-text = "Spectate"
+text = "UI_MENU_SPECTATE"
 
 [node name="PingLabel" type="Label" parent="."]
 layout_mode = 2
@@ -33,7 +33,7 @@ size_flags_horizontal = 3
 [node name="StatusLabel" type="Label" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "<None>"
+text = "UI_STATUS_NONE"
 
 [node name="NameLabel" type="Label" parent="."]
 layout_mode = 2

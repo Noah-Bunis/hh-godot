@@ -29,6 +29,7 @@ func _init():
 			Enums.StKey.counter_hit : Enums.AttackType.BurstLock,
 		},
 		6 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hurt1Disable : true,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.hit_box_colliding_frame : 254,
@@ -39,9 +40,9 @@ func _init():
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*75,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*70,
 			Enums.StKey.hitstun : 80,
-			Enums.StKey.attack_damage:125,
-			Enums.StKey.min_damage: 40,
-			Enums.StKey.chip_damage:15,
+			Enums.StKey.attack_damage: 110,
+			Enums.StKey.min_damage: 36,
+			Enums.StKey.chip_damage: 10,
 			Enums.StKey.hitstop: 20,
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.counter_hitstun: 100,
@@ -49,7 +50,8 @@ func _init():
 			Enums.StKey.counter_launch_dir_x: -SGFixed.ONE*90,
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*70,
 			},
-		25 : {
+		10 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : false,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.Hurt1PosX : -262144, Enums.StKey.Hurt1PosY : -7471104,
@@ -61,10 +63,10 @@ func _init():
 			Enums.StKey.launch_dir_x : -SGFixed.ONE*75,
 			Enums.StKey.launch_dir_y : -SGFixed.ONE*70,
 			Enums.StKey.hitstun : 80,
-			Enums.StKey.attack_damage:150,
-			Enums.StKey.min_damage:60,
-			Enums.StKey.chip_damage:30,
-			Enums.StKey.hitstop: 20,
+			Enums.StKey.attack_damage:85,
+			Enums.StKey.min_damage:40,
+			Enums.StKey.chip_damage:10,
+			Enums.StKey.hitstop: 12,
 			Enums.StKey.counter_hit: Enums.AttackType.Launcher,
 			Enums.StKey.counter_hitstun: 100,
 			Enums.StKey.meter_build: 0,
@@ -72,6 +74,7 @@ func _init():
 			Enums.StKey.counter_launch_dir_y: -SGFixed.ONE*70,
 			},
 		37 : {
+			Enums.StKey.counterOK : true,
 			Enums.StKey.Hit1Disable : true,
 			Enums.StKey.Hurt1Disable : false,Enums.StKey.Hurt2Disable : true,Enums.StKey.Hurt3Disable : true,
 			Enums.StKey.Hurt1PosX : -262144, Enums.StKey.Hurt1PosY : -7471104,
@@ -91,6 +94,7 @@ func physics_tick(state: Dictionary) -> void:
 		state[Enums.StKey.velocity_x] = SGFixed.ONE*70
 	elif (state[Enums.StKey.frame] == 5):
 		SyncManager.play_sound("SubaruVoice", CallSound, {"bus": "Voice"})
+		SyncManager.play_sound("SubaruVoiceReverb", CallSound, {"bus": "ReverbVoice"})
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

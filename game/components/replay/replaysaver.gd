@@ -103,6 +103,8 @@ func assist_name_abbrev(assist) -> String:
 			return "SNA"
 		Enums.AssistCharacters.Hakka:
 			return "HAK"
+		Enums.AssistCharacters.Rikka:
+			return "RIK"
 		Enums.AssistCharacters.Subaru:
 			return "SUB"
 		Enums.AssistCharacters.Mio:

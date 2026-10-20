@@ -2,6 +2,8 @@ extends "res://game/state/kanata/mainstates/kanataAirAttackState.gd"
 
 class_name KanataAirWingHazardState
 
+var Voice = preload("res://game/assets/voice/kanata/amk_bashx3.wav")
+
 func _init():
 	endFrame = 30
 	anim_data = {
@@ -103,6 +105,13 @@ func enter(state: Dictionary) -> void:
 	super.enter(state)
 	anim.play("WingHazard")
 	state[Enums.StKey.super_meter] -= Util.LEVEL_TWO_SUPER
+
+func physics_tick(state: Dictionary) -> void:
+	super.physics_tick(state)
+	if (state[Enums.StKey.frame] == 4):
+		SyncManager.play_sound("KanataVoice", Voice, {"bus": "Voice"})
+		SyncManager.play_sound("KanataVoiceReverb", Voice, {"bus": "ReverbVoice"})
+	
 
 func meter_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):

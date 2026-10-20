@@ -28,7 +28,7 @@ offset_right = -341.0
 offset_bottom = 147.0
 scale = Vector2(2, 2)
 theme_override_fonts/font = SubResource("1")
-text = "Open a replay file: "
+text = "UI_REPLAY_OPEN_FILE"
 
 [node name="ErrorLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
@@ -57,7 +57,7 @@ columns = 3
 [node name="DeleteModeButton" type="Button" parent="CanvasLayer/GridContainer/GridContainer"]
 layout_mode = 2
 toggle_mode = true
-text = "Delete Mode"
+text = "UI_REPLAY_DELETE_MODE"
 
 [node name="Earthbound2" type="Sprite2D" parent="."]
 material = ExtResource("8")

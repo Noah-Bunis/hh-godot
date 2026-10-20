@@ -21,6 +21,7 @@ var seek_point: float = 0.0
 
 var fade_out: Tween
 var fade_in: Tween
+var _skip_next_fade_in: bool = false
 
 func _ready():
 	menu_music = load("res://game/assets/music/WIM.ogg")
@@ -169,6 +170,8 @@ func character_id_to_bgm_id() -> int:
 				out_id = Global.BGM_LIST.find("The Wahphony")
 			Enums.AssistCharacters.Hakka:
 				out_id = Global.BGM_LIST.find("Battle at the Top of the World")
+			Enums.AssistCharacters.Rikka:
+				out_id = Global.BGM_LIST.find("Just Follow Stars")
 			Enums.AssistCharacters.Fubuki:
 				pass
 			Enums.AssistCharacters.Sora:
@@ -208,6 +211,8 @@ func character_id_to_bgm_id() -> int:
 				out_id = Global.BGM_LIST.find("WIM")
 			elif (assist_id == Enums.AssistCharacters.Hakka):
 				out_id = Global.BGM_LIST.find("Just Follow Stars")
+			elif (assist_id == Enums.AssistCharacters.Rikka):
+				out_id = Global.BGM_LIST.find("Just Follow Stars")
 		Enums.PointCharacters.Kanata:
 			if (assist_id == Enums.AssistCharacters.Kanata):
 				out_id = Global.BGM_LIST.find("Palette")
@@ -234,8 +239,14 @@ func fade_out_music():
 	set_seek()
 
 func fade_in_music():
+	if (_skip_next_fade_in):
+		_skip_next_fade_in = false
+		return
 	audio_player.volume_db = -70
 	start_fade_in()
+
+func skip_next_fade_in():
+	_skip_next_fade_in = true
 
 func play_win_song():
 	stop_fade_out()

@@ -21,7 +21,7 @@ func _ready() -> void:
 	Global.NETPLAY_MODE = Global.NETPLAY_MODES.PRIVATE_ROOM
 	SyncManager.network_adaptor = WebRTCNetworkAdaptor.new()
 	$CanvasLayer/RoomIDField.secret = true
-	$CanvasLayer/BattleVersionLabel.text = "Battle Version: "+Global.BATTLE_ENGINE_VERSION
+	$CanvasLayer/BattleVersionLabel.text = tr("UI_LABEL_BATTLE_VERSION").format({"version": Global.BATTLE_ENGINE_VERSION})
 	$CanvasLayer/GridContainer/CopyRoomID.grab_focus()
 	SyncManager.input_delay = 2
 	$CanvasLayer/GridContainer/InputDelayMeter.value = SyncManager.input_delay
@@ -75,7 +75,7 @@ func join_an_online_match() -> void:
 	SyncManager.connect("peer_removed", Callable(self, "_on_SyncManager_peer_removed"))
 	
 	OnlineMatch.leave()
-	
+
 	$CanvasLayer/RoomIDField.text = OnlineLobby.match_id
 	SyncManager.spectating = false
 	Global.was_spectating = false
@@ -92,6 +92,8 @@ func join_an_online_match() -> void:
 	update_ui()
 	OnlineLobby.clear_my_spectators()
 	init_player_list(OnlineLobby.players)
+
+
 
 func _on_OnlineMatch_match_left():
 	print("OnlineMatch left")
@@ -113,7 +115,7 @@ func _on_OnlineMatch_webrtc_peer_removed (webrtc_peer, player):
 func _on_OnlineLobby_error(message: String) -> void:
 	print("ERROR: %s" % message)
 	$CanvasLayer/ErrorLabel.visible = true
-	$CanvasLayer/ErrorLabel.text = "ERROR: " + message
+	$CanvasLayer/ErrorLabel.text = tr("UI_LABEL_ERROR").format({"message": message})
 	update_ui()
 
 func _on_OnlineLobby_disconnected() -> void:
@@ -195,6 +197,7 @@ func _on_OnlineLobby_challenge_received(sender: String, is_connect: bool) -> voi
 				add_child(challenge)
 			update_challenge_status(OnlineLobby.CHALLENGE_STATE.DECIDING)
 			challenges.push_back(challenge)
+			MainMenuMusicControl.play_cursor_select()
 	else:
 		delete_challenge_pop_up(false)
 		OnlineMatch.leave()
@@ -407,7 +410,7 @@ func delete_challenge_pop_up(accepted: bool):
 	update_ui()
 
 func _on_InputDelayMeter_value_changed(value):
-	$CanvasLayer/GridContainer/InputDelayLabel.set_text("Input Delay: " + str(int(value)))
+	$CanvasLayer/GridContainer/InputDelayLabel.text = tr("UI_LABEL_INPUT_DELAY").format({"frames": int(value)})
 	SyncManager.set_input_delay(int($CanvasLayer/GridContainer/InputDelayMeter.value))
 	update_ui()
 
@@ -443,6 +446,7 @@ func add_player_list(player, status=OnlineLobby.CHALLENGE_STATE.IDLE):
 		player_cards[player.session_id].get_node("Spectate").focus_neighbor_top = player_cards[player.session_id].get_node("Spectate").get_path_to($CanvasLayer/GridContainer/InputDelayMeter)
 		$CanvasLayer/GridContainer/InputDelayMeter.focus_neighbor_bottom = $CanvasLayer/GridContainer/InputDelayMeter.get_path_to(player_cards[player.session_id].get_node("Challenge"))
 	update_ui()
+	MainMenuMusicControl.play_cursor_select()
 
 func remove_player_list(player):
 	# remove any challenges or spectates sent to the player
