@@ -74,7 +74,7 @@ texture = ExtResource("23")
 
 [node name="YourNameLabel" type="Label" parent="CanvasLayer"]
 modulate = Color(0, 0.427451, 0.623529, 1)
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 275.0
@@ -88,7 +88,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 text = "UI_MENU_YOUR_NAME"
 
 [node name="DiscordLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -170.0
@@ -105,7 +105,6 @@ theme_override_font_sizes/font_size = 32
 text = "UI_MENU_JOIN_DISCORD"
 
 [node name="DiscordButton" type="TextureButton" parent="CanvasLayer"]
-anchors_preset = -1
 offset_left = 600.0
 offset_top = 933.0
 offset_right = 730.0
@@ -118,7 +117,7 @@ texture_hover = ExtResource("5_kh4bg")
 texture_focused = ExtResource("5_kh4bg")
 
 [node name="YourNameEdit" type="LineEdit" parent="CanvasLayer"]
-anchors_preset = -1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = 280.0
@@ -139,7 +138,6 @@ clear_button_enabled = true
 deselect_on_focus_loss_enabled = false
 
 [node name="MainMenuButtons" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = -1
 offset_left = 148.0
 offset_top = 86.0
 offset_right = 328.0
@@ -148,13 +146,20 @@ offset_bottom = 258.0
 [node name="Offline" type="TextureButton" parent="CanvasLayer/MainMenuButtons"]
 layout_mode = 2
 focus_neighbor_right = NodePath("../../YourNameEdit")
-focus_neighbor_bottom = NodePath("../Training")
+focus_neighbor_bottom = NodePath("../Minigame")
 texture_normal = ExtResource("21")
 texture_focused = ExtResource("5")
 
-[node name="Training" type="TextureButton" parent="CanvasLayer/MainMenuButtons"]
+[node name="Minigame" type="TextureButton" parent="CanvasLayer/MainMenuButtons"]
 layout_mode = 2
 focus_neighbor_top = NodePath("../Offline")
+focus_neighbor_bottom = NodePath("../Training")
+texture_normal = ExtResource("12_vmtg1")
+texture_focused = ExtResource("13_yp457")
+
+[node name="Training" type="TextureButton" parent="CanvasLayer/MainMenuButtons"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Minigame")
 focus_neighbor_bottom = NodePath("../Online")
 texture_normal = ExtResource("19")
 texture_focused = ExtResource("20")
@@ -230,6 +235,7 @@ texture = ExtResource("18")
 
 [connection signal="button_down" from="CanvasLayer/DiscordButton" to="." method="_on_discord_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Offline" to="." method="_on_Offline_button_down"]
+[connection signal="button_down" from="CanvasLayer/MainMenuButtons/Minigame" to="." method="_on_Minigame_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Training" to="." method="_on_Training_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Online" to="." method="_on_Online_button_down"]
 [connection signal="button_down" from="CanvasLayer/MainMenuButtons/Trials" to="." method="_on_Trials_button_down"]

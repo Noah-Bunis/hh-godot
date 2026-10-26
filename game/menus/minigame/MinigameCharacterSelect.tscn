@@ -1,0 +1,96 @@
+[gd_scene load_steps=10 format=3 uid="uid://c4l8x652e618w"]
+
+[ext_resource type="Script" uid="uid://btbfpob7shton" path="res://game/menus/minigame/MinigameCharacterSelect.gd" id="1_7gm1j"]
+[ext_resource type="PackedScene" uid="uid://cvwapffbx4nk5" path="res://game/menus/characterselect/character_select_presentation_layer.tscn" id="2_fsr0o"]
+[ext_resource type="Script" uid="uid://b33fby4v18npe" path="res://game/menus/characterselect/CharacterCursor.gd" id="3_character_cursor"]
+[ext_resource type="Shader" uid="uid://dinoskkj75qym" path="res://game/assets/shaders/ColorSwapAntiAlias.gdshader" id="53_0bet7"]
+[ext_resource type="Texture2D" uid="uid://7j6rx4336gr2" path="res://game/assets/sprites/assists/hakka/ColorPalettes/2.png" id="54_pky06"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2baf"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjwoc"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ertxd"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vubeb"]
+resource_local_to_scene = true
+shader = ExtResource("53_0bet7")
+shader_parameter/palette = ExtResource("54_pky06")
+shader_parameter/dimming = 1.0
+shader_parameter/shine_color = Color(1, 1, 1, 0.79607844)
+shader_parameter/alpha_limit = 0.0
+shader_parameter/cycle_speed = 20.0
+shader_parameter/full_pulse_cycle = false
+shader_parameter/mode = 0
+
+[node name="MinigameCharacterSelectMenu" type="Node2D"]
+script = ExtResource("1_7gm1j")
+
+[node name="PresentationLayer" parent="." instance=ExtResource("2_fsr0o")]
+
+[node name="7" parent="PresentationLayer/CharacterIconsNode" index="7"]
+
+[node name="9" parent="PresentationLayer/CharacterIconsNode" index="9"]
+
+[node name="P2Cursor" parent="PresentationLayer" index="10"]
+script = ExtResource("3_character_cursor")
+gridY = 3
+gridX = 3
+start_col = 1
+start_row = 1
+selectable_cells = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1), Vector2i(0, 2), Vector2i(1, 0), Vector2i(1, 1), Vector2i(1, 2), Vector2i(2, 0), Vector2i(2, 1), Vector2i(2, 2)])
+
+[node name="P1Cursor" parent="PresentationLayer" index="11"]
+script = ExtResource("3_character_cursor")
+position = Vector2(960, 392)
+gridY = 3
+gridX = 3
+start_col = 1
+start_row = 1
+selectable_cells = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1), Vector2i(0, 2), Vector2i(1, 0), Vector2i(1, 1), Vector2i(1, 2), Vector2i(2, 0), Vector2i(2, 1), Vector2i(2, 2)])
+
+[node name="P1Portrait" parent="PresentationLayer" index="12"]
+z_index = 99
+material = SubResource("ShaderMaterial_b2baf")
+
+[node name="P2Portrait" parent="PresentationLayer" index="13"]
+z_index = 99
+material = SubResource("ShaderMaterial_jjwoc")
+
+[node name="A1Portrait" parent="PresentationLayer" index="14"]
+visible = false
+material = SubResource("ShaderMaterial_ertxd")
+
+[node name="A2Portrait" parent="PresentationLayer" index="15"]
+visible = false
+material = SubResource("ShaderMaterial_vubeb")
+
+[editable path="PresentationLayer"]
+[editable path="PresentationLayer/CharacterIconsNode"]

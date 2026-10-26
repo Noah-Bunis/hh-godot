@@ -18,8 +18,12 @@ signal change_character(row, col)
 @export var start_col: int
 @export var start_row: int
 @export var deselect_ok: bool
+@export var selectable_cells: Array[Vector2i] = []
 
 var frame_delay: int
+var last_valid_position: Vector2
+var last_valid_row: int
+var last_valid_col: int
 
 var selected: bool
 var enabled: bool
@@ -41,6 +45,9 @@ func _ready():
 		col = gridX - 1
 	if (row >= gridY):
 		row = gridY - 1
+	last_valid_position = position
+	last_valid_row = row
+	last_valid_col = col
 	play_idle_anim()
 	AUp = true
 	BUp = true
@@ -113,13 +120,21 @@ func _physics_process(_delta):
 		DUp = true
 
 func cursor_move():
+	if (not selectable_cells.is_empty() and not selectable_cells.has(Vector2i(row, col))):
+		position = last_valid_position
+		row = last_valid_row
+		col = last_valid_col
+		return
+	last_valid_position = position
+	last_valid_row = row
+	last_valid_col = col
 	if (enabled):
 		emit_signal("change_character", self.row, self.col)
 		MainMenuMusicControl.play_cursor_move()
 
 func select():
 	frame_delay = 1
-	if (enabled):
+	if (enabled and (selectable_cells.is_empty() or Vector2i(row, col) in selectable_cells)):
 		selected = true
 		emit_signal("select_chara")
 		MainMenuMusicControl.play_cursor_select()

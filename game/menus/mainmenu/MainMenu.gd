@@ -24,6 +24,10 @@ func _on_Offline_button_down():
 	try_write_new_config_file()
 	get_tree().change_scene_to_file("res://game/menus/versus/VersusModeSelect.tscn")
 
+func _on_Minigame_button_down():
+	try_write_new_config_file()
+	get_tree().change_scene_to_file("res://game/menus/buttonmap/MinigameControllerPickMenuScreen.tscn")
+
 func _on_Training_button_down():
 	try_write_new_config_file()
 	get_tree().change_scene_to_file("res://game/menus/buttonmap/TrainingControllerPickMenuScreen.tscn")
