@@ -12,4 +12,4 @@ func go_to_prev_scene():
 func go_to_next_scene():
 	MainMenuMusicControl.play_cursor_select()
 	MainMenuMusicControl.reset_seek()
-	get_tree().change_scene_to_file("res://game/menus/combo_trial/ComboTrialMain.tscn")
+	get_tree().change_scene_to_file("res://game/menus/minigame/MinigameMain.tscn")

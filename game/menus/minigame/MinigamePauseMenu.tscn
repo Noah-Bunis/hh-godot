@@ -1,0 +1,114 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://da3lrwaml74um" path="res://game/menus/versus/PauseMenu.gd" id="1_pause_menu"]
+[ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="3_background"]
+
+[node name="PauseMenu" type="GridContainer"]
+process_mode = 3
+visible = false
+offset_left = 218.0
+offset_top = 33.0
+offset_right = 718.0
+offset_bottom = 333.0
+scale = Vector2(3, 3)
+columns = 3
+script = ExtResource("1_pause_menu")
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.172549, 0.121569, 0.121569, 0.788235)
+position = Vector2(229, 160)
+scale = Vector2(1.01874, 0.564336)
+texture = ExtResource("3_background")
+
+[node name="PlayerLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[node name="PlayerLabel2" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[node name="PlayerLabel3" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[node name="CloseLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+text = "UI_REPLAY_CLOSE_MENU"
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_top = NodePath("../ExitButton")
+text = "UI_BUTTON_CLOSE"
+
+[node name="CloseNumber" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[node name="CommandListLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[node name="CommandListButton" type="Button" parent="."]
+layout_mode = 2
+text = "UI_BUTTON_COMMAND_LIST"
+
+[node name="CommandListNumber" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[node name="ChangeControlsLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+text = "UI_MENU_EDIT_CONTROLS"
+
+[node name="ChangeControlsButton" type="Button" parent="."]
+layout_mode = 2
+text = "UI_BUTTON_CHANGE"
+
+[node name="ChangeControlsNumber" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[node name="ExitLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+text = "UI_MENU_QUIT_VERSUS"
+
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../CloseButton")
+text = "UI_BUTTON_QUIT"
+
+[node name="ExitNumber" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_font")
+
+[connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
+[connection signal="pressed" from="CommandListButton" to="." method="_on_CommandListButton_pressed"]
+[connection signal="pressed" from="ChangeControlsButton" to="." method="_on_ChangeControlsButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
