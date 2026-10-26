@@ -13,4 +13,4 @@ func go_to_prev_scene():
 	get_tree().change_scene_to_file("res://game/menus/buttonmap/MinigameControllerPickMenuScreen.tscn")
 
 func go_to_next_scene():
-	get_tree().change_scene_to_file("res://game/menus/training/TrainingMain.tscn")
+	get_tree().change_scene_to_file("res://game/menus/stagemusicselect/MinigameStageMusicSelect.tscn")
