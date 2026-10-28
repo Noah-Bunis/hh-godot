@@ -4,10 +4,34 @@ class_name MinigameMain
 
 var dummy_input: InputInterpreter
 
+@onready var minigame_director = $CanvasLayer/MinigameDirector
+
 func _ready() -> void:
 	super._ready()
 	game_mode_root = "/root/MinigameMain/FighterGame"
 	setup_training()
+
+	minigame_director.instruction_changed.connect(_on_minigame_instruction_changed)
+	minigame_director.result_changed.connect(_on_minigame_result_changed)
+	minigame_director.run_finished.connect(_on_minigame_run_finished)
+	start_minigame_run()
+	
+func start_minigame_run() -> void:
+	minigame_director.start_run()
+
+func _on_minigame_instruction_changed(text: String) -> void:
+	$CanvasLayer/MessageLabel.text = text
+	$CanvasLayer/MessageLabel.visible = true
+	
+func _on_minigame_result_changed(success: bool) -> void:
+	$CanvasLayer/MessageLabel.text = (tr("UI_COMBO_SUCCESS") if success else "FAILED!")
+
+func _on_minigame_run_finished(
+	final_score: int,
+	total_games: int) -> void:
+	$CanvasLayer/MessageLabel.text = (
+		"RUN COMPLETE!\nSCORE: %d/%d"
+		% [final_score, total_games])
 
 func exit():
 	get_tree().change_scene_to_file("res://game/menus/minigame/MinigameCharacterSelect.tscn")

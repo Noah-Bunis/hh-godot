@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vj5tn3syoeh7"]
+[gd_scene load_steps=12 format=3 uid="uid://vj5tn3syoeh7"]
 
 [ext_resource type="PackedScene" path="res://game/ui/FPSCounter.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dno6gucb1p5h" path="res://game/menus/minigame/MinigameMain.gd" id="2_minigame_main"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5xgqi0ik2bpc" path="res://game/ui/MatchWinCounter.tscn" id="4"]
 [ext_resource type="Script" uid="uid://da3lrwaml74um" path="res://game/menus/versus/PauseMenu.gd" id="5"]
 [ext_resource type="PackedScene" uid="uid://dird4f0w057ux" path="res://game/menus/training/CommandList.tscn" id="8"]
+[ext_resource type="Script" uid="uid://7pocl3a33bdi" path="res://game/menus/minigame/MinigameDirector.gd" id="8_d2n0x"]
 [ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="9"]
 
 [sub_resource type="FontFile" id="1"]
@@ -257,9 +258,15 @@ offset_right = 106.0
 offset_bottom = 44.0
 scale = Vector2(2.87118, 3.02479)
 
+[node name="MinigameDirector" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("8_d2n0x")
+
 [node name="SetupPingTimer" type="Timer" parent="."]
 
 [connection signal="pressed" from="CanvasLayer/PauseMenu/CloseButton" to="." method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/CommandListButton" to="." method="_on_CommandListButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/ChangeControlsButton" to="CanvasLayer/PauseMenu" method="_on_ChangeControlsButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseMenu/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="instruction_changed" from="CanvasLayer/MinigameDirector" to="." method="_on_minigame_instruction_changed"]
+[connection signal="result_changed" from="CanvasLayer/MinigameDirector" to="." method="_on_minigame_result_changed"]
+[connection signal="run_finished" from="CanvasLayer/MinigameDirector" to="." method="_on_minigame_run_finished"]
