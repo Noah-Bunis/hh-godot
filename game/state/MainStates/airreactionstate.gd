@@ -24,6 +24,9 @@ func enter(state: Dictionary) -> void:
 	state[Enums.StKey.cancelState] = ""
 	state[Enums.StKey.leftfaceOK] = false
 	state[Enums.StKey.hitstun] += Util.BONUS_JUGGLE_HITSTUN
+
+	self._player.deprioritize_z_index()
+
 	anim.speed_scale = 1
 	anim.stop(true)
 	anim.play("JumpFall")

@@ -34,6 +34,8 @@ var assist_meter_build_frozen: bool = false
 
 var color_scheme = null
 
+var DEFAULT_Z_INDEX: int = 10
+
 var attackData: Dictionary = {
 	Enums.StKey.attack_type: Enums.AttackType.Strike,
 	Enums.StKey.hitstop: Util.DEFAULT_HITSTOP,
@@ -373,6 +375,15 @@ func hit_stun_update() -> void:
 	if (currentState.get(Enums.StKey.frame, -1) == 0 and currentState.get(Enums.StKey.hitCount, -1) == 0):
 		emit_signal("combo_exit")
 
+func update_z_index(new_index: int) -> void:
+	self.z_index = new_index
+
+func prioritize_z_index() -> void:
+	update_z_index(self.DEFAULT_Z_INDEX)
+
+func deprioritize_z_index() -> void:
+	update_z_index(self.DEFAULT_Z_INDEX - 1)
+
 func setup(playerData:PlayerSetup):
 	self.team = playerData.team
 	currentState[Enums.StKey.leftface] = playerData.left_face
@@ -389,7 +400,7 @@ func setup(playerData:PlayerSetup):
 func state_factory_setup(state_factory):
 	if (fighterState == null):
 		fighterState = PersistentState.new(
-			currentState, state_factory, $NetworkAnimationPlayer)
+			currentState, state_factory, $NetworkAnimationPlayer, self)
 
 func update_left_face(left_face):
 	if (currentState[Enums.StKey.leftfaceOK]):

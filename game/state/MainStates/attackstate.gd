@@ -29,6 +29,9 @@ func enter(state: Dictionary) -> void:
 	state[Enums.StKey.counterOK] = false
 	state[Enums.StKey.hitStopFrame] = -1
 	state[Enums.StKey.leftfaceOK] = true
+
+	self._player.prioritize_z_index()
+
 	anim.speed_scale = 1
 	anim.stop(true)
 	anim.play("Idle")

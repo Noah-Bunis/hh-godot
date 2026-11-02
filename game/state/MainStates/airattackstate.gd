@@ -17,6 +17,9 @@ func _init():
 # Writing _delta instead of delta here prevents the unused variable warning.
 func enter(state: Dictionary) -> void:
 	super.enter(state)
+
+	self._player.prioritize_z_index()
+
 	state[Enums.StKey.cancelState] = ""
 	state[Enums.StKey.hitStopFrame] = -1
 

@@ -6,9 +6,9 @@ signal battery_player (super_meter, sync_rate, assist_meter)
 
 func _init():
 	super._init()
+	DEFAULT_Z_INDEX = 0
 	add_to_group("fight_entity")
 	add_to_group("network_sync")
-
 
 func reset_hitboxes():
 	if Hitbox1 != null:

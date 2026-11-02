@@ -6,6 +6,7 @@ signal move_pilot (velocity_x, velocity_y, accel_x, accel_y)
 
 func _init():
 	super._init()
+	DEFAULT_Z_INDEX = 7
 	add_to_group("fight_entity")
 	add_to_group("network_sync")
 	currentState[Enums.StKey.hitstun] = 0
