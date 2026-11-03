@@ -7,6 +7,7 @@ var anim : NetworkAnimationPlayer
 var persistent_state
 var anim_data : Dictionary 
 var endFrame: int = 99
+var _player: BasePlayer
 
 func enter(state: Dictionary) -> void:
 	state[Enums.StKey.accel_x] = 0
@@ -33,10 +34,11 @@ func physics_tick(_state: Dictionary) -> void:
 func handle_input(_state: Dictionary, _interpreter: InputInterpreter) -> void:
 	pass
 
-func setup(_change_state, _animation_player, _persistent_state):
+func setup(_change_state, _animation_player, _persistent_state, p_player: BasePlayer):
 	self.change_state = _change_state
 	self.anim = _animation_player
 	self.persistent_state = _persistent_state
+	self._player = p_player
 
 func reaction(state: Dictionary, interpreter: InputInterpreter, event_cause: int) -> void:
 	if (event_cause == Enums.Reaction.StrikeHurt):

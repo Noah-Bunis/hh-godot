@@ -7,6 +7,7 @@ class_name PuppetPlayer
 var pilot: PointPlayer
 
 func _init():
+	DEFAULT_Z_INDEX = -10
 	add_to_group("fight_entity")
 	add_to_group("network_sync")
 

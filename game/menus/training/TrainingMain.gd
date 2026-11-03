@@ -375,10 +375,16 @@ func _update_move_data() -> void:
 			(advantage_state is AttackState or advantage_state is AirAttackState)
 			and not _get_move_frame_data(advantage_state).is_empty()
 		)
+		var is_landing_recovery: bool = _is_landing_recovery_state(advantage_state_name)
 		if (not was_interrupted
 				and _move_data_contact_last_frame < _move_data_contact_end_frame - 1):
 			cancelled_recovery = _move_data_contact_end_frame - _move_data_contact_last_frame
 		_move_data_contact_advantage += cancelled_recovery
+		if (not was_interrupted and is_landing_recovery):
+			_move_data_contact_advantage -= maxi(
+				advantage_state.endFrame - advantage_player.currentState.get(Enums.StKey.frame, 0),
+				0
+			)
 		if (not was_interrupted and is_attack_followup):
 			_move_data_advantage_state_name = advantage_state_name
 			_move_data_contact_end_frame = advantage_state.endFrame
@@ -429,6 +435,12 @@ func _calculate_frame_advantage(
 	var opponent_hitstop: int = maxi(opponent.currentState.get(Enums.StKey.hitStopFrame, 0), 0)
 	var player_hitstop: int = maxi(player.currentState.get(Enums.StKey.hitStopFrame, 0), 0)
 	return opponent_stun + opponent_hitstop - player_hitstop - player_recovery
+
+func _is_landing_recovery_state(state_name: String) -> bool:
+	return (
+		state_name.ends_with("LandingRecovery")
+		or state_name.ends_with("LandAttackRecovery")
+	)
 
 func _set_move_data_advantage_value(advantage: int) -> void:
 	_set_move_data_advantage_text(advantage)

@@ -5,16 +5,18 @@ class_name PersistentState
 var state: State # Which state machine state are we in?
 var state_factory: StateFactory # Get states from here
 var anim : NetworkAnimationPlayer # contain a reference so that you can give it to new states
+var player: BasePlayer # try not to access things directly, this was intended to update things like the player's z index
 
 # Stores reference to fighter's rollback compliant state
 var rollback_state: Dictionary
 
 func _init(roll_state: Dictionary, _state_factory: StateFactory, 
-			_anim: NetworkAnimationPlayer):
+			_anim: NetworkAnimationPlayer, p_player: BasePlayer):
 	update_rollback_state(roll_state)
-	state_factory = _state_factory
-	state_factory.instantiate_states()
-	anim = _anim
+	self.state_factory = _state_factory
+	self.state_factory.instantiate_states()
+	self.anim = _anim
+	self.player = p_player
 	change_state("Neutral")
 	state_change_helper("Neutral")
 
@@ -60,5 +62,5 @@ func rollback_state_transition(new_state_name: String) -> void:
 
 func state_change_helper(new_state_name: String) -> void:
 	state = state_factory.get_state(new_state_name)
-	state.setup(self.change_state, anim, self)
+	state.setup(self.change_state, anim, self, self.player)
 	rollback_state[Enums.StKey.stateName] = new_state_name

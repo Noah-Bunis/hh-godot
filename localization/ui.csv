@@ -32,24 +32,24 @@ UI_MENU_OPEN_LOBBIES,Currently open Lobbies:,現在オープン中のロビー:,
 UI_MENU_JOIN_PRIVATE_ROOM,Join Private Room,プライベートルームに参加する,Unirte a sala privada,Entrar em sala privada
 UI_MENU_ROOM_ID,Room ID,ルームID,ID de sala,ID de sala
 UI_MENU_PASTE_CLIPBOARD,Paste from Clipboard,クリップボードからペーストする,Pegar desde el portapapeles,Colar da área de transferência
-UI_MENU_CHALLENGE,Challenge,挑戦する,Desafío,Desafio 
+UI_MENU_CHALLENGE,Challenge,挑戦する,Desafío,Desafio
 UI_MENU_SPECTATE,Spectate,観戦する,Observar,Observar
 UI_MENU_LOGGING_IN,Logging in to Server...,サーバーへのログイン中...,Iniciando sesión en el servidor...,Iniciando sessão no servidor
-UI_MENU_DISPLAY_NAME,Display Name,ハンドルネーム,Nombre público ,Nome de Exibição
+UI_MENU_DISPLAY_NAME,Display Name,ハンドルネーム,Nombre público,Nome de Exibição
 UI_MENU_NETPLAY,Netplay:,ネットコード:,,Jogo Online
 UI_MENU_PRIVATE_ROOM,Private Room,プライベートルーム,Sala privada,Sala Privada
 UI_MENU_JOIN_ROOM,Join Room,ルームに参加する,Unirse a la sala,Entrar na sala
 UI_MENU_PUBLIC_ROOM,Public Room,オープンルーム,Sala pública,Sala pública
 UI_MENU_DIRECT_IP,Direct IP connection (Needs port forwarding),IPによる直接接続（ポート転送が必要）,Conexión de IP directa (necesita redirección de puertos),Conexão direta de IP (requer encaminhamento de porta)
-UI_MENU_HOST,Host,ホスト,Host ,Host
+UI_MENU_HOST,Host,ホスト,Host,Host
 UI_MENU_PORT,Port,ポート,Puerto,Porta
 UI_MENU_SERVER,Server,サーバー,Servidor,Servidor
 UI_MENU_COPY_ROOM_ID,Copy Room ID,ルームIDをコピーする,Copiar ID de la sala,Copiar ID de sala
 UI_MENU_BATTLE_VERSION,Battle Version:,バージョン:,Versión de batalla:,Versão de batalha:
 UI_MENU_CREDITS,CREDITS:,スタッフロール:,CRÉDITOS:,CREDITOS:
 UI_OPTIONS_FULLSCREEN,Fullscreen,スクリーンモード,Pantalla completa,Tela Cheia
-UI_OPTIONS_VSYNC,VSync,垂直同期,Sincronización Vertical ,VSync
-UI_OPTIONS_MAIN_VOLUME,Main Volume,全体音量,Volumen principal ,Volume Principal
+UI_OPTIONS_VSYNC,VSync,垂直同期,Sincronización Vertical,VSync
+UI_OPTIONS_MAIN_VOLUME,Main Volume,全体音量,Volumen principal,Volume Principal
 UI_OPTIONS_MUSIC,Music,BGM音量,Música,Musica
 UI_OPTIONS_SOUND,Sound,効果音音量,Sonido,Som
 UI_OPTIONS_VOICE,Voice,音声音量,Voz,Voz
@@ -61,7 +61,7 @@ UI_OPTIONS_COPY_CLIPBOARD,Copy to clipboard,コピー,Copiar al portapapeles,Cop
 UI_OPTIONS_RESET_CONTROLS,Reset Controls File,デフォルトに戻す,Reiniciar Archivo de Controles,Resetar Arquivo de Controles
 UI_REPLAY_OPEN_FILE,Open a replay file:,リプレイを開ける:,Abrir un Archivo de Repetición,Abrir um Arquivo de gravação
 UI_REPLAY_DELETE_MODE,Delete Mode,消すモード,Modo Borrado,Modo de excluir
-UI_REPLAY_CLOSE_MENU,Close Menu,閉じる,Cerrar menú ,Fechar Menu
+UI_REPLAY_CLOSE_MENU,Close Menu,閉じる,Cerrar menú,Fechar Menu
 UI_REPLAY_TAKEOVER,Replay Takeover,リプレイテイクオーバー,Control de Repetición,Controle de gravação
 UI_REPLAY_LOAD_TAKEOVER,Load Takeover State,テイクオーバーをロードする,Cargar estado de Control,Carregar estado de controle
 UI_REPLAY_LOAD_BACK_HINT,Load (Back button works too),状態をロードする(戻るボタンもよい),Cargar (Botón atrás también funciona),Carregar (Botão Voltar também funciona)
@@ -83,7 +83,7 @@ UI_TRAINING_COUNTER_HIT,CounterHit,カウンターヒット,Contraataque,Contra-
 UI_TRAINING_BLOCK_SETTINGS,Block Settings,ガード設定,Opciones de bloqueo,Configurações de defesa
 UI_TRAINING_BLOCK_SWITCHING,Block Switching,ガード変わり,Cambio de bloqueo,Troca de defesa
 UI_TRAINING_BLOCK_TYPE,Block Type,ガードタイプ,Tipo de bloqueo,Tipo de defesa
-UI_TRAINING_AIR_RECOVERY,Air Recovery,空中受け身,Recuperación aérea ,Recuperação aérea
+UI_TRAINING_AIR_RECOVERY,Air Recovery,空中受け身,Recuperación aérea,Recuperação aérea
 UI_TRAINING_SUPER_METER,Super Meter,スーパーゲージ,Medidor de Super,Medidor de Super
 UI_TRAINING_ASSIST_METER,Assist Meter,アシストゲージ,Medidor de Asistencia,Medidor de Assistência
 UI_TRAINING_SYNC_RATE,Sync Rate,シンク率,Tasa de Sync,Taxa de Sync
@@ -93,18 +93,18 @@ UI_TRAINING_CLOSE_COMMAND_LIST,Close,閉じる,Cerrar,Fechar
 UI_TRAINING_NONE,NONE,なし,NINGUNO,NENHUM
 UI_TRAINING_ALL,ALL,全部,TODO,TUDO
 UI_TRAINING_ENABLED,ENABLED,オン,HABILITADO,ATIVADO
-UI_TRAINING_DISABLED,DISABLED,オフ,DESHABILITADO ,DESATIVADO
+UI_TRAINING_DISABLED,DISABLED,オフ,DESHABILITADO,DESATIVADO
 UI_TRAINING_NORMAL_BLOCK,NORMAL BLOCK,ガード,BLOQUEO NORMAL,BLOQUEIO NORMAL
-UI_TRAINING_INSTANT_BLOCK,INSTANT BLOCK,直前ガード,BLOQUEO INSTANTÁNEO ,BLOQUEIO INSTANÂNEO
+UI_TRAINING_INSTANT_BLOCK,INSTANT BLOCK,直前ガード,BLOQUEO INSTANTÁNEO,BLOQUEIO INSTANÂNEO
 UI_TRAINING_PUSH_BLOCK,PUSH BLOCK,FDガード,EMPUJE DE BLOQUEO,BLOQUEIO AFASTADOR
 UI_TRAINING_INSTANT_PUSH_BLOCK,INSTANT PUSH BLOCK,直前FDガード,EMPUJE DE BLOQUEO INSTANTANEO,BLOQUEIO AFASTADOR INSTANTÂNEO
 UI_TRAINING_PARRY,PARRY,パリィ,DESVIO,Aparar
 UI_TRAINING_NEUTRAL,NEUTRAL,ニュートラル,NEUTRAL,NEUTRO
 UI_TRAINING_FORWARD,FORWARD,前方,ADELANTE,EM FRENTE
-UI_TRAINING_BACKWARD,BACKWARD,後方,ATRÁS ,PARA TRÁS
+UI_TRAINING_BACKWARD,BACKWARD,後方,ATRÁS,PARA TRÁS
 UI_TRAINING_OFF,OFF,オフ,APAGADO,DESLIGADO
 UI_TRAINING_ON,ON,オン,ENCENDIDO,LIGADO
-UI_TRAINING_HAPPY_BIRTHDAY,HAPPY BIRTHDAY,ハッピーバースデー,FELIZ CUMPLEAÑOS ,FELIZ ANIVERSÁRIO
+UI_TRAINING_HAPPY_BIRTHDAY,HAPPY BIRTHDAY,ハッピーバースデー,FELIZ CUMPLEAÑOS,FELIZ ANIVERSÁRIO
 UI_TRAINING_STAND,STAND,立ち,DE PIE,LEVANTADO
 UI_TRAINING_CROUCH,CROUCH,しゃがみ,AGACHADO,AGACHADO
 UI_TRAINING_JUMP,JUMP,ジャンプ,SALTANDO,SALTO
@@ -216,14 +216,14 @@ UI_MENU_VERSUS_CPU,Versus CPU,CPU対戦,Contra CPU,Contra CPU
 UI_MENU_HIDE_ROOM_ID,Hide/UnHide RoomId,ルームIDを隠す/出す,Mostrar/Ocultar Id de sala,Mostrar/Ocultar ID da sala
 UI_MENU_SEARCH,Search,サーチ,Buscar,Buscar
 UI_MENU_CHANGE_CONTROLS,Change Controls,ボタン設定,Cambiar controles,Trocar controles
-UI_MENU_QUIT_TRAINING,Quit Training,トレーニング終了,Salir del entrenamiento ,Sair do treinamento
+UI_MENU_QUIT_TRAINING,Quit Training,トレーニング終了,Salir del entrenamiento,Sair do treinamento
 UI_REPLAY_PLAYER_ONE,Player 1,1P,Jugador 1,Jogador 1
 UI_REPLAY_PLAYER_TWO,Player 2,2P,Jugador 2,Jogador 2
 UI_STATUS_PUBLIC_LOBBY_CREATED,Created new public lobby: {match_id},新しいパブリックロビーを作成した: {match_id},Nueva sala pública creada: {match_id},Novo lobby publico criado: {match_id}
 UI_STATUS_PASTED_CLIPBOARD,Pasted from clipboard,クリップボードからペーストした,Pegado desde el portapapeles,Colado da área de transferência
 UI_STATUS_PEERS_LOADED,# of Peers loaded: {count},読み込まれたピアの数: {count},N de jugadores cargados: {count},N de Pares carregados: {count}
-UI_STATUS_UNABLE_OPPONENT_PEER,unable to find opponent's peer id,,No se pudo encontrar el ID del rival,Incapaz de encontrar id de par do oponente
-UI_STATUS_UNABLE_CLIENT_PEER,unable to find client peer id,,No se pudo encontrar el ID del cliente,Incapaz de encontrar id de par do cliente
+UI_STATUS_UNABLE_OPPONENT_PEER,unable to find opponent's peer id,相手のピアIDが見つからない,No se pudo encontrar el ID del rival,Incapaz de encontrar id de par do oponente
+UI_STATUS_UNABLE_CLIENT_PEER,unable to find client peer id,クライアントのピア ID が見つからない,No se pudo encontrar el ID del cliente,Incapaz de encontrar id de par do cliente
 UI_STATUS_FAILED_REPLAY_LOGGER,Failed to start replay logger,,Fallo al iniciar el registro de la repetición,Falha em iniciar registro de gravação
 UI_STATUS_GAME_LOADED,Game loaded,,Juego cargado,Jogo carregado
 UI_STATUS_SERVER_CONNECTED,CONNECTED,,CONECTADO,CONECTADO
@@ -235,18 +235,18 @@ UI_STATUS_TEAMS_SELECTED,Teams selected!,,¡Equipos seleccionados!,Equipes selec
 UI_STATUS_LOCAL_TEAMS_SELECTED,Locally: teams selected!,,Localmente: ¡Equipos seleccionados!,Localmente: Equipes selecionadas!
 UI_STATUS_PEERS_LOADING_COMPLETE,All peers loading completed!,,Carga completa de todas las conexiones,Carregamento de todos os pares completo!
 UI_STATUS_GOING_TO_MATCH,Going to match...,,Dirigiendo a partida…,Indo para a partida...
-UI_STATUS_CONNECTED_PEER,CONNECTED {peer_id},,CONECTADO {peer_id},CONECTADO {peer_id}
-UI_STATUS_DISCONNECTED_PEER,Disconnected {peer_id},,Desconectado {peer_id},Desconectado {peer_id}
+UI_STATUS_CONNECTED_PEER,CONNECTED {peer_id},CONNECTED {peer_id},CONECTADO {peer_id},CONECTADO {peer_id}
+UI_STATUS_DISCONNECTED_PEER,Disconnected {peer_id},Disconnected {peer_id},Desconectado {peer_id},Desconectado {peer_id}
 UI_BUTTON_RECORD,Record,記録する,Grabar,Gravar
-UI_BUTTON_REPLAY,Replay,リプレイ,Repetición ,Repetir
+UI_BUTTON_REPLAY,Replay,リプレイ,Repetición,Repetir
 UI_BUTTON_OK_EXCLAIM,OK!,OK!,¡OK!,OK!
 UI_BUTTON_LOGIN,Login,ログイン,Registrarse,Entrar
-UI_BUTTON_EXIT_OPTIONS,Exit Options,オプション終了,Salir de Opciones ,Sair do menu de opções
-UI_BUTTON_QUIT,Quit,終了,Salir,Sair 
-UI_MENU_QUIT_VERSUS,Quit Versus,バーサス終了,Salir de Enfrentamiento ,Sair do Versus
+UI_BUTTON_EXIT_OPTIONS,Exit Options,オプション終了,Salir de Opciones,Sair do menu de opções
+UI_BUTTON_QUIT,Quit,終了,Salir,Sair
+UI_MENU_QUIT_VERSUS,Quit Versus,バーサス終了,Salir de Enfrentamiento,Sair do Versus
 UI_TRAINING_TOGGLE_HITBOXES,Toggle Hitboxes,攻撃判定トグル,Mostrar Hitboxes,Alternar Hitboxes
-UI_TRAINING_RESET_POSITIONS,Reset Positions,位置リセットする,Reiniciar Posición ,Resetar Posição
-UI_PLACEHOLDER_YOUR_NAME,Your Name,ハンドル:,Tu Nombre ,Seu Nome
+UI_TRAINING_RESET_POSITIONS,Reset Positions,位置リセットする,Reiniciar Posición,Resetar Posição
+UI_PLACEHOLDER_YOUR_NAME,Your Name,ハンドル:,Tu Nombre,Seu Nome
 UI_LABEL_TIMER_INITIAL,Time: 10,時間:10,Tiempo: 10,Tempo: 10
 UI_COMBO_INPUTS_FACING_RIGHT,Inputs are performed while facing right,入力は右を向いて行う,Los comandos están hechos hacia la derecha,Os comandos são feitos para a direita
 UI_COMBO_HINT_FALLING_5C,[i]Hint: Use Jump5C as you are falling.[/i],[i]ヒント:落下しながら Jump5C を当たる。[/i],[i]Pista: Usa Jump5C mientras caes.[/i],[i]Dica: Use Jump5C enquanto cai.[/i]
@@ -258,24 +258,24 @@ UI_COMBO_JUMP,[i]Jump[/i],[i]ジャンプ[/i],[i]Salta[/i],[i]Pulo[/i]
 UI_COMBO_DOUBLE_JUMP,[i]Double jump[/i],[i]2段ジャンプ[/i],[i]Salta 2 veces[/i],[i]Pulo duplo[/i]
 UI_COMBO_HINT_PRESS_UP,[i]Hint: Press up as soon as you hit the opponent![/i],[i]ヒント：相手に当たったらすぐに上ボタンを押そう! [/i],[i]Pista: ¡Presiona arriba justo después de pegarle al oponente![/i],[i]Dica: Pressione para cima assim que acertar seu oponente![/i]
 UI_COMBO_HINT_THROW_HIT,A + B + C [i]during throw hit[/i],A + B + C [i]投げヒット間に[/i],A + B + C [i]mientras conecta el agarre[/i],A + B + C [i]durante o arremeso[/i]
-UI_COMBO_HINT_CORNER_ONLY,[color=yellow]Corner Only[/color] [i]Hint: Land and jump again after each Jump2C ![/i],[color=yellow]画面端だけに[/color] [i] Jump2C後に着地してジャンプ！[/i],[color=yellow]Solo en Esquina[/color] [i]Pista: ¡Aterriza y Salta de nuevo después de cada Jump2C![/i],[color=yellow]Apenas em canto[/color] [i]Dica: pouse e pule novamente após cada Jump2C ![/i]
-UI_COMBO_HINT_AIR_DASH_FAST,[i]Hint: Try to air dash as fast as possible![/i],,[i]Pista: ¡Trata de arremeter en el aire tan rápido como puedas![/i],[i]Dica: Tente dar arrancadas aéreas o mais rapido que puder![/i]
-UI_COMBO_HINT_CLEAN_HIT,[i]Hint: The first Jump6C requires a [color=yellow]clean hit[/color]. Good Luck![/i],,[i]Pista: El primer Jump6C Requiere un [color=yellow]golpe limpio[/color]. ¡Buena Suerte![/i],[i]Dica: O primeiro Jump6C requer um [color=yellow] acerto limpo[/color]. Boa Sorte![/i]
+UI_COMBO_HINT_CORNER_ONLY,[color=yellow]Corner Only[/color] [i]Hint: Land and jump again after each Jump2C ![/i],[color=yellow]画面端だけに[/color] [i] Jump2C 後に着地してジャンプ！[/i],[color=yellow]Solo en Esquina[/color] [i]Pista: ¡Aterriza y Salta de nuevo después de cada Jump2C![/i],[color=yellow]Apenas em canto[/color] [i]Dica: pouse e pule novamente após cada Jump2C ![/i]
+UI_COMBO_HINT_AIR_DASH_FAST,[i]Hint: Try to air dash as fast as possible![/i],[i]ヒント：できるだけ早く空中ダッシュをしてみてください！[/i],[i]Pista: ¡Trata de arremeter en el aire tan rápido como puedas![/i],[i]Dica: Tente dar arrancadas aéreas o mais rapido que puder![/i]
+UI_COMBO_HINT_CLEAN_HIT,[i]Hint: The first Jump6C requires a [color=yellow]clean hit[/color]. Good Luck![/i],[i]ヒント：最初の Jump6C では、[color=yellow]正確なヒット[/color]が必要だ。頑張ってね！[/i],[i]Pista: El primer Jump6C Requiere un [color=yellow]golpe limpio[/color]. ¡Buena Suerte![/i],[i]Dica: O primeiro Jump6C requer um [color=yellow] acerto limpo[/color]. Boa Sorte![/i]
 UI_COMBO_HOLD_LEFT,[i]Hold Left [/i],[i] Left を押したままに [/i],[i]Mantén Izquierda[/i],[i]Segure a esquerda[/i]
 UI_COMBO_DELAY,[i]Delay[/i],[i]ディレイ[/i],[i]Demora[/i],[i]Atraso[/i]
 UI_COMBO_GROUND_BOUNCE,[i]Ground bounce after each air move[/i],[i]それぞれの空中攻撃に床バウンドする[/i],[i]Rebote después de cada movimiento aéreo[/i],[i]Salte ao tocar no chão após cada movimento aéreo [/i]
 UI_COMBO_DELAY_JUMP,[i]Delay Jump[/i],[i]ディレイジャンプ[/i],[i]Salto demorado[/i],[i]Pulo Atrasado[/i]
-UI_COMBO_HINT_HATOTAURUS_RELEASE,[i]Hint: Hatotaurus attacks when you [color=yellow]release[/color] attack buttons![/i],,[i]Pista: ¡Hatotaurus ataca cuando tú [color=yellow]sueltas[/color] botones de ataque! [/i],[i]Dica: Hatotaurus ataca quando você [color=yellow]solta[/color] botões de ataque![/i]
+UI_COMBO_HINT_HATOTAURUS_RELEASE,[i]Hint: Hatotaurus attacks when you [color=yellow]release[/color] attack buttons![/i],[i]ヒント：ハトタウロスは、攻撃ボタンを[color=yellow]離した[/color]瞬間に攻撃して来る！[/i],[i]Pista: ¡Hatotaurus ataca cuando tú [color=yellow]sueltas[/color] botones de ataque! [/i],[i]Dica: Hatotaurus ataca quando você [color=yellow]solta[/color] botões de ataque![/i]
 UI_COMBO_BONUS_HATO,[i]Bonus: SummonHato[/i],[i]お負け: SummonHato[/i],[i]Bonus: SummonHato[/i],[i]Bonus: SummonHato[/i]
 UI_COMBO_INSTANT_AIR_DASH,[i]Instant air dash[/i],[i]低空ダッシュ[/i],[i]Arremetida aérea inmediata[/i],[i]Arrancada aérea instanânea[/i]
 UI_COMBO_LANDING_CANCEL,[i]Landing cancel[/i],[i]着地キャンセル[/i],[i]Cancelar Aterrizaje[/i],[i]Cancelamento de pouso[/i]
 UI_COMBO_AIR_DASH,[i]Air dash[/i],[i]空中ダッシュ[/i],[i]Arremetida aérea[/i],[i]Arrancada aérea[/i]
 UI_COMBO_AIRDASH,[i]Airdash[/i],[i]空中ダッシュ[/i],[i]Arremetida aérea[/i],[i]Arrancada aérea[/i]
-UI_COMBO_HINT_HIT_STANCE_SCISSORS,[i]Hint: Hit Stance D and Scissors in very quick succession[/i],,[i]Pista: Presiona Postura D y Tijeras en sucesión rapida[/i],[i]Dica Aperte Postura D e Tesouras logo em seguida[/i]
-UI_COMBO_HINT_START_SUISEI,[i]Hint: Start the combo in Suisei mode[/i],[i]ヒント:すいせいモードに始まる[/i],[i]Pista: Empieza el combo en modo Suisei [/i],[i]Dica: Comece o combo no modo Suisei[/i]
-UI_COMBO_HINT_ASSIST_BEHIND,[i]Hint: Use AssistAttack2 when Fubuki is behind the opponent[/i],[i]ヒント:フブキが相手の後ろに AssistAttack2 を使う[/i],[i]Pista: Usa AssistAttack2 cuando Fubuki esté detrás del oponente [/i],[i]Dica: Use AssistAttack2 Quando Fubuki está atras do oponente[/i]
-UI_COMBO_HINT_AIR_THROW_BOUNCE,[i]Hint: Air throw the opponent before they ground bounce[/i],,[i]Pista: Agarra en el aire al oponente antes de que rebote[i/],[i]Dica: Arremese o oponente no ar antes de poderem dar rebote[/i]
-UI_COMBO_HINT_J8CBUFFER,[i]Hint: Press Jump8C before Jump5C connects![/i],,[i]Pista: ¡Presiona Jump8C Antes de que Jump5C conecte![/i],[i]Dica: Pressione Jump8C antes de Jump5C conectar![/i]
+UI_COMBO_HINT_HIT_STANCE_SCISSORS,[i]Hint: Hit Stance D and Scissors in very quick succession[/i],[i]ヒント：Stance D と Scissors を非常に素早く続けて押す[/i],[i]Pista: Presiona Postura D y Tijeras en sucesión rapida[/i],[i]Dica Aperte Postura D e Tesouras logo em seguida[/i]
+UI_COMBO_HINT_START_SUISEI,[i]Hint: Start the combo in Suisei mode[/i],[i]ヒント：すいせいモードに始まる[/i],[i]Pista: Empieza el combo en modo Suisei [/i],[i]Dica: Comece o combo no modo Suisei[/i]
+UI_COMBO_HINT_ASSIST_BEHIND,[i]Hint: Use AssistAttack2 when Fubuki is behind the opponent[/i],[i]ヒント：フブキが相手の後ろに AssistAttack2 を使う[/i],[i]Pista: Usa AssistAttack2 cuando Fubuki esté detrás del oponente [/i],[i]Dica: Use AssistAttack2 Quando Fubuki está atras do oponente[/i]
+UI_COMBO_HINT_AIR_THROW_BOUNCE,[i]Hint: Air throw the opponent before they ground bounce[/i],[i]ヒント：床バウンド前に空投げる[/i],[i]Pista: Agarra en el aire al oponente antes de que rebote[i/],[i]Dica: Arremese o oponente no ar antes de poderem dar rebote[/i]
+UI_COMBO_HINT_J8CBUFFER,[i]Hint: Press Jump8C before Jump5C connects![/i],[i]ヒント：Jump5C 合ってる前に Jump8C を押す[/i],[i]Pista: ¡Presiona Jump8C Antes de que Jump5C conecte![/i],[i]Dica: Pressione Jump8C antes de Jump5C conectar![/i]
 UI_COMBO_HOLD_GROUND_THROW,Hold GroundThrowHit,GroundThrowHit を押したままに,Mantén GroundThrowHit,Segure GroundThrowHit
 UI_COMBO_HOLD_C,Hold C,C を押したままに,Mantén C,Segure C
 UI_COMBO_HOLD_A,Hold A,A を押したままに,Mantén A,Segure A
@@ -288,8 +288,8 @@ UI_COMBO_WORD_CLOSE,close,近,Cerca,Perto
 UI_COMBO_WORD_RELEASE,Release,離し,Soltar,Soltar
 UI_COMBO_WORD_TAP,Tap,押し,Presionar,Pressionar
 UI_COMBO_WORD_HOLD,Hold,押したままに,Mantén,Manter
-UI_COMBO_WORD_THEN,then,そして,Después ,Depois
-UI_COMBO_WORD_EARLY,Early,早い,Temprano ,Cedo
+UI_COMBO_WORD_THEN,then,そして,Después,Depois
+UI_COMBO_WORD_EARLY,Early,早い,Temprano,Cedo
 UI_COMBO_WORD_PERFECT,Perfect,パーフェクト,Perfecto,Perfeito
 UI_COMBO_WORD_ENHANCED,enhanced,溜めた,Mejorado,Melhorado
 UI_COMBO_WORD_CHARGE,Charge,溜め,Carga,Carga
@@ -297,11 +297,11 @@ UI_COMBO_WORD_FLIGHT,(Flight),(飛行),(Vuelo),(Voo)
 UI_COMBO_WORD_STANCE,stance,構え,Postura,Postura
 UI_COMBO_WORD_CHANGE,(Transform),(編集),(Transforma),(Transforma)
 UI_COMBO_WORD_OR,or,か,O,Ou
-(Check HH mechanics writeup for more detail and hidden mechanics),(Check HH mechanics writeup for more detail and hidden mechanics),,(Lee el informe de mecánicas de HH para más detalles y mecánicas ocultas),(Leia o informe de mecanicas do HH para mais detalhes e mecanicas ocultas)
+(Check HH mechanics writeup for more detail and hidden mechanics),(Check HH mechanics writeup for more detail and hidden mechanics),（詳細や隠された仕組みについては、HHのメカニクス解説を参照してください）,(Lee el informe de mecánicas de HH para más detalles y mecánicas ocultas),(Leia o informe de mecanicas do HH para mais detalhes e mecanicas ocultas)
 [color=red] oh no,[color=red] oh no,[color=red] やばい,[color=red] oh no,[color=red] oh não
-1 meter + 2 assist stock,1 meter + 2 assist stock,,1 Barra + 2 Barras de Asistencia,1 Barra + 2 Barras de Assist
-"1 meter + 2 assist stock, burst super meter cost increases after use","1 meter + 2 assist stock, burst super meter cost increases after use",,"1 Barra + 2 Barras de Asistencia,  la super estallido aumenta en costo despues del uso","1 Barra + 2 Barras de Assist, o super de explosão aumenta o custo de barra após cada uso"
-1 super bar,1 super bar,,1 barra de super,1 barra de super
+1 meter + 2 assist stock,1 meter + 2 assist stock,1ゲージ＋2アシストストック,1 Barra + 2 Barras de Asistencia,1 Barra + 2 Barras de Assist
+"1 meter + 2 assist stock, burst super meter cost increases after use","1 meter + 2 assist stock, burst super meter cost increases after use",1ゲージ＋2アシストストック、バーストゲージ消費量が増加する,"1 Barra + 2 Barras de Asistencia,  la super estallido aumenta en costo despues del uso","1 Barra + 2 Barras de Assist, o super de explosão aumenta o custo de barra após cada uso"
+1 super bar,1 super bar,1ゲージ,1 barra de super,1 barra de super
 2 hit projectile. Hitting star ball enhances projectile,2 hit projectile. Hitting star ball enhances projectile,,Proyectil de 2 golpes. golpear con una Bola Estelar mejora el proyectil,Projetil de 2 hit. Acertar a Bola Estelar melhora o projetil
 "2 way Steering, Multi hit","2 way Steering, Multi hit",,"Movimiento en 2 direciones, Multi golpe","Movimento de 2 direções, multi-golpe"
 25KG Grip Strength,25KG Grip Strength,25KG握力,Fuerza de agarre de 25KG,Força de Preensão de 25KG
@@ -315,15 +315,15 @@ Air Recovery,Air Recovery,空中硬直,Recuperación aérea,Recuperação Aéra
 Air Throw Cancel,Air Throw Cancel,空投げキャンセル,Cancelación de agarre aérea,Cancelamento de arremeso aéreo
 AirDash,AirDash,空中ダッシュ,Arremetida aérea,Arrancada Aérea
 Airdash cancel,Airdash cancel,空中ダッシュキャンセル,Cancelación de arremetida aérea,Cancelmanto de arrancada aérea
-Airdashes are air hops,Airdashes are air hops,ユニーク空中ダッシュ,Las arremetidas aéreas son saltos aéreos ,Arrancadas aéreas são pequenos saltos aéreos
+Airdashes are air hops,Airdashes are air hops,ユニーク空中ダッシュ,Las arremetidas aéreas son saltos aéreos,Arrancadas aéreas são pequenos saltos aéreos
 Airdashs are angled down,Airdashes are angled down,空中ダッシュは下向きに傾いている,Las arremetidas aéreas tienen un ángulo bajo,As arrancadas aereas são inclinadas para baixo
 Akai na...,Akai na...,赤いな…,Akai na…,Akai na...
 Alternate version that only launches opponent,Alternate version that only launches opponent,,Versión alternativa que solo lanza al oponente,Versão alternativa que apenas lança o oponente
 Alters Oga's air movement,Alters Oga's air movement,空中移動を変わる,Altera el movimiento aéreo de Oga,Altera o movimento aéreo do Oga
 Amane Kanata,Amane Kanata,天音かなた,Amane Kanata,Amane Kanata
-Anti Air,Anti Air,対空,Anti aéreo,Anti aéreo 
-anti air,anti air,対空,anti aéreo,Anti aéreo 
-Anti air and command jump,Anti air and command jump,対空とコマンドジャンプ,Anti aéreo y salto ,Anti aereo e salto de comando
+Anti Air,Anti Air,対空,Anti aéreo,Anti aéreo
+anti air,anti air,対空,anti aéreo,Anti aéreo
+Anti air and command jump,Anti air and command jump,対空とコマンドジャンプ,Anti aéreo y salto,Anti aereo e salto de comando
 Anti Air. Try hitting a 5D fireball with this,Anti Air. Try hitting a 5D fireball with this,対空。5D 飛び道具を当て試してみない,Anti aéreo. Intenta conectar un 5D proyectil con esto,Anti aéreo. tente acertar um projetil 5D com isso
 anti-air Normals,anti-air Normals,対空通常技,Normales anti-aéreos,Normais anti-aéreos
 Aragami Oga,Aragami Oga,荒咬オウガ,Aragami Oga,Aragami Oga
@@ -331,7 +331,7 @@ Assault,Assault,アサルト,Asalto,Assalto
 4 way Steering,4 way Steering,4方向ステアリング,Movimiento en 4 direcciones,Movimento em 4 direções
 4 way Steering and Multi hit,4 way Steering and Multi hit,4方向ステアリング,Movimiento en 4 direcciones y multi golpe,Movimento em 4 direções com golpes multiplos
 6D Guard Cancel,6D Guard Cancel,6D ガードキャンセル,Cancelación de Guardia 6D,Cancelação de guarda 6D
-Assist Chain,Assist Chain,アシスト連打,Cadena de Asistencia ,Cadeia de Assistência
+Assist Chain,Assist Chain,アシスト連打,Cadena de Asistencia,Cadeia de Assistência
 Assist character cancels into any assist attack,Assist character cancels into any assist attack,アシストキャラが何でもアシスト攻撃にキャンセルできる,La asistencia puede cancelarse en cualquier ataque de asistencia,O personagem de assistência pode cancelar qualquer outro ataque de assistência
 Assist: Amane Kanata,Assist: Amane Kanata,アシスト:天音かなた,Asistencia: Amane Kanata,Assistência: Amane Kanata
 Assist: Aragami Oga,Assist: Aragami Oga,アシスト:荒咬オウガ,Asistencia: Aragami Oga,Assistência: Aragami Oga
@@ -353,7 +353,7 @@ Attacks,Attacks,攻撃,Ataques,Ataques
 B and C (EX) version are invul reversals,B and C (EX) version are invul reversals,,Las versiones B y C (EX) son reversals invulnerables,As versões B e C (EX) são reversals invulneraveis
 B and C versions are jump cancel OK,B and C versions are jump cancel OK,,Las versiones B y C pueden cancelarse en salto,As versões B e C podem se cancelar em pulos
 Backdash,Backdash,バックステップ,Arremeter hacia Atrás,Recuo
-Backdash is abnormally invul,Backdash is abnormally invul,,Arremeter hacia  atrás tiene mucha invulnerabilidad ,Recuar da grande duração de invulnerabilidade
+Backdash is abnormally invul,Backdash is abnormally invul,,Arremeter hacia  atrás tiene mucha invulnerabilidad,Recuar da grande duração de invulnerabilidade
 Backdash:,Backdash:,バックステップ:,Arremeter hacia atrás:,Recuo:
 Backflips and recovers midair,Backflips and recovers midair,,Voltereta hacia atrás y se recupera en el aire,Faz mortal para tras e se recupera no ar
 Bases Loaded,Bases Loaded,満塁,Bases cargadas,Bases Carregadas
@@ -373,13 +373,13 @@ C Buttons,C Buttons,C ボタン,Botones C,Botões C
 Can be slightly steered in 4 directions,Can be slightly steered in 4 directions,4方向ステアリング,Puede ser movido ligeramente en 4 direcciones,Pode ser ligeiramente movido em 4 direções
 Can cancel air normals into air throw,Can cancel air normals into air throw,空中攻撃から空投げにキャンセルできる,Puede cancelar normales aéreos en agarre aéreo,Pode cancelar normais aéreos em arremeso aéreo
 Can cancel any normal into any different normal,Can cancel any normal into any different normal,何でも通常技から通常技にキャンセルできる,Puede cancelar cualquier normal en cualquier otro normal,Pode cancelar qualquer normal em um normal diferente
-Can double jump after,Can double jump after,後2段ジャンプできる,Puede saltar por segunda vez después ,Pode fazer um pulo duplo após
+Can double jump after,Can double jump after,後2段ジャンプできる,Puede saltar por segunda vez después,Pode fazer um pulo duplo após
 Cancel Flight normals into 4 way airdash,Cancel Flight normals into 4 way airdash,飛行攻撃から4方向空中ダッシュにキャンセルできる,Cancela normales de vuelo en una arremetida aérea de 4 direcciones,Cancela normais de voo em arranque aéreo de 4 direções
 Cancels into itself,Cancels into itself,自体に連打キャンセルできる,Cancela en sí mismo,Cancela em si mesmo
 Caramel Thrust,Caramel Thrust,Caramel 刺す,Estoque Caramelo,Estocada Caramelo
 Card Knives,Card Knives,カードクナイ,Cartas Cuchillo,Cartas de facas
 Card Teleport,Card Teleport,カードテレポート,Teletransportación de Carta,Teletransporte de cartas
-Card Toss,Card Toss,カード放る,Lanzamiento de Carta, Lançamento de cartas
+Card Toss,Card Toss,カード放る,Lanzamiento de Carta,Lançamento de cartas
 Chaos Soul Wing,Chaos Soul Wing,,Ala del Alma del Caos,Asa da Alma do Caos
 Chariot Pulse,Chariot Pulse,,Pulso Carruaje,Polso Carruagem
 Clay shooter,Clay shooter,,Lanzador de Arcilla,Lançador de argila
@@ -424,7 +424,7 @@ Fubuki=the=Kon!-edge,Fubuki=the=Kon!-edge,エッジ＝ザ＝コン＝エッジ,F
 Full invul,Full invul,無敵,Invulnerabilidad completa,Invulnerabilidade completa
 full invul anti air,full invul anti air,無敵対空,Invulnerabilidad completa anti aérea,Invulnerabilidade completa e anti ar
 Full invul reversal,Full invul reversal,無敵,Reversa con invulnerabilidad completa,Reversal com invulnerabilidade completa
-Funny Defense,Funny Defense,ファニーディフェンス,Defensa chistosa ,Defesa Zuada
+Funny Defense,Funny Defense,ファニーディフェンス,Defensa chistosa,Defesa Zuada
 Ginger Crusher,Ginger Crusher,,Aplastador de Jengibre,Esmagador de gengibre
 Gorilla Dunk,Gorilla Dunk,ゴリラ,Mate de Gorilla,Enterrada de Gorila
 Grappler's Soul,Grappler's Soul,投げキャラの魂,Espíritu de Luchador,Alma de lutador
@@ -452,13 +452,13 @@ High Jump,High Jump,,Salto Alto,Salto alto
 Hit projectile with strikes to change trajectory,Hit projectile with strikes to change trajectory,,Golpea los proyectiles para cambiar su trayectoria,Atinja os projeteis para mudar sua trajetória
 Hit projectile with strikes to enhance projectile,Hit projectile with strikes to enhance projectile,,Golpea los proyectiles para potenciarlos,Atinja os projeteis para fortalecer-los
 Hits before superflash,Hits before superflash,,Golpea antes del Superflash,Golpeia antes do Superflash
-Hold and release D for 3 different levels of charge,Hold and release D for 3 different levels of charge,,Mantén y suelta D para lograr cada uno de los 3 niveles de carga ,Segure e solte o D para 3 niveis diferentes de carga
-Hold any button during opponent's air combo,Hold any button during opponent's air combo,,Mantén cualquier boton durante el combo aéreo de un oponente ,Segure qualquer botão durante o combo aéreo do oponente
+Hold and release D for 3 different levels of charge,Hold and release D for 3 different levels of charge,,Mantén y suelta D para lograr cada uno de los 3 niveles de carga,Segure e solte o D para 3 niveis diferentes de carga
+Hold any button during opponent's air combo,Hold any button during opponent's air combo,,Mantén cualquier boton durante el combo aéreo de un oponente,Segure qualquer botão durante o combo aéreo do oponente
 "Hold back to charge, release at just timing for an enhanced attack","Hold back to charge, release at just timing for an enhanced attack",,"Mantén hacia atrés para cargar, Suelta en el momento justo para potenciar el ataque","Segure para trás para carregar, solte no momento certo para um ataque aprimorado"
 Hold D and steer Sana in all 4 directions,Hold D and steer Sana in all 4 directions,,Mantén D y maneja a Sana en las 4 direcciones,Segure D e controle a Sana em 4 direções
 Hold D and steer Sana left or right,Hold D and steer Sana left or right,,Mantén D y maneja a Sana hacia la izquierda o derecha,Segure D e controle Sana para esquerda e direita
-Hold D to hold smollie in place,Hold D to hold smollie in place,,Mantén D para mantener a smollie en su lugar ,Segure D para manter pequenollie em seu lugar
-Hold D to pull yourself away from block pressure,Hold D to pull yourself away from block pressure,,Mantén D para alejarte de la presión del bloqueo ,Segure D para afastar-se da pressão em bloqueio
+Hold D to hold smollie in place,Hold D to hold smollie in place,,Mantén D para mantener a smollie en su lugar,Segure D para manter pequenollie em seu lugar
+Hold D to pull yourself away from block pressure,Hold D to pull yourself away from block pressure,,Mantén D para alejarte de la presión del bloqueo,Segure D para afastar-se da pressão em bloqueio
 Hold D to stay on field,Hold D to stay on field,,Mantén D para quedar en el campo,Segure D para se manter no campo
 Hold D. Keep Subaru on field,Hold D. Keep Subaru on field,,Mantén D. Deja a Subaru en el campo,Segure D. Mantem a Subaru no campo
 Hold D. Pulls in your point character towards Sana,Hold D. Pulls in your point character towards Sana,,Mantén D. Empuja a tu personaje hacia Sana,Segure D. Puxa seu personagem para Sana
@@ -480,7 +480,7 @@ Invul advancing launcher,Invulnerable advancing launcher,無敵浮かせ技,Lanz
 invul reversal,Invulnerable reversal,無敵リバーサル,Reversal invencible,Reversal invulneravel
 "Invul reversal, ground bounces on second hit","Invulnerable reversal, ground bounces on second hit",無敵リバーサル、二回ヒットが床バウンド,"Reversal invencible, rebota en el segundo golpe","Reversal invulneravel, ricocheteia no chão no segundo golpe"
 "Invul reversal, Groundbounces on normal hit.","Invulnerable reversal, Groundbounces on normal hit.",,"Reversal invencible, rebota en golpe normal","Reversal invulneravel, ricocheteia no chão em golpe normal"
-Jump,Jump,ジャンプ,Salto,Pulo 
+Jump,Jump,ジャンプ,Salto,Pulo
 Jump Cancels,Jump Cancels,ジャンプキャンセル,Cancelado de Salto,Cancelamento de pulo
 jump Normals,jump Normals,空中攻撃,Normales de salto,Normais de salto
 "Kanata's signature command grab, steerable left and right","Kanata's signature command grab, steerable left and right",かなたの独自コマンド投げ、左右にステアリングできる,"El comando de agarre insignia de Kanata, puede moverse para la izquierda y derecha","O comande de arremeso é a marca da Kanata, navegavel para a direita e esquerda"
@@ -508,7 +508,7 @@ Mio teleports a fixed distance forwards,Mio teleports a fixed distance forwards,
 Missing,Missing,なし,Faltante,Ausente
 Missing moves,Missing moves,なし攻撃,Movimientos Faltantes,Movimentos ausentes
 Moon Jump,Moon Jump,ムーンジャンプ,Salto Lunar,Salto Lunar
-Movement,Movement,移動技,Movimientos,Movimentos 
+Movement,Movement,移動技,Movimientos,Movimentos
 Multi hit,Multi hit,,Multi golpe,Golpe multiplo
 Multi hit crossup,Multi hit crossup,,Multi golpe cruzado,Golpe mutiplo cruzado
 Multi hit projectile,Multi hit projectile,,Proyectil multi golpe,Projetil de golpe multiplo
@@ -544,13 +544,13 @@ Pop Pop Udin Formation,Pop Pop Udin Formation,,Formacion Udin: Pop Pop,Formaçã
 pushes back attackers more,pushes back attackers more,,empuja aún más atras al atacante,Empurra o atacante para trás
 Raging Twister Strike,Raging Twister Strike,,Golpe de Tornado Furioso,Golpe Tornado Furioso
 Raibu Cancel,Raibu Cancel,ライブキャンセル,Cancel Raibu,Cancelamento Raibu
-Rekka series,Rekka series,烈火攻撃,Serie de Rekkas,Serie Rekka 
+Rekka series,Rekka series,烈火攻撃,Serie de Rekkas,Serie Rekka
 "Rekka special, follow ups can whiff cancel","Rekka special, follow ups can whiff cancel",,"Las cadenas del Especial Rekka, pueden ser canceladas aunque fallen",As cadeias do especial Rekka podem ser canceladas ao errarem
-Release A for horizontal space control,Release A for horizontal space control,,Suelta A para controlar el espacio horizontalmente ,Solte A para controlar o espaço horizontal
+Release A for horizontal space control,Release A for horizontal space control,,Suelta A para controlar el espacio horizontalmente,Solte A para controlar o espaço horizontal
 "Release A, B, or C to bounce on the opponent","Release A, B, or C to bounce on the opponent",,"Suelta A, B o C para rebotar en el oponente","Solte A, B, ou C para quicar no oponente"
 Release B for diagonal space control,Release B for diagonal space control,,Suelta B para controlar el espacio diagonal,Solte B para controlar o espaço diagonal
 Release C for ...knight shaped? space control,Release C for ...knight shaped? space control,,Suelta C para controlar el espacio... ¿en forma de caballero?,Solte C para controlar o espaço... em forma de cavaleiro?
-Release D to do an overhead punch. (Air version hits mid),Release D to do an overhead punch. (Air version hits mid),,Suelta D para realizar un golpe Alto (En el aire golpea Medio) ,Solte D para realizar um golpe alto (Versão aérea golpeia médio)
+Release D to do an overhead punch. (Air version hits mid),Release D to do an overhead punch. (Air version hits mid),,Suelta D para realizar un golpe Alto (En el aire golpea Medio),Solte D para realizar um golpe alto (Versão aérea golpeia médio)
 Reverse Chains,Reverse Chains,リバースビート,Cadenas en reversa,Cadeias Reversas
 Reverse Temperance Crash,Reverse Temperance Crash,,Choque Templanza Reverso,Choque da Moderação Reversa
 Rook,Rook,ルーク,Torre,Torre
@@ -566,13 +566,13 @@ Slap back,Slap back,スラップバック,Devuelveles el golpe,Devolve o golpe
 Smollie Kiiiick!,Smollie Kiiiick!,ソモリーキィィィック!,¡PATADAAA Smollie!,CHUUUUTE Pequenollie!
 Smollie Queen,Smollie Queen,スモリークイーン,Su Majestad Smollie,Vossa Majestade Pequenollie
 "Smollie, hold down the neutral","Smollie, hold down the neutral",スモリー、ニュートラルを任せるぜ,"Smollie, robales el neutral","Pequenollie, segure o neutro"
-Some anti air normals have reverse gatlings / rebeats,Some anti air normals have reverse gatlings / rebeats,,Algunos anti aéreos normales pueden encadenarse en reversa ,Alguns anti aereos normais possuem cadeia reversa
+Some anti air normals have reverse gatlings / rebeats,Some anti air normals have reverse gatlings / rebeats,,Algunos anti aéreos normales pueden encadenarse en reversa,Alguns anti aereos normais possuem cadeia reversa
 Some Flight Normals can be held to enhance them,Some Flight Normals can be held to enhance them,,Algunos normales en vuelo pueden ser mantenidos para mejorarse,Alguns normais de voo podem ser segurados para serem aprimorados
 Specials,Specials,必殺技,Especiales,Especiais
 Spend super meter to fly,Spend super meter to fly,,Consume medidor de super para volar,Consome medidor de super para voar
 Stance cancel on hit,Stance cancel on hit,,Cancelación de postura tras golpear,Cancelamento de Postura ao receber golpe
 Stance cancel on whiff and hit,Stance cancel on whiff and hit,,Cancelación de postura al fallar y al  golpear,Cancelamento de Postura ao errar o golpe a ser acertado
-Star Ball,Star Ball,,Bola Estelar ,Bola Estelar 
+Star Ball,Star Ball,,Bola Estelar,Bola Estelar
 Star Ball Toss,Star Ball Toss,,Lanzamiento de Bola Estelar,Lançamento da Bola Estelar
 Starts with a back sway,Starts with a back sway,,Empieza con un movimiento hacia atrás,Começa com um movimento para trás
 Steal Home,Steal Home,,Robar Home,Roubar Casa
@@ -584,7 +584,7 @@ Steerable left and right,Steerable left and right,,Controlable para la izquierda
 Steerable multi hitting anti air,Steerable multi hitting anti air,,Golpe múltiple anti-aéreo manejable,Golpe multiplo anti-aéreo controlavel
 Stellar Stellar,Stellar Stellar,,Stellar Stellar,Estelar Estelar
 Step dash,Step dash,,Paso Rapido,Passo Rapido
-Subaru fires off 4 star balls. Hitting star ball changes trajectory,Subaru fires off 4 star balls. Hitting star ball changes trajectory,,Subaru dispara 4 bolas estelares. Golpear las bolas estelares cambia su trayectoria ,Subaru Atira 4 bolas estelares. acertando as bolas a trajetoria muda
+Subaru fires off 4 star balls. Hitting star ball changes trajectory,Subaru fires off 4 star balls. Hitting star ball changes trajectory,,Subaru dispara 4 bolas estelares. Golpear las bolas estelares cambia su trayectoria,Subaru Atira 4 bolas estelares. acertando as bolas a trajetoria muda
 Suicopath cannot air tech,Suicopath cannot air tech,,Suicópata no puede recuperarse en el aire,Suicopáta não pode se recuperar no ar
 Suicopath cannot build super meter,Suicopath cannot build super meter,,Suicópata no puede generar barras,Suicopáta não pode ganhar barra
 Suicopath cannot jump,Suicopath cannot jump,ジャンプできない,A Suicópata le pesan los pies (No puede saltar),Suicopáta não pode saltar devido ao inferno a puxar para baixo
@@ -612,7 +612,7 @@ Throw / Air Throw,Throw / Air Throw,投げ / 空投げ,Agarre / Agarre aéreo,Ar
 Throw hits at mid range,Throw hits at mid range,中距離投げ,El agarre golpea a rango Medio,Arremeso acerta em alcance médio
 Time to get fancy!,Time to get fancy!,派手になるぜ！,¡Hora de lucirse!,Hora de ficar chique!
 Tokusha-seizon Wandarada-!!,Tokusha-seizon Wandarada-!!,特者生存ワンダラダー！！,Tokusha-seizon Wandarada-!!,Tokusha-seizon Wandarada-!!
-Tone Tuning Guitar,Tone Tuning Guitar,,Guitarra Afinadora,Ajuste de Guitarra 
+Tone Tuning Guitar,Tone Tuning Guitar,,Guitarra Afinadora,Ajuste de Guitarra
 Tower Force,Tower Force,,Fuerza de Torre,Força da Torre
 Tuning Guitar,Tuning Guitar,チューニングギター,Afinando Guitarra,Afinando Guitarra
 Triangle Jump,Triangle Jump,三角飛び,Salto Triangular,Salto Triângulo
