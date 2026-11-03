@@ -6,7 +6,9 @@ var dummy_input: InputInterpreter
 var minigame_run_started: bool = false
 var dummy_is_p1: bool
 var original_dummy_point_character: int
+var original_dummy_assist_character: int
 var original_dummy_point_scene: PackedScene
+var original_dummy_assist_scene: PackedScene
 
 @onready var minigame_director = $CanvasLayer/MinigameDirector
 
@@ -20,9 +22,13 @@ func _ready() -> void:
 	var dummy_characters = Global.PLAYER_1_CHARACTER if dummy_is_p1 else Global.PLAYER_2_CHARACTER
 	var dummy_paths = Global.PLAYER_1_NODE_PATH if dummy_is_p1 else Global.PLAYER_2_NODE_PATH
 	original_dummy_point_character = dummy_characters[0]
+	original_dummy_assist_character = dummy_characters[1]
 	original_dummy_point_scene = dummy_nodes[0] as PackedScene
+	original_dummy_assist_scene = dummy_nodes[1] as PackedScene
 	if original_dummy_point_scene == null:
 		original_dummy_point_scene = load(dummy_paths[0]) as PackedScene
+	if original_dummy_assist_scene == null:
+		original_dummy_assist_scene = load(dummy_paths[1]) as PackedScene
 
 	setup_training()
 
@@ -203,13 +209,24 @@ func load_minigame_state(minigame: Minigame) -> void:
 		return
 
 	var point_character: int = minigame.dummy_point_character
+	var assist_character: int = minigame.dummy_assist_character
 	var point_scene: PackedScene = minigame.dummy_point_scene
+	var assist_scene: PackedScene = minigame.dummy_assist_scene
 	if point_character < 0:
 		point_character = original_dummy_point_character
 		point_scene = original_dummy_point_scene
+	if assist_character < 0:
+		assist_character = original_dummy_assist_character
+		assist_scene = original_dummy_assist_scene
 	elif point_scene == null:
 		push_error(
 			"MinigameMain: Minigame '%s' sets a dummy character without a scene."
+			% minigame.display_name
+		)
+		return
+	elif assist_scene == null:
+		push_error(
+			"MinigameMain: Minigame '%s' sets a dummy assist without a scene."
 			% minigame.display_name
 		)
 		return
@@ -217,14 +234,137 @@ func load_minigame_state(minigame: Minigame) -> void:
 	if point_scene == null:
 		push_error("MinigameMain: Could not resolve the dummy point character scene.")
 		return
+	if assist_scene == null:
+		push_error("MinigameMain: Could not resolve the dummy assist character scene.")
+		return
+
+	var point_color_path: String = _get_minigame_palette_path(
+		point_character,
+		false
+	)
+	var assist_color_path: String = _get_minigame_palette_path(
+		assist_character,
+		true
+	)
+	if point_color_path.is_empty() or assist_color_path.is_empty():
+		return
+
+	var dummy_colors = Global.PLAYER_1_COLOR if dummy_is_p1 else Global.PLAYER_2_COLOR
+	if dummy_colors[0] != point_color_path:
+		dummy_colors[0] = point_color_path
+		Global.load_new_color(dummy_is_p1, false)
+	if dummy_colors[1] != assist_color_path:
+		dummy_colors[1] = assist_color_path
+		Global.load_new_color(dummy_is_p1, true)
 
 	fighter_game.set_point_character(dummy_is_p1, point_character, point_scene)
+	fighter_game.set_assist_character(dummy_is_p1, assist_character, assist_scene)
 	return_control_to_player()
 	SyncManager._call_load_state(minigame.savestate)
-
 	fighter_game.un_freeze_game_sim()
 	fighter_game.RoundTimer.display_time()
 	dummy_input.clear_input()
+
+
+func _get_minigame_palette_path(character: int, is_assist: bool) -> String:
+	var slot: int = 1 if is_assist else 0
+	var characters = (
+		Global.PLAYER_1_CHARACTER if dummy_is_p1 else Global.PLAYER_2_CHARACTER
+	)
+	var colors = Global.PLAYER_1_COLOR if dummy_is_p1 else Global.PLAYER_2_COLOR
+	if characters[slot] == character:
+		return colors[slot]
+
+	var new_palette_directory: String = _get_minigame_palette_directory(
+		character,
+		is_assist
+	)
+	if new_palette_directory.is_empty():
+		push_error(
+			"MinigameMain: No palette directory for character %s."
+			% character
+		)
+		return ""
+
+	var old_palette_directory: String = _get_minigame_palette_directory(
+		characters[slot],
+		is_assist
+	)
+	var current_palette_number: int = (
+		colors[slot].get_file().get_basename().to_int()
+	)
+	if (
+		current_palette_number > 0
+		and ResourceLoader.exists(
+			old_palette_directory + str(current_palette_number) + ".png"
+		)
+		and ResourceLoader.exists(
+			new_palette_directory + str(current_palette_number) + ".png"
+		)
+	):
+		return new_palette_directory + str(current_palette_number) + ".png"
+
+	for candidate in range(1, Util.MAX_COLOR_PALETTE_NUMBER + 1):
+		var palette_path: String = new_palette_directory + str(candidate) + ".png"
+		if ResourceLoader.exists(palette_path):
+			return palette_path
+
+	push_error(
+		"MinigameMain: No color palettes found for character %s."
+		% character
+	)
+	return ""
+
+
+func _get_minigame_palette_directory(
+	character: int,
+	is_assist: bool
+) -> String:
+	if is_assist:
+		match character:
+			Enums.AssistCharacters.Fubuki:
+				return "res://game/assets/sprites/assists/fubuki/ColorPalettes/"
+			Enums.AssistCharacters.Sora:
+				return "res://game/assets/sprites/assists/sora/ColorPalettes/"
+			Enums.AssistCharacters.Sana:
+				return "res://game/assets/sprites/assists/sana/ColorPalettes/"
+			Enums.AssistCharacters.OkaKoro:
+				return "res://game/assets/sprites/assists/okakoro/ColorPalettes/"
+			Enums.AssistCharacters.Hakka:
+				return "res://game/assets/sprites/assists/hakka/ColorPalettes/"
+			Enums.AssistCharacters.Rikka:
+				return "res://game/assets/sprites/assists/rikka/ColorPalettes/"
+			Enums.AssistCharacters.Subaru:
+				return "res://game/assets/sprites/subaru/ColorPalettes/"
+			Enums.AssistCharacters.Mio:
+				return "res://game/assets/sprites/mio/ColorPalettes/"
+			Enums.AssistCharacters.Oga:
+				return "res://game/assets/sprites/oga/ColorPalettes/"
+			Enums.AssistCharacters.Ollie:
+				return "res://game/assets/sprites/ollie/ColorPalettes/"
+			Enums.AssistCharacters.Suisei:
+				return "res://game/assets/sprites/suisei/ColorPalettes/"
+			Enums.AssistCharacters.Kanata:
+				return "res://game/assets/sprites/kanata/ColorPalettes/"
+			Enums.AssistCharacters.Flayon:
+				return "res://game/assets/sprites/flayon/ColorPalettes/"
+	else:
+		match character:
+			Enums.PointCharacters.Subaru:
+				return "res://game/assets/sprites/subaru/ColorPalettes/"
+			Enums.PointCharacters.Mio:
+				return "res://game/assets/sprites/mio/ColorPalettes/"
+			Enums.PointCharacters.Oga:
+				return "res://game/assets/sprites/oga/ColorPalettes/"
+			Enums.PointCharacters.Ollie:
+				return "res://game/assets/sprites/ollie/ColorPalettes/"
+			Enums.PointCharacters.Suisei:
+				return "res://game/assets/sprites/suisei/ColorPalettes/"
+			Enums.PointCharacters.Kanata:
+				return "res://game/assets/sprites/kanata/ColorPalettes/"
+			Enums.PointCharacters.Flayon:
+				return "res://game/assets/sprites/flayon/ColorPalettes/"
+	return ""
 
 
 func input_start() -> void:

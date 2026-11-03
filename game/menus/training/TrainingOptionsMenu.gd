@@ -29,6 +29,7 @@ var move_data_visible: bool = false
 var _base_position: Vector2
 var _base_scale: Vector2
 var _base_size: Vector2
+var _character_settings_popup_preferred_size: Vector2i
 var _layout_ready := false
 var _closing_training_options_menu := false
 
@@ -46,6 +47,7 @@ func _ready():
 	_base_position = position
 	_base_scale = scale
 	_base_size = size
+	_character_settings_popup_preferred_size = character_settings_popup.size
 	_layout_ready = true
 	get_viewport().size_changed.connect(_fit_to_viewport)
 	get_viewport().connect("gui_focus_changed", Callable(self, "_on_focus_changed"))
@@ -191,12 +193,33 @@ func get_stance() -> int:
 	return $StanceOptions.selected
 
 func open_character_settings_popup() -> void:
-	var popup_size := Vector2i(680, 380)
 	var viewport_rect := get_viewport().get_visible_rect()
+	var margin := minf(48.0, minf(viewport_rect.size.x, viewport_rect.size.y) * 0.05)
+	var available_size := Vector2i(
+		viewport_rect.size - Vector2(margin, margin * 2.0)
+	)
+	var popup_scale := minf(
+		scale.y,
+		minf(
+			float(available_size.x) / _character_settings_popup_preferred_size.x,
+			float(available_size.y) / _character_settings_popup_preferred_size.y
+		)
+	)
+	var popup_size := Vector2i(
+		_character_settings_popup_preferred_size.x * popup_scale,
+		_character_settings_popup_preferred_size.y * popup_scale
+	)
+	var layout := character_settings_popup.get_node("Layout") as Control
+	layout.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	layout.position = Vector2(4.0, 4.0)
+	layout.size = Vector2(
+		_character_settings_popup_preferred_size.x - 8.0,
+		_character_settings_popup_preferred_size.y - 8.0
+	)
+	layout.scale = Vector2.ONE * popup_scale
+
 	var popup_position := Vector2i(
-		roundi(
-			viewport_rect.position.x + viewport_rect.size.x - popup_size.x - 48.0
-		),
+		roundi(viewport_rect.position.x + viewport_rect.size.x - popup_size.x),
 		roundi(viewport_rect.position.y + (viewport_rect.size.y - popup_size.y) * 0.5)
 	)
 	character_settings_popup.popup(Rect2i(popup_position, popup_size))

@@ -7,7 +7,8 @@ class_name Minigame
 @export var savestate: Dictionary = {}
 @export var dummy_point_character: int = -1
 @export var dummy_point_scene: PackedScene
-
+@export var dummy_assist_character: int = -1
+@export var dummy_assist_scene: PackedScene
 
 func get_instruction() -> String:
 	return instruction
