@@ -69,6 +69,27 @@ func _ready() -> void:
 	setup_mechanized()
 	super._ready()
 	setup_training()
+	var controlled_is_p1: bool = self is ComboTrialMain or Global.TRAINING_P1
+	$CanvasLayer/TrainingOptionsMenu.set_training_character(
+		controlled_is_p1,
+		false,
+		_get_side_character(controlled_is_p1, false)
+	)
+	$CanvasLayer/TrainingOptionsMenu.set_training_character(
+		controlled_is_p1,
+		true,
+		_get_side_character(controlled_is_p1, true)
+	)
+	$CanvasLayer/TrainingOptionsMenu.set_training_character(
+		not controlled_is_p1,
+		false,
+		_get_side_character(not controlled_is_p1, false)
+	)
+	$CanvasLayer/TrainingOptionsMenu.set_training_character(
+		not controlled_is_p1,
+		true,
+		_get_side_character(not controlled_is_p1, true)
+	)
 	$CanvasLayer/TrainingOptionsMenu.connect("close_menu", Callable(self, "set_new_training_options"))
 	$CanvasLayer/TrainingOptionsMenu.connect("exit", Callable(self, "exit"))
 	$CanvasLayer/TrainingOptionsMenu.connect("reset", Callable(self, "reset"))
@@ -227,6 +248,10 @@ func _get_controlled_player() -> BasePlayer:
 
 func _get_opponent_point_player() -> BasePlayer:
 	return fighter_game.ClientPlayer if (self is ComboTrialMain or Global.TRAINING_P1) else fighter_game.ServerPlayer
+
+func _get_side_character(is_p1: bool, is_assist: bool) -> int:
+	var characters = Global.PLAYER_1_CHARACTER if is_p1 else Global.PLAYER_2_CHARACTER
+	return characters[1 if is_assist else 0]
 
 func _get_move_data_attackers() -> Array[BasePlayer]:
 	var controlled_is_server: bool = self is ComboTrialMain or Global.TRAINING_P1
@@ -539,6 +564,52 @@ func execute_savestate():
 		var input_history: Array = input_source_state[InputSource.State.inputHistory]
 		var current_index: int = input_source_state[InputSource.State.zeroIndex]
 		input_history[current_index] &= ~active_button_flags
+
+	# Uncomment while authoring a minigame savestate; leave disabled in builds.
+	#save_minigame_savestate("default_corner")
+
+func save_minigame_savestate(minigame_name: String) -> void:
+	var resource_name := minigame_name.validate_filename()
+	if resource_name.is_empty():
+		push_error("TrainingMain: Minigame savestate name cannot be empty.")
+		return
+
+	var minigame := Minigame.new()
+	minigame.display_name = minigame_name
+	for node_path in savestate:
+		var minigame_node_path: String = str(node_path).replace(
+			"/root/TrainingMain/",
+			"/root/MinigameMain/"
+		)
+		minigame.savestate[minigame_node_path] = savestate[node_path].duplicate(true)
+
+	var script_path := (
+		"res://game/menus/minigame/minigames/Minigame%s.gd"
+		% resource_name.capitalize()
+	)
+	var script_contents := (
+		"extends Minigame\n\n"
+		+ "const SAVESTATE: Dictionary = %s\n\n"
+		+ "func _init() -> void:\n"
+		+ "\tdisplay_name = %s\n"
+		+ "\tsavestate = SAVESTATE.duplicate(true)\n"
+	) % [var_to_str(minigame.savestate), var_to_str(minigame_name)]
+	var file := FileAccess.open(script_path, FileAccess.WRITE)
+	if file == null:
+		push_error(
+			"TrainingMain: Could not open minigame savestate script '%s': %s"
+			% [script_path, error_string(FileAccess.get_open_error())]
+		)
+		return
+
+	file.store_string(script_contents)
+	var error := file.get_error()
+	file.close()
+	if error != OK:
+		push_error(
+			"TrainingMain: Could not write minigame '%s' savestate to '%s': %s"
+			% [minigame_name, script_path, error_string(error)]
+		)
 	
 func update_reaction_save_state():
 	var new_state = SyncManager._call_save_state()
@@ -853,6 +924,7 @@ func toggle_training_menu():
 
 func set_new_training_options():
 	fighter_game.un_freeze_game_sim()
+	_apply_training_character_settings()
 
 	var stance = $CanvasLayer/TrainingOptionsMenu.get_stance()
 	var blocking = $CanvasLayer/TrainingOptionsMenu.get_blocking()
@@ -875,6 +947,270 @@ func set_new_training_options():
 	
 	meter_refresher.assist_build = assist_build
 	meter_refresher.meter_reset_option = meter_reset_option
+
+func _apply_training_character_settings() -> void:
+	var controlled_is_p1: bool = self is ComboTrialMain or Global.TRAINING_P1
+	var options = $CanvasLayer/TrainingOptionsMenu
+	_apply_character_setting(
+		controlled_is_p1,
+		false,
+		options.get_training_character(controlled_is_p1, false)
+	)
+	_apply_character_setting(
+		controlled_is_p1,
+		true,
+		options.get_training_character(controlled_is_p1, true)
+	)
+	_apply_character_setting(
+		not controlled_is_p1,
+		false,
+		options.get_training_character(not controlled_is_p1, false)
+	)
+	_apply_character_setting(
+		not controlled_is_p1,
+		true,
+		options.get_training_character(not controlled_is_p1, true)
+	)
+
+func _apply_character_setting(
+	is_p1: bool,
+	is_assist: bool,
+	new_character: int
+) -> void:
+	var old_character: int = _get_side_character(is_p1, is_assist)
+	if new_character == old_character:
+		return
+
+	var character_data := (
+		_get_assist_character_data(new_character)
+		if is_assist
+		else _get_point_character_data(new_character)
+	)
+	if character_data.is_empty():
+		push_error("TrainingMain: Unsupported character selection %s." % new_character)
+		$CanvasLayer/TrainingOptionsMenu.set_training_character(
+			is_p1,
+			is_assist,
+			old_character
+		)
+		return
+
+	var colors = Global.PLAYER_1_COLOR if is_p1 else Global.PLAYER_2_COLOR
+	var current_color_path: String = colors[1 if is_assist else 0]
+	var current_palette_number: int = current_color_path.get_file().get_basename().to_int()
+	var old_palette_directory: String = (
+		_get_assist_palette_directory(old_character)
+		if is_assist
+		else _get_point_palette_directory(old_character)
+	)
+	var new_palette_directory: String = character_data["palette_directory"]
+	var palette_number: int = _choose_character_palette(
+		current_palette_number,
+		old_palette_directory,
+		new_palette_directory
+	)
+	if palette_number == 0:
+		push_error(
+			"TrainingMain: No color palettes found for character %s."
+			% new_character
+		)
+		$CanvasLayer/TrainingOptionsMenu.set_training_character(
+			is_p1,
+			is_assist,
+			old_character
+		)
+		return
+
+	var character_scene: PackedScene = load(character_data["scene_path"]) as PackedScene
+	if character_scene == null:
+		push_error(
+			"TrainingMain: Could not load character scene '%s'."
+			% character_data["scene_path"]
+		)
+		$CanvasLayer/TrainingOptionsMenu.set_training_character(
+			is_p1,
+			is_assist,
+			old_character
+		)
+		return
+
+	colors[1 if is_assist else 0] = (
+		new_palette_directory + str(palette_number) + ".png"
+	)
+	Global.load_new_color(is_p1, is_assist)
+
+	if is_assist:
+		fighter_game.set_assist_character(is_p1, new_character, character_scene)
+	else:
+		if dummy_input.player != null:
+			dummy_input.disconnect_signals()
+			dummy_input.player = null
+		fighter_game.set_point_character(is_p1, new_character, character_scene)
+		return_control_to_player()
+
+	if _has_move_data_ui:
+		_refresh_move_data_signals(is_p1)
+
+func _refresh_move_data_signals(changed_side_is_p1: bool) -> void:
+	var controlled_is_p1: bool = self is ComboTrialMain or Global.TRAINING_P1
+	var is_controlled_side: bool = changed_side_is_p1 == controlled_is_p1
+	var point_player: PointPlayer = (
+		fighter_game.ServerPlayer if changed_side_is_p1 else fighter_game.ClientPlayer
+	)
+	var assist_player: AssistPlayer = (
+		fighter_game.AssistPlayer1 if changed_side_is_p1 else fighter_game.AssistPlayer2
+	)
+	if is_controlled_side:
+		point_player.projectilespawn.connect(
+			Callable(self, "_on_move_data_projectile_spawned").bind(point_player)
+		)
+		assist_player.projectilespawn.connect(
+			Callable(self, "_on_move_data_projectile_spawned").bind(assist_player)
+		)
+	else:
+		point_player.attack_hurt_resolved.connect(
+			Callable(self, "_on_training_opponent_attack_hurt").bind(point_player)
+		)
+		assist_player.attack_hurt_resolved.connect(
+			Callable(self, "_on_training_opponent_attack_hurt").bind(assist_player)
+		)
+
+func _choose_character_palette(
+	current_palette_number: int,
+	old_palette_directory: String,
+	new_palette_directory: String
+) -> int:
+	if (
+		current_palette_number > 0
+		and ResourceLoader.exists(
+			old_palette_directory + str(current_palette_number) + ".png"
+		)
+		and ResourceLoader.exists(
+			new_palette_directory + str(current_palette_number) + ".png"
+		)
+	):
+		return current_palette_number
+
+	for candidate in range(1, Util.MAX_COLOR_PALETTE_NUMBER + 1):
+		if ResourceLoader.exists(new_palette_directory + str(candidate) + ".png"):
+			return candidate
+	return 0
+
+func _get_point_character_data(character: int) -> Dictionary:
+	match character:
+		Enums.PointCharacters.Subaru:
+			return {
+				"scene_path": "res://game/fighter/SubaruPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/subaru/ColorPalettes/",
+			}
+		Enums.PointCharacters.Mio:
+			return {
+				"scene_path": "res://game/fighter/MioPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/mio/ColorPalettes/",
+			}
+		Enums.PointCharacters.Oga:
+			return {
+				"scene_path": "res://game/fighter/OgaPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/oga/ColorPalettes/",
+			}
+		Enums.PointCharacters.Ollie:
+			return {
+				"scene_path": "res://game/fighter/OlliePlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/ollie/ColorPalettes/",
+			}
+		Enums.PointCharacters.Suisei:
+			return {
+				"scene_path": "res://game/fighter/SuiseiPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/suisei/ColorPalettes/",
+			}
+		Enums.PointCharacters.Kanata:
+			return {
+				"scene_path": "res://game/fighter/KanataPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/kanata/ColorPalettes/",
+			}
+		Enums.PointCharacters.Flayon:
+			return {
+				"scene_path": "res://game/fighter/FlayonPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/flayon/ColorPalettes/",
+			}
+	return {}
+
+func _get_point_palette_directory(character: int) -> String:
+	var character_data := _get_point_character_data(character)
+	return character_data.get("palette_directory", "")
+
+func _get_assist_character_data(assist: int) -> Dictionary:
+	match assist:
+		Enums.AssistCharacters.Fubuki:
+			return {
+				"scene_path": "res://game/fighter/assist/fubuki/FubukiPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/assists/fubuki/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Sora:
+			return {
+				"scene_path": "res://game/fighter/assist/sora/SoraPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/assists/sora/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Sana:
+			return {
+				"scene_path": "res://game/fighter/assist/assistsana/SanaPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/assists/sana/ColorPalettes/",
+			}
+		Enums.AssistCharacters.OkaKoro:
+			return {
+				"scene_path": "res://game/fighter/assist/okakoro/OkaKoroPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/assists/okakoro/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Hakka:
+			return {
+				"scene_path": "res://game/fighter/assist/hakka/HakkaPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/assists/hakka/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Rikka:
+			return {
+				"scene_path": "res://game/fighter/assist/rikka/RikkaPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/assists/rikka/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Subaru:
+			return {
+				"scene_path": "res://game/fighter/assist/assistsubaru/AssistSubaruPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/subaru/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Mio:
+			return {
+				"scene_path": "res://game/fighter/assist/assistmio/AssistMioPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/mio/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Oga:
+			return {
+				"scene_path": "res://game/fighter/assist/assistoga/AssistOgaPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/oga/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Ollie:
+			return {
+				"scene_path": "res://game/fighter/assist/assistollie/AssistOlliePlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/ollie/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Suisei:
+			return {
+				"scene_path": "res://game/fighter/assist/assistsuisei/AssistSuiseiPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/suisei/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Kanata:
+			return {
+				"scene_path": "res://game/fighter/assist/assistkanata/AssistKanataPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/kanata/ColorPalettes/",
+			}
+		Enums.AssistCharacters.Flayon:
+			return {
+				"scene_path": "res://game/fighter/assist/flayon/AssistFlayonPlayer.tscn",
+				"palette_directory": "res://game/assets/sprites/flayon/ColorPalettes/",
+			}
+	return {}
+
+func _get_assist_palette_directory(assist: int) -> String:
+	var assist_data := _get_assist_character_data(assist)
+	return assist_data.get("palette_directory", "")
 
 ### RECORDING 
 

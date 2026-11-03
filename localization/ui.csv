@@ -74,6 +74,11 @@ UI_TRAINING_ATTACK_RECOVERY,Recovery:,硬直:,Recuperación:,Recuperação:
 UI_TRAINING_FRAME_ADVANTAGE,Frame Advantage:,有利フレーム:,Ventaja de frames:,Vantagem de quadros:
 UI_TRAINING_MOVE_DATA,Move Data,技データ,Datos del movimiento,Dados do movimento
 UI_TRAINING_STANCE,Stance,相手の状態,Postura,Postura
+UI_TRAINING_OPPONENT_CHARACTER,Opponent Character,相手キャラクター,Personaje rival,Personagem oponente
+UI_TRAINING_OPPONENT_ASSIST,Opponent Assist,相手のアシスト,Asistencia rival,Assistência oponente
+UI_TRAINING_PLAYER_CHARACTER,Player Character,プレイヤーキャラクター,Personaje del jugador,Personagem do jogador
+UI_TRAINING_PLAYER_ASSIST,Player Assist,プレイヤーアシスト,Asistencia del jugador,Assistência do jogador
+UI_TRAINING_CHARACTER_SETTINGS,Character Settings,キャラクター設定,Configuración de personajes,Configurações de personagem
 UI_TRAINING_COUNTER_HIT,CounterHit,カウンターヒット,Contraataque,Contra-ataque
 UI_TRAINING_BLOCK_SETTINGS,Block Settings,ガード設定,Opciones de bloqueo,Configurações de defesa
 UI_TRAINING_BLOCK_SWITCHING,Block Switching,ガード変わり,Cambio de bloqueo,Troca de defesa

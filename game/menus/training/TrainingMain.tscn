@@ -245,6 +245,23 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
 
+[node name="CharacterSettingsLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_CHARACTER_SETTINGS"
+
+[node name="CharacterSettingsButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "UI_BUTTON_CHANGE"
+
+[node name="CharacterSettingsNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
 [node name="StanceLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -585,6 +602,87 @@ offset_top = 19.0
 offset_right = 109.0
 offset_bottom = 43.0
 scale = Vector2(2.87118, 3.02479)
+
+[node name="CharacterSettingsPopup" type="PopupPanel" parent="CanvasLayer"]
+visible = false
+size = Vector2i(680, 380)
+theme = ExtResource("11_s221j")
+
+[node name="Background" type="NinePatchRect" parent="CanvasLayer/CharacterSettingsPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+patch_margin_left = 75
+patch_margin_top = 60
+patch_margin_right = 75
+patch_margin_bottom = 70
+mouse_filter = 2
+modulate = Color(0.172549, 0.121569, 0.121569, 0.411765)
+texture = ExtResource("6")
+
+[node name="Layout" type="VBoxContainer" parent="CanvasLayer/CharacterSettingsPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 24.0
+offset_right = -30.0
+offset_bottom = -24.0
+
+[node name="Title" type="Label" parent="CanvasLayer/CharacterSettingsPopup/Layout"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_CHARACTER_SETTINGS"
+
+[node name="CharacterSettingsGrid" type="GridContainer" parent="CanvasLayer/CharacterSettingsPopup/Layout"]
+layout_mode = 2
+columns = 2
+
+[node name="PlayerCharacterLabel" type="Label" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_PLAYER_CHARACTER"
+
+[node name="PlayerCharacterOptions" type="OptionButton" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+
+[node name="PlayerAssistLabel" type="Label" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_PLAYER_ASSIST"
+
+[node name="PlayerAssistOptions" type="OptionButton" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+
+[node name="OpponentCharacterLabel" type="Label" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_OPPONENT_CHARACTER"
+
+[node name="OpponentCharacterOptions" type="OptionButton" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+
+[node name="OpponentAssistLabel" type="Label" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_OPPONENT_ASSIST"
+
+[node name="OpponentAssistOptions" type="OptionButton" parent="CanvasLayer/CharacterSettingsPopup/Layout/CharacterSettingsGrid"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/CharacterSettingsPopup/Layout"]
+layout_mode = 2
+text = "UI_BUTTON_CLOSE"
 
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/SaveStateButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_SaveStateButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/LoadStateButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_LoadStateButton_pressed"]

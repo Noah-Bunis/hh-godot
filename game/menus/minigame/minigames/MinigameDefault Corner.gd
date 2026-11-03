@@ -1,0 +1,424 @@
+extends "res://game/menus/minigame/Minigame.gd"
+
+const MIO_PLAYER_SCENE = preload("res://game/fighter/MioPlayer.tscn")
+
+const SAVESTATE: Dictionary = {
+"/root/MinigameMain/FighterGame": {
+0: true,
+1: false,
+2: -1,
+3: 0,
+4: 0
+},
+"/root/MinigameMain/FighterGame/AssistPlayer1": {
+0: "Dormant",
+1: "Dormant",
+2: false,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0,
+9: false,
+10: true,
+11: 38,
+12: 0,
+13: -1,
+14: -1,
+16: 0,
+21: 0,
+22: 0,
+37: 0,
+38: -1966080000,
+39: 65536,
+85: {}
+},
+"/root/MinigameMain/FighterGame/AssistPlayer1/Hitbox1": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer1/Hitbox2": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer1/Hurtbox1": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer1/Hurtbox2": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer1/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/AssistPlayer2": {
+0: "Dormant",
+1: "Dormant",
+2: false,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 0,
+8: 0,
+9: false,
+10: true,
+11: 38,
+12: 0,
+13: -1,
+14: -1,
+16: 0,
+21: 0,
+22: 0,
+37: 0,
+38: -1966080000,
+39: 65536,
+85: {}
+},
+"/root/MinigameMain/FighterGame/AssistPlayer2/Hitbox1": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer2/Hitbox2": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer2/Hurtbox1": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer2/Hurtbox2": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/AssistPlayer2/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/BattleCamera": {
+0: 119730404,
+1: 0
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/ClientComboCounter/CounterAnimation": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/ClientComboCounter/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/ClientHPBar": {
+0: 563,
+1: 563,
+2: 563,
+3: 1.0,
+4: true
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/DownText/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/DownText/NetworkTimer": {
+&"running": false,
+&"ticks_left": 0,
+&"wait_ticks": 60
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/IntroShutters/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/IntroShutters/NetworkTimer": {
+&"running": true,
+&"ticks_left": 19,
+&"wait_ticks": 30
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/NowLoadingText/AnnouncerTimer": {
+&"running": false,
+&"ticks_left": 0,
+&"wait_ticks": 135
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/NowLoadingText/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/NowLoadingText/NetworkTimer": {
+&"running": false,
+&"ticks_left": 0,
+&"wait_ticks": 1
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/RoundTimer": {
+0: 6000,
+1: false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/RoundTimer/CounterAnimation": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/RoundTimer/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/RoundTracker": {
+0: 0,
+1: 0
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/ServerComboCounter/CounterAnimation": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/ServerComboCounter/NetworkAnimationPlayer": {
+&"current_animation": "",
+&"current_position": 0.0,
+&"current_speed": 1,
+&"is_playing": false
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/ServerHPBar": {
+0: 563,
+1: 563,
+2: 563,
+3: 1.0,
+4: true
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/WinScreenManager": {
+0: false,
+1: 0
+},
+"/root/MinigameMain/FighterGame/Camera3D/BattleUI/WinScreenManager/NetworkTimer": {
+&"running": false,
+&"ticks_left": 0,
+&"wait_ticks": 200
+},
+"/root/MinigameMain/FighterGame/ClientInputInterpreter/InputSource": {
+0: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+1: 43,
+2: 0
+},
+"/root/MinigameMain/FighterGame/Player1": {
+0: "Stand",
+1: "Stand",
+2: false,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 125536,
+8: 0,
+9: false,
+10: true,
+11: 35,
+12: 0,
+13: -1,
+14: -1,
+15: "",
+16: 0,
+17: 0,
+18: 0,
+19: 1,
+20: 1,
+21: 0,
+22: 0,
+23: false,
+24: 2621440000,
+25: 1975080,
+26: 1966080,
+27: 3276800000,
+28: 175570000,
+29: 28787136,
+30: true,
+31: 1,
+32: "/root/TrainingMain/FighterGame/Player2",
+33: 0,
+34: true,
+37: 146782864,
+38: 29212410,
+39: 65536,
+85: {}
+},
+"/root/MinigameMain/FighterGame/Player1/Hitbox1": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/Player1/Hitbox2": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/Player1/Hurtbox1": {
+37: 327680,
+38: -22085634,
+39: 257090,
+40: 604574,
+41: false
+},
+"/root/MinigameMain/FighterGame/Player1/Hurtbox2": {
+37: 131072,
+38: -14352384,
+39: 401098,
+40: -853100,
+41: false
+},
+"/root/MinigameMain/FighterGame/Player1/Hurtbox3": {
+37: 262144,
+38: -3538944,
+39: 783139,
+40: -370037,
+41: false
+},
+"/root/MinigameMain/FighterGame/Player1/NetworkAnimationPlayer": {
+&"current_animation": "Idle",
+&"current_position": 0.5833333333333335,
+&"current_speed": 0.0,
+&"is_playing": true
+},
+"/root/MinigameMain/FighterGame/Player2": {
+0: "Stand",
+1: "Stand",
+2: false,
+3: 0,
+4: 0,
+5: 0,
+6: 0,
+7: 125536,
+8: 0,
+9: true,
+10: true,
+11: 38,
+12: 0,
+13: -1,
+14: -1,
+15: "",
+16: 0,
+17: 0,
+18: 0,
+19: 1,
+20: 1,
+21: 0,
+22: 0,
+23: false,
+24: 2621440000,
+25: 1966080,
+26: 1966080,
+27: 3276800000,
+28: 146782864,
+29: 28787136,
+30: true,
+31: 1,
+32: "/root/TrainingMain/FighterGame/Player1",
+33: 0,
+34: true,
+37: 175570000,
+38: 29212410,
+39: -65536,
+85: {}
+},
+"/root/MinigameMain/FighterGame/Player2/Hitbox1": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/Player2/Hitbox2": {
+37: 0,
+38: 0,
+39: 65536,
+40: 65536,
+41: true
+},
+"/root/MinigameMain/FighterGame/Player2/Hurtbox1": {
+37: 327680,
+38: -22085634,
+39: 257090,
+40: 604574,
+41: false
+},
+"/root/MinigameMain/FighterGame/Player2/Hurtbox2": {
+37: 131072,
+38: -14352384,
+39: 401098,
+40: -853100,
+41: false
+},
+"/root/MinigameMain/FighterGame/Player2/Hurtbox3": {
+37: 262144,
+38: -3538944,
+39: 783139,
+40: -370037,
+41: false
+},
+"/root/MinigameMain/FighterGame/Player2/NetworkAnimationPlayer": {
+&"current_animation": "Idle",
+&"current_position": 0.6500000000000004,
+&"current_speed": 0.0,
+&"is_playing": true
+},
+"/root/MinigameMain/FighterGame/ServerInputInterpreter/InputSource": {
+0: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+1: 43,
+2: 0
+},
+"/root/SyncManager/SpawnManager": {
+&"counter": {
+"TagVFX": 6
+},
+&"spawn_records": {}
+}
+}
+
+func _init() -> void:
+	display_name = "default_corner"
+	dummy_point_character = Enums.PointCharacters.Mio
+	dummy_point_scene = MIO_PLAYER_SCENE
+	savestate = SAVESTATE.duplicate(true)

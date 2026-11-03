@@ -181,6 +181,204 @@ func reset_to_game_start():
 	
 	un_freeze_game_sim()
 
+func set_point_character(is_p1: bool, character: int, player_scene: PackedScene) -> void:
+	if player_scene == null:
+		push_error("FighterGame: Cannot set point character without a player scene.")
+		return
+
+	var player_nodes = Global.PLAYER_1_NODE if is_p1 else Global.PLAYER_2_NODE
+	var player_instances = Global.PLAYER_1_NODE_INSTANCE if is_p1 else Global.PLAYER_2_NODE_INSTANCE
+	var player_characters = Global.PLAYER_1_CHARACTER if is_p1 else Global.PLAYER_2_CHARACTER
+	var player_paths = Global.PLAYER_1_NODE_PATH if is_p1 else Global.PLAYER_2_NODE_PATH
+	if (
+		player_characters[0] == character
+		and player_paths[0] == player_scene.resource_path
+	):
+		return
+
+	var new_player := player_scene.instantiate()
+	if not new_player is PointPlayer:
+		push_error("FighterGame: Point character scene must have a PointPlayer root.")
+		new_player.free()
+		return
+
+	var old_player: PointPlayer = ServerPlayer if is_p1 else ClientPlayer
+	if old_player != null:
+		old_player.free()
+
+	new_player.name = "Player1" if is_p1 else "Player2"
+	add_child(new_player)
+	player_nodes[0] = player_scene
+	player_instances[0] = new_player
+	player_characters[0] = character
+	player_paths[0] = player_scene.resource_path
+
+	if is_p1:
+		ServerPlayer = new_player
+	else:
+		ClientPlayer = new_player
+
+	_set_mio_puppet(is_p1, character == Enums.PointCharacters.Mio)
+	reset_to_game_start()
+	_connect_point_player_signals(is_p1)
+	_connect_assist_player_signals(is_p1)
+	_update_player_portrait(is_p1)
+
+func set_assist_character(is_p1: bool, character: int, assist_scene: PackedScene) -> void:
+	if assist_scene == null:
+		push_error("FighterGame: Cannot set assist character without an assist scene.")
+		return
+
+	var assist_instance := assist_scene.instantiate()
+	var new_assist := assist_instance as AssistPlayer
+	if new_assist == null:
+		push_error("FighterGame: Assist character scene must have an AssistPlayer root.")
+		assist_instance.free()
+		return
+
+	var player_nodes = Global.PLAYER_1_NODE if is_p1 else Global.PLAYER_2_NODE
+	var player_instances = Global.PLAYER_1_NODE_INSTANCE if is_p1 else Global.PLAYER_2_NODE_INSTANCE
+	var player_characters = Global.PLAYER_1_CHARACTER if is_p1 else Global.PLAYER_2_CHARACTER
+	var player_paths = Global.PLAYER_1_NODE_PATH if is_p1 else Global.PLAYER_2_NODE_PATH
+	if (
+		player_characters[1] == character
+		and player_paths[1] == assist_scene.resource_path
+	):
+		new_assist.free()
+		return
+
+	var old_assist: AssistPlayer = AssistPlayer1 if is_p1 else AssistPlayer2
+	if old_assist != null:
+		old_assist.free()
+
+	new_assist.name = "AssistPlayer1" if is_p1 else "AssistPlayer2"
+	add_child(new_assist)
+	player_nodes[1] = assist_scene
+	player_instances[1] = new_assist
+	player_characters[1] = character
+	player_paths[1] = assist_scene.resource_path
+
+	if is_p1:
+		AssistPlayer1 = new_assist
+	else:
+		AssistPlayer2 = new_assist
+
+	_initialize_assist_player(is_p1)
+	_connect_assist_player_signals(is_p1)
+	_update_player_portrait(is_p1)
+
+func _initialize_assist_player(is_p1: bool) -> void:
+	var assist: AssistPlayer = AssistPlayer1 if is_p1 else AssistPlayer2
+	var point_player: PointPlayer = ServerPlayer if is_p1 else ClientPlayer
+	var player_characters = Global.PLAYER_1_CHARACTER if is_p1 else Global.PLAYER_2_CHARACTER
+	var player_colors = Global.PLAYER_1_COLOR if is_p1 else Global.PLAYER_2_COLOR
+	var input_interpreter = $ServerInputInterpreter if is_p1 else $ClientInputInterpreter
+	var left_face: bool = not is_p1
+	var x_position: int = -40239104 if is_p1 else 40239104
+
+	assist.reset_to_game_start()
+	assist.fixed_position.x = x_position
+	assist.fixed_position.y = 29949952
+	if not is_p1:
+		assist.fixed_scale.x *= -1
+	assist.sync_to_physics_engine()
+	assist.setup(
+		PlayerSetup.new(
+			left_face,
+			not is_p1,
+			player_characters[1],
+			player_colors[1],
+			input_interpreter
+		)
+	)
+	assist.pilot = point_player
+
+func _connect_assist_player_signals(is_p1: bool) -> void:
+	var point_player: PointPlayer = ServerPlayer if is_p1 else ClientPlayer
+	var assist: AssistPlayer = AssistPlayer1 if is_p1 else AssistPlayer2
+
+	_connect_signal_once(assist, "strike_hurt", Callable(point_player, "assist_hurt"))
+	_connect_signal_once(assist, "battery_player", Callable(point_player, "support_battery"))
+	_connect_signal_once(assist, "move_pilot", Callable(point_player, "move_from_assist_character"))
+	_connect_signal_once(assist, "projectilespawn", Callable(self, "spawn"))
+	_connect_signal_once(assist, "super_freeze", Callable(self, "super_flash"))
+	_connect_signal_once(point_player, "summon", Callable(assist, "tag_in"))
+	_connect_signal_once(point_player, "strike_hurt", Callable(assist, "point_hurt"))
+
+func _update_player_portrait(is_p1: bool) -> void:
+	var player_characters = Global.PLAYER_1_CHARACTER if is_p1 else Global.PLAYER_2_CHARACTER
+	var player_colors = Global.PLAYER_1_COLOR_INSTANCE if is_p1 else Global.PLAYER_2_COLOR_INSTANCE
+	var portrait = $Camera3D/BattleUI/ServerPortrait if is_p1 else $Camera3D/BattleUI/ClientPortrait
+	portrait.load_portrait(
+		player_characters[0],
+		player_colors[0],
+		player_characters[1],
+		player_colors[1]
+	)
+
+func _set_mio_puppet(is_p1: bool, enabled: bool) -> void:
+	var player_nodes = Global.PLAYER_1_NODE if is_p1 else Global.PLAYER_2_NODE
+	var player_instances = Global.PLAYER_1_NODE_INSTANCE if is_p1 else Global.PLAYER_2_NODE_INSTANCE
+	var puppet = player_instances[2]
+	var puppet_name := "Hato1" if is_p1 else "Hato2"
+
+	if not enabled:
+		if puppet != null and is_instance_valid(puppet):
+			puppet.free()
+		player_nodes[2] = null
+		player_instances[2] = null
+		if is_p1:
+			Hato1 = null
+		else:
+			Hato2 = null
+		return
+
+	if player_nodes[2] == null:
+		player_nodes[2] = load("res://game/fighter/puppet/HatoPuppet.tscn")
+	if player_instances[2] == null:
+		player_instances[2] = player_nodes[2].instantiate()
+		player_instances[2].name = puppet_name
+		add_child(player_instances[2])
+
+	if is_p1:
+		Hato1 = player_instances[2]
+	else:
+		Hato2 = player_instances[2]
+
+func _connect_point_player_signals(is_p1: bool) -> void:
+	var player: PointPlayer = ServerPlayer if is_p1 else ClientPlayer
+	var assist: AssistPlayer = AssistPlayer1 if is_p1 else AssistPlayer2
+	var own_hp_bar = $Camera3D/BattleUI/ServerHPBar if is_p1 else $Camera3D/BattleUI/ClientHPBar
+	var opponent_combo_counter = $Camera3D/BattleUI/ClientComboCounter if is_p1 else $Camera3D/BattleUI/ServerComboCounter
+	var puppet: PuppetPlayer = Hato1 if is_p1 else Hato2
+
+	_connect_signal_once(player, "summon", Callable(assist, "tag_in"))
+	_connect_signal_once(player, "strike_hurt", Callable(assist, "point_hurt"))
+	_connect_signal_once(player, "projectilespawn", Callable(self, "spawn"))
+	_connect_signal_once(player, "strike_hurt", Callable(opponent_combo_counter, "count_up"))
+	_connect_signal_once(player, "combo_exit", Callable(opponent_combo_counter, "drop_combo"))
+	_connect_signal_once(player, "strike_hurt", Callable(own_hp_bar, "register_attack"))
+	_connect_signal_once(player, "combo_exit", Callable(own_hp_bar, "drop_combo"))
+	_connect_signal_once(player, "super_freeze", Callable(self, "super_flash"))
+	_connect_signal_once(assist, "strike_hurt", Callable(player, "assist_hurt"))
+	_connect_signal_once(assist, "battery_player", Callable(player, "support_battery"))
+	_connect_signal_once(assist, "move_pilot", Callable(player, "move_from_assist_character"))
+
+	if ko_enabled:
+		_connect_signal_once(own_hp_bar, "ko", Callable(player, "ko"))
+
+	if puppet != null:
+		_connect_signal_once(player, "summonPuppet", Callable(puppet, "summon"))
+		_connect_signal_once(player, "unsummonPuppet", Callable(puppet, "unsummon"))
+		_connect_signal_once(puppet, "strike_hurt", Callable(player, "puppet_hurt"))
+		_connect_signal_once(puppet, "battery_player", Callable(player, "support_battery"))
+		_connect_signal_once(player, "strike_hurt", Callable(puppet, "point_hurt"))
+		_connect_signal_once(puppet, "super_freeze", Callable(self, "super_flash"))
+
+func _connect_signal_once(source: Object, signal_name: StringName, callback: Callable) -> void:
+	if not source.is_connected(signal_name, callback):
+		source.connect(signal_name, callback)
+
 func setup():
 	if (Global.PLAYER_1_NODE[0] == null):
 		Global.PLAYER_1_NODE[0] = load(Global.PLAYER_1_NODE_PATH[0])

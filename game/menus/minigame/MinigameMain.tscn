@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://vj5tn3syoeh7"]
+[gd_scene load_steps=17 format=3 uid="uid://vj5tn3syoeh7"]
 
 [ext_resource type="PackedScene" path="res://game/ui/FPSCounter.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dno6gucb1p5h" path="res://game/menus/minigame/MinigameMain.gd" id="2_minigame_main"]
@@ -8,6 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://dird4f0w057ux" path="res://game/menus/training/CommandList.tscn" id="8"]
 [ext_resource type="Script" uid="uid://7pocl3a33bdi" path="res://game/menus/minigame/MinigameDirector.gd" id="8_d2n0x"]
 [ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="9"]
+[ext_resource type="Script" path="res://game/menus/minigame/Minigame.gd" id="10_minigame"]
+[ext_resource type="Script" path="res://game/menus/minigame/minigames/MinigameDefault.gd" id="11_default_minigame"]
+[ext_resource type="Script" uid="uid://cnry3r4o0ag6" path="res://game/menus/minigame/minigames/MinigameDefault Corner.gd" id="12_default_corner_minigame"]
+
+[sub_resource type="Resource" id="MinigameDefault"]
+script = ExtResource("11_default_minigame")
+
+[sub_resource type="Resource" id="MinigameDefaultCorner"]
+script = ExtResource("12_default_corner_minigame")
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -260,6 +269,7 @@ scale = Vector2(2.87118, 3.02479)
 
 [node name="MinigameDirector" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("8_d2n0x")
+minigames = Array[ExtResource("10_minigame")]([SubResource("MinigameDefault"), SubResource("MinigameDefaultCorner")])
 
 [node name="SetupPingTimer" type="Timer" parent="."]
 

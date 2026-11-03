@@ -30,6 +30,11 @@ var _base_position: Vector2
 var _base_scale: Vector2
 var _base_size: Vector2
 var _layout_ready := false
+var _closing_training_options_menu := false
+
+@onready var character_settings_popup: PopupPanel = get_node(
+	"../CharacterSettingsPopup"
+)
 
 func _on_focus_changed(control:Control) -> void:
 	#if control is PopupMenu:
@@ -71,6 +76,44 @@ func _ready():
 	$StanceOptions.add_item(tr("UI_TRAINING_STAND"), Enums.TrainingStance.STAND)
 	$StanceOptions.add_item(tr("UI_TRAINING_CROUCH"), Enums.TrainingStance.CROUCH)
 	$StanceOptions.add_item(tr("UI_TRAINING_JUMP"), Enums.TrainingStance.JUMP)
+
+	for options in [
+		$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/PlayerCharacterOptions",
+		$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/OpponentCharacterOptions",
+	]:
+		options.add_item("Oozora Subaru", Enums.PointCharacters.Subaru)
+		options.add_item("Ookami Mio", Enums.PointCharacters.Mio)
+		options.add_item("Aragami Oga", Enums.PointCharacters.Oga)
+		options.add_item("Kureiji Ollie", Enums.PointCharacters.Ollie)
+		options.add_item("Hoshimachi Suisei", Enums.PointCharacters.Suisei)
+		options.add_item("Amane Kanata", Enums.PointCharacters.Kanata)
+		options.add_item("Machina X Flayon", Enums.PointCharacters.Flayon)
+
+	for options in [
+		$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/PlayerAssistOptions",
+		$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/OpponentAssistOptions",
+	]:
+		options.add_item("Shirakami Fubuki", Enums.AssistCharacters.Fubuki)
+		options.add_item("Tokino Sora", Enums.AssistCharacters.Sora)
+		options.add_item("Tsukumo Sana", Enums.AssistCharacters.Sana)
+		options.add_item("OkaKoro", Enums.AssistCharacters.OkaKoro)
+		options.add_item("Banzoin Hakka", Enums.AssistCharacters.Hakka)
+		options.add_item("Rikka", Enums.AssistCharacters.Rikka)
+		options.add_item("Oozora Subaru", Enums.AssistCharacters.Subaru)
+		options.add_item("Ookami Mio", Enums.AssistCharacters.Mio)
+		options.add_item("Aragami Oga", Enums.AssistCharacters.Oga)
+		options.add_item("Kureiji Ollie", Enums.AssistCharacters.Ollie)
+		options.add_item("Hoshimachi Suisei", Enums.AssistCharacters.Suisei)
+		options.add_item("Amane Kanata", Enums.AssistCharacters.Kanata)
+		options.add_item("Machina X Flayon", Enums.AssistCharacters.Flayon)
+
+	$CharacterSettingsButton.pressed.connect(open_character_settings_popup)
+	$"../CharacterSettingsPopup/Layout/CloseButton".pressed.connect(
+		Callable(character_settings_popup, "hide")
+	)
+	character_settings_popup.popup_hide.connect(
+		_on_character_settings_popup_hidden
+	)
 	
 	$SyncRate.value = Util.BASE_SYNC_RATE / SGFixed.ONE
 	call_deferred("_fit_to_viewport")
@@ -123,6 +166,9 @@ func set_close_delay():
 	
 func close_training_options_menu():
 	if (is_enabled()):
+		_closing_training_options_menu = true
+		character_settings_popup.hide()
+		_closing_training_options_menu = false
 		self.visible = false
 		emit_signal("close_menu")
 
@@ -143,6 +189,50 @@ func get_sync_rate() -> int:
 
 func get_stance() -> int:
 	return $StanceOptions.selected
+
+func open_character_settings_popup() -> void:
+	var popup_size := Vector2i(680, 380)
+	var viewport_rect := get_viewport().get_visible_rect()
+	var popup_position := Vector2i(
+		roundi(
+			viewport_rect.position.x + viewport_rect.size.x - popup_size.x - 48.0
+		),
+		roundi(viewport_rect.position.y + (viewport_rect.size.y - popup_size.y) * 0.5)
+	)
+	character_settings_popup.popup(Rect2i(popup_position, popup_size))
+	$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/PlayerCharacterOptions".call_deferred(
+		"grab_focus"
+	)
+
+func _on_character_settings_popup_hidden() -> void:
+	most_recent_focus = $CharacterSettingsButton
+	if not _closing_training_options_menu:
+		emit_signal("close_menu")
+		emit_signal("reset")
+	call_deferred("_restore_character_settings_focus")
+
+func _restore_character_settings_focus() -> void:
+	if is_enabled() and not character_settings_popup.visible:
+		$CharacterSettingsButton.grab_focus()
+
+func get_training_character(is_p1: bool, is_assist: bool) -> int:
+	var side_name := "Player" if is_p1 else "Opponent"
+	var slot_name := "Assist" if is_assist else "Character"
+	var options := character_settings_popup.get_node(
+		"Layout/CharacterSettingsGrid/%s%sOptions" % [side_name, slot_name]
+	) as OptionButton
+	return options.get_selected_id()
+
+func set_training_character(is_p1: bool, is_assist: bool, character: int) -> void:
+	var side_name := "Player" if is_p1 else "Opponent"
+	var slot_name := "Assist" if is_assist else "Character"
+	var options := character_settings_popup.get_node(
+		"Layout/CharacterSettingsGrid/%s%sOptions" % [side_name, slot_name]
+	) as OptionButton
+	for index in range(options.item_count):
+		if options.get_item_id(index) == character:
+			options.select(index)
+			return
 
 func get_counter_hit() -> int:
 	return $CounterHitOptions.selected
@@ -216,6 +306,25 @@ func _input(event):
 	input_helper(event)
 
 func input_helper(event):
+	if character_settings_popup.visible:
+		if (
+			event.is_action_pressed("player1_start")
+			or event.is_action_pressed("player2_start")
+			or event.is_action_pressed("player1_cancel")
+			or event.is_action_pressed("player2_cancel")
+			or event.is_action_pressed("menu_back_b")
+		):
+			for options in [
+				$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/PlayerCharacterOptions",
+				$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/PlayerAssistOptions",
+				$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/OpponentCharacterOptions",
+				$"../CharacterSettingsPopup/Layout/CharacterSettingsGrid/OpponentAssistOptions",
+			]:
+				if options.get_popup().visible:
+					return
+			character_settings_popup.hide()
+		return
+
 	if event.is_action_pressed("player1_start") or event.is_action_pressed("player2_start"):
 		if (not command_list.is_enabled()):
 			_on_CloseButton_pressed()
