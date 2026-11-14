@@ -2,6 +2,10 @@ extends OfflineVersusMain
 
 class_name MinigameMain
 
+const MINIGAME_ROUND_TIMER_SCENE = preload(
+	"res://game/menus/minigame/MinigameRoundTimer.tscn"
+)
+
 var dummy_input: InputInterpreter
 var minigame_run_started: bool = false
 var dummy_is_p1: bool
@@ -9,12 +13,26 @@ var original_dummy_point_character: int
 var original_dummy_assist_character: int
 var original_dummy_point_scene: PackedScene
 var original_dummy_assist_scene: PackedScene
+var active_minigame_instruction: MinigameInstruction
 
 @onready var minigame_director = $CanvasLayer/MinigameDirector
+@onready var objective_progress_label: Label = $CanvasLayer/ObjectiveProgressLabel
 
 
 func _ready() -> void:
 	super._ready()
+	var round_timer = fighter_game.RoundTimer
+	var minigame_round_timer: MinigameRoundTimer = (
+		MINIGAME_ROUND_TIMER_SCENE.instantiate()
+	)
+	minigame_round_timer.name = "MinigameRoundTimer"
+	minigame_round_timer.minigame_director = minigame_director
+	minigame_round_timer.position = round_timer.position
+	minigame_round_timer.scale = round_timer.scale
+	minigame_round_timer.hide()
+	round_timer.get_parent().add_child(minigame_round_timer)
+	round_timer.hide()
+	round_timer.stop_time()
 
 	game_mode_root = "/root/MinigameMain/FighterGame"
 	dummy_is_p1 = not Global.TRAINING_P1
@@ -63,15 +81,43 @@ func _on_round_start_popup_finished(animation_name: StringName) -> void:
 
 func _on_minigame_instruction_changed(minigame: Minigame) -> void:
 	load_minigame_state(minigame)
+	fighter_game.RoundTimer.hide()
+	fighter_game.RoundTimer.stop_time()
+	minigame_director.target_player = (
+		fighter_game.ServerPlayer if dummy_is_p1 else fighter_game.ClientPlayer
+	)
 
-	$CanvasLayer/MessageLabel.text = minigame.get_instruction()
-	$CanvasLayer/MessageLabel.visible = true
+	if active_minigame_instruction != null:
+		if active_minigame_instruction.progress_changed.is_connected(
+			_on_minigame_progress_changed
+		):
+			active_minigame_instruction.progress_changed.disconnect(
+				_on_minigame_progress_changed
+			)
+
+	active_minigame_instruction = minigame.objective
+	message_label.text = minigame.get_instruction()
+	message_label.show()
+	objective_progress_label.hide()
+	if active_minigame_instruction != null:
+		active_minigame_instruction.progress_changed.connect(
+			_on_minigame_progress_changed
+		)
+		_on_minigame_progress_changed(
+			active_minigame_instruction.get_progress_text()
+		)
+
+
+func _on_minigame_progress_changed(progress_text: String) -> void:
+	objective_progress_label.text = progress_text
+	objective_progress_label.visible = not progress_text.is_empty()
 
 
 func _on_minigame_result_changed(success: bool) -> void:
-	$CanvasLayer/MessageLabel.text = (
+	message_label.text = (
 		tr("UI_COMBO_SUCCESS") if success else "FAILED!"
 	)
+	objective_progress_label.hide()
 
 
 func _on_minigame_run_finished(
@@ -83,7 +129,8 @@ func _on_minigame_run_finished(
 		Global.TRAINING_P1 if player_won else not Global.TRAINING_P1
 	)
 
-	$CanvasLayer/MessageLabel.hide()
+	message_label.hide()
+	objective_progress_label.hide()
 	fighter_game.RoundTimer.stop_time()
 	fighter_game.permaFreeze()
 	var win_screen_manager = fighter_game.get_node(

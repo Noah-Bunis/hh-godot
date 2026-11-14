@@ -3,7 +3,8 @@ class_name Minigame
 
 
 @export var display_name: String = "Minigame"
-@export_multiline var instruction: String = "GET READY!"
+@export_multiline var message: String = "GET READY!"
+@export var objective: MinigameInstruction
 @export var savestate: Dictionary = {}
 @export var dummy_point_character: int = -1
 @export var dummy_point_scene: PackedScene
@@ -11,14 +12,16 @@ class_name Minigame
 @export var dummy_assist_scene: PackedScene
 
 func get_instruction() -> String:
-	return instruction
+	if objective != null:
+		return objective.get_instruction()
+	return message
 
 
-func start() -> void:
-	# Override this in individual minigames.
-	pass
+func start(target_player: BasePlayer, on_success: Callable) -> void:
+	if objective != null:
+		objective.start(target_player, on_success)
 
 
 func stop() -> void:
-	# Override this in individual minigames.
-	pass
+	if objective != null:
+		objective.stop()

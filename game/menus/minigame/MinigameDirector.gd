@@ -27,6 +27,7 @@ var state: director_state = director_state.WAITING
 
 var current_minigame: Minigame = null
 
+var target_player: BasePlayer
 var minigame_index: int = 0
 var score: int = 0
 var time_remaining: float = 0.0
@@ -85,7 +86,10 @@ func _process(delta: float) -> void:
 			if announcement_timer <= 0.0:
 				announcement_timer = 0.0
 				state = director_state.PLAYING
-				current_minigame.start()
+				current_minigame.start(
+					target_player,
+					Callable(self, "report_success")
+				)
 
 		director_state.PLAYING:
 			time_remaining -= delta

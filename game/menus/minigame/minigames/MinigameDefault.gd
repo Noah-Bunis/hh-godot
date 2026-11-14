@@ -417,4 +417,5 @@ const DEFAULT_SAVESTATE: Dictionary = {
 
 func _init() -> void:
 	display_name = "default"
+	objective = DealDamage.new()
 	savestate = DEFAULT_SAVESTATE.duplicate(true)
