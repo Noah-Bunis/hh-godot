@@ -578,7 +578,7 @@ func execute_savestate():
 		input_history[current_index] &= ~active_button_flags
 
 	# Uncomment while authoring a minigame savestate; leave disabled in builds.
-	#save_minigame_savestate("default_corner")
+	save_minigame_savestate("knockdown_midscreen")
 
 func save_minigame_savestate(minigame_name: String) -> void:
 	var resource_name := minigame_name.validate_filename()

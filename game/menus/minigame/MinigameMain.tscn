@@ -1,22 +1,96 @@
-[gd_scene load_steps=17 format=3 uid="uid://vj5tn3syoeh7"]
+[gd_scene load_steps=27 format=3 uid="uid://vj5tn3syoeh7"]
 
 [ext_resource type="PackedScene" path="res://game/ui/FPSCounter.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dno6gucb1p5h" path="res://game/menus/minigame/MinigameMain.gd" id="2_minigame_main"]
 [ext_resource type="FontFile" uid="uid://b2jogmfxodv6o" path="res://game/assets/monogram_extended.ttf" id="3"]
+[ext_resource type="Texture2D" uid="uid://dxagc00m0lxta" path="res://game/assets/sprites/UI/NOWLOADING/Timeline 1_0003.png" id="3_bxm3x"]
 [ext_resource type="PackedScene" uid="uid://c5xgqi0ik2bpc" path="res://game/ui/MatchWinCounter.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://cp0wkb6fei8y8" path="res://game/assets/sprites/UI/NOWLOADING/Timeline 1_0004.png" id="4_qngve"]
 [ext_resource type="Script" uid="uid://da3lrwaml74um" path="res://game/menus/versus/PauseMenu.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://b4al2ruo5anla" path="res://game/assets/sprites/UI/NOWLOADING/Timeline 1_0005.png" id="5_u48fo"]
+[ext_resource type="Texture2D" uid="uid://ovc1p6guqph3" path="res://game/assets/sprites/UI/NOWLOADING/Timeline 1_0006.png" id="6_u5um0"]
 [ext_resource type="PackedScene" uid="uid://dird4f0w057ux" path="res://game/menus/training/CommandList.tscn" id="8"]
 [ext_resource type="Script" uid="uid://7pocl3a33bdi" path="res://game/menus/minigame/MinigameDirector.gd" id="8_d2n0x"]
 [ext_resource type="Texture2D" uid="uid://bvaehcl811u1" path="res://game/assets/sprites/UI/CharacterSelect/WOOD.png" id="9"]
-[ext_resource type="Script" path="res://game/menus/minigame/Minigame.gd" id="10_minigame"]
-[ext_resource type="Script" path="res://game/menus/minigame/minigames/MinigameDefault.gd" id="11_default_minigame"]
+[ext_resource type="Script" uid="uid://cfn8526ykb3y" path="res://game/menus/minigame/Minigame.gd" id="10_minigame"]
+[ext_resource type="Script" uid="uid://b1cwljtuwaxin" path="res://game/menus/minigame/minigames/MinigameDefault.gd" id="11_default_minigame"]
 [ext_resource type="Script" uid="uid://cnry3r4o0ag6" path="res://game/menus/minigame/minigames/MinigameDefault Corner.gd" id="12_default_corner_minigame"]
+[ext_resource type="Texture2D" uid="uid://cswoboat1phpm" path="res://game/assets/sprites/UI/NOWLOADING/Timeline 1_0007.png" id="13_go"]
+[ext_resource type="Script" uid="uid://dt53c8kbwwgx3" path="res://game/menus/minigame/minigames/MinigameKnockdown Midscreen.gd" id="14_knockdown_midscreen"]
 
-[sub_resource type="Resource" id="MinigameDefault"]
-script = ExtResource("11_default_minigame")
+[sub_resource type="Animation" id="MinigameGO"]
+resource_name = "GO"
+length = 0.25
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MinigameGoSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MinigameGoSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(3.8, 3.8), Vector2(3.4, 3.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MinigameGoSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MinigameGoSprite:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.016666668, 0.033333335, 0.05, 0.06666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_bxm3x"), ExtResource("4_qngve"), ExtResource("5_u48fo"), ExtResource("6_u5um0"), ExtResource("13_go")]
+}
 
-[sub_resource type="Resource" id="MinigameDefaultCorner"]
-script = ExtResource("12_default_corner_minigame")
+[sub_resource type="Animation" id="Animation_hb122"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MinigameGoSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_go")]
+}
+
+[sub_resource type="AnimationLibrary" id="MinigameAnimationLibrary"]
+_data = {
+&"GO": SubResource("MinigameGO"),
+&"RESET": SubResource("Animation_hb122")
+}
 
 [sub_resource type="FontFile" id="1"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -25,6 +99,26 @@ cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/60/0/ascent = 0.0
+cache/0/60/0/descent = 0.0
+cache/0/60/0/underline_position = 0.0
+cache/0/60/0/underline_thickness = 0.0
+cache/0/60/0/scale = 1.0
+cache/0/44/0/ascent = 0.0
+cache/0/44/0/descent = 0.0
+cache/0/44/0/underline_position = 0.0
+cache/0/44/0/underline_thickness = 0.0
+cache/0/44/0/scale = 1.0
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -42,40 +136,65 @@ cache/0/16/0/underline_position = 0.0
 cache/0/16/0/underline_thickness = 0.0
 cache/0/16/0/scale = 1.0
 
+[sub_resource type="Resource" id="MinigameDefault"]
+script = ExtResource("11_default_minigame")
+
+[sub_resource type="Resource" id="MinigameDefaultCorner"]
+script = ExtResource("12_default_corner_minigame")
+
+[sub_resource type="Resource" id="MinigameKnockdownMidscreen"]
+script = ExtResource("14_knockdown_midscreen")
+
 [node name="MinigameMain" type="Node2D"]
 script = ExtResource("2_minigame_main")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MessageLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 32.0
-offset_top = 112.0
-offset_right = -32.0
-offset_bottom = 184.0
+[node name="MinigameGoSprite" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+position = Vector2(960, 540)
+scale = Vector2(3.4, 3.4)
+texture = ExtResource("13_go")
+
+[node name="MinigameGoAnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+&"": SubResource("MinigameAnimationLibrary")
+}
+
+[node name="InstructionPanelBackground" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+modulate = Color(0.17254902, 0.12156863, 0.12156863, 0.24313726)
+position = Vector2(302, 420)
+scale = Vector2(0.7, 0.6)
+texture = ExtResource("9")
+
+[node name="MessageLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 132.0
+offset_top = 220.0
+offset_right = 472.0
+offset_bottom = 475.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = SubResource("1")
+theme_override_font_sizes/normal_font_size = 48
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ObjectiveProgressLabel" type="Label" parent="CanvasLayer"]
+visible = false
+offset_left = 132.0
+offset_top = 480.0
+offset_right = 472.0
+offset_bottom = 620.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("1")
 theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="ObjectiveProgressLabel" type="Label" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 32.0
-offset_top = 184.0
-offset_right = -32.0
-offset_bottom = 236.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("1")
-theme_override_font_sizes/font_size = 32
-horizontal_alignment = 1
-vertical_alignment = 1
-visible = false
 
 [node name="PingLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
@@ -285,7 +404,7 @@ scale = Vector2(2.87118, 3.02479)
 
 [node name="MinigameDirector" type="Node2D" parent="CanvasLayer"]
 script = ExtResource("8_d2n0x")
-minigames = Array[ExtResource("10_minigame")]([SubResource("MinigameDefault"), SubResource("MinigameDefaultCorner")])
+minigames = Array[ExtResource("10_minigame")]([SubResource("MinigameDefault"), SubResource("MinigameDefaultCorner"), SubResource("MinigameKnockdownMidscreen")])
 
 [node name="SetupPingTimer" type="Timer" parent="."]
 

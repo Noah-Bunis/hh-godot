@@ -419,7 +419,7 @@ const SAVESTATE: Dictionary = {
 
 func _init() -> void:
 	display_name = "default_corner"
-	objective = DealDamage.new()
+	objective = DealDamage.new(150)
 	dummy_point_character = Enums.PointCharacters.Mio
 	dummy_point_scene = MIO_PLAYER_SCENE
 	savestate = SAVESTATE.duplicate(true)

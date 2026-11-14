@@ -8,13 +8,15 @@ var damage_dealt: int = 0
 var _target_player: BasePlayer
 var _on_success: Callable
 
+func _init(damage: int = 100) -> void:
+	required_damage = damage
 
 func get_instruction() -> String:
-	return "DEAL %d DAMAGE!" % required_damage
+	return tr("MINI_DEALDAMAGE") % required_damage
 
 
 func get_progress_text() -> String:
-	return "%d / %d DAMAGE" % [damage_dealt, required_damage]
+	return tr("MINI_DEALDAMAGE_PROGRESS") % [damage_dealt, required_damage]
 
 
 func start(target_player: BasePlayer, on_success: Callable) -> void:

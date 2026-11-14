@@ -641,3 +641,6 @@ Wing Stance Exit,Wing Stance Exit,翼構え出る,Salir de la Postura Alada,Said
 Wing Tackle,Wing Tackle,翼タックル,Tacleada alada,Afrontamento Alado
 Yoru wo Matsuyo,Yoru wo Matsuyo,夜を待つよ,Yoru wo Matsuyo,Yoru wo Matsuyo
 Ground Backdash,Ground Backdash,バックステップ,Arremetida hacia atrás en el suelo,Recuo no solo
+MINI_DEALDAMAGE,DEAL %d DAMAGE!,,,
+MINI_DEALDAMAGE_PROGRESS,%d / %d DAMAGE,,,
+UI_COMBO_FAILURE,FAILURE!,,,

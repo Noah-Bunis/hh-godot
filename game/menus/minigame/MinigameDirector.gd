@@ -3,6 +3,7 @@ class_name MinigameDirector
 
 
 signal instruction_changed(minigame: Minigame)
+signal minigame_started(minigame: Minigame)
 signal result_changed(success: bool)
 signal run_finished(score: int, total_games: int)
 
@@ -19,7 +20,7 @@ enum director_state {
 @export var minigames: Array[Minigame] = []
 
 @export var minigame_duration: float = 5.0
-@export var announcement_duration: float = 1.0
+@export var announcement_duration: float = 0.25
 @export var results_duration: float = 0.75
 
 
@@ -90,6 +91,7 @@ func _process(delta: float) -> void:
 					target_player,
 					Callable(self, "report_success")
 				)
+				minigame_started.emit(current_minigame)
 
 		director_state.PLAYING:
 			time_remaining -= delta

@@ -8,15 +8,26 @@ const MINIGAME_ROUND_TIMER_SCENE = preload(
 
 var dummy_input: InputInterpreter
 var minigame_run_started: bool = false
+var has_seen_minigame_instruction: bool = false
 var dummy_is_p1: bool
 var original_dummy_point_character: int
 var original_dummy_assist_character: int
 var original_dummy_point_scene: PackedScene
 var original_dummy_assist_scene: PackedScene
 var active_minigame_instruction: MinigameInstruction
+var voice_go = preload("res://game/assets/voice/kyoko/kyk_fight.wav")
+var voice_success = preload("res://game/assets/voice/sora/sor_good.wav")
+var voice_failure = preload("res://game/assets/voice/hakka/bzn_NO.wav")
 
 @onready var minigame_director = $CanvasLayer/MinigameDirector
 @onready var objective_progress_label: Label = $CanvasLayer/ObjectiveProgressLabel
+@onready var minigame_go_sprite: Sprite2D = $CanvasLayer/MinigameGoSprite
+@onready var minigame_go_animation_player: AnimationPlayer = (
+	$CanvasLayer/MinigameGoAnimationPlayer
+)
+@onready var instruction_panel_background: Sprite2D = (
+	$CanvasLayer/InstructionPanelBackground
+)
 
 
 func _ready() -> void:
@@ -53,6 +64,9 @@ func _ready() -> void:
 	minigame_director.instruction_changed.connect(
 		_on_minigame_instruction_changed
 	)
+	minigame_director.minigame_started.connect(
+		_on_minigame_started
+	)
 	minigame_director.result_changed.connect(
 		_on_minigame_result_changed
 	)
@@ -68,6 +82,7 @@ func _ready() -> void:
 
 
 func start_minigame_run() -> void:
+	has_seen_minigame_instruction = false
 	minigame_director.start_run()
 
 
@@ -79,8 +94,21 @@ func _on_round_start_popup_finished(animation_name: StringName) -> void:
 	start_minigame_run()
 
 
+func _on_minigame_started(_minigame: Minigame) -> void:
+	minigame_go_animation_player.stop()
+	minigame_go_sprite.hide()
+	fighter_game.un_freeze_game_sim()
+
+
 func _on_minigame_instruction_changed(minigame: Minigame) -> void:
 	load_minigame_state(minigame)
+	SyncManager.play_sound("MinigameAnnouncer", voice_go, {"bus": "Voice"})
+	if has_seen_minigame_instruction:
+		minigame_go_animation_player.play("GO")
+	else:
+		has_seen_minigame_instruction = true
+		minigame_go_animation_player.stop()
+		minigame_go_sprite.hide()
 	fighter_game.RoundTimer.hide()
 	fighter_game.RoundTimer.stop_time()
 	minigame_director.target_player = (
@@ -97,6 +125,7 @@ func _on_minigame_instruction_changed(minigame: Minigame) -> void:
 
 	active_minigame_instruction = minigame.objective
 	message_label.text = minigame.get_instruction()
+	instruction_panel_background.show()
 	message_label.show()
 	objective_progress_label.hide()
 	if active_minigame_instruction != null:
@@ -114,9 +143,19 @@ func _on_minigame_progress_changed(progress_text: String) -> void:
 
 
 func _on_minigame_result_changed(success: bool) -> void:
-	message_label.text = (
-		tr("UI_COMBO_SUCCESS") if success else "FAILED!"
-	)
+	fighter_game.freeze_game_sim()
+	if success:
+		SyncManager.play_sound("MinigameAnnouncer", voice_success, {"bus": "Voice"})
+		message_label.text = (
+			"[font_size=64][rainbow][wave][b][center]%s[/center][/b]"
+			+ "[/wave][/rainbow][/font_size]"
+		) % tr("UI_COMBO_SUCCESS")
+	else:
+		SyncManager.play_sound("MinigameAnnouncer", voice_failure, {"bus": "Voice"})
+		message_label.text = (
+			"[font_size=64][color=red][wave][b][center]%s[/center][/b]"
+			+ "[/wave][/color][/font_size]"
+		) % tr("UI_COMBO_FAILURE")
 	objective_progress_label.hide()
 
 
@@ -131,6 +170,7 @@ func _on_minigame_run_finished(
 
 	message_label.hide()
 	objective_progress_label.hide()
+	instruction_panel_background.hide()
 	fighter_game.RoundTimer.stop_time()
 	fighter_game.permaFreeze()
 	var win_screen_manager = fighter_game.get_node(
@@ -308,7 +348,6 @@ func load_minigame_state(minigame: Minigame) -> void:
 	fighter_game.set_assist_character(dummy_is_p1, assist_character, assist_scene)
 	return_control_to_player()
 	SyncManager._call_load_state(minigame.savestate)
-	fighter_game.un_freeze_game_sim()
 	fighter_game.RoundTimer.display_time()
 	dummy_input.clear_input()
 
