@@ -82,8 +82,9 @@ func _ready():
 	KimiNoHiroin.connect("start_intro_sequence", Callable(MainMenuMusicControl, "play_character_select_music"))
 	update_p1_portrait(P1Cursor.row, P1Cursor.col)
 	update_p2_portrait(P2Cursor.row, P2Cursor.col)
-	if (self.has_node("CanvasLayer/WinCounterP1")):
+	if (is_instance_valid(WinCounterP1)):
 		WinCounterP1.update_win_count(true)
+	if (is_instance_valid(WinCounterP2)):
 		WinCounterP2.update_win_count(false)
 	p1_active_cursor = P1Cursor
 	p2_active_cursor = P2Cursor
@@ -100,8 +101,8 @@ func connect_ui_elements():
 	P1SelectFlash = $P1SelectFlash
 	P2SelectFlash = $P2SelectFlash
 	KimiNoHiroin = $KimiNoHiroin
-	WinCounterP1 = $CanvasLayer/WinCounterP1
-	WinCounterP2 = $CanvasLayer/WinCounterP2
+	WinCounterP1 = get_node_or_null("CanvasLayer/WinCounterP1")
+	WinCounterP2 = get_node_or_null("CanvasLayer/WinCounterP2")
 
 func try_react_to_new_controller(event):
 	if (event is InputEventJoypadMotion or event is InputEventJoypadButton):
