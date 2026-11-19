@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://crkvty0v7xv45"]
+[gd_scene load_steps=17 format=3 uid="uid://crkvty0v7xv45"]
 
 [ext_resource type="Script" uid="uid://c3crr8e8iawl" path="res://game/menus/training/TrainingMain.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/ui/FPSCounter.tscn" id="2"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dird4f0w057ux" path="res://game/menus/training/CommandList.tscn" id="11"]
 [ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="11_s221j"]
 [ext_resource type="PackedScene" uid="uid://cnx2a5iq536el" path="res://game/menus/training/TrainingInputDisplay.tscn" id="12"]
+[ext_resource type="Script" uid="uid://e5l2ifyn2eep" path="res://game/ui/framebar/FrameBar.gd" id="13"]
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -28,6 +29,9 @@ cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 script = ExtResource("1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FrameBar" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("13")
 
 [node name="MessageLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
