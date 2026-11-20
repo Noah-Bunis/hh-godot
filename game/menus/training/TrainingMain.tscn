@@ -30,7 +30,15 @@ script = ExtResource("1")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="FrameBar" type="Node2D" parent="CanvasLayer"]
+[node name="FrameBar" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("13")
 
 [node name="MessageLabel" type="Label" parent="CanvasLayer"]
@@ -530,6 +538,23 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
 
+[node name="FrameBarLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_FRAME_BAR"
+
+[node name="FrameBarButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "UI_TRAINING_OFF"
+
+[node name="FrameBarNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
 [node name="ResetLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -601,6 +626,7 @@ scale = Vector2(2.87118, 3.02479)
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/ChangeControlsButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_ChangeControlsButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/HideHitboxesButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_hide_hitboxes_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/MoveDataButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_MoveDataButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/FrameBarButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_FrameBarButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/ResetButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/CloseButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/ExitButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_ExitButton_pressed"]

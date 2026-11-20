@@ -11,6 +11,7 @@ enum EventType {
     PARRY_CATCH,
     STATE_CHANGE,
     PROPERTY_CHANGE,
+    FIRST_ACTIVE
 }
 
 var type: EventType
