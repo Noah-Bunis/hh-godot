@@ -2,15 +2,29 @@ extends Control
 
 class_name FrameBar
 
+const FrameBarCellControl = preload("res://game/ui/framebar/FrameBarCell.gd")
 const MAX_FRAME_HISTORY := 120
-const FRAME_CELL_WIDTH := 8.0
-const FRAME_CELL_GAP := 2.0
-const FRAME_CELL_STEP := FRAME_CELL_WIDTH + FRAME_CELL_GAP
-const ROW_LABEL_WIDTH := 112.0
-const PANEL_WIDTH := 1328.0
-const PANEL_HEIGHT := 132.0
-const ROW_HEIGHT := 21.0
-const ROW_TOP := 34.0
+
+@export var frame_cell_scene: PackedScene
+
+@onready var _panel: PanelContainer = $Panel
+@onready var _duration_label_overlay: Control = $DurationLabels
+@onready var _assist_rows: Array = [
+	$Panel/Rows/AssistPlayer1,
+	$Panel/Rows/AssistPlayer2,
+]
+@onready var _frame_rows: Array = [
+	$Panel/Rows/AssistPlayer1,
+	$Panel/Rows/Player1,
+	$Panel/Rows/Player2,
+	$Panel/Rows/AssistPlayer2,
+]
+@onready var _cell_rows: Array = [
+	$Panel/Rows/AssistPlayer1/Cells,
+	$Panel/Rows/Player1/Cells,
+	$Panel/Rows/Player2/Cells,
+	$Panel/Rows/AssistPlayer2/Cells,
+]
 
 var _previous_states: Dictionary = {}
 var _frame_history: Dictionary = {}
@@ -24,6 +38,29 @@ var _pending_advancing_mask: int = 0
 var _pending_annotation_mask: int = 0
 var _pending_invincibility_mask: int = 0
 var _frame_history_invincibility: Dictionary = {}
+var _frame_cells: Array = []
+
+func _ready() -> void:
+	for row_index in range(4):
+		var row_cells: Array = []
+		for _column_index in range(MAX_FRAME_HISTORY):
+			var cell: FrameBarCellControl = frame_cell_scene.instantiate()
+			_cell_rows[row_index].add_child(cell)
+			cell.get_node("DurationLabel").reparent(_duration_label_overlay, false)
+			row_cells.append(cell)
+		_frame_cells.append(row_cells)
+	_refresh_frame_cells()
+
+func set_assist_rows_visible(is_visible: bool) -> void:
+	for row in _assist_rows:
+		row.visible = is_visible
+
+	var panel_height := 0.0
+	for row in _frame_rows:
+		if row.visible:
+			panel_height += row.custom_minimum_size.y
+	_panel.custom_minimum_size.y = panel_height
+	_panel.offset_top = _panel.offset_bottom - panel_height
 
 func reset_at_frame(frame: int) -> void:
 	_previous_states.clear()
@@ -34,7 +71,7 @@ func reset_at_frame(frame: int) -> void:
 	_pending_annotation_mask = 0
 	_pending_invincibility_mask = 0
 	_store_frame(frame, _pending_frame_types, _pending_invincibility_mask)
-	queue_redraw()
+	_refresh_frame_cells()
 
 func capture_state_changes(
 	entity: BasePlayer,
@@ -49,7 +86,13 @@ func capture_state_changes(
 	for state_property in Enums.StateProperty.values():
 		properties[state_property] = entity.has_property(state_property)
 
+	var state_changed: bool = (
+		not previous_state.is_empty()
+		and previous_state["state_name"] != state_name
+	)
 	var all_hurtboxes_disabled := _are_all_hurtboxes_disabled(entity)
+	if state_changed and not _has_current_state_hurtbox_data(entity):
+		all_hurtboxes_disabled = false
 	var first_active_seen: bool = (
 		previous_state.get("first_active_seen", false)
 		if previous_state.get("state_name", "") == state_name
@@ -64,10 +107,6 @@ func capture_state_changes(
 	)
 	if event_types.has(FrameEvent.EventType.FIRST_ACTIVE):
 		first_active_seen = true
-	var state_changed: bool = (
-		not previous_state.is_empty()
-		and previous_state["state_name"] != state_name
-	)
 	var cancel_target: String = str(previous_state.get("cancel_state", "")).to_lower()
 	var normalized_state_name := state_name.to_lower()
 	var is_pre_jump_state: bool = (
@@ -111,7 +150,6 @@ func capture_state_changes(
 	if not _previous_states.has(instance_id):
 		_previous_states[instance_id] = current_state
 		_record_frame(entity, frame, event_types, events)
-		queue_redraw()
 		return events
 
 	var emitted_types: Dictionary = {}
@@ -165,7 +203,6 @@ func capture_state_changes(
 
 	_previous_states[instance_id] = current_state
 	_record_frame(entity, frame, event_types, events)
-	queue_redraw()
 	return events
 
 func _get_event_types(
@@ -177,10 +214,15 @@ func _get_event_types(
 ) -> Dictionary:
 	var event_types: Dictionary = {}
 	var normalized_state_name := state_name.to_lower()
-	if normalized_state_name.contains("parry") and normalized_state_name.contains("catch"):
-		event_types[FrameEvent.EventType.PARRY_CATCH] = max(entity.fighterState.state.endFrame, 1)
 
-	if entity.currentState.get(Enums.StKey.hitstun, 0) > 0:
+	var state_transition_pending: bool = entity.currentState.get(
+		Enums.StKey.transition_state_flag,
+		false
+	)
+	if (
+		not state_transition_pending
+		and entity.currentState.get(Enums.StKey.hitstun, 0) > 0
+	):
 		if normalized_state_name.contains("block"):
 			event_types[FrameEvent.EventType.BLOCKSTUN] = entity.currentState[Enums.StKey.hitstun]
 		else:
@@ -211,6 +253,26 @@ func _are_all_hurtboxes_disabled(entity: BasePlayer) -> bool:
 		_is_hurtbox_disabled(entity.Hurtbox1)
 		and _is_hurtbox_disabled(entity.Hurtbox2)
 		and _is_hurtbox_disabled(entity.Hurtbox3)
+	)
+
+func _has_current_state_hurtbox_data(entity: BasePlayer) -> bool:
+	if entity.fighterState == null or entity.fighterState.state == null:
+		return false
+	var current_frame: int = entity.currentState.get(Enums.StKey.frame, 0)
+	var latest_animation_frame := -1
+	var latest_animation_data: Dictionary = {}
+	for animation_frame in entity.fighterState.state.anim_data:
+		var animation_frame_number := int(animation_frame)
+		if (
+			animation_frame_number <= current_frame
+			and animation_frame_number > latest_animation_frame
+		):
+			latest_animation_frame = animation_frame_number
+			latest_animation_data = entity.fighterState.state.anim_data[animation_frame]
+	return (
+		latest_animation_data.has(Enums.StKey.Hurt1Disable)
+		or latest_animation_data.has(Enums.StKey.Hurt2Disable)
+		or latest_animation_data.has(Enums.StKey.Hurt3Disable)
 	)
 
 func _is_hurtbox_disabled(hurtbox) -> bool:
@@ -267,6 +329,8 @@ func _record_frame(
 		if _pending_annotation_mask & (1 << annotation_row_index):
 			if _pending_frame_types[annotation_row_index] != FrameEvent.EventType.FIRST_ACTIVE:
 				_annotate_previous_event(_pending_frame - 1, annotation_row_index)
+	if _pending_advancing_mask != 0 or _pending_annotation_mask != 0:
+		_refresh_frame_cells()
 	_pending_frame = -1
 	_pending_row_mask = 0
 
@@ -277,7 +341,6 @@ func _has_advancing_event(event_types: Dictionary) -> bool:
 		FrameEvent.EventType.RECOVERY,
 		FrameEvent.EventType.HITSTUN,
 		FrameEvent.EventType.BLOCKSTUN,
-		FrameEvent.EventType.PARRY_CATCH,
 		FrameEvent.EventType.FIRST_ACTIVE,
 	]:
 		if event_types.has(event_type):
@@ -355,6 +418,8 @@ func _annotate_previous_event(frame: int, row_index: int) -> void:
 		if earlier_frame_types.is_empty() or earlier_frame_types[row_index] != event_type:
 			break
 		duration += 1
+	if event_type == FrameEvent.EventType.HITSTUN and duration == 1:
+		return
 	var labels: Dictionary = _duration_labels.get(event_frame, {})
 	labels[row_index] = duration
 	_duration_labels[event_frame] = labels
@@ -365,7 +430,6 @@ func _get_frame_type(event_types: Dictionary) -> int:
 		FrameEvent.EventType.ACTIVE,
 		FrameEvent.EventType.STARTUP,
 		FrameEvent.EventType.RECOVERY,
-		FrameEvent.EventType.PARRY_CATCH,
 		FrameEvent.EventType.HITSTUN,
 		FrameEvent.EventType.BLOCKSTUN,
 	]:
@@ -373,39 +437,11 @@ func _get_frame_type(event_types: Dictionary) -> int:
 			return event_type
 	return -1
 
-func _draw() -> void:
-	var panel_position := Vector2(
-		(size.x - PANEL_WIDTH) / 2.0,
-		size.y - PANEL_HEIGHT - 24.0
-	)
-	var panel_rect := Rect2(panel_position, Vector2(PANEL_WIDTH, PANEL_HEIGHT))
-	draw_rect(panel_rect, Color(0.035, 0.045, 0.065, 0.91))
-	draw_rect(panel_rect, Color(0.55, 0.62, 0.72, 0.95), false, 2.0)
-
-	var font := get_theme_default_font()
-	var font_size := maxi(get_theme_default_font_size(), 14)
-	var text_color := Color(0.93, 0.95, 1.0)
-	var timeline_x := panel_position.x + 14.0 + ROW_LABEL_WIDTH
-	var timeline_y := panel_position.y + ROW_TOP
-
+func _refresh_frame_cells() -> void:
+	if _frame_cells.is_empty():
+		return
+	var overlay_inverse_transform := _duration_label_overlay.get_global_transform().affine_inverse()
 	for row_index in range(4):
-		var row_y := timeline_y + row_index * ROW_HEIGHT
-		draw_string(
-			font,
-			Vector2(panel_position.x + 14.0, row_y + 13.0),
-			_get_source_label_for_row(row_index),
-			HORIZONTAL_ALIGNMENT_LEFT,
-			ROW_LABEL_WIDTH - 8.0,
-			font_size,
-			text_color
-		)
-		draw_rect(
-			Rect2(
-				Vector2(timeline_x, row_y),
-				Vector2(MAX_FRAME_HISTORY * FRAME_CELL_STEP, ROW_HEIGHT - 2.0)
-			),
-			Color(0.1, 0.12, 0.15, 0.85)
-		)
 		for column_index in range(MAX_FRAME_HISTORY):
 			var sample_frame := (
 				_latest_activity_frame - MAX_FRAME_HISTORY + 1 + column_index
@@ -416,39 +452,17 @@ func _draw() -> void:
 				if not frame_types.is_empty():
 					frame_type = frame_types[row_index]
 			var invincibility_mask: int = _frame_history_invincibility.get(sample_frame, 0)
-			var is_invincible: bool = (invincibility_mask & (1 << row_index)) != 0
-			var cell_position := Vector2(
-				timeline_x + column_index * FRAME_CELL_STEP,
-				row_y + 3.0
+			var cell: FrameBarCellControl = _frame_cells[row_index][column_index]
+			cell.set_duration_label_position(
+				overlay_inverse_transform * cell.get_global_transform().origin
 			)
-			draw_rect(
-				Rect2(cell_position, Vector2(FRAME_CELL_WIDTH, ROW_HEIGHT - 8.0)),
-				_get_frame_color(frame_type)
-			)
-			if is_invincible:
-				_draw_invincibility_filter(cell_position)
-			if _has_activity_frame:
-				var duration_labels: Dictionary = _duration_labels.get(sample_frame, {})
-				if duration_labels.has(row_index):
-					var duration_position := cell_position + Vector2(-8.0, 10.0)
-					draw_string(
-						font,
-						duration_position + Vector2(1.0, 1.0),
-						str(duration_labels[row_index]),
-						HORIZONTAL_ALIGNMENT_CENTER,
-						FRAME_CELL_WIDTH + 16.0,
-						12,
-						Color(0.0, 0.0, 0.0)
-					)
-					draw_string(
-						font,
-						duration_position,
-						str(duration_labels[row_index]),
-						HORIZONTAL_ALIGNMENT_CENTER,
-						FRAME_CELL_WIDTH + 16.0,
-						12,
-						text_color
-					)
+			cell.set_frame_type(frame_type)
+			cell.set_invincible((invincibility_mask & (1 << row_index)) != 0)
+			var duration_labels: Dictionary = _duration_labels.get(sample_frame, {})
+			if duration_labels.has(row_index):
+				cell.set_duration_label(int(duration_labels[row_index]))
+			else:
+				cell.clear_duration_label()
 
 func _get_source_row(source_name: String) -> int:
 	if source_name == "AssistPlayer1":
@@ -460,41 +474,3 @@ func _get_source_row(source_name: String) -> int:
 	if source_name == "AssistPlayer2":
 		return 3
 	return -1
-
-func _draw_invincibility_filter(cell_position: Vector2) -> void:
-	draw_line(
-		cell_position + Vector2(1.0, 10.0),
-		cell_position + Vector2(6.0, 3.0),
-		Color(0.72, 0.98, 1.0, 0.95),
-		1.5
-	)
-
-func _get_source_label_for_row(row_index: int) -> String:
-	match row_index:
-		0:
-			return "P1 ASSIST"
-		1:
-			return "P1"
-		2:
-			return "P2"
-		_:
-			return "P2 ASSIST"
-
-func _get_frame_color(event_type: int) -> Color:
-	match event_type:
-		FrameEvent.EventType.STARTUP:
-			return Color(0.35, 0.72, 1.0)
-		FrameEvent.EventType.ACTIVE:
-			return Color(1.0, 0.42, 0.28)
-		FrameEvent.EventType.RECOVERY:
-			return Color(1.0, 0.75, 0.28)
-		FrameEvent.EventType.HITSTUN:
-			return Color(1.0, 0.3, 0.35)
-		FrameEvent.EventType.BLOCKSTUN:
-			return Color(0.75, 0.48, 1.0)
-		FrameEvent.EventType.PARRY_CATCH:
-			return Color(0.38, 0.95, 0.55)
-		FrameEvent.EventType.FIRST_ACTIVE:
-			return Color(0.95, 0.35, 0.9)
-		_:
-			return Color(0.24, 0.28, 0.33)

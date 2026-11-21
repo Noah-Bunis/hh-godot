@@ -91,7 +91,13 @@ func _ready() -> void:
 		_frame_bar = get_node_or_null("CanvasLayer/FrameBar") as FrameBar
 	if _frame_bar != null:
 		$CanvasLayer/TrainingOptionsMenu.frame_bar_toggled.connect(_on_frame_bar_toggled)
+		$CanvasLayer/TrainingOptionsMenu.assist_frame_bars_toggled.connect(
+			_on_assist_frame_bars_toggled
+		)
 		_on_frame_bar_toggled($CanvasLayer/TrainingOptionsMenu.frame_bar_visible)
+		_on_assist_frame_bars_toggled(
+			$CanvasLayer/TrainingOptionsMenu.assist_frame_bars_visible
+		)
 	if (_has_move_data_ui):
 		$CanvasLayer/TrainingOptionsMenu.connect("move_data_toggled", Callable(self, "_on_move_data_toggled"))
 		_on_move_data_toggled($CanvasLayer/TrainingOptionsMenu.move_data_visible)
@@ -111,6 +117,10 @@ func _on_move_data_toggled(is_visible: bool) -> void:
 func _on_frame_bar_toggled(is_visible: bool) -> void:
 	if _frame_bar != null:
 		_frame_bar.visible = is_visible
+
+func _on_assist_frame_bars_toggled(is_visible: bool) -> void:
+	if _frame_bar != null:
+		_frame_bar.set_assist_rows_visible(is_visible)
 
 func _on_training_opponent_attack_hurt(
 	hitbox_name: String,
