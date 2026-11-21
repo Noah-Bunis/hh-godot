@@ -219,13 +219,26 @@ func _get_event_types(
 		Enums.StKey.transition_state_flag,
 		false
 	)
-	if (
-		not state_transition_pending
-		and entity.currentState.get(Enums.StKey.hitstun, 0) > 0
-	):
-		if normalized_state_name.contains("block"):
+	var stun_state_name := normalized_state_name
+	if state_transition_pending:
+		var pending_state_name := str(
+			entity.currentState.get(Enums.StKey.next_state, "")
+		).to_lower()
+		if not pending_state_name.is_empty():
+			stun_state_name = pending_state_name
+
+	var training_dummy_parry_enabled := false
+	if entity.input_interpreter is DummyInputInterpreter:
+		var training_dummy_input := entity.input_interpreter as DummyInputInterpreter
+		training_dummy_parry_enabled = (
+			training_dummy_input.blocking == Enums.TrainingBlock.ALL
+			and training_dummy_input.block_type == Enums.TrainingBlockType.PARRY
+		)
+
+	if entity.currentState.get(Enums.StKey.hitstun, 0) > 0:
+		if stun_state_name.contains("block"):
 			event_types[FrameEvent.EventType.BLOCKSTUN] = entity.currentState[Enums.StKey.hitstun]
-		else:
+		elif not (state_transition_pending and training_dummy_parry_enabled):
 			event_types[FrameEvent.EventType.HITSTUN] = entity.currentState[Enums.StKey.hitstun]
 
 	if all_hurtboxes_disabled:
