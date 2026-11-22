@@ -18,6 +18,7 @@ signal play_demo()
 signal move_data_toggled(is_visible: bool)
 signal frame_bar_toggled(is_visible: bool)
 signal assist_frame_bars_toggled(is_visible: bool)
+signal punish_analysis_toggled(is_visible: bool)
 
 var menu_close_delay: int
 var most_recent_focus:Control
@@ -29,6 +30,7 @@ var meter_reset_option: bool = true
 var move_data_visible: bool = false
 var frame_bar_visible: bool = false
 var assist_frame_bars_visible: bool = false
+var punish_analysis_visible: bool = false
 
 var _base_position: Vector2
 var _base_scale: Vector2
@@ -266,3 +268,10 @@ func _on_AssistFrameBarButton_pressed() -> void:
 		tr("UI_TRAINING_ON") if assist_frame_bars_visible else tr("UI_TRAINING_OFF")
 	)
 	assist_frame_bars_toggled.emit(assist_frame_bars_visible)
+
+func _on_PunishAnalysisButton_pressed() -> void:
+	punish_analysis_visible = not punish_analysis_visible
+	$PunishAnalysisButton.text = (
+		tr("UI_TRAINING_ON") if punish_analysis_visible else tr("UI_TRAINING_OFF")
+	)
+	punish_analysis_toggled.emit(punish_analysis_visible)

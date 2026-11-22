@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://crkvty0v7xv45"]
+[gd_scene load_steps=18 format=3 uid="uid://crkvty0v7xv45"]
 
 [ext_resource type="Script" uid="uid://c3crr8e8iawl" path="res://game/menus/training/TrainingMain.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/ui/FPSCounter.tscn" id="2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Theme" uid="uid://of3afybns5hm" path="res://game/menus/default_menu.tres" id="11_s221j"]
 [ext_resource type="PackedScene" uid="uid://cnx2a5iq536el" path="res://game/menus/training/TrainingInputDisplay.tscn" id="12"]
 [ext_resource type="PackedScene" uid="uid://b1tarmjqj26tm" path="res://game/ui/framebar/FrameBar.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://game/ui/framebar/PunishAnalysis.tscn" id="14"]
 
 [sub_resource type="FontFile" id="2"]
 fallbacks = Array[Font]([ExtResource("3")])
@@ -32,6 +33,8 @@ script = ExtResource("1")
 
 [node name="FrameBar" parent="CanvasLayer" instance=ExtResource("13")]
 visible = false
+
+[node name="PunishAnalysis" parent="CanvasLayer" instance=ExtResource("14")]
 
 [node name="MessageLabel" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
@@ -564,6 +567,23 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("2")
 
+[node name="PunishAnalysisLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+text = "UI_TRAINING_PUNISH_ANALYSIS"
+
+[node name="PunishAnalysisButton" type="Button" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+text = "UI_TRAINING_OFF"
+
+[node name="PunishAnalysisNumber" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("2")
+
 [node name="ResetLabel" type="Label" parent="CanvasLayer/TrainingOptionsMenu"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -637,6 +657,7 @@ scale = Vector2(2.87118, 3.02479)
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/MoveDataButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_MoveDataButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/FrameBarButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_FrameBarButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/AssistFrameBarButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_AssistFrameBarButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/PunishAnalysisButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_PunishAnalysisButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/ResetButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_ResetButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/CloseButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_CloseButton_pressed"]
 [connection signal="pressed" from="CanvasLayer/TrainingOptionsMenu/ExitButton" to="CanvasLayer/TrainingOptionsMenu" method="_on_ExitButton_pressed"]

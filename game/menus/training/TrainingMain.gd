@@ -42,6 +42,7 @@ var _move_data_contact_last_frame: int = 0
 var _move_data_projectile_sources: Dictionary = {}
 var _has_move_data_ui: bool = false
 var _frame_bar: FrameBar
+var _punish_analysis: PunishAnalysis
 var _frame_bar_pause_start_tick: int = -1
 var _frame_bar_paused_ticks: int = 0
 var _frame_bar_was_in_simulation_freeze: bool = false
@@ -89,6 +90,9 @@ func _ready() -> void:
 	_has_move_data_ui = has_node("CanvasLayer/MoveData")
 	if not self is ComboTrialMain:
 		_frame_bar = get_node_or_null("CanvasLayer/FrameBar") as FrameBar
+		_punish_analysis = get_node_or_null(
+			"CanvasLayer/PunishAnalysis"
+		) as PunishAnalysis
 	if _frame_bar != null:
 		$CanvasLayer/TrainingOptionsMenu.frame_bar_toggled.connect(_on_frame_bar_toggled)
 		$CanvasLayer/TrainingOptionsMenu.assist_frame_bars_toggled.connect(
@@ -97,6 +101,13 @@ func _ready() -> void:
 		_on_frame_bar_toggled($CanvasLayer/TrainingOptionsMenu.frame_bar_visible)
 		_on_assist_frame_bars_toggled(
 			$CanvasLayer/TrainingOptionsMenu.assist_frame_bars_visible
+		)
+	if _punish_analysis != null:
+		$CanvasLayer/TrainingOptionsMenu.punish_analysis_toggled.connect(
+			_on_punish_analysis_toggled
+		)
+		_on_punish_analysis_toggled(
+			$CanvasLayer/TrainingOptionsMenu.punish_analysis_visible
 		)
 	if (_has_move_data_ui):
 		$CanvasLayer/TrainingOptionsMenu.connect("move_data_toggled", Callable(self, "_on_move_data_toggled"))
@@ -121,6 +132,10 @@ func _on_frame_bar_toggled(is_visible: bool) -> void:
 func _on_assist_frame_bars_toggled(is_visible: bool) -> void:
 	if _frame_bar != null:
 		_frame_bar.set_assist_rows_visible(is_visible)
+
+func _on_punish_analysis_toggled(is_visible: bool) -> void:
+	if _punish_analysis != null:
+		_punish_analysis.set_enabled(is_visible)
 
 func _on_training_opponent_attack_hurt(
 	hitbox_name: String,
@@ -606,7 +621,7 @@ func _physics_process(delta):
 	input_helper(null)
 
 	_do_execute_frame_mechanized(SyncManager.current_tick, delta)
-	if _frame_bar != null:
+	if _frame_bar != null or _punish_analysis != null:
 		var current_frame: int = SyncManager.current_tick
 		if _frame_bar_last_tick >= 0 and current_frame < _frame_bar_last_tick:
 			_frame_bar_tick_offset = (
@@ -658,22 +673,35 @@ func _physics_process(delta):
 				- _frame_bar_paused_ticks
 			)
 			if _frame_bar_reset_pending:
-				_frame_bar.reset_at_frame(frame_bar_frame)
+				if _frame_bar != null:
+					_frame_bar.reset_at_frame(frame_bar_frame)
+				if _punish_analysis != null:
+					_punish_analysis.reset_analysis()
 				_frame_bar_reset_pending = false
-			for entity in frame_bar_entities:
-				var move_frame_events: Array[FrameEvent] = []
-				if entity.fighterState != null:
-					var move_state: State = entity.fighterState.state
-					if move_state is AttackState or move_state is AirAttackState:
-						move_frame_events = _get_frame_bar_move_events(
-							move_state,
-							entity.currentState.get(Enums.StKey.stateName, "")
-						)
-				_frame_bar.capture_state_changes(
-					entity,
-					frame_bar_frame,
-					move_frame_events
-				)
+			if _frame_bar != null:
+				for entity in frame_bar_entities:
+					var move_frame_events: Array[FrameEvent] = []
+					if entity.fighterState != null:
+						var move_state: State = entity.fighterState.state
+						if move_state is AttackState or move_state is AirAttackState:
+							move_frame_events = _get_frame_bar_move_events(
+								move_state,
+								entity.currentState.get(Enums.StKey.stateName, "")
+							)
+					_frame_bar.capture_state_changes(
+						entity,
+						frame_bar_frame,
+						move_frame_events
+					)
+			if _punish_analysis != null:
+				var punish_attackers := _get_move_data_attackers()
+				var punish_opponents := _get_move_data_opponents()
+				if punish_attackers.size() > 1 and not punish_opponents.is_empty():
+					_punish_analysis.update_analysis(
+						punish_attackers[0],
+						punish_attackers[1],
+						punish_opponents[0]
+					)
 			_frame_bar_last_timeline_frame = frame_bar_frame
 
 func _do_execute_frame_mechanized(tick, delta) -> bool:

@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://b0c5ivn0p0cm2" path="res://game/ui/framebar/FrameBarCell.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://be2g6mvvohuai" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0000.png" id="3_6n5qr"]
 [ext_resource type="FontFile" uid="uid://yi8e7q0s0mfp" path="res://game/assets/HandwritingJoe.ttf" id="3_70i0g"]
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6yuit"]
 texture = ExtResource("3_6n5qr")
 expand_margin_top = 5.0
@@ -182,3 +181,4 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+

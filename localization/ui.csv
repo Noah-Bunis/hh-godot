@@ -75,6 +75,7 @@ UI_TRAINING_FRAME_ADVANTAGE,Frame Advantage:,有利フレーム:,Ventaja de fram
 UI_TRAINING_MOVE_DATA,Move Data,技データ,Datos del movimiento,Dados do movimento
 UI_TRAINING_FRAME_BAR,Frame Bar,フレームバー,Barra de frames,Barra de quadros
 UI_TRAINING_ASSIST_FRAME_BAR,Assist Frame Bars,アシストフレームバー,Barras de frames de asistencia,Barras de quadros de assist
+UI_TRAINING_PUNISH_ANALYSIS,Punish Analysis,確定反撃分析,Análisis de castigos,Análise de punição
 UI_TRAINING_STANCE,Stance,相手の状態,Postura,Postura
 UI_TRAINING_COUNTER_HIT,CounterHit,カウンターヒット,Contraataque,Contra-ataque
 UI_TRAINING_BLOCK_SETTINGS,Block Settings,ガード設定,Opciones de bloqueo,Configurações de defesa
