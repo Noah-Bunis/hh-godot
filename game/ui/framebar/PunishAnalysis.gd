@@ -3,11 +3,14 @@ extends PanelContainer
 class_name PunishAnalysis
 
 const MAX_DISPLAYED_MOVES := 25
+const COMBO_TRIAL_DISPLAY_NAMES = preload("res://game/ui/ComboTrialDisplayNames.gd")
 const ASSIST_CALL_STATES := [
 	"AssistAttack",
 	"AssistAttack2",
 	"AssistAirAttack",
 	"AssistAirAttack2",
+	"AssistSuper",
+	"AssistAirSuper"
 ]
 const PROJECTILE_SUMMON_NAMES := [
 	"subarustarball",
@@ -67,13 +70,20 @@ const PROJECTILE_SUMMON_NAMES := [
 	"FiftyKGHit",
 	"FiftyKGAirHit",
 	"SuperFiftyKGHit",
-	"SuperfiftyKGRekkaA"
+	"SuperfiftyKGRekkaA",
+	"GroundThrowHit",
+	"GroundBackThrowHit",
+	"AirThrowHit",
+	"AirBackThrowHit",
+	"AngelGroundThrowHit",
+	"AngelGroundBackThrowHit",
+	"AngelAirThrowHit",
+	"AngelAirBackThrowHit",
 
 ]
 
 @onready var _output: RichTextLabel = $Output
 
-var display_names: Dictionary = load("res://game/ui/ComboTrialDisplayNames.gd").DISPLAY_NAMES
 var icon_paths: Dictionary = load("res://game/ui/IconPaths.gd").ICON_PATHS
 var button_icon_size := 20
 var combo_prose_regex := RegEx.new()
@@ -230,6 +240,7 @@ func _get_punish_moves(
 	var subaru_angel_install_active := (
 		is_subaru and _is_subaru_angel_install_active(entity)
 	)
+	var display_character_name := _get_display_character_name(entity, is_assist)
 	for move_name in state_factory.states_instance:
 		var move_name_string := str(move_name)
 		var normalized_move_name := move_name_string.to_lower()
@@ -276,6 +287,10 @@ func _get_punish_moves(
 			continue
 		moves.append({
 			"name": move_name_string,
+			"display_name": COMBO_TRIAL_DISPLAY_NAMES.get_display_name(
+				display_character_name,
+				move_name_string
+			),
 			"startup": startup,
 		})
 
@@ -285,6 +300,27 @@ func _get_punish_moves(
 		return a["startup"] > b["startup"]
 	)
 	return moves
+
+func _get_display_character_name(entity: BasePlayer, is_assist: bool) -> String:
+	if is_assist or entity.fighterState == null:
+		return ""
+
+	var state_factory: StateFactory = entity.fighterState.state_factory
+	if state_factory is SubaruStateFactory:
+		return "Subaru"
+	if state_factory is MioStateFactory:
+		return "Mio"
+	if state_factory is OgaStateFactory:
+		return "Oga"
+	if state_factory is SuiseiStateFactory:
+		return "Suisei"
+	if state_factory is OllieStateFactory:
+		return "Ollie"
+	if state_factory is KanataStateFactory:
+		return "Kanata"
+	if state_factory is FlayonStateFactory:
+		return "Flayon"
+	return ""
 
 func _update_suisei_stance(entity: BasePlayer) -> void:
 	if entity.fighterState == null \
@@ -484,7 +520,7 @@ func _format_move_list(moves: Array[Dictionary]) -> String:
 	for index in range(mini(moves.size(), MAX_DISPLAYED_MOVES)):
 		var move: Dictionary = moves[index]
 		var move_name := str(move["name"])
-		var display_name: String = display_names.get(move_name, move_name)
+		var display_name := str(move.get("display_name", move_name))
 		move_labels.append(
 			"\n %s (%df)" % [_format_display_text(display_name), move["startup"]]
 		)

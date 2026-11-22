@@ -39,10 +39,12 @@ const COMBO_DUMMY_TEXT_KEYS := {
 }
 
 var ComboDatabase = load("res://game/ui/ComboTrials.gd")
-var display_names: Dictionary = load("res://game/ui/ComboTrialDisplayNames.gd").DISPLAY_NAMES
+const COMBO_TRIAL_DISPLAY_NAMES = preload("res://game/ui/ComboTrialDisplayNames.gd")
+var display_names: Dictionary = COMBO_TRIAL_DISPLAY_NAMES.DISPLAY_NAMES
 var icon_paths: Dictionary = load("res://game/ui/IconPaths.gd").ICON_PATHS
 var combo_trial: Dictionary = {}
 var current_combo_index = 0
+var current_character_name := ""
 var current_reset_position: String = "CENTER"
 
 var processed_combo: Array = []
@@ -83,6 +85,10 @@ func load_combo(index: int) -> void:
 	
 	
 	trials_size = combo_database[character_index].size()
+	if Global.ASSIST_COMBO_TRIAL:
+		current_character_name = _get_assist_character_name(character_index)
+	else:
+		current_character_name = _get_point_character_name(character_index)
 
 	if (index < 0):
 		index = trials_size - 1
@@ -160,7 +166,10 @@ func refresh_combo_ui() -> void:
 			display = _dummy_text(item["move"])
 		else:
 			display = _format_display_text(
-				display_names.get(item["move"], item["move"])
+				COMBO_TRIAL_DISPLAY_NAMES.get_display_name(
+					current_character_name,
+					str(item["move"])
+				)
 			)
 
 		if _is_dummy_step(item["move"]):
@@ -199,6 +208,34 @@ func refresh_combo_ui() -> void:
 	if current_combo_position == 0 or current_combo_position == 1:
 		target_value = 0
 	create_tween().tween_property(sb, "value", target_value, 0.1)
+
+func _get_point_character_name(character_index: int) -> String:
+	match character_index:
+		Enums.PointCharacters.Subaru:
+			return "Subaru"
+		Enums.PointCharacters.Mio:
+			return "Mio"
+		Enums.PointCharacters.Oga:
+			return "Oga"
+		Enums.PointCharacters.Ollie:
+			return "Ollie"
+		Enums.PointCharacters.Suisei:
+			return "Suisei"
+		Enums.PointCharacters.Kanata:
+			return "Kanata"
+		Enums.PointCharacters.Flayon:
+			return "Flayon"
+	return ""
+
+func _get_assist_character_name(character_index: int) -> String:
+	match character_index:
+		Enums.AssistCharacters.Ollie:
+			return "Ollie"
+		Enums.AssistCharacters.Kanata:
+			return "Kanata"
+		Enums.AssistCharacters.Suisei:
+			return "Suisei"
+	return ""
 
 func _format_display_text(text: String) -> String:
 	text = _translate_combo_prose(text)
