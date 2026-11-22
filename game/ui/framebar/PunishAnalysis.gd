@@ -4,6 +4,9 @@ class_name PunishAnalysis
 
 const MAX_DISPLAYED_MOVES := 25
 const COMBO_TRIAL_DISPLAY_NAMES = preload("res://game/ui/ComboTrialDisplayNames.gd")
+const PUNISH_HITBOX_SIMULATOR = preload(
+	"res://game/ui/framebar/PunishHitboxSimulator.gd"
+)
 const ASSIST_CALL_STATES := [
 	"AssistAttack",
 	"AssistAttack2",
@@ -67,10 +70,12 @@ const PROJECTILE_SUMMON_NAMES := [
 	"AngelAirAssistCall",
 	"AngelAirAssistCall2",
 	"AngelAirAssistCallSuper",
-	"FiftyKGHit",
-	"FiftyKGAirHit",
-	"SuperFiftyKGHit",
-	"SuperfiftyKGRekkaA",
+	"KanataFiftyKGHit",
+	"KanataFiftyRekkaA",
+	"KanataAirFiftyKGHit",
+	"KanataAirFiftyRekkaA",
+	"KanataSuperFiftyKGHit",
+	"KanataSuperFiftyRekkaA",
 	"GroundThrowHit",
 	"GroundBackThrowHit",
 	"AirThrowHit",
@@ -87,10 +92,14 @@ const PROJECTILE_SUMMON_NAMES := [
 var icon_paths: Dictionary = load("res://game/ui/IconPaths.gd").ICON_PATHS
 var button_icon_size := 20
 var combo_prose_regex := RegEx.new()
+var _hitbox_simulator = PUNISH_HITBOX_SIMULATOR.new()
 
 var _enabled := false
 var _last_state_property_snapshot: Dictionary = {}
+var _last_geometry_snapshot: Dictionary = {}
+var _last_valid_output := ""
 var _has_last_state_property_snapshot := false
+var _has_last_geometry_snapshot := false
 var _best_punish_window := -1
 var _neutral_hold_active := false
 var _neutral_hold_reached_both := false
@@ -122,6 +131,11 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		"assist": _get_entity_snapshot(assist),
 		"opponent": _get_entity_snapshot(opponent),
 	}
+	var geometry_snapshot := {
+		"player": _get_geometry_snapshot(player),
+		"assist": _get_geometry_snapshot(assist),
+		"opponent": _get_geometry_snapshot(opponent),
+	}
 	var was_both_neutral := (
 		_has_last_state_property_snapshot
 		and _are_player_and_opponent_neutral(_last_state_property_snapshot)
@@ -138,37 +152,69 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		not _has_last_state_property_snapshot
 		or state_property_snapshot != _last_state_property_snapshot
 	)
+	var geometry_changed := (
+		not _has_last_geometry_snapshot
+		or geometry_snapshot != _last_geometry_snapshot
+	)
 	var left_neutral_after_hold := (
 		_neutral_hold_active
 		and _neutral_hold_reached_both
 		and was_both_neutral
 		and not are_both_neutral
 	)
-	if left_neutral_after_hold:
+	var left_neutral_before_both := (
+		_neutral_hold_active
+		and not _neutral_hold_reached_both
+		and not are_both_neutral
+		and _left_neutral_state(
+			_last_state_property_snapshot,
+			state_property_snapshot
+		)
+	)
+	var ended_neutral_hold := (
+		left_neutral_after_hold or left_neutral_before_both
+	)
+	if ended_neutral_hold:
 		_neutral_hold_active = false
 		_neutral_hold_reached_both = false
-	elif visible and entered_neutral:
+	elif entered_neutral and not _last_valid_output.is_empty():
 		_neutral_hold_active = true
+		_output.text = _last_valid_output
+		visible = _enabled
 	if _neutral_hold_active and are_both_neutral:
 		_neutral_hold_reached_both = true
 
 	_last_state_property_snapshot = state_property_snapshot
 	_has_last_state_property_snapshot = true
-	if left_neutral_after_hold:
+	_last_geometry_snapshot = geometry_snapshot
+	_has_last_geometry_snapshot = true
+	if ended_neutral_hold:
 		_best_punish_window = -1
+		_last_valid_output = ""
 		visible = false
 	elif state_or_property_changed and not _neutral_hold_active:
 		_best_punish_window = -1
 		visible = false
+		if not entered_neutral:
+			_last_valid_output = ""
+	elif geometry_changed and not _neutral_hold_active:
+		_best_punish_window = -1
+		visible = false
 
-	if _neutral_hold_active and _neutral_hold_reached_both:
+	if _neutral_hold_active:
+		_output.text = _last_valid_output
+		visible = _enabled
 		return
 
 	var opponent_state := _get_current_state(opponent)
 	if opponent_state == null or _has_projectile_summon(opponent_state):
 		return
 
-	var recovery_frames := _get_recovery_frames(opponent, opponent_state)
+	var recovery_frames := _get_recovery_frames(
+		opponent,
+		opponent_state,
+		player
+	)
 	if recovery_frames <= 0:
 		return
 
@@ -183,7 +229,11 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		player,
 		punish_window,
 		false,
-		air_move_startup_delay
+		air_move_startup_delay,
+		opponent,
+		opponent_state,
+		player_delay,
+		null
 	)
 	var assist_available := (
 		assist.fighterState != null
@@ -195,7 +245,11 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 			assist,
 			punish_window,
 			true,
-			air_move_startup_delay
+			air_move_startup_delay,
+			opponent,
+			opponent_state,
+			0,
+			player
 		)
 
 	if player_moves.is_empty() and assist_moves.is_empty():
@@ -211,14 +265,18 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		lines.append("[b]Assist[/b]: %s" % _format_move_list(assist_moves))
 	else:
 		lines.append("[b]Assist[/b]: unavailable")
-	lines.append("Only startup speed is checked; effective range may vary.")
+	lines.append("Punishes may vary based on distance and positioning.")
 
 	_output.text = "\n".join(lines)
+	_last_valid_output = _output.text
 	visible = _enabled
 
 func reset_analysis() -> void:
 	_last_state_property_snapshot.clear()
+	_last_geometry_snapshot.clear()
+	_last_valid_output = ""
 	_has_last_state_property_snapshot = false
+	_has_last_geometry_snapshot = false
 	_best_punish_window = -1
 	_neutral_hold_active = false
 	_neutral_hold_reached_both = false
@@ -228,7 +286,11 @@ func _get_punish_moves(
 	entity: BasePlayer,
 	startup_budget: int,
 	is_assist: bool = false,
-	air_move_startup_delay: int = 0
+	air_move_startup_delay: int = 0,
+	opponent: BasePlayer = null,
+	opponent_state: State = null,
+	action_delay: int = 0,
+	attacker_anchor: BasePlayer = null
 ) -> Array[Dictionary]:
 	var moves: Array[Dictionary] = []
 	if startup_budget <= 0 or entity.fighterState == null:
@@ -277,13 +339,25 @@ func _get_punish_moves(
 			continue
 		if _has_projectile_summon(move_state):
 			continue
-		var timing := _get_attack_timing(move_state)
+		var timing := _hitbox_simulator.get_attack_timing(move_state)
 		if timing.is_empty():
 			continue
 		var startup: int = timing["startup"]
+		var move_delay := action_delay
 		if move_state is AirAttackState:
 			startup += air_move_startup_delay
+			move_delay += air_move_startup_delay
 		if startup > startup_budget:
+			continue
+		if not _hitbox_simulator.will_move_hit_during_recovery(
+			entity,
+			move_state,
+			opponent,
+			opponent_state,
+			timing,
+			move_delay,
+			attacker_anchor
+		):
 			continue
 		moves.append({
 			"name": move_name_string,
@@ -362,21 +436,59 @@ func _has_projectile_summon(move_state: State) -> bool:
 			return true
 	return false
 
-func _get_recovery_frames(entity: BasePlayer, state: State) -> int:
+func _get_recovery_frames(
+	entity: BasePlayer,
+	state: State,
+	target: BasePlayer
+) -> int:
 	var current_frame: int = entity.currentState.get(Enums.StKey.frame, 0)
 	if current_frame > state.endFrame:
 		return 0
 	if _is_landing_recovery_state(
 		str(entity.currentState.get(Enums.StKey.stateName, ""))
 	):
-		return maxi(state.endFrame - current_frame + 1, 0)
+		return (
+			maxi(state.endFrame - current_frame + 1, 0)
+			+ _get_remaining_hitstop_delay(entity)
+		)
 	if not (state is AttackState or state is AirAttackState):
 		return 0
 
-	var timing := _get_attack_timing(state)
-	if timing.is_empty() or current_frame <= timing["last_active_frame"]:
+	var timing := _hitbox_simulator.get_attack_timing(state)
+	if timing.is_empty():
 		return 0
-	return maxi(state.endFrame - current_frame + 1, 0)
+	var remaining_frames := (
+		maxi(state.endFrame - current_frame + 1, 0)
+		+ _get_remaining_hitstop_delay(entity)
+	)
+	var active_frames_remaining := (
+		maxi(timing["last_active_frame"] - current_frame + 1, 0)
+		+ _get_remaining_hitstop_delay(entity)
+	)
+	if current_frame <= timing["last_active_frame"] \
+			and not _has_attack_cooldown_against_target(
+				entity,
+				target,
+				active_frames_remaining
+			):
+		return 0
+	return remaining_frames
+
+func _has_attack_cooldown_against_target(
+	attacker: BasePlayer,
+	target: BasePlayer,
+	frames_until_active_end: int
+) -> bool:
+	var hit_cooldowns: Dictionary = attacker.currentState.get(
+		Enums.StKey.hit_cooldown,
+		{}
+	)
+	var cooldown := -1
+	if hit_cooldowns.has(str(target.name)):
+		cooldown = int(hit_cooldowns[str(target.name)])
+	elif hit_cooldowns.size() == 1:
+		cooldown = int(hit_cooldowns.values()[0])
+	return cooldown > frames_until_active_end
 
 func _get_entity_snapshot(entity: BasePlayer) -> Dictionary:
 	var properties: Dictionary = {}
@@ -387,6 +499,17 @@ func _get_entity_snapshot(entity: BasePlayer) -> Dictionary:
 		"instance_id": entity.get_instance_id(),
 		"state_name": entity.currentState.get(Enums.StKey.stateName, "Neutral"),
 		"properties": properties,
+	}
+
+func _get_geometry_snapshot(entity: BasePlayer) -> Dictionary:
+	var position: SGFixedVector2 = entity.get_global_fixed_position()
+	return {
+		"position_x": int(position.x),
+		"position_y": int(position.y),
+		"frame": int(entity.currentState.get(Enums.StKey.frame, 0)),
+		"leftface": bool(entity.currentState.get(Enums.StKey.leftface, false)),
+		"scale_x": int(entity.fixed_scale.x),
+		"scale_y": int(entity.fixed_scale.y),
 	}
 
 func _entered_neutral_state(
@@ -400,6 +523,22 @@ func _entered_neutral_state(
 		var current_state_name: String = str(current_entity["state_name"])
 		if previous_state_name != current_state_name \
 				and _is_neutral_state_name(current_state_name):
+			return true
+	return false
+
+func _left_neutral_state(
+	previous_snapshot: Dictionary,
+	current_snapshot: Dictionary
+) -> bool:
+	for entity_name in ["player", "opponent"]:
+		var previous_state_name: String = str(
+			previous_snapshot[entity_name]["state_name"]
+		)
+		var current_state_name: String = str(
+			current_snapshot[entity_name]["state_name"]
+		)
+		if _is_neutral_state_name(previous_state_name) \
+				and not _is_neutral_state_name(current_state_name):
 			return true
 	return false
 
@@ -424,47 +563,6 @@ func _is_landing_recovery_state(state_name: String) -> bool:
 		or state_name.ends_with("LandAttackRecovery")
 	)
 
-func _get_attack_timing(move_state: State) -> Dictionary:
-	if move_state.anim_data == null or move_state.anim_data.is_empty():
-		return {}
-
-	var animation_frames: Array = move_state.anim_data.keys()
-	animation_frames.sort()
-	var first_active_frame := -1
-	var last_active_frame := -1
-
-	for index in range(animation_frames.size()):
-		var frame: int = int(animation_frames[index])
-		if frame > move_state.endFrame:
-			break
-		var frame_data: Dictionary = move_state.anim_data[frame]
-		var hitbox_active: bool = (
-			not frame_data.get(Enums.StKey.Hit1Disable, true)
-			or not frame_data.get(Enums.StKey.Hit2Disable, true)
-		)
-		if not hitbox_active:
-			continue
-
-		var active_frame := maxi(frame, 0)
-		if first_active_frame < 0:
-			first_active_frame = active_frame
-		var active_until := active_frame
-		if hitbox_active:
-			active_until = move_state.endFrame
-			if index + 1 < animation_frames.size():
-				active_until = mini(
-					active_until,
-					int(animation_frames[index + 1]) - 1
-				)
-		last_active_frame = maxi(last_active_frame, active_until)
-
-	if first_active_frame < 0:
-		return {}
-	return {
-		"startup": first_active_frame + 1,
-		"last_active_frame": last_active_frame,
-	}
-
 func _get_current_state(entity: BasePlayer) -> State:
 	if entity.fighterState == null:
 		return null
@@ -475,13 +573,22 @@ func _get_action_delay(entity: BasePlayer) -> int:
 		return 0
 	var state: State = entity.fighterState.state
 	if entity.currentState.get(Enums.StKey.hitstun, 0) > 0:
-		return int(entity.currentState[Enums.StKey.hitstun])
+		return (
+			int(entity.currentState[Enums.StKey.hitstun])
+			+ _get_remaining_hitstop_delay(entity)
+		)
 	if state is AttackState or state is AirAttackState:
 		return maxi(
 			state.endFrame - int(entity.currentState.get(Enums.StKey.frame, 0)) + 1,
 			0
-		)
+		) + _get_remaining_hitstop_delay(entity)
 	return 0
+
+func _get_remaining_hitstop_delay(entity: BasePlayer) -> int:
+	return maxi(
+		int(entity.currentState.get(Enums.StKey.hitStopFrame, 0)) - 1,
+		0
+	)
 
 func _get_air_move_startup_delay(entity: BasePlayer) -> int:
 	if entity.fighterState == null or entity.has_property(Enums.StateProperty.AirThrowOK):
