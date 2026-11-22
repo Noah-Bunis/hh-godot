@@ -309,6 +309,11 @@ func _record_frame(
 	if row_index < 0:
 		return
 	if _pending_frame != frame:
+		if _pending_frame >= 0:
+			assert(
+			_pending_row_mask == 0b1111,
+			"Incomplete frame capture: %d" % _pending_frame
+		)
 		_pending_frame = frame
 		_pending_frame_types = [-1, -1, -1, -1]
 		_pending_row_mask = 0
@@ -354,6 +359,7 @@ func _has_advancing_event(event_types: Dictionary) -> bool:
 		FrameEvent.EventType.RECOVERY,
 		FrameEvent.EventType.HITSTUN,
 		FrameEvent.EventType.BLOCKSTUN,
+		FrameEvent.EventType.INVINCIBILITY,
 		FrameEvent.EventType.FIRST_ACTIVE,
 	]:
 		if event_types.has(event_type):

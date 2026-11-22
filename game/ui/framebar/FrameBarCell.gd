@@ -9,17 +9,17 @@ class_name FrameBarCell
 func set_frame_type(event_type: int) -> void:
 	match event_type:
 		FrameEvent.EventType.STARTUP:
-			_base_color.color = Color("31cca1")
+			_base_color.color = Color("00b83d")
 		FrameEvent.EventType.ACTIVE:
 			_base_color.color = Color("c63567")
 		FrameEvent.EventType.RECOVERY:
 			_base_color.color = Color("186eb8")
 		FrameEvent.EventType.HITSTUN:
-			_base_color.color = Color("f5f642")
+			_base_color.color = Color("fcdf5b")
 		FrameEvent.EventType.BLOCKSTUN:
-			_base_color.color = Color("45b8cb")
+			_base_color.color = Color("4ecaf1")
 		FrameEvent.EventType.FIRST_ACTIVE:
-			_base_color.color = Color("e0a602")
+			_base_color.color = Color("ff8b00")
 		_:
 			_base_color.color = Color("3d4754ff")
 
