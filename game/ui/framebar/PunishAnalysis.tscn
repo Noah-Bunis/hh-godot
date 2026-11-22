@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://e00y7ai46q1n" path="res://game/ui/framebar/PunishAnalysis.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://be2g6mvvohuai" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0000.png" id="2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6yuit"]
+texture = ExtResource("2")
+expand_margin_top = 5.0
+expand_margin_right = 12.0
+expand_margin_bottom = 10.0
+
+[node name="PunishAnalysis" type="PanelContainer"]
+visible = false
+custom_minimum_size = Vector2(400, 135)
+anchors_preset = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -416.0
+offset_top = -421.0
+offset_right = -16.0
+offset_bottom = -286.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_6yuit")
+script = ExtResource("1")
+
+[node name="Output" type="RichTextLabel" parent="."]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+text = ""

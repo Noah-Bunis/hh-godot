@@ -41,6 +41,15 @@ var _move_data_contact_start_frame: int = 0
 var _move_data_contact_last_frame: int = 0
 var _move_data_projectile_sources: Dictionary = {}
 var _has_move_data_ui: bool = false
+var _frame_bar: FrameBar
+var _punish_analysis: PunishAnalysis
+var _frame_bar_pause_start_tick: int = -1
+var _frame_bar_paused_ticks: int = 0
+var _frame_bar_was_in_simulation_freeze: bool = false
+var _frame_bar_tick_offset: int = 0
+var _frame_bar_last_tick: int = -1
+var _frame_bar_last_timeline_frame: int = -1
+var _frame_bar_reset_pending: bool = false
 
 func _init() -> void:
 	super._init()
@@ -79,6 +88,27 @@ func _ready() -> void:
 	$CanvasLayer/TrainingOptionsMenu.command_list.connect("close_menu", Callable($CanvasLayer/TrainingOptionsMenu, "command_list_closed"))
 	dummy_input.connect("strike_hurt", Callable(self, "load_reaction_state"))
 	_has_move_data_ui = has_node("CanvasLayer/MoveData")
+	if not self is ComboTrialMain:
+		_frame_bar = get_node_or_null("CanvasLayer/FrameBar") as FrameBar
+		_punish_analysis = get_node_or_null(
+			"CanvasLayer/PunishAnalysis"
+		) as PunishAnalysis
+	if _frame_bar != null:
+		$CanvasLayer/TrainingOptionsMenu.frame_bar_toggled.connect(_on_frame_bar_toggled)
+		$CanvasLayer/TrainingOptionsMenu.assist_frame_bars_toggled.connect(
+			_on_assist_frame_bars_toggled
+		)
+		_on_frame_bar_toggled($CanvasLayer/TrainingOptionsMenu.frame_bar_visible)
+		_on_assist_frame_bars_toggled(
+			$CanvasLayer/TrainingOptionsMenu.assist_frame_bars_visible
+		)
+	if _punish_analysis != null:
+		$CanvasLayer/TrainingOptionsMenu.punish_analysis_toggled.connect(
+			_on_punish_analysis_toggled
+		)
+		_on_punish_analysis_toggled(
+			$CanvasLayer/TrainingOptionsMenu.punish_analysis_visible
+		)
 	if (_has_move_data_ui):
 		$CanvasLayer/TrainingOptionsMenu.connect("move_data_toggled", Callable(self, "_on_move_data_toggled"))
 		_on_move_data_toggled($CanvasLayer/TrainingOptionsMenu.move_data_visible)
@@ -94,6 +124,18 @@ func _ready() -> void:
 
 func _on_move_data_toggled(is_visible: bool) -> void:
 	$CanvasLayer/MoveData.visible = is_visible
+
+func _on_frame_bar_toggled(is_visible: bool) -> void:
+	if _frame_bar != null:
+		_frame_bar.visible = is_visible
+
+func _on_assist_frame_bars_toggled(is_visible: bool) -> void:
+	if _frame_bar != null:
+		_frame_bar.set_assist_rows_visible(is_visible)
+
+func _on_punish_analysis_toggled(is_visible: bool) -> void:
+	if _punish_analysis != null:
+		_punish_analysis.set_enabled(is_visible)
 
 func _on_training_opponent_attack_hurt(
 	hitbox_name: String,
@@ -114,12 +156,12 @@ func _on_training_opponent_attack_hurt(
 			return
 		_queue_move_data_contact(
 			player,
-			projectile_source["move_data"],
+			projectile_source["move_frame_events"],
 			true,
 			was_parried
 		)
 		return
-	_queue_move_data_contact(player, {}, false, was_parried)
+	_queue_move_data_contact(player, [], false, was_parried)
 
 func _on_move_data_projectile_spawned(
 	_x: int,
@@ -132,10 +174,10 @@ func _on_move_data_projectile_spawned(
 	if (attacker.fighterState == null):
 		return
 	var move_state: State = attacker.fighterState.state
-	var move_data: Dictionary = _get_move_frame_data(move_state)
+	var move_frame_events: Array[FrameEvent] = _get_move_frame_events(move_state)
 	_move_data_projectile_sources[_normalize_projectile_name(node_name)] = {
 		"actor": attacker,
-		"move_data": move_data,
+		"move_frame_events": move_frame_events,
 	}
 
 func _normalize_projectile_name(projectile_name: String) -> String:
@@ -143,25 +185,25 @@ func _normalize_projectile_name(projectile_name: String) -> String:
 
 func _queue_move_data_contact(
 	player: BasePlayer,
-	move_data_snapshot: Dictionary = {},
+	move_frame_events_snapshot: Array[FrameEvent] = [],
 	is_projectile: bool = false,
 	was_parried: bool = false
 ) -> void:
 	if (player.fighterState == null):
 		return
 	var move_state: State = player.fighterState.state
-	var move_data: Dictionary = move_data_snapshot
-	if (move_data.is_empty()):
+	var move_frame_events: Array[FrameEvent] = move_frame_events_snapshot
+	if (move_frame_events.is_empty()):
 		if (not is_projectile and not move_state is AttackState and not move_state is AirAttackState):
 			return
-		move_data = _get_move_frame_data(move_state)
-	if (move_data.is_empty() and not is_projectile):
+		move_frame_events = _get_move_frame_events(move_state)
+	if (move_frame_events.is_empty() and not is_projectile):
 		return
 	call_deferred(
 		"_record_move_data_contact",
 		player,
 		player.currentState.get(Enums.StKey.stateName, ""),
-		move_data,
+		move_frame_events,
 		is_projectile,
 		was_parried
 	)
@@ -169,7 +211,7 @@ func _queue_move_data_contact(
 func _record_move_data_contact(
 	player: BasePlayer,
 	move_state_name: String,
-	move_data_snapshot: Dictionary,
+	move_frame_events_snapshot: Array[FrameEvent],
 	is_projectile: bool,
 	was_parried: bool
 ) -> void:
@@ -179,12 +221,12 @@ func _record_move_data_contact(
 	var opponent: BasePlayer = _get_opponent_point_player()
 	if (base_player.fighterState == null):
 		return
-	if (move_data_snapshot.is_empty()):
+	if (move_frame_events_snapshot.is_empty()):
 		var move_state: State = player.fighterState.state
 		if (not is_projectile and not move_state is AttackState and not move_state is AirAttackState):
 			return
-		move_data_snapshot = _get_move_frame_data(move_state)
-		if (move_data_snapshot.is_empty() and not is_projectile):
+		move_frame_events_snapshot = _get_move_frame_events(move_state)
+		if (move_frame_events_snapshot.is_empty() and not is_projectile):
 			return
 	var opponent_stun: int = 0 if was_parried else opponent.currentState.get(Enums.StKey.hitstun, 0)
 	if (opponent_stun <= 0 and not was_parried):
@@ -214,8 +256,8 @@ func _record_move_data_contact(
 	_move_data_state_name = move_state_name
 	_move_data_advantage_locked = true
 	_move_data_contacted = true
-	if (not move_data_snapshot.is_empty()):
-		_set_move_data_frame_values(move_data_snapshot)
+	if (not move_frame_events_snapshot.is_empty()):
+		_set_move_data_frame_values(move_frame_events_snapshot)
 	else:
 		$CanvasLayer/MoveData/AttackStartup.text = tr("UI_TRAINING_ATTACK_STARTUP") + " --"
 		$CanvasLayer/MoveData/ActiveFrames.text = tr("UI_TRAINING_ATTACK_ACTIVE") + " --"
@@ -259,7 +301,7 @@ func _find_move_data_attacker(hitbox_name: String) -> BasePlayer:
 		var move_state: State = attacker.fighterState.state
 		if (not move_state is AttackState and not move_state is AirAttackState):
 			continue
-		if (not _get_move_frame_data(move_state).is_empty()):
+		if (not _get_move_frame_events(move_state).is_empty()):
 			return attacker
 	return null
 
@@ -269,7 +311,7 @@ func _get_active_move_data_attacker() -> BasePlayer:
 			continue
 		var move_state: State = attacker.fighterState.state
 		if ((move_state is AttackState or move_state is AirAttackState)
-				and not _get_move_frame_data(move_state).is_empty()):
+				and not _get_move_frame_events(move_state).is_empty()):
 			return attacker
 	return null
 
@@ -279,40 +321,30 @@ func _reset_move_data_display() -> void:
 	$CanvasLayer/MoveData/AttackRecovery.text = tr("UI_TRAINING_ATTACK_RECOVERY") + " --"
 	$CanvasLayer/MoveData/FrameAdvantage.text = tr("UI_TRAINING_FRAME_ADVANTAGE") + " --"
 
-func _get_move_frame_data(move_state: State) -> Dictionary:
-	var animation_frames: Array = move_state.anim_data.keys()
-	animation_frames.sort()
-	var startup: int = -1
-	var last_active_frame: int = -1
-	var active_frames: int = 0
+func _get_move_frame_events(move_state: State) -> Array[FrameEvent]:
+	return FrameBar.get_move_frame_events(move_state)
 
-	for index in range(animation_frames.size()):
-		var frame: int = int(animation_frames[index])
-		if (frame > move_state.endFrame):
-			break
-		var frame_data: Dictionary = move_state.anim_data[frame]
-		var hitbox_active: bool = (
-			not frame_data.get(Enums.StKey.Hit1Disable, true)
-			or not frame_data.get(Enums.StKey.Hit2Disable, true)
-		)
-		if (not hitbox_active):
-			continue
+func _get_frame_bar_move_events(
+	move_state: State,
+	state_name: String
+) -> Array[FrameEvent]:
+	return FrameBar.get_frame_bar_move_events(move_state, state_name)
 
-		if (startup < 0):
-			startup = maxi(frame, 0)
-		var active_until: int = move_state.endFrame
-		if (index + 1 < animation_frames.size()):
-			active_until = mini(active_until, int(animation_frames[index + 1]) - 1)
-		last_active_frame = maxi(last_active_frame, active_until)
-		active_frames += maxi(active_until - maxi(frame, 0) + 1, 0)
+func _get_move_frame_event_duration(
+	move_frame_events: Array[FrameEvent],
+	event_type: FrameEvent.EventType
+) -> int:
+	var duration: int = 0
+	for event in move_frame_events:
+		if (event.type == event_type):
+			duration += event.duration
+	return duration
 
-	if (startup < 0):
-		return {}
-	return {
-		"startup": startup,
-		"active": active_frames,
-		"recovery": maxi(move_state.endFrame - last_active_frame, 0),
-	}
+func _get_first_active_frame(move_frame_events: Array[FrameEvent]) -> int:
+	for event in move_frame_events:
+		if event.type == FrameEvent.EventType.FIRST_ACTIVE:
+			return event.start_frame + 1
+	return 0
 
 func _update_move_data() -> void:
 	var player: BasePlayer = _move_data_actor if _move_data_contacted else _get_active_move_data_attacker()
@@ -329,10 +361,10 @@ func _update_move_data() -> void:
 	if (advantage_player.fighterState == null):
 		return
 	var advantage_state_name: String = advantage_player.currentState.get(Enums.StKey.stateName, "")
-	var move_data: Dictionary = {}
+	var move_frame_events: Array[FrameEvent] = []
 	if (move_state is AttackState or move_state is AirAttackState):
-		move_data = _get_move_frame_data(move_state)
-	var is_attack_move: bool = not move_data.is_empty()
+		move_frame_events = _get_move_frame_events(move_state)
+	var is_attack_move: bool = not move_frame_events.is_empty()
 
 	if (_move_data_contacted and advantage_state_name == _move_data_advantage_state_name):
 		_move_data_contact_last_frame = maxi(
@@ -348,7 +380,7 @@ func _update_move_data() -> void:
 		)
 		var is_attack_followup: bool = (
 			(advantage_state is AttackState or advantage_state is AirAttackState)
-			and not _get_move_frame_data(advantage_state).is_empty()
+			and not _get_move_frame_events(advantage_state).is_empty()
 		)
 		var is_landing_recovery: bool = _is_landing_recovery_state(advantage_state_name)
 		if (not was_interrupted
@@ -393,10 +425,16 @@ func _update_move_data() -> void:
 		_move_data_actor = player
 		return
 
-	var startup: int = move_data["startup"]
-	var active: int = move_data["active"]
-	var recovery: int = move_data["recovery"]
-	$CanvasLayer/MoveData/AttackStartup.text = tr("UI_TRAINING_ATTACK_STARTUP") + " " + str(startup)
+	var first_active_frame: int = _get_first_active_frame(move_frame_events)
+	var active: int = _get_move_frame_event_duration(
+		move_frame_events,
+		FrameEvent.EventType.ACTIVE
+	)
+	var recovery: int = _get_move_frame_event_duration(
+		move_frame_events,
+		FrameEvent.EventType.RECOVERY
+	)
+	$CanvasLayer/MoveData/AttackStartup.text = tr("UI_TRAINING_ATTACK_STARTUP") + " " + str(first_active_frame)
 	$CanvasLayer/MoveData/ActiveFrames.text = tr("UI_TRAINING_ATTACK_ACTIVE") + " " + str(active)
 	$CanvasLayer/MoveData/AttackRecovery.text = tr("UI_TRAINING_ATTACK_RECOVERY") + " " + str(recovery)
 	_move_data_actor = player
@@ -421,10 +459,16 @@ func _set_move_data_advantage_value(advantage: int) -> void:
 	_set_move_data_advantage_text(advantage)
 	_move_data_advantage_locked = true
 
-func _set_move_data_frame_values(move_data: Dictionary) -> void:
-	$CanvasLayer/MoveData/AttackStartup.text = tr("UI_TRAINING_ATTACK_STARTUP") + " " + str(move_data["startup"])
-	$CanvasLayer/MoveData/ActiveFrames.text = tr("UI_TRAINING_ATTACK_ACTIVE") + " " + str(move_data["active"])
-	$CanvasLayer/MoveData/AttackRecovery.text = tr("UI_TRAINING_ATTACK_RECOVERY") + " " + str(move_data["recovery"])
+func _set_move_data_frame_values(move_frame_events: Array[FrameEvent]) -> void:
+	$CanvasLayer/MoveData/AttackStartup.text = tr("UI_TRAINING_ATTACK_STARTUP") + " " + str(
+		_get_first_active_frame(move_frame_events)
+	)
+	$CanvasLayer/MoveData/ActiveFrames.text = tr("UI_TRAINING_ATTACK_ACTIVE") + " " + str(
+		_get_move_frame_event_duration(move_frame_events, FrameEvent.EventType.ACTIVE)
+	)
+	$CanvasLayer/MoveData/AttackRecovery.text = tr("UI_TRAINING_ATTACK_RECOVERY") + " " + str(
+		_get_move_frame_event_duration(move_frame_events, FrameEvent.EventType.RECOVERY)
+	)
 
 func _set_move_data_advantage_text(advantage: int) -> void:
 	var value := "%+d" % advantage
@@ -485,6 +529,88 @@ func _physics_process(delta):
 	input_helper(null)
 
 	_do_execute_frame_mechanized(SyncManager.current_tick, delta)
+	if _frame_bar != null or _punish_analysis != null:
+		var current_frame: int = SyncManager.current_tick
+		if _frame_bar_last_tick >= 0 and current_frame < _frame_bar_last_tick:
+			_frame_bar_tick_offset = (
+				_frame_bar_last_timeline_frame + 1 - current_frame
+			)
+			_frame_bar_paused_ticks = 0
+			_frame_bar_pause_start_tick = -1
+			_frame_bar_was_in_simulation_freeze = false
+			_frame_bar_reset_pending = true
+		_frame_bar_last_tick = current_frame
+		var frame_bar_entities: Array[BasePlayer] = [
+			fighter_game.ServerPlayer,
+			fighter_game.ClientPlayer,
+			fighter_game.AssistPlayer1,
+			fighter_game.AssistPlayer2,
+		]
+		var hitstop_active := false
+		for entity in frame_bar_entities:
+			if entity.currentState.get(Enums.StKey.hitStopFrame, 0) > 0:
+				hitstop_active = true
+				break
+		var screen_freeze_active: bool = (
+			fighter_game.frozen
+			and fighter_game.frozenFrame > 0
+		)
+		var simulation_freeze_active: bool = hitstop_active or screen_freeze_active
+		var freeze_just_started: bool = (
+			simulation_freeze_active
+			and not _frame_bar_was_in_simulation_freeze
+		)
+		_frame_bar_was_in_simulation_freeze = simulation_freeze_active
+		var frame_bar_paused: bool = (
+			$CanvasLayer/TrainingOptionsMenu.is_enabled()
+			or (simulation_freeze_active and not freeze_just_started)
+		)
+		if frame_bar_paused:
+			if _frame_bar_pause_start_tick < 0:
+				_frame_bar_pause_start_tick = current_frame
+		else:
+			if _frame_bar_pause_start_tick >= 0:
+				_frame_bar_paused_ticks += maxi(
+					current_frame - _frame_bar_pause_start_tick,
+					0
+				)
+				_frame_bar_pause_start_tick = -1
+			var frame_bar_frame := (
+				current_frame
+				+ _frame_bar_tick_offset
+				- _frame_bar_paused_ticks
+			)
+			if _frame_bar_reset_pending:
+				if _frame_bar != null:
+					_frame_bar.reset_at_frame(frame_bar_frame)
+				if _punish_analysis != null:
+					_punish_analysis.reset_analysis()
+				_frame_bar_reset_pending = false
+			if _frame_bar != null:
+				for entity in frame_bar_entities:
+					var move_frame_events: Array[FrameEvent] = []
+					if entity.fighterState != null:
+						var move_state: State = entity.fighterState.state
+						if move_state is AttackState or move_state is AirAttackState:
+							move_frame_events = _get_frame_bar_move_events(
+								move_state,
+								entity.currentState.get(Enums.StKey.stateName, "")
+							)
+					_frame_bar.capture_state_changes(
+						entity,
+						frame_bar_frame,
+						move_frame_events
+					)
+			if _punish_analysis != null:
+				var punish_attackers := _get_move_data_attackers()
+				var punish_opponents := _get_move_data_opponents()
+				if punish_attackers.size() > 1 and not punish_opponents.is_empty():
+					_punish_analysis.update_analysis(
+						punish_attackers[0],
+						punish_attackers[1],
+						punish_opponents[0]
+					)
+			_frame_bar_last_timeline_frame = frame_bar_frame
 
 func _do_execute_frame_mechanized(tick, delta) -> bool:
 	var p1_input_dict = {}

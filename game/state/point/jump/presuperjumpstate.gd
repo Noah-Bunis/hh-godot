@@ -17,6 +17,9 @@ func _init():
 			},
 		4 : {
 			Enums.StKey.Summon : "superjumpdust",
+			Enums.StKey.Hurt1Disable : false,
+			Enums.StKey.Hurt2Disable : false,
+			Enums.StKey.Hurt3Disable : false,
 		},
 	}
 	endFrame = 4  # endFrame + 1 = X frame jump squat

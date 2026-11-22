@@ -1,0 +1,184 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1tarmjqj26tm"]
+
+[ext_resource type="Script" uid="uid://e5l2ifyn2eep" path="res://game/ui/framebar/FrameBar.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://b0c5ivn0p0cm2" path="res://game/ui/framebar/FrameBarCell.tscn" id="2"]
+[ext_resource type="Texture2D" uid="uid://be2g6mvvohuai" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0000.png" id="3_6n5qr"]
+[ext_resource type="FontFile" uid="uid://yi8e7q0s0mfp" path="res://game/assets/HandwritingJoe.ttf" id="3_70i0g"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6yuit"]
+texture = ExtResource("3_6n5qr")
+expand_margin_top = 5.0
+expand_margin_right = 12.0
+expand_margin_bottom = 10.0
+
+[node name="FrameBar" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1")
+frame_cell_scene = ExtResource("2")
+
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 84)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -280.0
+offset_right = -16.0
+offset_bottom = -196.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_6yuit")
+
+[node name="Rows" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="AssistPlayer1" type="HBoxContainer" parent="Panel/Rows"]
+visible = false
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="LabelSlot" type="Control" parent="Panel/Rows/AssistPlayer1"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 21)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="Panel/Rows/AssistPlayer1/LabelSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93, 0.95, 1, 1)
+theme_override_fonts/font = ExtResource("3_70i0g")
+theme_override_font_sizes/font_size = 32
+text = "A1"
+vertical_alignment = 1
+
+[node name="Cells" type="HBoxContainer" parent="Panel/Rows/AssistPlayer1"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Player1" type="HBoxContainer" parent="Panel/Rows"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="LabelSlot" type="Control" parent="Panel/Rows/Player1"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 21)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="Panel/Rows/Player1/LabelSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93, 0.95, 1, 1)
+theme_override_fonts/font = ExtResource("3_70i0g")
+theme_override_font_sizes/font_size = 32
+text = "P1"
+vertical_alignment = 1
+
+[node name="Cells" type="HBoxContainer" parent="Panel/Rows/Player1"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Player2" type="HBoxContainer" parent="Panel/Rows"]
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="LabelSlot" type="Control" parent="Panel/Rows/Player2"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 21)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="Panel/Rows/Player2/LabelSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93, 0.95, 1, 1)
+theme_override_fonts/font = ExtResource("3_70i0g")
+theme_override_font_sizes/font_size = 32
+text = "P2"
+vertical_alignment = 1
+
+[node name="Cells" type="HBoxContainer" parent="Panel/Rows/Player2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="AssistPlayer2" type="HBoxContainer" parent="Panel/Rows"]
+visible = false
+custom_minimum_size = Vector2(0, 21)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="LabelSlot" type="Control" parent="Panel/Rows/AssistPlayer2"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 21)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="Panel/Rows/AssistPlayer2/LabelSlot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.93, 0.95, 1, 1)
+theme_override_fonts/font = ExtResource("3_70i0g")
+theme_override_font_sizes/font_size = 32
+text = "A2"
+vertical_alignment = 1
+
+[node name="Cells" type="HBoxContainer" parent="Panel/Rows/AssistPlayer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="DurationLabels" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
