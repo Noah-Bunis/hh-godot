@@ -84,6 +84,7 @@ const PROJECTILE_SUMMON_NAMES := [
 	"AngelGroundBackThrowHit",
 	"AngelAirThrowHit",
 	"AngelAirBackThrowHit",
+	"Burst"
 
 ]
 
@@ -101,6 +102,7 @@ var _last_valid_output := ""
 var _has_last_state_property_snapshot := false
 var _has_last_geometry_snapshot := false
 var _best_punish_window := -1
+var _punish_window_latched := false
 var _neutral_hold_active := false
 var _neutral_hold_reached_both := false
 var _tracked_suisei_instance_id := 0
@@ -156,6 +158,20 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		not _has_last_geometry_snapshot
 		or geometry_snapshot != _last_geometry_snapshot
 	)
+	var opponent_action_changed: bool = (
+		_has_last_state_property_snapshot
+		and (
+			_last_state_property_snapshot["opponent"]["instance_id"]
+				!= state_property_snapshot["opponent"]["instance_id"]
+			or _last_state_property_snapshot["opponent"]["state_name"]
+				!= state_property_snapshot["opponent"]["state_name"]
+		)
+	)
+	if opponent_action_changed and not _is_neutral_state_name(
+		str(state_property_snapshot["opponent"]["state_name"])
+	):
+		_punish_window_latched = false
+
 	var left_neutral_after_hold := (
 		_neutral_hold_active
 		and _neutral_hold_reached_both
@@ -177,6 +193,7 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 	if ended_neutral_hold:
 		_neutral_hold_active = false
 		_neutral_hold_reached_both = false
+		_punish_window_latched = false
 	elif entered_neutral and not _last_valid_output.is_empty():
 		_neutral_hold_active = true
 		_output.text = _last_valid_output
@@ -192,14 +209,35 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		_best_punish_window = -1
 		_last_valid_output = ""
 		visible = false
-	elif state_or_property_changed and not _neutral_hold_active:
+	elif (
+		state_or_property_changed
+		and not _neutral_hold_active
+	):
 		_best_punish_window = -1
+		_punish_window_latched = false
 		visible = false
 		if not entered_neutral:
 			_last_valid_output = ""
-	elif geometry_changed and not _neutral_hold_active:
+	elif (
+		geometry_changed
+		and not _neutral_hold_active
+		and not _punish_window_latched
+	):
 		_best_punish_window = -1
 		visible = false
+
+	if int(player.currentState.get(Enums.StKey.hitstun, 0)) > 0:
+		_punish_window_latched = false
+		_best_punish_window = -1
+		_last_valid_output = ""
+		_output.text = ""
+		visible = false
+		return
+
+	if _punish_window_latched:
+		_output.text = _last_valid_output
+		visible = _enabled
+		return
 
 	if _neutral_hold_active:
 		_output.text = _last_valid_output
@@ -269,6 +307,7 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 
 	_output.text = "\n".join(lines)
 	_last_valid_output = _output.text
+	_punish_window_latched = true
 	visible = _enabled
 
 func reset_analysis() -> void:
@@ -278,6 +317,7 @@ func reset_analysis() -> void:
 	_has_last_state_property_snapshot = false
 	_has_last_geometry_snapshot = false
 	_best_punish_window = -1
+	_punish_window_latched = false
 	_neutral_hold_active = false
 	_neutral_hold_reached_both = false
 	visible = false
