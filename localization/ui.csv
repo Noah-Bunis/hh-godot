@@ -76,6 +76,9 @@ UI_TRAINING_MOVE_DATA,Move Data,技データ,Datos del movimiento,Dados do movim
 UI_TRAINING_FRAME_BAR,Frame Bar,フレームバー,Barra de frames,Barra de quadros
 UI_TRAINING_ASSIST_FRAME_BAR,Assist Frame Bars,アシストフレームバー,Barras de frames de asistencia,Barras de quadros de assist
 UI_TRAINING_PUNISH_ANALYSIS,Punish Analysis,確定反撃分析,Análisis de castigos,Análise de punição
+UI_PUNISH_WINDOW,[b]Best punish window - {frames} Frames[/b]{newline}[b]Player[/b]: {player_moves}{newline}[b]Assist[/b]: {assist_moves},[b]最大確定反撃時間 - {frames}フレーム[/b]{newline}[b]プレイヤー[/b]：{player_moves}{newline}[b]アシスト[/b]：{assist_moves},[b]Ventana máxima de castigo - {frames} frames[/b]{newline}[b]Jugador[/b]: {player_moves}{newline}[b]Asistencia[/b]: {assist_moves},[b]Janela máxima de punição - {frames} quadros[/b]{newline}[b]Jogador[/b]: {player_moves}{newline}[b]Assistência[/b]: {assist_moves}
+UI_PUNISH_UNAVAILABLE,unavailable,使用不可,no disponible,indisponível
+UI_PUNISH_DISTANCE_NOTE,Punishes may vary based on distance and positioning.,確定反撃は距離や位置によって変わる場合がある。,Los castigos pueden variar según la distancia y la posición.,As punições podem variar conforme a distância e o posicionamento.
 UI_TRAINING_STANCE,Stance,相手の状態,Postura,Postura
 UI_TRAINING_COUNTER_HIT,CounterHit,カウンターヒット,Contraataque,Contra-ataque
 UI_TRAINING_BLOCK_SETTINGS,Block Settings,ガード設定,Opciones de bloqueo,Configurações de defesa

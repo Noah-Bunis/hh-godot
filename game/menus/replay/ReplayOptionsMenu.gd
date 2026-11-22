@@ -61,6 +61,12 @@ func _update_player_button_texts() -> void:
 		var punish_status := tr("UI_TRAINING_ON") if punish_analysis_visible[player_index] else tr("UI_TRAINING_OFF")
 		move_buttons[player_index].text = "%s: %s" % [player_labels[player_index], move_status]
 		punish_buttons[player_index].text = "%s: %s" % [player_labels[player_index], punish_status]
+	$FrameBarButton.text = tr("UI_TRAINING_ON") if frame_bar_visible else tr("UI_TRAINING_OFF")
+	$AssistFrameBarButton.text = tr("UI_TRAINING_ON") if assist_frame_bars_visible else tr("UI_TRAINING_OFF")
+	if $TakeoverButton.item_count == 3:
+		$TakeoverButton.set_item_text(0, tr("UI_TRAINING_NONE"))
+		$TakeoverButton.set_item_text(1, player_labels[0])
+		$TakeoverButton.set_item_text(2, player_labels[1])
 
 func _fit_to_viewport() -> void:
 	var viewport_size := get_viewport_rect().size

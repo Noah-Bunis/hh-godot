@@ -101,6 +101,10 @@ var _enabled := false
 var _last_state_property_snapshot: Dictionary = {}
 var _last_geometry_snapshot: Dictionary = {}
 var _last_valid_output := ""
+var _last_result_window := 0
+var _last_player_moves: Array[Dictionary] = []
+var _last_assist_moves: Array[Dictionary] = []
+var _last_assist_available := false
 var _has_last_state_property_snapshot := false
 var _has_last_geometry_snapshot := false
 var _best_punish_window := -1
@@ -113,6 +117,11 @@ var _suisei_suicopath_stance := false
 func _ready() -> void:
 	combo_prose_regex.compile("UI_COMBO_WORD_[A-Z_]+")
 	visible = false
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED and is_node_ready() \
+			and not _last_valid_output.is_empty():
+		_refresh_last_output()
 
 func set_enabled(is_enabled: bool) -> void:
 	if _enabled == is_enabled:
@@ -297,27 +306,37 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		visible = false
 		return
 
-	var lines: Array[String] = [
-		"[b]Best punish window - %d Frames[/b]" % punish_window,
-		"[b]Player[/b]: %s" % _format_move_list(player_moves),
-	]
-	if not player_label.is_empty():
-		lines.push_front("[b]%s[/b]" % tr(player_label))
-	if assist_available:
-		lines.append("[b]Assist[/b]: %s" % _format_move_list(assist_moves))
-	else:
-		lines.append("[b]Assist[/b]: unavailable")
-	lines.append("Punishes may vary based on distance and positioning.")
-
-	_output.text = "\n".join(lines)
-	_last_valid_output = _output.text
+	_last_result_window = punish_window
+	_last_player_moves = player_moves
+	_last_assist_moves = assist_moves
+	_last_assist_available = assist_available
+	_refresh_last_output()
 	_punish_window_latched = true
 	visible = _enabled
+
+func _refresh_last_output() -> void:
+	var assist_text := (
+		_format_move_list(_last_assist_moves)
+		if _last_assist_available else tr("UI_PUNISH_UNAVAILABLE")
+	)
+	var lines: Array[String] = [tr("UI_PUNISH_WINDOW").format({
+		"frames": _last_result_window,
+		"newline": "\n",
+		"player_moves": _format_move_list(_last_player_moves),
+		"assist_moves": assist_text,
+	})]
+	if not player_label.is_empty():
+		lines.push_front("[b]%s[/b]" % tr(player_label))
+	lines.append(tr("UI_PUNISH_DISTANCE_NOTE"))
+	_last_valid_output = "\n".join(lines)
+	_output.text = _last_valid_output
 
 func reset_analysis() -> void:
 	_last_state_property_snapshot.clear()
 	_last_geometry_snapshot.clear()
 	_last_valid_output = ""
+	_last_player_moves.clear()
+	_last_assist_moves.clear()
 	_has_last_state_property_snapshot = false
 	_has_last_geometry_snapshot = false
 	_best_punish_window = -1
@@ -671,7 +690,7 @@ func _get_air_move_startup_delay(entity: BasePlayer) -> int:
 
 func _format_move_list(moves: Array[Dictionary]) -> String:
 	if moves.is_empty():
-		return "none"
+		return tr("None").to_lower()
 
 	var move_labels: PackedStringArray = []
 	for index in range(mini(moves.size(), MAX_DISPLAYED_MOVES)):
