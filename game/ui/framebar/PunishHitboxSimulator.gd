@@ -48,6 +48,7 @@ func will_move_hit_during_recovery(
 	if (
 		not is_instance_valid(opponent)
 		or opponent_state == null
+		or opponent_state.anim_data == null
 		or attacker.Hitbox1 == null
 		or attacker.Hitbox2 == null
 	):
@@ -154,7 +155,8 @@ func _get_collision_boxes(entity: BasePlayer, is_hitbox: bool) -> Array[Dictiona
 	var boxes: Array[Dictionary] = []
 	for index in range(nodes.size()):
 		var box = nodes[index]
-		if box == null or box.collision_shape.shape == null:
+		if not is_instance_valid(box) or not is_instance_valid(box.collision_shape) \
+				or box.collision_shape.shape == null:
 			continue
 		boxes.append({
 			"index": index,

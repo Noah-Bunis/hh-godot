@@ -322,105 +322,13 @@ func _reset_move_data_display() -> void:
 	$CanvasLayer/MoveData/FrameAdvantage.text = tr("UI_TRAINING_FRAME_ADVANTAGE") + " --"
 
 func _get_move_frame_events(move_state: State) -> Array[FrameEvent]:
-	if move_state.anim_data == null or move_state.anim_data.is_empty():
-		return []
-
-	var animation_frames: Array = move_state.anim_data.keys()
-	animation_frames.sort()
-	var startup: int = -1
-	var last_active_frame: int = -1
-	var active_events: Array[FrameEvent] = []
-
-	for index in range(animation_frames.size()):
-		var frame: int = int(animation_frames[index])
-		if (frame > move_state.endFrame):
-			break
-		var frame_data: Dictionary = move_state.anim_data[frame]
-		var hitbox_active: bool = (
-			not frame_data.get(Enums.StKey.Hit1Disable, true)
-			or not frame_data.get(Enums.StKey.Hit2Disable, true)
-		)
-		if (not hitbox_active):
-			continue
-
-		if (startup < 0):
-			startup = maxi(frame, 0)
-		var active_until: int = move_state.endFrame
-		if (index + 1 < animation_frames.size()):
-			active_until = mini(active_until, int(animation_frames[index + 1]) - 1)
-		var active_duration: int = maxi(active_until - maxi(frame, 0) + 1, 0)
-		if (active_duration > 0):
-			active_events.append(FrameEvent.new(
-				FrameEvent.EventType.ACTIVE,
-				maxi(frame, 0),
-				active_duration
-			))
-			last_active_frame = maxi(last_active_frame, active_until)
-
-	if (startup < 0):
-		return []
-
-	var events: Array[FrameEvent] = []
-	if (startup > 0):
-		events.append(FrameEvent.new(FrameEvent.EventType.STARTUP, 0, startup))
-	events.append(FrameEvent.new(FrameEvent.EventType.FIRST_ACTIVE, startup, 1))
-	events.append_array(active_events)
-	var recovery: int = maxi(move_state.endFrame - last_active_frame, 0)
-	if (recovery > 0):
-		events.append(FrameEvent.new(
-			FrameEvent.EventType.RECOVERY,
-			last_active_frame + 1,
-			recovery
-		))
-	return events
+	return FrameBar.get_move_frame_events(move_state)
 
 func _get_frame_bar_move_events(
 	move_state: State,
 	state_name: String
 ) -> Array[FrameEvent]:
-	var events := _get_move_frame_events(move_state)
-	if not events.is_empty():
-		return events
-
-	var total_duration := maxi(move_state.endFrame + 1, 1)
-	var animation_frames: Array = move_state.anim_data.keys() \
-		if move_state.anim_data != null else []
-	animation_frames.sort()
-	for animation_frame in animation_frames:
-		var frame: int = int(animation_frame)
-		if frame > move_state.endFrame:
-			break
-		var frame_data: Dictionary = move_state.anim_data[frame]
-		if str(frame_data.get(Enums.StKey.Summon, "")).is_empty():
-			continue
-		if frame > 0:
-			events.append(FrameEvent.new(FrameEvent.EventType.STARTUP, 0, frame))
-		events.append(FrameEvent.new(FrameEvent.EventType.ACTIVE, frame, 1))
-		var recovery_duration := maxi(move_state.endFrame - frame, 0)
-		if recovery_duration > 0:
-			events.append(FrameEvent.new(
-				FrameEvent.EventType.RECOVERY,
-				frame + 1,
-				recovery_duration
-			))
-		return events
-
-	var normalized_state_name := state_name.to_lower()
-	if normalized_state_name.contains("parry") \
-			and not normalized_state_name.contains("catch"):
-		var active_duration := mini(Util.PARRY_WINDOW, total_duration)
-		events.append(FrameEvent.new(FrameEvent.EventType.ACTIVE, 0, active_duration))
-		var recovery_duration := total_duration - active_duration
-		if recovery_duration > 0:
-			events.append(FrameEvent.new(
-				FrameEvent.EventType.RECOVERY,
-				active_duration,
-				recovery_duration
-			))
-		return events
-
-	events.append(FrameEvent.new(FrameEvent.EventType.RECOVERY, 0, total_duration))
-	return events
+	return FrameBar.get_frame_bar_move_events(move_state, state_name)
 
 func _get_move_frame_event_duration(
 	move_frame_events: Array[FrameEvent],

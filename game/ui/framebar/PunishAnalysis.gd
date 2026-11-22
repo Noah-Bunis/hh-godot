@@ -88,6 +88,8 @@ const PROJECTILE_SUMMON_NAMES := [
 
 ]
 
+@export var player_label: String = ""
+
 @onready var _output: RichTextLabel = $Output
 
 var icon_paths: Dictionary = load("res://game/ui/IconPaths.gd").ICON_PATHS
@@ -121,7 +123,6 @@ func set_enabled(is_enabled: bool) -> void:
 func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlayer) -> void:
 	if (
 		not is_instance_valid(player)
-		or not is_instance_valid(assist)
 		or not is_instance_valid(opponent)
 	):
 		reset_analysis()
@@ -130,12 +131,12 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 	_update_suisei_stance(player)
 	var state_property_snapshot := {
 		"player": _get_entity_snapshot(player),
-		"assist": _get_entity_snapshot(assist),
+		"assist": _get_entity_snapshot(assist) if is_instance_valid(assist) else {},
 		"opponent": _get_entity_snapshot(opponent),
 	}
 	var geometry_snapshot := {
 		"player": _get_geometry_snapshot(player),
-		"assist": _get_geometry_snapshot(assist),
+		"assist": _get_geometry_snapshot(assist) if is_instance_valid(assist) else {},
 		"opponent": _get_geometry_snapshot(opponent),
 	}
 	var was_both_neutral := (
@@ -274,7 +275,8 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		null
 	)
 	var assist_available := (
-		assist.fighterState != null
+		is_instance_valid(assist)
+		and assist.fighterState != null
 		and assist.has_property(Enums.StateProperty.DormantAssist)
 	)
 	var assist_moves: Array[Dictionary] = []
@@ -299,6 +301,8 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 		"[b]Best punish window - %d Frames[/b]" % punish_window,
 		"[b]Player[/b]: %s" % _format_move_list(player_moves),
 	]
+	if not player_label.is_empty():
+		lines.push_front("[b]%s[/b]" % tr(player_label))
 	if assist_available:
 		lines.append("[b]Assist[/b]: %s" % _format_move_list(assist_moves))
 	else:
@@ -320,6 +324,8 @@ func reset_analysis() -> void:
 	_punish_window_latched = false
 	_neutral_hold_active = false
 	_neutral_hold_reached_both = false
+	_tracked_suisei_instance_id = 0
+	_suisei_suicopath_stance = false
 	visible = false
 
 func _get_punish_moves(
@@ -337,6 +343,8 @@ func _get_punish_moves(
 		return moves
 
 	var state_factory: StateFactory = entity.fighterState.state_factory
+	if state_factory == null:
+		return moves
 	var is_subaru := state_factory is SubaruStateFactory
 	var is_suisei := state_factory is SuiseiStateFactory
 	var subaru_angel_install_active := (
@@ -648,6 +656,8 @@ func _get_air_move_startup_delay(entity: BasePlayer) -> int:
 			)
 
 	var state_factory: StateFactory = entity.fighterState.state_factory
+	if state_factory == null:
+		return 0
 	var pre_jump_frames := 0
 	for move_name in state_factory.states_instance:
 		var normalized_state_name := str(move_name).to_lower()

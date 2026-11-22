@@ -25,6 +25,14 @@ var dummy_input1: InputInterpreter
 var dummy_input2: InputInterpreter
 
 var is_waiting: bool
+var _analysis_frame := 0
+var _analysis_was_frozen := false
+
+@onready var _frame_bar: FrameBar = get_node_or_null("CanvasLayer/FrameBar") as FrameBar
+@onready var _punish_analysis: PunishAnalysis = get_node_or_null("CanvasLayer/PunishAnalysis") as PunishAnalysis
+@onready var _punish_analysis_p2: PunishAnalysis = get_node_or_null("CanvasLayer/PunishAnalysisP2") as PunishAnalysis
+@onready var _move_data: ReplayMoveData = $CanvasLayer/MoveData
+@onready var _move_data_p2: ReplayMoveData = $CanvasLayer/MoveDataP2
 
 func _init() -> void:
 	super._init()
@@ -67,6 +75,15 @@ func setup_main() -> void:
 	$CanvasLayer/TrainingOptionsMenu.connect("exit", Callable(self, "exit"))
 	$CanvasLayer/TrainingOptionsMenu.connect("reset", Callable(self, "reset"))
 	$CanvasLayer/TrainingOptionsMenu.connect("loadstate", Callable(self, "takeover_loadstate"))
+	if _frame_bar != null:
+		$CanvasLayer/TrainingOptionsMenu.frame_bar_toggled.connect(_on_frame_bar_toggled)
+		$CanvasLayer/TrainingOptionsMenu.assist_frame_bars_toggled.connect(_on_assist_frame_bars_toggled)
+		_frame_bar.set_assist_rows_visible(false)
+	if _punish_analysis != null or _punish_analysis_p2 != null:
+		$CanvasLayer/TrainingOptionsMenu.punish_analysis_toggled.connect(_on_punish_analysis_toggled)
+	$CanvasLayer/TrainingOptionsMenu.move_data_toggled.connect(_on_move_data_toggled)
+	_move_data.reset_tracking()
+	_move_data_p2.reset_tracking()
 	
 	var log_file_name = Global.REPLAY_FILE_NAME
 	log_data = LogData.new()
@@ -102,6 +119,8 @@ func process_message(match_info: Dictionary):
 	Global.PLAYER_1_NODE[2] = null
 	Global.PLAYER_2_NODE[2] = null
 	setup_match_for_replay(1, [1], match_info)
+	_move_data.setup(fighter_game)
+	_move_data_p2.setup(fighter_game)
 
 	return true
 
@@ -142,12 +161,88 @@ func _do_execute_frame_mechanized(tick, delta) -> bool:
 		SyncManager.mechanized_input_received = input_frames_received
 		SyncManager.mechanized_rollback_ticks = 0
 		SyncManager.execute_mechanized_tick()
+		if SyncManager.current_tick >= 0:
+			_move_data.capture_frame()
+			_move_data_p2.capture_frame()
+			_capture_analysis_frame()
 		SyncManager.execute_mechanized_interpolation_frame(delta)
 		if (SyncManager.current_tick >= 0):
 			return true
 	else:
 		report_error("Execute frame failed, tick not present in log data")
 	return false
+
+func _on_frame_bar_toggled(is_visible: bool) -> void:
+	if _frame_bar != null:
+		_frame_bar.visible = is_visible
+
+func _on_assist_frame_bars_toggled(is_visible: bool) -> void:
+	if _frame_bar != null:
+		_frame_bar.set_assist_rows_visible(is_visible)
+
+func _on_punish_analysis_toggled(player_index: int, is_visible: bool) -> void:
+	var analysis: PunishAnalysis = _punish_analysis if player_index == 0 else _punish_analysis_p2
+	if analysis != null:
+		analysis.set_enabled(is_visible)
+
+func _on_move_data_toggled(player_index: int, is_visible: bool) -> void:
+	var move_data: ReplayMoveData = _move_data if player_index == 0 else _move_data_p2
+	move_data.visible = is_visible
+
+func _reset_replay_analysis() -> void:
+	_analysis_frame = 0
+	_analysis_was_frozen = false
+	if _frame_bar != null:
+		_frame_bar.reset_at_frame(_analysis_frame)
+	if _punish_analysis != null:
+		_punish_analysis.reset_analysis()
+	if _punish_analysis_p2 != null:
+		_punish_analysis_p2.reset_analysis()
+	_move_data.reset_tracking()
+	_move_data_p2.reset_tracking()
+
+func _capture_analysis_frame() -> void:
+	if _frame_bar == null and _punish_analysis == null and _punish_analysis_p2 == null:
+		return
+	var entities: Array[BasePlayer] = [
+		fighter_game.AssistPlayer1,
+		fighter_game.ServerPlayer,
+		fighter_game.ClientPlayer,
+		fighter_game.AssistPlayer2,
+	]
+	var frozen: bool = fighter_game.frozen and fighter_game.frozenFrame > 0
+	for entity in entities:
+		if is_instance_valid(entity) and entity.currentState.get(Enums.StKey.hitStopFrame, 0) > 0:
+			frozen = true
+			break
+	var skip_frozen_frame := frozen and _analysis_was_frozen
+	_analysis_was_frozen = frozen
+	if skip_frozen_frame:
+		return
+
+	_analysis_frame += 1
+	if _frame_bar != null:
+		for row in range(entities.size()):
+			var entity: BasePlayer = entities[row]
+			if not is_instance_valid(entity) or entity.fighterState == null:
+				_frame_bar.capture_missing_row(row, _analysis_frame)
+				continue
+			var move_events: Array[FrameEvent] = []
+			var move_state: State = entity.fighterState.state
+			if move_state is AttackState or move_state is AirAttackState:
+				move_events = FrameBar.get_frame_bar_move_events(
+					move_state, entity.currentState.get(Enums.StKey.stateName, "")
+				)
+			_frame_bar.capture_state_changes(entity, _analysis_frame, move_events)
+
+	if _punish_analysis != null and $CanvasLayer/TrainingOptionsMenu.punish_analysis_visible[0]:
+		_punish_analysis.update_analysis(
+			fighter_game.ServerPlayer, fighter_game.AssistPlayer1, fighter_game.ClientPlayer
+		)
+	if _punish_analysis_p2 != null and $CanvasLayer/TrainingOptionsMenu.punish_analysis_visible[1]:
+		_punish_analysis_p2.update_analysis(
+			fighter_game.ClientPlayer, fighter_game.AssistPlayer2, fighter_game.ServerPlayer
+		)
 
 func _physics_process(delta):
 	if (is_waiting):
@@ -239,6 +334,7 @@ func rewind():
 	if (not next_state.is_empty()):
 		SyncManager._call_load_state(next_state)
 		current_tick = rewind_tick
+		_reset_replay_analysis()
 	replay_speed = 0
 	error_label.text = ""
 	message_label.text = tr("UI_STATUS_REWINDING")
@@ -335,6 +431,7 @@ func takeover_loadstate():
 	if (not takeover_state.is_empty()):
 		SyncManager._call_load_state(takeover_state)
 		current_tick = takeover_tick
+		_reset_replay_analysis()
 	else:
 		message_label.text = tr("UI_STATUS_NO_REPLAY_TAKEOVER")
 
