@@ -2,6 +2,9 @@ extends FlayonAirAttackState
 
 class_name FlayonFlightBaseState
 
+const EARLY_RELEASE_FRAME := 4
+const FULL_CHARGE_FRAME := 15
+
 func _init():
 	endFrame = 180
 

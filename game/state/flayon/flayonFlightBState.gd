@@ -25,8 +25,8 @@ func physics_tick(state: Dictionary) -> void:
 	state[Enums.StKey.super_meter] -= Util.FLIGHT_ATTACK_METER_DRAIN
 
 func handle_input(state: Dictionary, interpreter: InputInterpreter) -> void:
-	if (state[Enums.StKey.frame] >= 4 and not interpreter.is_button_down(Enums.InputFlags.BHold)):
+	if (state[Enums.StKey.frame] >= EARLY_RELEASE_FRAME and not interpreter.is_button_down(Enums.InputFlags.BHold)):
 		change_state.call("Flight5BEarly")
-	if (state[Enums.StKey.frame] >= 15):
+	if (state[Enums.StKey.frame] >= FULL_CHARGE_FRAME):
 		change_state.call("Flight5BIncrease")
 	super.handle_input(state, interpreter)

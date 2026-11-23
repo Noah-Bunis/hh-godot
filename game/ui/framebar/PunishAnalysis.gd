@@ -15,6 +15,18 @@ const ASSIST_CALL_STATES := [
 	"AssistSuper",
 	"AssistAirSuper"
 ]
+const SUISEI_NORMAL_MOVES := [
+	"Stand5A", "Stand5B", "StandcB", "Stand6A", "Crouch2A", "Crouch2B",
+	"Jump5A", "Jump5B", "Jump6B", "GroundThrowWhiff", "GroundBackThrowWhiff",
+	"AirThrowWhiff", "AirBackThrowWhiff", "YoruMatsuyo", "LightYoruMatsuyo",
+	"GatoKick", "GatoDive", "Pendulum", "CaramelThrust", "AirCaramelThrust",
+]
+const SUISEI_SUICOPATH_MOVES := [
+	"AngelStand5A", "AngelStand5B", "AngelStandcB", "AngelStand6A",
+	"AngelCrouch2A", "AngelCrouch2B", "AngelJump5A", "AngelJump5B",
+	"AngelJump2B", "AngelGroundThrowWhiff", "AngelGroundBackThrowWhiff",
+	"AngelAirThrowWhiff", "AngelAirBackThrowWhiff", "Scissors", "Chainsaws",
+]
 const PROJECTILE_SUMMON_NAMES := [
 	"subarustarball",
 	"subarubattersetball",
@@ -36,6 +48,10 @@ const PROJECTILE_SUMMON_NAMES := [
 	"assistsubarustarball",
 	"assistprotoncannon",
 	"hakkatags",
+]
+const STATIONARY_BEAM_SUMMON_NAMES := [
+	"protoncannon",
+	"assistprotoncannon",
 ]
 
 @export var move_blacklist: Array[String] = [
@@ -84,7 +100,9 @@ const PROJECTILE_SUMMON_NAMES := [
 	"AngelGroundBackThrowHit",
 	"AngelAirThrowHit",
 	"AngelAirBackThrowHit",
-	"Burst"
+	"AngelJump2B2",
+	"Burst",
+	"GrappleFollowup"
 
 ]
 
@@ -266,7 +284,7 @@ func update_analysis(player: BasePlayer, assist: BasePlayer, opponent: BasePlaye
 	if recovery_frames <= 0:
 		return
 
-	var player_delay := _get_action_delay(player)
+	var player_delay := _get_earliest_action_delay(player)
 	var punish_window := maxi(recovery_frames - player_delay, 0)
 	if punish_window <= _best_punish_window:
 		return
@@ -380,11 +398,20 @@ func _get_punish_moves(
 		]
 		if is_subaru and is_angel_move and not subaru_angel_install_active:
 			continue
-		if is_suisei:
-			if _suisei_suicopath_stance:
-				if not is_angel_move and not is_suicopath_only_move:
-					continue
-			elif is_angel_move or is_suicopath_only_move:
+		if is_suisei and not is_assist:
+			if move_name_string == "Scissors" and not Global.level_1_OK(entity.currentState):
+				continue
+			if move_name_string == "Chainsaws" and not Global.level_2_OK(entity.currentState):
+				continue
+		var requires_suisei_switch := is_suisei and not is_assist and (
+			_suisei_suicopath_stance != (is_angel_move or is_suicopath_only_move)
+		)
+		if requires_suisei_switch:
+			var available_moves := (
+				SUISEI_NORMAL_MOVES if _suisei_suicopath_stance
+				else SUISEI_SUICOPATH_MOVES
+			)
+			if move_name_string not in available_moves:
 				continue
 		if (
 			move_name_string in move_blacklist
@@ -404,34 +431,61 @@ func _get_punish_moves(
 		var move_state: State = state_factory.states_instance[move_name]
 		if not (move_state is AttackState or move_state is AirAttackState):
 			continue
-		if _has_projectile_summon(move_state):
+		if is_suisei and not is_assist and _suisei_suicopath_stance \
+				and not requires_suisei_switch and move_state is AirAttackState \
+				and not entity.has_property(Enums.StateProperty.AirThrowOK):
 			continue
-		var timing := _hitbox_simulator.get_attack_timing(move_state)
+		var beam_startup := _get_stationary_beam_startup(move_state)
+		var is_stationary_beam := beam_startup >= 0
+		if _has_projectile_summon(move_state) and not is_stationary_beam:
+			continue
+		var timing: Dictionary = (
+			{"startup": beam_startup} if is_stationary_beam
+			else _hitbox_simulator.get_attack_timing(move_state)
+		)
 		if timing.is_empty():
 			continue
-		var startup: int = timing["startup"]
-		var move_delay := action_delay
-		if move_state is AirAttackState:
-			startup += air_move_startup_delay
-			move_delay += air_move_startup_delay
+		var move_delay := _get_move_action_delay(
+			entity, move_name_string, move_state, is_assist, air_move_startup_delay
+		)
+		if move_delay < 0:
+			continue
+		if requires_suisei_switch:
+			var switch_delay := _get_suisei_form_switch_delay(
+				entity, move_name_string, move_state
+			)
+			if switch_delay < 0:
+				continue
+			move_delay += switch_delay - _get_action_delay(entity)
+		var startup: int = timing["startup"] + maxi(move_delay - action_delay, 0)
 		if startup > startup_budget:
 			continue
-		if not _hitbox_simulator.will_move_hit_during_recovery(
-			entity,
-			move_state,
-			opponent,
-			opponent_state,
-			timing,
-			move_delay,
-			attacker_anchor
-		):
-			continue
+		if not is_stationary_beam:
+			if not _hitbox_simulator.will_move_hit_during_recovery(
+				entity,
+				move_state,
+				opponent,
+				opponent_state,
+				timing,
+				move_delay,
+				attacker_anchor
+			):
+				continue
+		var display_name := COMBO_TRIAL_DISPLAY_NAMES.get_display_name(
+			display_character_name, move_name_string
+		)
+		if requires_suisei_switch:
+			var switch_input := "C UI_COMBO_WORD_CHANGE UI_COMBO_WORD_THEN "
+			if not entity.has_property(Enums.StateProperty.AirThrowOK) \
+					and _is_suisei_air_only_move(move_name_string, move_state):
+				if _suisei_suicopath_stance:
+					switch_input += "Up UI_COMBO_WORD_THEN "
+				else:
+					switch_input = "Up UI_COMBO_WORD_THEN " + switch_input
+			display_name = switch_input + display_name
 		moves.append({
 			"name": move_name_string,
-			"display_name": COMBO_TRIAL_DISPLAY_NAMES.get_display_name(
-				display_character_name,
-				move_name_string
-			),
+			"display_name": display_name,
 			"startup": startup,
 		})
 
@@ -477,7 +531,14 @@ func _update_suisei_stance(entity: BasePlayer) -> void:
 
 	var state_name := str(entity.currentState.get(Enums.StKey.stateName, ""))
 	var normalized_state_name := state_name.to_lower()
-	if (
+	var current_state: State = entity.fighterState.state
+	if current_state is SuicopathToSuiseiState \
+			or current_state is SuicopathToSuiseiAirState:
+		_suisei_suicopath_stance = false
+	elif current_state is SuiseiToSuicopathState \
+			or current_state is SuiseiToSuicopathAirState:
+		_suisei_suicopath_stance = true
+	elif (
 		normalized_state_name.begins_with("angel")
 		or normalized_state_name.contains("suicopath")
 		or normalized_state_name in ["scissors", "chainsaws"]
@@ -502,6 +563,20 @@ func _has_projectile_summon(move_state: State) -> bool:
 		if summon_name in PROJECTILE_SUMMON_NAMES:
 			return true
 	return false
+
+func _get_stationary_beam_startup(move_state: State) -> int:
+	if move_state.anim_data == null:
+		return -1
+	var first_beam_frame := -1
+	for frame in move_state.anim_data:
+		var frame_data: Dictionary = move_state.anim_data[frame]
+		var summon_name := str(frame_data.get(Enums.StKey.Summon, "")).to_lower()
+		if summon_name in STATIONARY_BEAM_SUMMON_NAMES:
+			if first_beam_frame < 0 or int(frame) < first_beam_frame:
+				first_beam_frame = int(frame)
+	if first_beam_frame < 0:
+		return -1
+	return first_beam_frame + 1
 
 func _get_recovery_frames(
 	entity: BasePlayer,
@@ -650,6 +725,184 @@ func _get_action_delay(entity: BasePlayer) -> int:
 			0
 		) + _get_remaining_hitstop_delay(entity)
 	return 0
+
+func _get_earliest_action_delay(entity: BasePlayer) -> int:
+	var delay := _get_action_delay(entity)
+	if entity.fighterState != null \
+			and entity.fighterState.state_factory is SuiseiStateFactory:
+		delay = mini(delay, _get_suisei_switch_start_delay(entity))
+	for move_name in [
+		"KanataWingStanceA", "KanataAirWingStanceA", "GatoKick", "GatoDive",
+		"Flight5A", "Flight5BEarly", "Flight5CEarly", "Flight2CEarly",
+	]:
+		var stance_delay := _get_active_stance_delay(entity, move_name)
+		if stance_delay >= 0:
+			delay = mini(delay, stance_delay)
+	return delay
+
+func _get_active_stance_delay(entity: BasePlayer, move_name: String) -> int:
+	if entity.fighterState == null:
+		return -1
+	var current_name := str(entity.currentState.get(Enums.StKey.stateName, ""))
+	var current_frame := int(entity.currentState.get(Enums.StKey.frame, 0))
+	var threshold := -1
+	if entity.fighterState.state_factory is KanataStateFactory:
+		if (
+			(current_name == "KanataWingStance" and move_name.begins_with("KanataWingStance"))
+			or (current_name == "AirKanataWingStance" and move_name.begins_with("KanataAirWingStance"))
+		):
+			threshold = Util.INPUT_BUFFER_LENIANCY
+	elif entity.fighterState.state_factory is SuiseiStateFactory \
+			and move_name in ["GatoKick", "GatoDive", "Pendulum"]:
+		if current_name in ["YoruMatsuyo", "LightYoruMatsuyo"]:
+			threshold = SuiseiYoruMatsuyoState.GATO_CANCEL_FRAME
+		elif move_name == "GatoDive" and current_name == "Pendulum":
+			threshold = SuiseiPendulumState.FOLLOWUP_CANCEL_FRAME
+		elif move_name in ["GatoDive", "Pendulum"] and current_name == "GatoKick":
+			threshold = SuiseiGatoKickState.FOLLOWUP_CANCEL_FRAME
+	elif entity.fighterState.state_factory is FlayonStateFactory \
+			and move_name.begins_with("Flight"):
+		if current_name == "Flight":
+			threshold = current_frame
+		elif current_name in ["FlightEnter", "AirFlightEnter"]:
+			# Flight itself must receive input on the tick after entry finishes.
+			threshold = entity.fighterState.state.endFrame
+		else:
+			var charge_state := ""
+			if move_name.begins_with("Flight5B"):
+				charge_state = "Flight5B"
+			elif move_name.begins_with("Flight5C"):
+				charge_state = "Flight5C"
+			elif move_name.begins_with("Flight2C"):
+				charge_state = "Flight2C"
+			if current_name == charge_state:
+				if move_name.ends_with("Early") \
+						and current_frame < FlayonFlightBaseState.FULL_CHARGE_FRAME:
+					threshold = FlayonFlightBaseState.EARLY_RELEASE_FRAME
+				elif move_name.ends_with("Increase"):
+					threshold = FlayonFlightBaseState.FULL_CHARGE_FRAME
+	if threshold < 0:
+		return -1
+	return maxi(threshold - current_frame, 0) + _get_remaining_hitstop_delay(entity)
+
+func _get_move_action_delay(
+	entity: BasePlayer,
+	move_name: String,
+	move_state: State,
+	is_assist: bool,
+	air_move_startup_delay: int
+) -> int:
+	var delay := 0 if is_assist else _get_action_delay(entity)
+	var factory: StateFactory = entity.fighterState.state_factory
+	var entry_name := ""
+	var entry_delay := 0
+	var is_air_entry := false
+	if not is_assist and factory is KanataStateFactory:
+		if move_name.begins_with("KanataAirWingStance"):
+			entry_name = "AirKanataWingStance"
+			is_air_entry = true
+		elif move_name.begins_with("KanataWingStance"):
+			entry_name = "KanataWingStance"
+		entry_delay = Util.INPUT_BUFFER_LENIANCY + 1
+	elif not is_assist and factory is SuiseiStateFactory \
+			and move_name in ["GatoKick", "GatoDive", "Pendulum"]:
+		entry_name = "YoruMatsuyo"
+		entry_delay = SuiseiYoruMatsuyoState.GATO_CANCEL_FRAME + 1
+	elif not is_assist and factory is FlayonStateFactory \
+			and move_name.begins_with("Flight"):
+		entry_name = (
+			"AirFlightEnter" if entity.has_property(Enums.StateProperty.AirThrowOK)
+			else "FlightEnter"
+		)
+		var entry_state: State = factory.states_instance.get(entry_name)
+		if entry_state == null:
+			push_error("Missing stance entry state: " + entry_name)
+			return -1
+		entry_delay = entry_state.endFrame + 1
+
+	if entry_name.is_empty():
+		if move_state is AirAttackState and not (
+			factory is SuiseiStateFactory
+			and move_name in ["YoruMatsuyo", "LightYoruMatsuyo"]
+		):
+			delay += air_move_startup_delay
+		return delay
+
+	if factory.states_instance.get(entry_name) == null:
+		push_error("Missing stance entry state: " + entry_name)
+		return -1
+	var stance_delay := _get_active_stance_delay(entity, move_name)
+	if stance_delay >= 0:
+		delay = stance_delay
+	elif factory is FlayonStateFactory and entity.fighterState.state is FlayonFlightBaseState:
+		pass
+	else:
+		delay += entry_delay
+		if is_air_entry:
+			delay += air_move_startup_delay
+
+	if factory is FlayonStateFactory:
+		var current_name := str(entity.currentState.get(Enums.StKey.stateName, ""))
+		var charge_state := move_name.trim_suffix("Early").trim_suffix("Increase")
+		if current_name == charge_state and move_name.ends_with("Early") \
+				and stance_delay < 0:
+			var charged_state: State = factory.states_instance.get(charge_state + "Increase")
+			if charged_state == null:
+				push_error("Missing flight charge state: " + charge_state + "Increase")
+				return -1
+			delay = charged_state.endFrame + 2 + _get_remaining_hitstop_delay(entity)
+		if current_name != charge_state or stance_delay < 0:
+			if move_name.ends_with("Early"):
+				delay += FlayonFlightBaseState.EARLY_RELEASE_FRAME + 1
+			elif move_name.ends_with("Increase"):
+				delay += FlayonFlightBaseState.FULL_CHARGE_FRAME + 1
+	return delay
+
+func _get_suisei_switch_start_delay(entity: BasePlayer) -> int:
+	var delay := _get_action_delay(entity)
+	var current_name := str(entity.currentState.get(Enums.StKey.stateName, ""))
+	var threshold := -1
+	match current_name:
+		"YoruMatsuyo", "LightYoruMatsuyo":
+			threshold = SuiseiYoruMatsuyoState.FORM_CHANGE_FRAME
+		"GatoKick":
+			threshold = SuiseiGatoKickState.FOLLOWUP_CANCEL_FRAME
+		"GatoDive":
+			threshold = SuiseiGatoDiveState.FORM_CHANGE_FRAME
+		"Pendulum":
+			threshold = SuiseiPendulumState.FOLLOWUP_CANCEL_FRAME
+	if threshold < 0:
+		return delay
+	var hitstop := int(entity.currentState.get(Enums.StKey.hitStopFrame, -1))
+	if hitstop >= 0:
+		return mini(delay, maxi(hitstop - 1, 1))
+	var current_frame := int(entity.currentState.get(Enums.StKey.frame, 0))
+	return mini(delay, maxi(threshold - current_frame, 0))
+
+func _get_suisei_form_switch_delay(
+	entity: BasePlayer, move_name: String, move_state: State
+) -> int:
+	var airborne := entity.has_property(Enums.StateProperty.AirThrowOK)
+	var air_only_move := _is_suisei_air_only_move(move_name, move_state)
+	if airborne and not (move_state is AirAttackState):
+		return -1
+	var air_switch := airborne or (not _suisei_suicopath_stance and air_only_move)
+	var switch_name: String
+	if _suisei_suicopath_stance:
+		switch_name = "AirSuicopathToSuisei" if air_switch else "AngelUninstall"
+	else:
+		switch_name = "AirSuiseiToSuicopath" if air_switch else "AngelInstall"
+	var factory: StateFactory = entity.fighterState.state_factory
+	var switch_state: State = factory.states_instance.get(switch_name)
+	if switch_state == null:
+		push_error("Missing Suisei form change state: " + switch_name)
+		return -1
+	return _get_suisei_switch_start_delay(entity) + switch_state.endFrame + 1
+
+func _is_suisei_air_only_move(move_name: String, move_state: State) -> bool:
+	return move_state is AirAttackState and move_name not in [
+		"YoruMatsuyo", "LightYoruMatsuyo", "GatoKick", "GatoDive", "Pendulum",
+	]
 
 func _get_remaining_hitstop_delay(entity: BasePlayer) -> int:
 	return maxi(

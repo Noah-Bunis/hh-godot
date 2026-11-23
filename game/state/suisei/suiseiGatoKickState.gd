@@ -2,6 +2,8 @@ extends SuiseiAirAttackState
 
 class_name SuiseiGatoKickState
 
+const FOLLOWUP_CANCEL_FRAME := 15
+
 var CallSound = preload("res://game/assets/voice/suisei/sui_wah!.wav")
 
 func _init():
@@ -105,7 +107,7 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 			state[Enums.StKey.cancelState] = "GatoDive"
 		elif (interpreter.is_button_down(Enums.InputFlags.BDown)):
 			state[Enums.StKey.cancelState] = "Pendulum"
-	elif (state[Enums.StKey.frame] >= 15):
+	elif (state[Enums.StKey.frame] >= FOLLOWUP_CANCEL_FRAME):
 		if (interpreter.is_button_down(Enums.InputFlags.CDown)):
 			change_state.call("AirSuiseiToSuicopath")
 		elif ((interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or

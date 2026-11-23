@@ -10,9 +10,12 @@ func get_attack_timing(move_state: State) -> Dictionary:
 	var last_active_frame := -1
 	var hitbox_1_active := false
 	var hitbox_2_active := false
+	var attack_type: int = Enums.AttackType.Strike
 
 	for frame in range(move_state.endFrame + 1):
 		var frame_data: Dictionary = move_state.anim_data.get(frame, {})
+		if frame_data.has(Enums.StKey.attack_type):
+			attack_type = int(frame_data[Enums.StKey.attack_type])
 		if frame_data.has(Enums.StKey.Hit1Disable):
 			hitbox_1_active = not bool(
 				frame_data[Enums.StKey.Hit1Disable]
@@ -21,7 +24,8 @@ func get_attack_timing(move_state: State) -> Dictionary:
 			hitbox_2_active = not bool(
 				frame_data[Enums.StKey.Hit2Disable]
 			)
-		if not (hitbox_1_active or hitbox_2_active):
+		if not (hitbox_1_active or hitbox_2_active) \
+				or attack_type == Enums.AttackType.BurstLock:
 			continue
 
 		if first_active_frame < 0:
@@ -132,6 +136,8 @@ func will_move_hit_during_recovery(
 
 func _can_hit_target(attack_type: int, opponent: BasePlayer) -> bool:
 	if opponent.fighterState == null:
+		return false
+	if attack_type == Enums.AttackType.BurstLock:
 		return false
 	if attack_type == Enums.AttackType.Throw:
 		return opponent.fighterState.has_property(

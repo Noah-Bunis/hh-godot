@@ -295,7 +295,7 @@ UI_COMBO_WORD_PERFECT,Perfect,パーフェクト,Perfecto,Perfeito
 UI_COMBO_WORD_ENHANCED,enhanced,溜めた,Mejorado,Melhorado
 UI_COMBO_WORD_CHARGE,Charge,溜め,Carga,Carga
 UI_COMBO_WORD_FLIGHT,(Flight),(飛行),(Vuelo),(Voo)
-UI_COMBO_WORD_STANCE,stance,構え,Postura,Postura
+UI_COMBO_WORD_STANCE,(Stance),(構え),(Postura),(Postura)
 UI_COMBO_WORD_CHANGE,(Transform),(編集),(Transforma),(Transforma)
 UI_COMBO_WORD_OR,or,か,O,Ou
 (Check HH mechanics writeup for more detail and hidden mechanics),(Check HH mechanics writeup for more detail and hidden mechanics),（詳細や隠された仕組みについては、HHのメカニクス解説を参照してください）,(Lee el informe de mecánicas de HH para más detalles y mecánicas ocultas),(Leia o informe de mecanicas do HH para mais detalhes e mecanicas ocultas)

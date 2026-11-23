@@ -2,6 +2,8 @@ extends SuiseiAirAttackState
 
 class_name SuiseiGatoDiveState
 
+const FORM_CHANGE_FRAME := 25
+
 func _init():
 	endFrame = 80
 	
@@ -90,7 +92,7 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 	if (state[Enums.StKey.hitStopFrame] >= 0):
 		if (interpreter.is_button_down(Enums.InputFlags.CDown)):
 			state[Enums.StKey.cancelState] = "AirSuiseiToSuicopath"
-	elif (state[Enums.StKey.frame] >= 25):
+	elif (state[Enums.StKey.frame] >= FORM_CHANGE_FRAME):
 		if (interpreter.is_button_down(Enums.InputFlags.CDown)):
 			change_state.call("AirSuiseiToSuicopath")
 

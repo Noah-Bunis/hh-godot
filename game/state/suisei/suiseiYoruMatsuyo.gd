@@ -2,6 +2,9 @@ extends SuiseiAirAttackState
 
 class_name SuiseiYoruMatsuyoState
 
+const GATO_CANCEL_FRAME := 6
+const FORM_CHANGE_FRAME := 15
+
 func _init():
 	endFrame = 42
 	
@@ -93,7 +96,7 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 			state[Enums.StKey.cancelState] = "GatoKick"
 		elif (interpreter.is_button_down(Enums.InputFlags.BDown)):
 			state[Enums.StKey.cancelState] = "Pendulum"
-	elif (state[Enums.StKey.frame] >= 15):
+	elif (state[Enums.StKey.frame] >= FORM_CHANGE_FRAME):
 		if (interpreter.is_button_down(Enums.InputFlags.CDown)):
 			change_state.call("AirSuiseiToSuicopath")
 		elif ((interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or
@@ -105,7 +108,7 @@ func special_cancel(state: Dictionary, interpreter: InputInterpreter):
 			change_state.call("GatoKick")
 		elif (interpreter.is_button_down(Enums.InputFlags.BDown)):
 			change_state.call("Pendulum")
-	elif (state[Enums.StKey.frame] >= 6):
+	elif (state[Enums.StKey.frame] >= GATO_CANCEL_FRAME):
 		if ((interpreter.is_holding_a_direction(Enums.Numpad.N1, state[Enums.StKey.leftface]) or
 				interpreter.is_holding_a_direction(Enums.Numpad.N2, state[Enums.StKey.leftface]) or
 				interpreter.is_holding_a_direction(Enums.Numpad.N3, state[Enums.StKey.leftface])) and 
