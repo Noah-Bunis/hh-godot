@@ -2,13 +2,10 @@ extends Control
 
 class_name FrameBar
 
-const FrameBarCellControl = preload("res://game/ui/framebar/FrameBarCell.gd")
 const MAX_FRAME_HISTORY := 120
 
-@export var frame_cell_scene: PackedScene
-
 @onready var _panel: PanelContainer = $Panel
-@onready var _duration_label_overlay: Control = $DurationLabels
+@onready var _duration_label_overlay: FrameBarLabels = $DurationLabels
 @onready var _assist_rows: Array = [
 	$Panel/Rows/AssistPlayer1,
 	$Panel/Rows/AssistPlayer2,
@@ -26,6 +23,10 @@ const MAX_FRAME_HISTORY := 120
 	$Panel/Rows/AssistPlayer2/Cells,
 ]
 
+func _ready() -> void:
+	_duration_label_overlay.rows = _cell_rows
+	_refresh_frame_cells()
+
 var _previous_states: Dictionary = {}
 var _frame_history: Dictionary = {}
 var _duration_labels: Dictionary = {}
@@ -38,7 +39,6 @@ var _pending_advancing_mask: int = 0
 var _pending_annotation_mask: int = 0
 var _pending_invincibility_mask: int = 0
 var _frame_history_invincibility: Dictionary = {}
-var _frame_cells: Array = []
 
 static func get_move_frame_events(move_state: State) -> Array[FrameEvent]:
 	if move_state.anim_data == null or move_state.anim_data.is_empty():
@@ -124,16 +124,6 @@ static func get_frame_bar_move_events(move_state: State, state_name: String) -> 
 	events.append(FrameEvent.new(FrameEvent.EventType.RECOVERY, 0, total_duration))
 	return events
 
-func _ready() -> void:
-	for row_index in range(4):
-		var row_cells: Array = []
-		for _column_index in range(MAX_FRAME_HISTORY):
-			var cell: FrameBarCellControl = frame_cell_scene.instantiate()
-			_cell_rows[row_index].add_child(cell)
-			cell.get_node("DurationLabel").reparent(_duration_label_overlay, false)
-			row_cells.append(cell)
-		_frame_cells.append(row_cells)
-	_refresh_frame_cells()
 
 func set_assist_rows_visible(is_visible: bool) -> void:
 	for row in _assist_rows:
@@ -145,6 +135,7 @@ func set_assist_rows_visible(is_visible: bool) -> void:
 			panel_height += row.custom_minimum_size.y
 	_panel.custom_minimum_size.y = panel_height
 	_panel.offset_top = _panel.offset_bottom - panel_height
+	_duration_label_overlay.queue_redraw()
 
 func reset_at_frame(frame: int) -> void:
 	_previous_states.clear()
@@ -556,10 +547,9 @@ func _get_frame_type(event_types: Dictionary) -> int:
 	return -1
 
 func _refresh_frame_cells() -> void:
-	if _frame_cells.is_empty():
-		return
-	var overlay_inverse_transform := _duration_label_overlay.get_global_transform().affine_inverse()
 	for row_index in range(4):
+		var row: FrameBarRow = _cell_rows[row_index]
+		var row_durations: Dictionary = {}
 		for column_index in range(MAX_FRAME_HISTORY):
 			var sample_frame := (
 				_latest_activity_frame - MAX_FRAME_HISTORY + 1 + column_index
@@ -570,17 +560,17 @@ func _refresh_frame_cells() -> void:
 				if not frame_types.is_empty():
 					frame_type = frame_types[row_index]
 			var invincibility_mask: int = _frame_history_invincibility.get(sample_frame, 0)
-			var cell: FrameBarCellControl = _frame_cells[row_index][column_index]
-			cell.set_duration_label_position(
-				overlay_inverse_transform * cell.get_global_transform().origin
+			row.set_cell(
+				column_index,
+				frame_type,
+				(invincibility_mask & (1 << row_index)) != 0
 			)
-			cell.set_frame_type(frame_type)
-			cell.set_invincible((invincibility_mask & (1 << row_index)) != 0)
 			var duration_labels: Dictionary = _duration_labels.get(sample_frame, {})
 			if duration_labels.has(row_index):
-				cell.set_duration_label(int(duration_labels[row_index]))
-			else:
-				cell.clear_duration_label()
+				row_durations[column_index] = int(duration_labels[row_index])
+		row.queue_redraw()
+		_duration_label_overlay.durations[row_index] = row_durations
+	_duration_label_overlay.queue_redraw()
 
 func _get_source_row(source_name: String) -> int:
 	if source_name == "AssistPlayer1":

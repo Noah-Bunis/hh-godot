@@ -49,6 +49,8 @@ const PROJECTILE_SUMMON_NAMES := [
 	"assistprotoncannon",
 	"hakkatags",
 ]
+# Compared by path so this script doesn't force-load the 130+ Suisei state scripts.
+const SUISEI_FACTORY_PATH := "res://game/state/suisei/suiseistatefactory.gd"
 const STATIONARY_BEAM_SUMMON_NAMES := [
 	"protoncannon",
 	"assistprotoncannon",
@@ -383,7 +385,7 @@ func _get_punish_moves(
 	if state_factory == null:
 		return moves
 	var is_subaru := state_factory is SubaruStateFactory
-	var is_suisei := state_factory is SuiseiStateFactory
+	var is_suisei := _is_suisei_factory(state_factory)
 	var subaru_angel_install_active := (
 		is_subaru and _is_subaru_angel_install_active(entity)
 	)
@@ -507,7 +509,7 @@ func _get_display_character_name(entity: BasePlayer, is_assist: bool) -> String:
 		return "Mio"
 	if state_factory is OgaStateFactory:
 		return "Oga"
-	if state_factory is SuiseiStateFactory:
+	if _is_suisei_factory(state_factory):
 		return "Suisei"
 	if state_factory is OllieStateFactory:
 		return "Ollie"
@@ -517,9 +519,12 @@ func _get_display_character_name(entity: BasePlayer, is_assist: bool) -> String:
 		return "Flayon"
 	return ""
 
+func _is_suisei_factory(factory: StateFactory) -> bool:
+	return factory != null and factory.get_script().resource_path == SUISEI_FACTORY_PATH
+
 func _update_suisei_stance(entity: BasePlayer) -> void:
 	if entity.fighterState == null \
-			or not (entity.fighterState.state_factory is SuiseiStateFactory):
+			or not _is_suisei_factory(entity.fighterState.state_factory):
 		_tracked_suisei_instance_id = 0
 		_suisei_suicopath_stance = false
 		return
@@ -729,7 +734,7 @@ func _get_action_delay(entity: BasePlayer) -> int:
 func _get_earliest_action_delay(entity: BasePlayer) -> int:
 	var delay := _get_action_delay(entity)
 	if entity.fighterState != null \
-			and entity.fighterState.state_factory is SuiseiStateFactory:
+			and _is_suisei_factory(entity.fighterState.state_factory):
 		delay = mini(delay, _get_suisei_switch_start_delay(entity))
 	for move_name in [
 		"KanataWingStanceA", "KanataAirWingStanceA", "GatoKick", "GatoDive",
@@ -752,7 +757,7 @@ func _get_active_stance_delay(entity: BasePlayer, move_name: String) -> int:
 			or (current_name == "AirKanataWingStance" and move_name.begins_with("KanataAirWingStance"))
 		):
 			threshold = Util.INPUT_BUFFER_LENIANCY
-	elif entity.fighterState.state_factory is SuiseiStateFactory \
+	elif _is_suisei_factory(entity.fighterState.state_factory) \
 			and move_name in ["GatoKick", "GatoDive", "Pendulum"]:
 		if current_name in ["YoruMatsuyo", "LightYoruMatsuyo"]:
 			threshold = SuiseiYoruMatsuyoState.GATO_CANCEL_FRAME
@@ -804,7 +809,7 @@ func _get_move_action_delay(
 		elif move_name.begins_with("KanataWingStance"):
 			entry_name = "KanataWingStance"
 		entry_delay = Util.INPUT_BUFFER_LENIANCY + 1
-	elif not is_assist and factory is SuiseiStateFactory \
+	elif not is_assist and _is_suisei_factory(factory) \
 			and move_name in ["GatoKick", "GatoDive", "Pendulum"]:
 		entry_name = "YoruMatsuyo"
 		entry_delay = SuiseiYoruMatsuyoState.GATO_CANCEL_FRAME + 1
@@ -822,7 +827,7 @@ func _get_move_action_delay(
 
 	if entry_name.is_empty():
 		if move_state is AirAttackState and not (
-			factory is SuiseiStateFactory
+			_is_suisei_factory(factory)
 			and move_name in ["YoruMatsuyo", "LightYoruMatsuyo"]
 		):
 			delay += air_move_startup_delay

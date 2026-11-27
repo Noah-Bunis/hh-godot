@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1tarmjqj26tm"]
+[gd_scene load_steps=7 format=3 uid="uid://b1tarmjqj26tm"]
 
 [ext_resource type="Script" uid="uid://e5l2ifyn2eep" path="res://game/ui/framebar/FrameBar.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://b0c5ivn0p0cm2" path="res://game/ui/framebar/FrameBarCell.tscn" id="2"]
+[ext_resource type="Script" path="res://game/ui/framebar/FrameBarRow.gd" id="2"]
+[ext_resource type="Script" path="res://game/ui/framebar/FrameBarLabels.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://be2g6mvvohuai" path="res://game/assets/sprites/UI/MainMenus/Buttons/ButtonChalkboard/Timeline 1_0000.png" id="3_6n5qr"]
 [ext_resource type="FontFile" uid="uid://yi8e7q0s0mfp" path="res://game/assets/HandwritingJoe.ttf" id="3_70i0g"]
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6yuit"]
@@ -19,7 +20,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1")
-frame_cell_scene = ExtResource("2")
 
 [node name="Panel" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(0, 84)
@@ -70,11 +70,12 @@ theme_override_font_sizes/font_size = 32
 text = "A1"
 vertical_alignment = 1
 
-[node name="Cells" type="HBoxContainer" parent="Panel/Rows/AssistPlayer1"]
+[node name="Cells" type="Control" parent="Panel/Rows/AssistPlayer1"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_constants/separation = 0
+script = ExtResource("2")
 
 [node name="Player1" type="HBoxContainer" parent="Panel/Rows"]
 custom_minimum_size = Vector2(0, 21)
@@ -102,11 +103,12 @@ theme_override_font_sizes/font_size = 32
 text = "P1"
 vertical_alignment = 1
 
-[node name="Cells" type="HBoxContainer" parent="Panel/Rows/Player1"]
+[node name="Cells" type="Control" parent="Panel/Rows/Player1"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_constants/separation = 0
+script = ExtResource("2")
 
 [node name="Player2" type="HBoxContainer" parent="Panel/Rows"]
 custom_minimum_size = Vector2(0, 21)
@@ -134,11 +136,12 @@ theme_override_font_sizes/font_size = 32
 text = "P2"
 vertical_alignment = 1
 
-[node name="Cells" type="HBoxContainer" parent="Panel/Rows/Player2"]
+[node name="Cells" type="Control" parent="Panel/Rows/Player2"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_constants/separation = 0
+script = ExtResource("2")
 
 [node name="AssistPlayer2" type="HBoxContainer" parent="Panel/Rows"]
 visible = false
@@ -167,13 +170,15 @@ theme_override_font_sizes/font_size = 32
 text = "A2"
 vertical_alignment = 1
 
-[node name="Cells" type="HBoxContainer" parent="Panel/Rows/AssistPlayer2"]
+[node name="Cells" type="Control" parent="Panel/Rows/AssistPlayer2"]
+custom_minimum_size = Vector2(0, 21)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-theme_override_constants/separation = 0
+script = ExtResource("2")
 
 [node name="DurationLabels" type="Control" parent="."]
+script = ExtResource("4")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
