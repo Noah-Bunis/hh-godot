@@ -49,7 +49,6 @@ const PROJECTILE_SUMMON_NAMES := [
 	"assistprotoncannon",
 	"hakkatags",
 ]
-# Compared by path so this script doesn't force-load the 130+ Suisei state scripts.
 const SUISEI_FACTORY_PATH := "res://game/state/suisei/suiseistatefactory.gd"
 const STATIONARY_BEAM_SUMMON_NAMES := [
 	"protoncannon",
@@ -502,22 +501,11 @@ func _get_display_character_name(entity: BasePlayer, is_assist: bool) -> String:
 	if is_assist or entity.fighterState == null:
 		return ""
 
-	var state_factory: StateFactory = entity.fighterState.state_factory
-	if state_factory is SubaruStateFactory:
-		return "Subaru"
-	if state_factory is MioStateFactory:
-		return "Mio"
-	if state_factory is OgaStateFactory:
-		return "Oga"
-	if _is_suisei_factory(state_factory):
-		return "Suisei"
-	if state_factory is OllieStateFactory:
-		return "Ollie"
-	if state_factory is KanataStateFactory:
-		return "Kanata"
-	if state_factory is FlayonStateFactory:
-		return "Flayon"
-	return ""
+	var point_chara: int = Global.PLAYER_2_CHARACTER[0] if entity.team else Global.PLAYER_1_CHARACTER[0]
+	var keys := Enums.PointCharacters.keys()
+	if point_chara < 0 or point_chara >= keys.size():
+		return ""
+	return keys[point_chara]
 
 func _is_suisei_factory(factory: StateFactory) -> bool:
 	return factory != null and factory.get_script().resource_path == SUISEI_FACTORY_PATH
@@ -770,7 +758,6 @@ func _get_active_stance_delay(entity: BasePlayer, move_name: String) -> int:
 		if current_name == "Flight":
 			threshold = current_frame
 		elif current_name in ["FlightEnter", "AirFlightEnter"]:
-			# Flight itself must receive input on the tick after entry finishes.
 			threshold = entity.fighterState.state.endFrame
 		else:
 			var charge_state := ""
